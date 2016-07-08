@@ -1,4 +1,4 @@
-package model.impl;
+package model.impl.area;
 
 import model.service.Area;
 

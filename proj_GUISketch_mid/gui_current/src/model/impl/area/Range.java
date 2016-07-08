@@ -1,10 +1,10 @@
-package model.impl;
+package model.impl.area;
 
 import model.service.Area;
 
 public class Range implements Area{
-	private SinglePoint startPoint;
-	private SinglePoint endPoint;
+	protected SinglePoint startPoint;
+	protected SinglePoint endPoint;
 	
 	public Range(SinglePoint start,SinglePoint end){
 		startPoint = start;

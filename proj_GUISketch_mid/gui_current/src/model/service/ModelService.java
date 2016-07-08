@@ -1,6 +1,6 @@
 package model.service;
 
-import model.operation.Operation;
+import model.impl.Operation;
 
 public interface ModelService {
 	/**
@@ -17,15 +17,15 @@ public interface ModelService {
 	/**
 	 * 删除边 原理同addEdge
 	 * @param start
-	 * @param operation
+	 * @param operationId
 	 */
-	public void deleteEdge(String start,Operation operation);
+	public void deleteEdge(String start,String operationId);
 	/**
 	 * 设置orcle目标状态
 	 * @param oracleName最终所要测试的标准状态
 	 * (类似JUNIT的expect result)
 	 */
-	public void setOracle(String oracleName);
+	public void setOracle(String oracleName , boolean oracleInfo);
 	
 	
 }
