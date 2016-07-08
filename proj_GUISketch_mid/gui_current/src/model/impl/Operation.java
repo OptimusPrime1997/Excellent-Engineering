@@ -9,7 +9,7 @@ public class Operation implements Edge{
 	private String destination;
 	private Area area;
 	private String id;
-	
+
 	
 	public Operation(TAction action, String destination, Area area, String id) {
 		super();
