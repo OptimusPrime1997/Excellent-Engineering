@@ -5,17 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
-import sketch.gui.testing.AndroidNode;
-import sketch.gui.testing.ModelBuilder;
 import sketch.gui.testing.ParseXML;
-import sketch.gui.testing.TAction;
 import sketch.gui.testing.TType;
-import sketch.gui.testing.TestEdge;
-import sketch.gui.testing.TestGenerator;
-import sketch.gui.testing.TestModel;
-import sketch.gui.testing.TestState;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,21 +26,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnTouchListener {
@@ -85,8 +71,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 /*---- Modify By zhchuch ---*/
 	private String imagePath;
 	private PointF[] rect;
-	private ModelBuilder modelBuilder;
-	private ModelBuilder tempMG;
 	private int countDrawArea = 0;
 	private boolean isModelCompleted = false;
 	private TType test_type;
@@ -114,7 +98,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 		}
 		imageView = (ImageView) findViewById(R.id.imageView1);
 		
-		modelBuilder = new ModelBuilder();
 		
 		imageChooseIntent = new Intent(this, ImageChooseActivity.class);
 		draw();
@@ -219,12 +202,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 				// 找到这个 圈 里面的所有控件
 				if (test_type == TType.JOINT) {
 					if (recogRect_flag) {
-						tempMG = new ModelBuilder(modelBuilder.cur_parser);
-						tempMG.identifyArea(rect);
+						
 					}
 				} else {
 					if (recogRect_flag) {
-						List<AndroidNode> wid_list = modelBuilder.identifyArea(rect);
+						
 					}
 				}
 				recogRect_flag = false;
@@ -245,7 +227,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 								// TODO Auto-generated method stub
 								input = tv.getText().toString();
 								
-								modelBuilder.generateJointState(modelBuilder.generateStateBasedString("s"+modelBuilder.state_counter, getImageName(imagePath), input), 1);
+								
 								System.out.println("Your Input[pos-ATOMIC]: " +input);
 							}
 						}).setNegativeButton("取消", null).show();
@@ -264,7 +246,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 							public void onClick(DialogInterface arg0, int arg1) {
 								// TODO Auto-generated method stub
 								input = tv.getText().toString();
-								modelBuilder.generateJointState(tempMG.generateStateBasedString("s"+modelBuilder.state_counter, getImageName(imagePath), input), 1);
+								
 								System.out.println("Your Input[pos-JOINT]: " +input);
 							}
 						}).setNegativeButton("取消", null).show();
@@ -324,7 +306,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 		switch (item.getItemId()) {
 		case MENU_ITEM_COUNTER:	// choose
 			clickCount++;
-			modelBuilder = new ModelBuilder();
 			// 判断sd卡是否存在，并且是否具有读写权限
 			if (Environment.getExternalStorageState().equals(
 					Environment.MEDIA_MOUNTED)) {
@@ -353,12 +334,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if (test_type == TType.JOINT)
 						modelBuilder.generateJointModel();
 					*/
-					modelBuilder.generateModel();
+				
 					isModelCompleted = false;
 					accept_flag = false;
 					target_flag = false;
 					
-					modelBuilder.model.print();
+			
 					System.out.println("\nModel Building Done!");
 					
 					/*用已经生成的模型 生成 测试用例*/
@@ -384,17 +365,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 					String pack_name = "";
 					String mainActivity_name= "MyBox2dActivity"; // for App: AngryBird
 					
-					if (!modelBuilder.operation_node.package_name.equals(""))
-						pack_name = modelBuilder.operation_node.package_name;
-					else 
-						pack_name = modelBuilder.area_nodes.get(0).package_name;
-					TestGenerator testGenerator = new TestGenerator(modelBuilder.model, filePath, app_name, pack_name, mainActivity_name);
-					List<String> tst = testGenerator.generateTestCase(0);
-					for (String test : tst){
-						System.out.println("#########");
-						System.out.println(test);
-						System.out.println("#########");
-					}
+					
+					
+					
 					System.out.println("\nTestCase Generating Done!");
 					
 				}
@@ -449,9 +422,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 					//System.out.println("====== After Saving =====");
 					//System.out.println("result[operator]= "+result[operationPoint.size()-1]);
-					modelBuilder.identifyOperation(result, operationPoint, endPoint);
+					
 			/*--------- Before there, imply the identify action function. ---------*/
-					if (modelBuilder.operation_action == TAction.CLICK && modelBuilder.operation_node.widget_name == "EditText") {
+					if (true) {
 						// 代表用户想要输入一个编辑框
 						final TextView tv = new EditText(this);
 						new AlertDialog.Builder(this).setTitle("Please Input Text:").setIcon(android.R.drawable.ic_dialog_info)
@@ -461,7 +434,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 									// TODO Auto-generated method stub
 									input = tv.getText().toString();
 									//modelBuilder.generateJointState(tempMG.generateStateBasedString("s"+modelBuilder.state_counter, getImageName(imagePath), input), 1);
-									modelBuilder.operation_node.text = input;
+									
 									
 									System.out.println("Your Input[pos-EditText]: " +input);
 								}
@@ -489,18 +462,13 @@ public class MainActivity extends Activity implements OnTouchListener {
 			System.out.println("After click Target...");
 			target_flag = true;
 		
-			if (modelBuilder.operation_node == null)
-			{
-				System.out.println("model->operation_node = null!");
-			}
+			
 			
 			if (countDrawArea == 0) test_type = TType.ATOMIC;
 			else test_type = TType.JOINT;
 			
 			System.out.println("GenerateSingState pos[target]");
-			modelBuilder.generateJointState(modelBuilder.generateSingleState(
-					"s"+modelBuilder.state_counter, getImageName(imagePath), test_type.ordinal()),
-					0);
+			
 			//System.out.println("After generating (in Target) modelG.stateCounter="+modelBuilder.state_counter);
 /*--------------------------------------------------*/
 			
@@ -520,7 +488,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			double[] result = comGestureTrain.TrainResult(path);
 		
 /*--------------------------------------------------*/
-			modelBuilder.identifyConstraint(result);
+			
 			
 			for (int i = 0; i < result.length; i++) {
 				if (result[i] == -1.00) break;
@@ -633,7 +601,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 /*--------------- modify by zhchuch ----------*/				
 				ParseXML parser = getParserByImagePath(imagePath);
 				
-				modelBuilder.addXMLParser(parser);
 				//tempMG = new ModelBuilder(modelBuilder.cur_parser); 
 /*-------------------------------------------*/	
 				draw();
@@ -675,9 +642,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		 * 点击Next按钮的时候，先对 之前的图片上的操作 生成一个状态
 		 */
 		if (!target_flag) {
-			modelBuilder.generateJointState(
-					modelBuilder.generateSingleState("s"+modelBuilder.state_counter, getImageName(imagePath), 0),
-					0);
+			
 		}
 		
 		int currentIndex = imageFiles.indexOf(currentImage);// 获得所选图片在这个文件夹中的序号
@@ -695,7 +660,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 			//System.out.println("NextImage: Uri="+imageUri.toString()+", ImageName: "+ImageName);
 			ParseXML parser = getParserByImagePath(imagePath);
 			
-			modelBuilder.addXMLParser(parser);
 /*----------------------------------------*/
 			imageView.setImageURI(imageUri);
 			operationPoint = new ArrayList<PointF>();
