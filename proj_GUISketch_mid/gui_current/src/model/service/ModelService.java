@@ -13,13 +13,13 @@ public interface ModelService {
 	 * @param start 所要执行的状态的状态的名字，同截图的名字(or uix文件的名字 用于区别每个不同的状态)
 	 * @param operantion
 	 */
-	public void addEdge(String start,Operation operantion);
+	public void addEdge(String start,Edge edge);
 	/**
 	 * 删除边 原理同addEdge
 	 * @param start
 	 * @param operationId
 	 */
-	public void deleteEdge(String start,String operationId);
+	public void deleteEdge(String start,String edgeId);
 	/**
 	 * 设置orcle目标状态
 	 * @param oracleName最终所要测试的标准状态

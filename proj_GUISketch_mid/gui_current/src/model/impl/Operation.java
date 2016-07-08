@@ -1,9 +1,10 @@
 package model.impl;
 
 import model.service.Area;
+import model.service.Edge;
 import sketch.gui.testing.TAction;
 
-public class Operation {
+public class Operation implements Edge{
 	private TAction action;
 	private String destination;
 	private Area area;

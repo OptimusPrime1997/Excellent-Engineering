@@ -3,25 +3,27 @@ package model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.service.Edge;
+
 public class State {
 	
 	private String name;
-	private List<Operation> operationList;
+	private List<Edge> edgeList;
 	private boolean isOracle = false;
 	
 	public State(String name){
 		this.name = name;
-		operationList = new ArrayList<Operation>();
+		edgeList = new ArrayList<Edge>();
 	}
 	
-	public void addOperation(Operation operation){
-		operationList.add(operation);
+	public void addEdge(Edge edge){
+		edgeList.add(edge);
 	}
 
-	public void deleteOperation(String operationId){
-		for(Operation operation : operationList){
-			if(operation.hasSameID(operationId)){
-				operationList.remove(operation);
+	public void deleteOperation(String edgeId){
+		for(Edge edge : edgeList){
+			if(edge.hasSameID(edgeId)){
+				edgeList.remove(edgeId);
 			}
 		}
 	}

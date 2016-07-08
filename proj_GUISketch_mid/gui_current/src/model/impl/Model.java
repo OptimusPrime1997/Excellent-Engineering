@@ -3,6 +3,7 @@ package model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.service.Edge;
 import model.service.ModelService;
 
 
@@ -17,19 +18,19 @@ public class Model implements ModelService{
 	}
 
 	@Override
-	public void addEdge(String start, Operation operation) {
+	public void addEdge(String start, Edge edge) {
 		boolean isRecord = false;
 		for(State state : states){
 			if(state.isThisName(start)){
 				isRecord = true;
-				state.addOperation(operation);
+				state.addEdge(edge);
 				break;
 			}
 		}
 		
 		if(!isRecord){
 			State stateNew = new State(start);
-			stateNew.addOperation(operation);
+			stateNew.addEdge(edge);
 			states.add(stateNew);
 			
 		}
