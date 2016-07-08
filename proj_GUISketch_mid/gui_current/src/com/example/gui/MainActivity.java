@@ -11,10 +11,10 @@ import sketch.gui.testing.TType;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -79,6 +79,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private boolean input_flag = false;
 	private boolean recogRect_flag = false;
 /*-------------------------*/
+	
+	private String timeInput;
+	private boolean timeInput_flag = false;
 	
 	private Intent imageChooseIntent;
 	private final int REQUEST_CODE = 1;
@@ -168,7 +171,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 		case MotionEvent.ACTION_UP:
 
 			// 直线画板
-
 			upx = event.getX();
 			upy = event.getY();
 			canvas.drawLine(downx, downy, upx, upy, paint);
@@ -194,25 +196,25 @@ public class MainActivity extends Activity implements OnTouchListener {
 				
 				String filePath = getDirName(getPath()) + "temp" + "/"
 						+ getImageName(getPath()) + ".txt";
-				rect = logic.getExteriorRect(graphics);
+				rect = logic.getExteriorRect(graphics);   //计算出矩形的4个点
 				ioOperation.recordAreaInfo(filePath, graphics, rect);
 /*-------------- Modify by zhchuch -----------------*/
 				countDrawArea++;
 				
-				// 找到这个 圈 里面的所有控件
-				if (test_type == TType.JOINT) {
-					if (recogRect_flag) {
-						
-					}
-				} else {
-					if (recogRect_flag) {
-						
-					}
-				}
-				recogRect_flag = false;
-				//isDrawArea = false;
-				
-				System.out.println("test_type = " + test_type);
+//				// 找到这个 圈 里面的所有控件
+//				if (test_type == TType.JOINT) {
+//					if (recogRect_flag) {
+//						
+//					}
+//				} else {
+//					if (recogRect_flag) {
+//						
+//					}
+//				}
+//				recogRect_flag = false;
+//				//isDrawArea = false;
+//				
+//				System.out.println("test_type = " + test_type);
 				
 				if (test_type == TType.ATOMIC) {
 					System.out.println("GenerateSingState pos[draw]");
@@ -235,6 +237,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					countDrawArea = 0;
 					isModelCompleted = true;
 				}
+				
 				if (test_type == TType.JOINT) {
 					// 为每一个的 accept 状态，生成 单终止状态
 					System.out.println("JOINT [AccpetState Generating...]");
@@ -298,6 +301,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 		menu.add(0, MENU_ITEM_COUNTER + 4, 0, "draw Area");
 		menu.add(0, MENU_ITEM_COUNTER + 5, 0, "target");
 		//menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
+		menu.add(0, MENU_ITEM_COUNTER+7, 0, "timer");
+		menu.add(0,MENU_ITEM_COUNTER + 8, 0, "fork");
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -320,135 +325,44 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 2:	 // save
 			if (isDrawed) {
-/*--------- Modify By zhchuch, in here ---------*/
-				if (test_type == TType.JOINT && accept_flag)
-				{
-					isModelCompleted = true;
-				}
 				
-				if (isModelCompleted)
-				{
-					/*
-					if (test_type == TType.ATOMIC)
-						modelBuilder.generateAtomicModel();
-					if (test_type == TType.JOINT)
-						modelBuilder.generateJointModel();
-					*/
-				
-					isModelCompleted = false;
-					accept_flag = false;
-					target_flag = false;
-					
-			
-					System.out.println("\nModel Building Done!");
-					
-					/*用已经生成的模型 生成 测试用例*/
-					
-					System.out.println("\nTestCase Generating ...");
-					//TestGenerator testGenerator = new TestGenerator(modelBuilder.model);
-					
-					String[] temp = getDirName(getPath()).split("/");
-					String app_name = temp[temp.length - 1];
-					
-					String dirPath = getDirName(getPath()) + "TC";
-					try {
-						// 先要创建目录
-						ioOperation.CreateMdr(dirPath);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					String filePath = dirPath + "/";
-					System.out.println("StorePath = " +filePath);
-					
-					// 找到被测试APP的包名
-					String pack_name = "";
-					String mainActivity_name= "MyBox2dActivity"; // for App: AngryBird
-					
-					
-					
-					
-					System.out.println("\nTestCase Generating Done!");
-					
-				}
-/*----------------------------------------------*/				
-				else {
-					//System.out.println("Save: Identify Basic-Test-Action Code is transfered!");
-					/*--------- After there, imply the identify action function. ---------*/
-					// savePicture();
-					String path = getDirName(getPath()) + "temp" + "/"
-							+ getImageName(getPath()) + ".arff";
-					double[] result;
-					result = gestureTrain.TrainResult(path);
-					//System.out.println("Result[atomic]: "+result[result.length-1]);
-					/*
-					 * isDrawed为true并且result等于-1时说明只绘制了区域，并没有单击双击拖动这三种操作
-					 */
-					if (result[0] != -1) {
-						String filePath = getDirName(getPath()) + "temp" + "/"
-								+ getImageName(getPath()) + ".txt";
-						ArrayList<String> operationList = ioOperation
-								.readOperation(filePath);
-						for (int i = 0; i < operationPoint.size(); i++) {
+				/*--------- After there, imply the identify action function. ---------*/
+				// savePicture();
+				String path = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".arff";
+				double[] result;
+				result = gestureTrain.TrainResult(path);
+				/*
+				 * isDrawed为true并且result等于-1时说明只绘制了区域，并没有单击双击拖动这三种操作
+				 */
+				if (result[0] != -1) {
+					String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
+					ArrayList<String> operationList = ioOperation.readOperation(filePath);
+					for (int i = 0; i < operationPoint.size(); i++) {
 
-							if (operationPoint.get(i).x != 0
-									&& operationPoint.get(i).y != 0
-									&& result[i] != 3) {
-								if (result[i] == 0 || result[i] == 1) { // click
-									String operation = result[i] + "-<"
-											+ format(operationPoint.get(i).x) + ","
-											+ format(operationPoint.get(i).y) + ">";
-									if (operationList.indexOf(operation) == -1) {
-										// ioOperation.recordOperation(filePath,
-										// operation);
-									}
+						if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0 && result[i] != 3) {
+							if (result[i] == 0 || result[i] == 1) { // click
+								String operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
+										+ format(operationPoint.get(i).y) + ">";
+								
 
-								}
-								if (result[i] == 2) { // Drag
-									String operation = result[i] + "-<"
-											+ format(operationPoint.get(i).x) + ","
-											+ format(operationPoint.get(i).y)
-											+ ">;<" + format(endPoint.get(i).x)
-											+ "," + format(endPoint.get(i).y) + ">";
-									if (operationList.indexOf(operation) == -1) {
-										// ioOperation.recordOperation(filePath,
-										// operation);
-									}
-								}
-
+							}
+							if (result[i] == 2) { // Drag
+								String operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
+										+ format(operationPoint.get(i).y) + ">;<" + format(endPoint.get(i).x) + ","
+										+ format(endPoint.get(i).y) + ">";
+								
 							}
 
 						}
-					}
-					//System.out.println("====== After Saving =====");
-					//System.out.println("result[operator]= "+result[operationPoint.size()-1]);
-					
-			/*--------- Before there, imply the identify action function. ---------*/
-					if (true) {
-						// 代表用户想要输入一个编辑框
-						final TextView tv = new EditText(this);
-						new AlertDialog.Builder(this).setTitle("Please Input Text:").setIcon(android.R.drawable.ic_dialog_info)
-							.setView(tv).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface arg0, int arg1) {
-									// TODO Auto-generated method stub
-									input = tv.getText().toString();
-									//modelBuilder.generateJointState(tempMG.generateStateBasedString("s"+modelBuilder.state_counter, getImageName(imagePath), input), 1);
-									
-									
-									System.out.println("Your Input[pos-EditText]: " +input);
-								}
-							}).setNegativeButton("取消", null).show();
+
 					}
 				}
-/*----------------------------------------------*/
-			} else {
-				Toast toast = Toast.makeText(this, "no draw",
-						Toast.LENGTH_SHORT);
+
+				/*--------- Before there, imply the identify action function. ---------*/			
+			} else {    
+				Toast toast = Toast.makeText(this, "no draw",Toast.LENGTH_SHORT);
 				toast.show();
 			}
-
-			//draw();
 			break;
 		case MENU_ITEM_COUNTER + 3:	  // clear
 			draw();
@@ -461,20 +375,16 @@ public class MainActivity extends Activity implements OnTouchListener {
 /*-------------- Modify by zhchuch -----------------*/
 			System.out.println("After click Target...");
 			target_flag = true;
-		
-			
-			
-			if (countDrawArea == 0) test_type = TType.ATOMIC;
-			else test_type = TType.JOINT;
+							
+			if (countDrawArea == 0) 
+				test_type = TType.ATOMIC;
+			else 
+				test_type = TType.JOINT;
 			
 			System.out.println("GenerateSingState pos[target]");
-			
-			//System.out.println("After generating (in Target) modelG.stateCounter="+modelBuilder.state_counter);
-/*--------------------------------------------------*/
-			
+						
 			// 先获取所有的 joint 信息，并放入训练器进行识别 
-			ArrayList<String> recordList = logic.calRecordList(jointGraphics);
-		
+			ArrayList<String> recordList = logic.calRecordList(jointGraphics);		
 			String path = getDirName(getPath()) + "temp"
 					+ "/combinationGesture" + getImageName(getPath()) + ".arff";
 			ioOperation.recordJointPoint(path, recordList);
@@ -487,8 +397,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 			double[] result = comGestureTrain.TrainResult(path);
 		
-/*--------------------------------------------------*/
-			
+/*--------------------------------------------------*/			
 			
 			for (int i = 0; i < result.length; i++) {
 				if (result[i] == -1.00) break;
@@ -498,8 +407,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			isDrawArea = false;
 			jointGraphics = new ArrayList<PointF>();
 			stepCount = 0;
-			if (Environment.getExternalStorageState().equals(
-					Environment.MEDIA_MOUNTED)) {
+			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			}
 			break;
@@ -507,11 +415,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 		case MENU_ITEM_COUNTER + 6:
 			//getUserInputString();
 			/*这里涉及到 多线程，主线程要等待子线程输入。*/
-			//System.out.println("Your Input Text: "+input);
-			
 			final TextView tv = new EditText(this);
-			new AlertDialog.Builder(this).setTitle("Expected output:").setIcon(android.R.drawable.ic_dialog_info)
-			.setView(tv).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			Builder expectDialog = new AlertDialog.Builder(this);
+			expectDialog.setTitle("Expected output:").setIcon(android.R.drawable.ic_dialog_info);
+			expectDialog.setView(tv);
+			expectDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface arg0, int arg1) {
 					// TODO Auto-generated method stub
@@ -519,9 +427,28 @@ public class MainActivity extends Activity implements OnTouchListener {
 					input_flag = true;
 					System.out.println("Your Input[pos-menu-selected]: " +input);
 				}
-			}).setNegativeButton("取消", null).show();
-			
+			});
+			expectDialog.setNegativeButton("取消", null).show();			
 			break;
+			
+		case MENU_ITEM_COUNTER + 7:
+			final TextView timeText = new EditText(this);
+			Builder timeDialog = new AlertDialog.Builder(this);
+			timeDialog.setTitle("Wait time");
+			timeDialog.setIcon(android.R.drawable.ic_dialog_info);
+			timeDialog.setView(timeText);
+			timeDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					timeInput = timeText.getText().toString();
+					timeInput_flag = true;
+					System.out.println("Your Input[pos-menu-selected]: " +timeInput);
+				}
+			});
+			timeDialog.setNegativeButton("取消", null);
+			timeDialog.show();
+			break;			
 		default:
 			break;
 		}
@@ -668,42 +595,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 	}
 
-	/*
-	 * 根据Uri获得文件的绝对路径
-	 */
-	@SuppressWarnings("unused")
-	private String getAbsoluteImagePath(Uri uri) {
-		// can post image
-		Cursor cursor = null;
-		String column = MediaStore.Images.Media.DATA;
-		String[] projection = { column };
-		try {
-			cursor = this.getContentResolver().query(uri, projection, null,
-					null, null);
-			if (cursor != null && cursor.moveToFirst()) {
-				int index = cursor.getColumnIndexOrThrow(column);
-				return cursor.getString(index);
-			}
-		} finally {
-			if (cursor != null)
-				cursor.close();
-		}
-		return null;
-	}
-
-	/*
-	 * 保存所画的图片
-	 * 
-	 * private void savePicture() { // TODO Auto-generated method stub String
-	 * dir = getDirName(getPath()) + "temp";
-	 * 
-	 * File f = new File(dir + "/" + getImageName(getPath()) + ".png"); if
-	 * (f.exists()) { f.delete(); } try { FileOutputStream fos = new
-	 * FileOutputStream(f); alterBitmap.compress(Bitmap.CompressFormat.PNG, 70,
-	 * fos); fos.flush(); fos.close(); } catch (FileNotFoundException e) {
-	 * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-	 * Log.v("savePicture", dir); }
-	 */
+	
 	private String format(double input) {
 		DecimalFormat decimalFormat = new DecimalFormat(".00");// 将点的坐标统一保留两位小数
 		String Coordinate = decimalFormat.format(input);
