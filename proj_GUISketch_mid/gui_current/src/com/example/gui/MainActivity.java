@@ -1,6 +1,7 @@
 package com.example.gui;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
@@ -324,6 +325,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 			break;
 		case MENU_ITEM_COUNTER + 2:	 // save
+			String operation = "";
 			if (isDrawed) {
 				
 				/*--------- After there, imply the identify action function. ---------*/
@@ -341,13 +343,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 						if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0 && result[i] != 3) {
 							if (result[i] == 0 || result[i] == 1) { // click
-								String operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
+								operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
 										+ format(operationPoint.get(i).y) + ">";
+								
 								
 
 							}
 							if (result[i] == 2) { // Drag
-								String operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
+								operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
 										+ format(operationPoint.get(i).y) + ">;<" + format(endPoint.get(i).x) + ","
 										+ format(endPoint.get(i).y) + ">";
 								
@@ -363,6 +366,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 				Toast toast = Toast.makeText(this, "no draw",Toast.LENGTH_SHORT);
 				toast.show();
 			}
+			System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=");
+			WriteXML.writeObject(operation, "testOPeration.txt");   
+		    //获取当前时间   
+		 	  
+		     
 			break;
 		case MENU_ITEM_COUNTER + 3:	  // clear
 			draw();
