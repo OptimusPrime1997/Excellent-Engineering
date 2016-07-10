@@ -4,23 +4,40 @@ package com.example.gui;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import android.annotation.SuppressLint;
 import android.os.Environment;
 
 
+@SuppressLint("SimpleDateFormat")
 public class WriteXML {
 
-	public static void writeObject(String content,String fileName){
+	
+	public static File createTestFile(){
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fileName = simpleDateFormat.format(date);
 		File skRoot = Environment.getExternalStorageDirectory();
-		FileWriter fw;
-		File totalDir = new File(skRoot.getPath()+"/transdata");
-		if (!totalDir.exists()) {
-			totalDir.mkdir();
+		File totalDir = new File(skRoot.getPath()+"/transdata",fileName+".txt");
+		if (!totalDir.exists()) {		
+			totalDir.getParentFile().mkdirs();
+			try {
+				totalDir.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		return totalDir;		 
+	}
+	
+	
+	public static void writeObject(String content,String fileName){
+		FileWriter fw;		
 		try {
-			fw = new  FileWriter( skRoot.toString() +  "/transdata/"+ fileName ,  true );
-			fw.write(content);  
-		    fw.write("\r\n" );  //写入换行     
+			fw = new  FileWriter(fileName , true );
+			fw.write(content);       
 		    fw.close();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block

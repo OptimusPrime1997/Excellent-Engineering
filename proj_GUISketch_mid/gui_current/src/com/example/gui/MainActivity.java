@@ -1,11 +1,11 @@
 package com.example.gui;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import sketch.gui.testing.ParseXML;
 import sketch.gui.testing.TType;
@@ -83,6 +83,13 @@ public class MainActivity extends Activity implements OnTouchListener {
 	
 	private String timeInput;
 	private boolean timeInput_flag = false;
+	private File currentWrittenFile;
+	private List<String> onePictureOPerations = new ArrayList<String>();
+	
+	private boolean fork_flag = false;
+	private File forkImage;
+	private boolean isCompleted = false;
+	
 	
 	private Intent imageChooseIntent;
 	private final int REQUEST_CODE = 1;
@@ -101,7 +108,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			e.printStackTrace();
 		}
 		imageView = (ImageView) findViewById(R.id.imageView1);
-		
+		currentWrittenFile = WriteXML.createTestFile();
 		
 		imageChooseIntent = new Intent(this, ImageChooseActivity.class);
 		draw();
@@ -179,6 +186,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 			graphics.add(new PointF(upx, upy));
 			isDrawed = true;
 			
+			
+			
+			
 			/*
 			 * 无论是否在绘制区域都要先创建文件目录
 			 */
@@ -198,6 +208,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 				String filePath = getDirName(getPath()) + "temp" + "/"
 						+ getImageName(getPath()) + ".txt";
 				rect = logic.getExteriorRect(graphics);   //计算出矩形的4个点
+				onePictureOPerations.add(String.valueOf(rect[0])+" ");
+				onePictureOPerations.add(String.valueOf(rect[1])+" ");
+				onePictureOPerations.add(String.valueOf(rect[2])+" ");
+				onePictureOPerations.add(String.valueOf(rect[3])+" ");
 				ioOperation.recordAreaInfo(filePath, graphics, rect);
 /*-------------- Modify by zhchuch -----------------*/
 				countDrawArea++;
@@ -223,18 +237,21 @@ public class MainActivity extends Activity implements OnTouchListener {
 					//modelBuilder.generateSingleState("s"+modelBuilder.state_counter, getImageName(imagePath), 1);
 					/*使用对话框，让用户输入他自己所要想得到的 期待输出结果(Expected-Output)*/
 					final TextView tv = new EditText(this);
-					new AlertDialog.Builder(this).setTitle("Expected output:").setIcon(android.R.drawable.ic_dialog_info)
-						.setView(tv).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface arg0, int arg1) {
-								// TODO Auto-generated method stub
-								input = tv.getText().toString();
-								
-								
-								System.out.println("Your Input[pos-ATOMIC]: " +input);
-							}
-						}).setNegativeButton("取消", null).show();
-
+					Builder inputDailog = new AlertDialog.Builder(this);
+					inputDailog.setTitle("Expected output:");
+					inputDailog.setIcon(android.R.drawable.ic_dialog_info);
+					inputDailog.setView(tv).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface arg0, int arg1) {
+							// TODO Auto-generated method stub
+							input = tv.getText().toString();
+							onePictureOPerations.add("Expected output:"+input+"\r\n");
+							
+						}
+					});
+					inputDailog.setNegativeButton("取消", null);
+					inputDailog.show();
+					
 					countDrawArea = 0;
 					isModelCompleted = true;
 				}
@@ -244,16 +261,21 @@ public class MainActivity extends Activity implements OnTouchListener {
 					System.out.println("JOINT [AccpetState Generating...]");
 					/*使用对话框，让用户输入他自己所要想得到的 期待输出结果(Expected-Output)*/
 					final TextView tv = new EditText(this);
-					new AlertDialog.Builder(this).setTitle("Expected output:").setIcon(android.R.drawable.ic_dialog_info)
-						.setView(tv).setPositiveButton("确定", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface arg0, int arg1) {
-								// TODO Auto-generated method stub
-								input = tv.getText().toString();
-								
-								System.out.println("Your Input[pos-JOINT]: " +input);
-							}
-						}).setNegativeButton("取消", null).show();
+					Builder inputDialog = new AlertDialog.Builder(this);
+					inputDialog.setTitle("Expected output:");
+					inputDialog.setIcon(android.R.drawable.ic_dialog_info);
+					inputDialog.setView(tv);
+					inputDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface arg0, int arg1) {
+							// TODO Auto-generated method stub
+							input = tv.getText().toString();
+							onePictureOPerations.add("Expected output:"+input+"\r\n");
+							System.out.println("Your Input[pos-JOINT]: " +input);
+						}
+					});
+					inputDialog.setNegativeButton("取消", null);
+					inputDialog.show();
 					//modelBuilder.generateJointState(tempMG.generateSingleState("s"+modelBuilder.state_counter, getImageName(imagePath), 1));
 					accept_flag = true;
 				}
@@ -278,6 +300,49 @@ public class MainActivity extends Activity implements OnTouchListener {
 					String path = getDirName(getPath()) + "temp" + "/"
 							+ getImageName(getPath()) + ".arff";
 					ioOperation.recordPoint(path, recordList);
+				}
+				
+				if (isDrawed) {				
+					/*--------- After there, imply the identify action function. ---------*/
+					// savePicture();
+					String operation = "";
+					String path = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".arff";
+					double[] result;
+					result = gestureTrain.TrainResult(path);
+					/*
+					 * isDrawed为true并且result等于-1时说明只绘制了区域，并没有单击双击拖动这三种操作
+					 */
+					if (result[0] != -1) {
+						String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
+						ArrayList<String> operationList = ioOperation.readOperation(filePath);
+						for (int i = 0; i < operationPoint.size(); i++) {
+
+							if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0 && result[i] != 3) {
+								if (result[i] == 0 || result[i] == 1) { // click
+									operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
+											+ format(operationPoint.get(i).y) + ">";
+									//onePictureOPerations.add(operation);
+									
+								}
+								if (result[i] == 2) { // Drag
+									operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
+											+ format(operationPoint.get(i).y) + ">;<" + format(endPoint.get(i).x) + ","
+											+ format(endPoint.get(i).y) + ">";
+									//onePictureOPerations.add(operation);													
+								}
+
+							}
+
+						}
+						onePictureOPerations.add(operation);
+						
+						
+					}
+
+					/*--------- Before there, imply the identify action function. ---------*/			
+				} else {    
+					Toast toast = Toast.makeText(this, "no draw",Toast.LENGTH_SHORT);
+					toast.show();
 				}
 			}
 
@@ -316,6 +381,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			if (Environment.getExternalStorageState().equals(
 					Environment.MEDIA_MOUNTED)) {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
+				
 			}
 			break;
 		case MENU_ITEM_COUNTER + 1:	 // next
@@ -325,62 +391,29 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 			break;
 		case MENU_ITEM_COUNTER + 2:	 // save
-			String operation = "";
-			if (isDrawed) {
-				
-				/*--------- After there, imply the identify action function. ---------*/
-				// savePicture();
-				String path = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".arff";
-				double[] result;
-				result = gestureTrain.TrainResult(path);
-				/*
-				 * isDrawed为true并且result等于-1时说明只绘制了区域，并没有单击双击拖动这三种操作
-				 */
-				if (result[0] != -1) {
-					String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
-					ArrayList<String> operationList = ioOperation.readOperation(filePath);
-					for (int i = 0; i < operationPoint.size(); i++) {
-
-						if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0 && result[i] != 3) {
-							if (result[i] == 0 || result[i] == 1) { // click
-								operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
-										+ format(operationPoint.get(i).y) + ">";
-								
-								
-
-							}
-							if (result[i] == 2) { // Drag
-								operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
-										+ format(operationPoint.get(i).y) + ">;<" + format(endPoint.get(i).x) + ","
-										+ format(endPoint.get(i).y) + ">";
-								
-							}
-
-						}
-
-					}
-				}
-
-				/*--------- Before there, imply the identify action function. ---------*/			
-			} else {    
-				Toast toast = Toast.makeText(this, "no draw",Toast.LENGTH_SHORT);
-				toast.show();
+			
+			//if (!target_flag) {
+				WriteXML.writeObject(currentImage.getPath(), currentWrittenFile.getPath());		
+				for (int i = 0; i < onePictureOPerations.size(); i++) {
+					WriteXML.writeObject(onePictureOPerations.get(i), currentWrittenFile.getPath());
+				//}
 			}
-			System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=");
-			WriteXML.writeObject(operation, "testOPeration.txt");   
-		    //获取当前时间   
-		 	  
-		     
+			
+			if (target_flag&&!fork_flag) {
+				isCompleted = true;
+			}
 			break;
 		case MENU_ITEM_COUNTER + 3:	  // clear
 			draw();
 			break;
 		case MENU_ITEM_COUNTER + 4:	  // drawArea
+			onePictureOPerations.add("draw area ");
 			isDrawArea = true;
 			recogRect_flag = true;
 			break;
 		case MENU_ITEM_COUNTER + 5:	  // target
 /*-------------- Modify by zhchuch -----------------*/
+			WriteXML.writeObject("targe/r/n", currentWrittenFile.getPath());
 			System.out.println("After click Target...");
 			target_flag = true;
 							
@@ -418,6 +451,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			}
+			
 			break;
 			
 		case MENU_ITEM_COUNTER + 6:
@@ -432,6 +466,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				public void onClick(DialogInterface arg0, int arg1) {
 					// TODO Auto-generated method stub
 					input = tv.getText().toString();
+					WriteXML.writeObject("Expected output:"+input+"\r\n", currentWrittenFile.getPath());
 					input_flag = true;
 					System.out.println("Your Input[pos-menu-selected]: " +input);
 				}
@@ -439,7 +474,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			expectDialog.setNegativeButton("取消", null).show();			
 			break;
 			
-		case MENU_ITEM_COUNTER + 7:
+		case MENU_ITEM_COUNTER + 7:    //timer
 			final TextView timeText = new EditText(this);
 			Builder timeDialog = new AlertDialog.Builder(this);
 			timeDialog.setTitle("Wait time");
@@ -450,13 +485,37 @@ public class MainActivity extends Activity implements OnTouchListener {
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 					timeInput = timeText.getText().toString();
+					WriteXML.writeObject("Delay time:"+timeInput+"\r\n", currentWrittenFile.getPath());
 					timeInput_flag = true;
 					System.out.println("Your Input[pos-menu-selected]: " +timeInput);
 				}
 			});
 			timeDialog.setNegativeButton("取消", null);
 			timeDialog.show();
-			break;			
+			break;	
+		
+		case MENU_ITEM_COUNTER + 8:    //fork
+			if (!fork_flag) {
+				forkImage = currentImage;
+				fork_flag = true;
+				Toast.makeText(this, "fork成功", Toast.LENGTH_SHORT).show();
+			}else {
+				fork_flag = false;
+				int forkIndex = imageFiles.indexOf(forkImage);
+				currentImage = imageFiles.get(forkIndex);
+				Uri imageUri = Uri.fromFile(currentImage);
+	/*------------ modify by zhchuch ----------*/
+				imagePath = imageUri.toString();
+				//System.out.println("NextImage: Uri="+imageUri.toString()+", ImageName: "+ImageName);
+				ParseXML parser = getParserByImagePath(imagePath);
+				
+	/*----------------------------------------*/
+				imageView.setImageURI(imageUri);
+				operationPoint = new ArrayList<PointF>();
+				draw();
+				
+			}
+			break;		
 		default:
 			break;
 		}
@@ -511,6 +570,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
+		onePictureOPerations.clear();
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
 			if (data != null) {
@@ -518,6 +578,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				imagePath = data.getStringExtra(EXTRA_FILE_CHOOSER);				
 
 				currentImage = new File(imagePath);
+								
+				System.out.println(currentImage.toString());
 				Uri imageUri = Uri.fromFile(currentImage);
 				imageView.setImageURI(imageUri);
 				File dir = new File(getDirName(imagePath));
@@ -573,12 +635,19 @@ public class MainActivity extends Activity implements OnTouchListener {
 	}
 
 	private void nextClickOperation() {
+		
 		/*
 		 * 点击Next按钮的时候，先对 之前的图片上的操作 生成一个状态
 		 */
-		if (!target_flag) {
+		if (target_flag&&onePictureOPerations.size()!=0) {
+			WriteXML.writeObject(currentImage.getPath(), currentWrittenFile.getPath());		
+			for (int i = 0; i < onePictureOPerations.size(); i++) {
+				WriteXML.writeObject(onePictureOPerations.get(i), currentWrittenFile.getPath());
+			}
 			
 		}
+		
+		onePictureOPerations.clear();
 		
 		int currentIndex = imageFiles.indexOf(currentImage);// 获得所选图片在这个文件夹中的序号
 		/*
