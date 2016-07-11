@@ -12,10 +12,11 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.xmlpull.v1.XmlSerializer;
-
+import android.annotation.SuppressLint;
 import android.os.Environment;
 import android.util.Xml;
 
+@SuppressLint("SimpleDateFormat")
 public class XMLHelper {
 	public static OutputStream getOutputStream(){
 		Date date = new Date();

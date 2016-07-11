@@ -32,5 +32,9 @@ public interface ModelService {
      */
     public void setOracle(String oracleName,Result result);
 
-
+    /**
+     * 用于输出XML
+     * @param times 用于指定要找出多少条路径
+     */
+    public void printXML(int times);
 }

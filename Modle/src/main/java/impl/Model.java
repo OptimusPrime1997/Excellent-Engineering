@@ -3,21 +3,25 @@ package impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import impl.xmlwriter.PathStrategy;
 import service.Edge;
 import service.ModelService;
-
+import impl.xmlwriter.path_strategy.*;
 
 
 public class Model implements ModelService{
 
-	private List<State> states = new ArrayList<State>();
-	private String rootName = null;
-    private int id;
-	
+	protected List<State> states = new ArrayList<State>();
+	protected String rootName = null;
+    protected int id;
+	protected PathStrategy strategy = new RootFrist();
+
+
 
 	public void setRoot(String rootName,int id) {
 		this.rootName = rootName;		
 	}
+
 
 
 	public void addEdge(int id, Edge edge) {
@@ -66,6 +70,10 @@ public class Model implements ModelService{
 				state = state.toOracle(result);
 			}
 		}
+	}
+
+	public void printXML(int times) {
+		this.strategy.writeXML(states,rootName,times);
 	}
 
 	public String getRootName() {
