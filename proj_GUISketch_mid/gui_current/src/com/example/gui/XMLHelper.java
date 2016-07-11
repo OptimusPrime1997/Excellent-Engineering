@@ -6,25 +6,37 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.xmlpull.v1.XmlSerializer;
-
+import android.annotation.SuppressLint;
+import android.os.Environment;
 import android.util.Xml;
 
+@SuppressLint("SimpleDateFormat")
 public class XMLHelper {
 	public static OutputStream getOutputStream(String path){
-		File f=new File(path);
-		if(!f.exists()){
+		
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+		String fileName = simpleDateFormat.format(date);
+		File skRoot = Environment.getExternalStorageDirectory();
+		File totalDir = new File(skRoot.getPath()+"/transdata",fileName+".xml");
+		if (!totalDir.exists()) {		
+			totalDir.getParentFile().mkdirs();
 			try {
-				f.createNewFile();
+				totalDir.createNewFile();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
+			
 		OutputStream output=null;
 		try {
-			output=new FileOutputStream(new File(path));
+			output=new FileOutputStream(totalDir);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

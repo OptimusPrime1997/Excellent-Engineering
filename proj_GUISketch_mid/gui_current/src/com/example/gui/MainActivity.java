@@ -237,11 +237,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
 							input = tv.getText().toString();
-							onePictureOPerations.add(String.valueOf(rect[0])+" ");
-							onePictureOPerations.add(String.valueOf(rect[1])+" ");
-							onePictureOPerations.add(String.valueOf(rect[2])+" ");
-							onePictureOPerations.add(String.valueOf(rect[3])+" ");
-							onePictureOPerations.add("Expected output:"+input+"\r\n");
+							onePictureOPerations.add(String.valueOf(rect[0])+",");
+							onePictureOPerations.add(String.valueOf(rect[1])+",");
+							onePictureOPerations.add(String.valueOf(rect[2])+",");
+							onePictureOPerations.add(String.valueOf(rect[3])+",\r\n");
+							onePictureOPerations.add("Expected output:"+"\r\n"+input+"\r\n");
 							
 						}
 					});
@@ -266,11 +266,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
 							input = tv.getText().toString();
-							onePictureOPerations.add(String.valueOf(rect[0])+" ");
-							onePictureOPerations.add(String.valueOf(rect[1])+" ");
-							onePictureOPerations.add(String.valueOf(rect[2])+" ");
-							onePictureOPerations.add(String.valueOf(rect[3])+" ");
-							onePictureOPerations.add("Expected output:"+input+"\r\n");
+							onePictureOPerations.add(String.valueOf(rect[0])+",");
+							onePictureOPerations.add(String.valueOf(rect[1])+",");
+							onePictureOPerations.add(String.valueOf(rect[2])+",");
+							onePictureOPerations.add(String.valueOf(rect[3])+",");
+							onePictureOPerations.add("Expected output:"+"\r\n"+input+"\r\n");
 							System.out.println("Your Input[pos-JOINT]: " +input);
 						}
 					});
@@ -315,17 +315,21 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 							if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0 ) {
 								System.out.println("++++++"+result[i]);
-								if (result[i] == 0 || result[i] == 1) { // click
-									operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
-											+ format(operationPoint.get(i).y) + ">";
+								if (result[i] == 0) { // click
+									operation = "click;" + "\r\n" + format(operationPoint.get(i).x) + ","
+											+ format(operationPoint.get(i).y) + "\r\n";
 									//onePictureOPerations.add(operation);
 									
 								}
+								if (result[i] == 1) {  //longclick
+									operation = "longClick;" + "\r\n" + format(operationPoint.get(i).x) + ","
+											+ format(operationPoint.get(i).y) + "\r\n";
+								}
 								if (result[i] == 2) { // Drag
 									System.out.println("++++++"+result[i]);
-									operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
-											+ format(operationPoint.get(i).y) + ">;<" + format(endPoint.get(i).x) + ","
-											+ format(endPoint.get(i).y) + ">";
+									operation = "drag;" + "\r\n" + format(operationPoint.get(i).x) + ","
+											+ format(operationPoint.get(i).y) + "," + format(endPoint.get(i).x) + ","
+											+ format(endPoint.get(i).y) + "\r\n";
 									//onePictureOPerations.add(operation);													
 								}
 
@@ -491,7 +495,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				public void onClick(DialogInterface arg0, int arg1) {
 					// TODO Auto-generated method stub
 					input = tv.getText().toString();
-					WriteXML.writeObject("Expected output:"+input+"\r\n", currentWrittenFile.getPath());
+					WriteXML.writeObject("Expected output:"+"\r\n"+input+"\r\n", currentWrittenFile.getPath());
 					input_flag = true;
 					System.out.println("Your Input[pos-menu-selected]: " +input);
 				}
@@ -510,7 +514,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 					timeInput = timeText.getText().toString();
-					WriteXML.writeObject("Delay time:"+timeInput+"\r\n", currentWrittenFile.getPath());
+					WriteXML.writeObject("Delay time:"+"\r\n"+timeInput+"\r\n", currentWrittenFile.getPath());
 					timeInput_flag = true;
 					System.out.println("Your Input[pos-menu-selected]: " +timeInput);
 				}
