@@ -35,7 +35,7 @@ bridge
          1.png
      </fileName>
  </state>
-	    <operation type="singlePoint" action="click" delayTime="5">
+	    <operation type="singlePoint" action="click" delayTime=5>
 	           <singlePoint>
 	               <pointX>
 	                   400.00
@@ -45,7 +45,14 @@ bridge
 	               </pointY>
 	           </singlePoint>
 	    </operation>
-
+<state typeCode=0>
+     <stateId>
+         1
+     </stateId>
+     <fileName>
+         1.png
+     </fileName>
+ </state>
 	    <operation type="component" action="click" delayTime="5">
 	           <resourceId>
 	               button1
@@ -215,7 +222,7 @@ bridge
      </fileName>
  </state>
 	        	    
-	     <operation  type="components" action="click" isRecursive=1 >
+	     <operation  type="components" action="click" isRecursive="1" >
 	            <resourceIdList>
 			       <resourceId>
 			               button2
