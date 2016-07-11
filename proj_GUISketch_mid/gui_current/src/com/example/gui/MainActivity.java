@@ -209,10 +209,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				String filePath = getDirName(getPath()) + "temp" + "/"
 						+ getImageName(getPath()) + ".txt";
 				rect = logic.getExteriorRect(graphics);   //计算出矩形的4个点
-				onePictureOPerations.add(String.valueOf(rect[0])+" ");
-				onePictureOPerations.add(String.valueOf(rect[1])+" ");
-				onePictureOPerations.add(String.valueOf(rect[2])+" ");
-				onePictureOPerations.add(String.valueOf(rect[3])+" ");
+				
 				ioOperation.recordAreaInfo(filePath, graphics, rect);
 /*-------------- Modify by zhchuch -----------------*/
 				countDrawArea++;
@@ -246,6 +243,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
 							input = tv.getText().toString();
+							onePictureOPerations.add(String.valueOf(rect[0])+" ");
+							onePictureOPerations.add(String.valueOf(rect[1])+" ");
+							onePictureOPerations.add(String.valueOf(rect[2])+" ");
+							onePictureOPerations.add(String.valueOf(rect[3])+" ");
 							onePictureOPerations.add("Expected output:"+input+"\r\n");
 							
 						}
@@ -271,6 +272,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
 							input = tv.getText().toString();
+							onePictureOPerations.add(String.valueOf(rect[0])+" ");
+							onePictureOPerations.add(String.valueOf(rect[1])+" ");
+							onePictureOPerations.add(String.valueOf(rect[2])+" ");
+							onePictureOPerations.add(String.valueOf(rect[3])+" ");
 							onePictureOPerations.add("Expected output:"+input+"\r\n");
 							System.out.println("Your Input[pos-JOINT]: " +input);
 						}
@@ -394,15 +399,21 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 2:	 // save
 			
-			//if (!target_flag) {
-				WriteXML.writeObject(currentImage.getPath(), currentWrittenFile.getPath());		
-				for (int i = 0; i < onePictureOPerations.size(); i++) {
-					WriteXML.writeObject(onePictureOPerations.get(i), currentWrittenFile.getPath());
-				//}
+			if (isCompleted) {
+				currentWrittenFile = WriteXML.createTestFile();
+				isCompleted = false;
+			}			
+			
+			WriteXML.writeObject(currentImage.getPath(), currentWrittenFile.getPath());		
+			for (int i = 0; i < onePictureOPerations.size(); i++) {
+				WriteXML.writeObject(onePictureOPerations.get(i), currentWrittenFile.getPath());
 			}
 			
 			if (target_flag&&!fork_flag) {
 				isCompleted = true;
+				target_flag = false;
+				isDrawArea = false;
+				recogRect_flag = false;
 			}
 			break;
 		case MENU_ITEM_COUNTER + 3:	  // clear
@@ -501,7 +512,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 				fork_flag = true;
 				Toast.makeText(this, "fork成功", Toast.LENGTH_SHORT).show();
 			}else {
+				onePictureOPerations.clear();
 				fork_flag = false;
+				target_flag = false;
+				isDrawArea = false;
 				int forkIndex = imageFiles.indexOf(forkImage);
 				currentImage = imageFiles.get(forkIndex);
 				Uri imageUri = Uri.fromFile(currentImage);

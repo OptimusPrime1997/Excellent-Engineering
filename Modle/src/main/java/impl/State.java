@@ -2,7 +2,7 @@ package impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Iterator;
 import service.Edge;
 
 public class State {
@@ -40,5 +40,15 @@ public class State {
 		this.isOracle = isOracle;
 	}
 	
-	
+	public Iterator<Edge> iterator(){
+		return edgeList.iterator();
+	}
+
+	public Edge get(int index){
+		return edgeList.get(index);
+	}
+
+	public int length(){
+		return edgeList.size();
+	}
 }
