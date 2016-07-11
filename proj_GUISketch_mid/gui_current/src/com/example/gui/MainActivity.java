@@ -163,8 +163,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 			downx = event.getX();
 			downy = event.getY();
 			graphics.add(new PointF(downx, downy));
+			if (stepCount>2) {
+				jointGraphics.add(new PointF(upx,upy));
+			}
 			stepCount++;
-//			this.onCreateOptionsMenu();
 			break;
 		case MotionEvent.ACTION_MOVE:
 			// 路径画板
@@ -175,6 +177,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 			downx = upx;
 			downy = upy;
 			graphics.add(new PointF(upx, upy));// 记录点的坐标
+			if (stepCount>2) {
+				jointGraphics.add(new PointF(upx,upy));
+			}
 
 			break;
 		case MotionEvent.ACTION_UP:
@@ -186,7 +191,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 			imageView.invalidate();// 刷新
 			graphics.add(new PointF(upx, upy));
 			isDrawed = true;
-			
+			if (stepCount>2) {
+				jointGraphics.add(new PointF(upx,upy));
+			}
 			
 			
 			
@@ -214,20 +221,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 /*-------------- Modify by zhchuch -----------------*/
 				countDrawArea++;
 				
-//				// 找到这个 圈 里面的所有控件
-//				if (test_type == TType.JOINT) {
-//					if (recogRect_flag) {
-//						
-//					}
-//				} else {
-//					if (recogRect_flag) {
-//						
-//					}
-//				}
-//				recogRect_flag = false;
-//				//isDrawArea = false;
-//				
-//				System.out.println("test_type = " + test_type);
+						
 				
 				if (test_type == TType.ATOMIC) {
 					System.out.println("GenerateSingState pos[draw]");
@@ -282,18 +276,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 					});
 					inputDialog.setNegativeButton("取消", null);
 					inputDialog.show();
-					//modelBuilder.generateJointState(tempMG.generateSingleState("s"+modelBuilder.state_counter, getImageName(imagePath), 1));
 					accept_flag = true;
 				}
-/*--------------------------------------------------*/
-				if(stepCount>2){
-					for (int i = 0; i < graphics.size(); i++) {
-						jointGraphics.add(graphics.get(i));
-					}
-				}
 				
-
-			} else {
+			} 
+			
+			
+			//没有draw area,只是单独的手势
+			else {
 				float[] coordinate = logic.calCoordinate(graphics);// 单击时的中心点
 				canvas.drawCircle(coordinate[0], coordinate[1], 10, paint);
 
@@ -323,7 +313,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 						ArrayList<String> operationList = ioOperation.readOperation(filePath);
 						for (int i = 0; i < operationPoint.size(); i++) {
 
-							if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0 && result[i] != 3) {
+							if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0 ) {
+								System.out.println("++++++"+result[i]);
 								if (result[i] == 0 || result[i] == 1) { // click
 									operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
 											+ format(operationPoint.get(i).y) + ">";
@@ -331,6 +322,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 									
 								}
 								if (result[i] == 2) { // Drag
+									System.out.println("++++++"+result[i]);
 									operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
 											+ format(operationPoint.get(i).y) + ">;<" + format(endPoint.get(i).x) + ","
 											+ format(endPoint.get(i).y) + ">";
@@ -375,8 +367,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		//menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
 		menu.add(0, MENU_ITEM_COUNTER+7, 0, "timer");
 		menu.add(0,MENU_ITEM_COUNTER + 8, 0, "fork");
-		return true;
-//				super.onCreateOptionsMenu(menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -399,6 +390,46 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 2:	 // save
 			
+			//没有点击target时，只是点击了 draw area, 判断组合情况
+			if(stepCount>2){
+				
+				// 先获取所有的 joint 信息，并放入训练器进行识别 
+				ArrayList<String> recordList = logic.calRecordList(jointGraphics);		
+				String path = getDirName(getPath()) + "temp"
+						+ "/combinationGesture" + getImageName(getPath()) + ".arff";
+				ioOperation.recordJointPoint(path, recordList);
+				comGestureTrain = new combinationGestureTrain();
+				try {
+					comGestureTrain.Train(this);
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+				double[] result = comGestureTrain.TrainResult(path);
+				
+				String combaOperation = "";
+				for (int i = 0; i < result.length; i++) {
+					if (result[i] == -1.00) 
+						break;
+					if (result[i] == 0.00) {
+						combaOperation = "FORALL";
+						System.out.println("------------"+result[i]);
+						onePictureOPerations.add(combaOperation);
+					}	
+					if (result[i] == 1.00) {
+						combaOperation = "REC_FORALL";
+						System.out.println("------------"+result[i]);
+						onePictureOPerations.add(combaOperation);
+					}
+					if (result[i] == 2.00) {
+						combaOperation = "EXIST";
+						System.out.println("------------"+result[i]);
+						onePictureOPerations.add(combaOperation);
+					}
+				}
+			}
+			
+		
 			if (isCompleted) {
 				currentWrittenFile = WriteXML.createTestFile();
 				isCompleted = false;
@@ -429,6 +460,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			WriteXML.writeObject("targe/r/n", currentWrittenFile.getPath());
 			System.out.println("After click Target...");
 			target_flag = true;
+							
 			if (countDrawArea == 0) 
 				test_type = TType.ATOMIC;
 			else 
@@ -436,26 +468,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			
 			System.out.println("GenerateSingState pos[target]");
 						
-			// 先获取所有的 joint 信息，并放入训练器进行识别 
-			ArrayList<String> recordList = logic.calRecordList(jointGraphics);		
-			String path = getDirName(getPath()) + "temp"
-					+ "/combinationGesture" + getImageName(getPath()) + ".arff";
-			ioOperation.recordJointPoint(path, recordList);
-			comGestureTrain = new combinationGestureTrain();
-			try {
-				comGestureTrain.Train(this);
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-			double[] result = comGestureTrain.TrainResult(path);
-		
-/*--------------------------------------------------*/			
 			
-			for (int i = 0; i < result.length; i++) {
-				if (result[i] == -1.00) break;
-					System.out.println(result[i] + "");
-			}
 /*--------------------------------------------------*/
 			isDrawArea = false;
 			jointGraphics = new ArrayList<PointF>();
