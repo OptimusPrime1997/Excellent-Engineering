@@ -11,17 +11,18 @@ public class Model implements ModelService{
 
 	private List<State> states = new ArrayList<State>();
 	private String rootName = null;
+    private int id;
 	
 
-	public void setRoot(String rootName) {
+	public void setRoot(String rootName,int id) {
 		this.rootName = rootName;		
 	}
 
 
-	public void addEdge(Edge edge) {
+	public void addEdge(String start,int id, Edge edge) {
 		boolean isRecord = false;
 		for(State state : states){
-			if(state.isThisName(edge.getDestination())){
+			if(state.isThisName(start)){
 				isRecord = true;
 				state.addEdge(edge);
 				break;
@@ -29,7 +30,7 @@ public class Model implements ModelService{
 		}
 		
 		if(!isRecord){
-			State stateNew = new State(edge.getDestination());
+			State stateNew = new State(start,id);
 			stateNew.addEdge(edge);
 			states.add(stateNew);
 			
@@ -37,9 +38,9 @@ public class Model implements ModelService{
 	}
 
 
-	public void deleteEdge(String end, String operationId) {
+	public void deleteEdge(String start, String operationId) {
 		for(State state : states){
-			if(state.isThisName(end)){
+			if(state.isThisName(start)){
 				state.deleteOperation(operationId);
 				break;
 			}

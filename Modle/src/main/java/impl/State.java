@@ -2,7 +2,7 @@ package impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
+
 import service.Edge;
 
 public class State {
@@ -10,10 +10,12 @@ public class State {
 	private String name;
 	private List<Edge> edgeList;
 	private boolean isOracle = false;
+    private int id;
 	
-	public State(String name){
+	public State(String name,int id){
 		this.name = name;
 		edgeList = new ArrayList<Edge>();
+        this.id = id;
 	}
 	
 	public void addEdge(Edge edge){
@@ -40,15 +42,5 @@ public class State {
 		this.isOracle = isOracle;
 	}
 	
-	public Iterator<Edge> iterator(){
-		return edgeList.iterator();
-	}
-
-	public Edge get(int index){
-		return edgeList.get(index);
-	}
-
-	public int length(){
-		return edgeList.size();
-	}
+	
 }
