@@ -1,13 +1,14 @@
 package impl;
 
 import impl.xmlwriter.PathStrategyEnum;
+import service.ModelService;
 
 /**
  * Created by Administrator on 2016/7/11.
  */
 public class ModelFactory {
 
-    public Model getModelInstance(PathStrategyEnum pe){
+    public static ModelService getModelInstance(PathStrategyEnum pe){
         switch(pe){
             case ORACLE_FRIST:
                 return new Re_Model();
