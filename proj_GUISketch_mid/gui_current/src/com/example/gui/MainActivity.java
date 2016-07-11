@@ -455,7 +455,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			
 			break;
 			
-		case MENU_ITEM_COUNTER + 6:
+		case MENU_ITEM_COUNTER + 6://target
 			//getUserInputString();
 			/*这里涉及到 多线程，主线程要等待子线程输入。*/
 			final TextView tv = new EditText(this);
