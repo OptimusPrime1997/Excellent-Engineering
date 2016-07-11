@@ -1,6 +1,6 @@
 package impl.area;
 
-import model.service.Area;
+import service.Area;
 
 public class Component implements Area{
 	
@@ -15,7 +15,6 @@ public class Component implements Area{
 	}
 
 
-	@Override
 	public String toXML() {
 		// TODO Auto-generated method stub
 		return null;
