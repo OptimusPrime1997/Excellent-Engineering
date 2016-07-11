@@ -1,7 +1,6 @@
 package com.example.gui;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
@@ -157,6 +156,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			downy = event.getY();
 			graphics.add(new PointF(downx, downy));
 			stepCount++;
+//			this.onCreateOptionsMenu();
 			break;
 		case MotionEvent.ACTION_MOVE:
 			// 路径画板
@@ -304,7 +304,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 		//menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
 		menu.add(0, MENU_ITEM_COUNTER+7, 0, "timer");
 		menu.add(0,MENU_ITEM_COUNTER + 8, 0, "fork");
-		return super.onCreateOptionsMenu(menu);
+		return true;
+//				super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -345,9 +346,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 							if (result[i] == 0 || result[i] == 1) { // click
 								operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
 										+ format(operationPoint.get(i).y) + ">";
-								
-								
-
 							}
 							if (result[i] == 2) { // Drag
 								operation = result[i] + "-<" + format(operationPoint.get(i).x) + ","
@@ -383,7 +381,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 /*-------------- Modify by zhchuch -----------------*/
 			System.out.println("After click Target...");
 			target_flag = true;
-							
 			if (countDrawArea == 0) 
 				test_type = TType.ATOMIC;
 			else 

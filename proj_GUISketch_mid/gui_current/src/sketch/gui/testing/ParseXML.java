@@ -127,9 +127,7 @@ public class ParseXML {
 	}
 	
 	/*
-	public static void main(String args[])
-	{
-		parse("screen_data/simple_1.uix");
-	}
-	*/
+	 * public static void main(String args[]) {
+	 * parse("screen_data/simple_1.uix"); }
+	 */
 }
