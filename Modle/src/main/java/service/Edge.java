@@ -31,5 +31,10 @@ public interface Edge {
 	 * 下面的一个方法用于遍历，获得一个未遍历完全的下一条边
 	 * @return 这条边的下标
      */
-	public int getNextEdge();
+	public int getEdge();
+
+	/**
+	 * 用于移动边的指针
+	 */
+	public void moveToNext();
 }

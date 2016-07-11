@@ -40,11 +40,12 @@ public class Operation implements Edge{
 		return destination;
 	}
 
-
-	public int getNextEdge() {
-		ptr ++;
-		return ptr - 1;
+	public int getEdge() {
+		return ptr;
 	}
 
+	public void moveToNext() {
+		ptr ++;
+	}
 
 }

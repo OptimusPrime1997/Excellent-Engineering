@@ -1,5 +1,7 @@
 package service;
 import impl.State;
+import impl.xmlwriter.PathStrategy;
+
 import java.util.List;
 
 /**
@@ -9,9 +11,7 @@ import java.util.List;
 public interface XMLWriter {
     /**
      * 该接口用于将模型转换成测试层能够识别的XML文件
-     * @param appStates 导入的app状态模型
-     * @param root  该模型的根节点
-     * @param times 需要的路径条数
+     * @param strategy 寻路的策略
      */
-    public void writeXML(List<State> appStates,String root, int times);
+    public void writeXML(PathStrategy strategy);
 }
