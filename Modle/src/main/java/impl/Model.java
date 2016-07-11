@@ -11,14 +11,15 @@ public class Model implements ModelService{
 
 	private List<State> states = new ArrayList<State>();
 	private String rootName = null;
+    private int id;
 	
 
-	public void setRoot(String rootName) {
+	public void setRoot(String rootName,int id) {
 		this.rootName = rootName;		
 	}
 
 
-	public void addEdge(Edge edge) {
+	public void addEdge(int id, Edge edge) {
 		boolean isRecord = false;
 		for(State state : states){
 			if(state.isThisName(edge.getRescoures())){
@@ -36,11 +37,11 @@ public class Model implements ModelService{
 		}
 
 		if(!hasDestination){
-			states.add(new State(edge.getDestination()));
+			states.add(new State(edge.getDestination() , id));
 		}
 
 		if(!isRecord){
-			State stateNew = new State(edge.getRescoures());
+			State stateNew = new State(edge.getRescoures() , id);
 			stateNew.addEdge(edge);
 			states.add(stateNew);
 			

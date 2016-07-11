@@ -2,16 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82395ac0-2c95-41e1-b6ac-62f1a22d748a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/impl/xmlwriter/PathStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/impl/xmlwriter/path_strategy/OracleFrist.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/impl/xmlwriter/path_strategy/RootFrist.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/impl/Oracle.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/data/example.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/data/example2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/data/pullXml.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes.dex" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/MainActivity.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/MainActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/Action.java" afterPath="$PROJECT_DIR$/src/main/java/impl/Action.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/Model.java" afterPath="$PROJECT_DIR$/src/main/java/impl/Model.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/Operation.java" afterPath="$PROJECT_DIR$/src/main/java/impl/Operation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/xmlwriter/XMLWriterImpl.java" afterPath="$PROJECT_DIR$/src/main/java/impl/xmlwriter/XMLWriterImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/service/Edge.java" afterPath="$PROJECT_DIR$/src/main/java/service/Edge.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/service/XMLWriter.java" afterPath="$PROJECT_DIR$/src/main/java/service/XMLWriter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/State.java" afterPath="$PROJECT_DIR$/src/main/java/impl/State.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/service/ModelService.java" afterPath="$PROJECT_DIR$/src/main/java/service/ModelService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/MainActivity.java" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/MainActivity.java" />
     </list>
     <ignored path="Modle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,12 +40,10 @@
       <file leaf-file-name="State.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/impl/State.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="569">
-              <caret line="42" column="25" selection-start-line="42" selection-start-column="11" selection-end-line="42" selection-end-column="25" />
+            <state relative-caret-position="695">
+              <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#766#767#0" expanded="true" />
-                <element signature="e#799#800#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,9 +99,13 @@
       <file leaf-file-name="Model.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/impl/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="50" column="39" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
-              <folding />
+            <state relative-caret-position="34">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#319#320#0" expanded="true" />
+                <element signature="e#352#353#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,8 +113,8 @@
       <file leaf-file-name="ModelService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/service/ModelService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+            <state relative-caret-position="216">
+              <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -171,7 +175,6 @@
         <option value="$PROJECT_DIR$/src/test/ModelServiceDriver.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/area/Component.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/xmlwriter/PathSelector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/service/ModelService.java" />
         <option value="$PROJECT_DIR$/src/main/java/service/Edge.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/Operation.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/State.java" />
@@ -181,6 +184,7 @@
         <option value="$PROJECT_DIR$/src/main/java/service/XMLWriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/xmlwriter/XMLWriterImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/Model.java" />
+        <option value="$PROJECT_DIR$/src/main/java/service/ModelService.java" />
       </list>
     </option>
   </component>
@@ -927,7 +931,7 @@
       <workItem from="1467970128358" duration="1925000" />
       <workItem from="1468035063108" duration="37000" />
       <workItem from="1468198956258" duration="18524000" />
-      <workItem from="1468233756689" duration="1172000" />
+      <workItem from="1468233756689" duration="1438000" />
     </task>
     <servers />
   </component>
@@ -940,7 +944,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23309000" />
+    <option name="totallyTimeSpent" value="23575000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1009,8 +1013,6 @@
           <caret line="42" column="25" selection-start-line="42" selection-start-column="11" selection-end-line="42" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#766#767#0" expanded="true" />
-            <element signature="e#799#800#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1056,7 +1058,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="576">
           <caret line="38" column="55" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#319#320#0" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1238,14 +1244,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/ModelService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/impl/xmlwriter/path_strategy/RootFrist.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -1305,21 +1303,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/impl/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="42" column="25" selection-start-line="42" selection-start-column="11" selection-end-line="42" selection-end-column="25" />
+        <state relative-caret-position="695">
+          <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#766#767#0" expanded="true" />
-            <element signature="e#799#800#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/ModelService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/impl/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="50" column="39" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
-          <folding />
+        <state relative-caret-position="34">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#319#320#0" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
