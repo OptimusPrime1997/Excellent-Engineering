@@ -1,23 +1,29 @@
 package impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import service.Edge;
 
 public class State {
 	
-	private String name;
-	private List<Edge> edgeList;
-	private boolean isOracle = false;
-    private int id;
+	protected String name;
+	protected List<Edge> edgeList;
+    protected int id;
 	
 	public State(String name,int id){
 		this.name = name;
 		edgeList = new ArrayList<Edge>();
         this.id = id;
 	}
-	
+
+	public State(String name,int id,List<Edge> edgeList){
+		this.name = name;
+		this.id = id;
+		this.edgeList = edgeList;
+	}
+
 	public void addEdge(Edge edge){
 		edgeList.add(edge);
 	}
@@ -34,13 +40,23 @@ public class State {
 		return this.name.equals(name);
 	}
 	
+	public Iterator<Edge> iterator(){
+		return edgeList.iterator();
+	}
+	
+	public int length(){
+		return edgeList.size();
+	}
+
+	public Edge get(int index){
+		return edgeList.get(index);
+	}
+
 	public boolean isOracle(){
-		return isOracle;
+		return false;
 	}
-	
-	public void setOracleInfo(boolean isOracle){
-		this.isOracle = isOracle;
+
+	public Oracle toOracle(Result result){
+		return new Oracle(name,id,result,edgeList);
 	}
-	
-	
 }

@@ -7,6 +7,7 @@ import service.Edge;
 import service.ModelService;
 
 
+
 public class Model implements ModelService{
 
 	private List<State> states = new ArrayList<State>();
@@ -59,10 +60,10 @@ public class Model implements ModelService{
 	}
 
 
-	public void setOracle(String oracleName , boolean oracleInfo) {
+	public void setOracle(String oracleName,Result result) {
 		for(State state : states){
 			if(state.isThisName(oracleName)){
-				state.setOracleInfo(oracleInfo);
+				state = state.toOracle(result);
 			}
 		}
 	}
