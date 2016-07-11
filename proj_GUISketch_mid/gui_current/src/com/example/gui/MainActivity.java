@@ -3,9 +3,12 @@ package com.example.gui;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.xmlpull.v1.XmlSerializer;
 
 import sketch.gui.testing.ParseXML;
 import sketch.gui.testing.TType;
@@ -83,7 +86,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 	
 	private String timeInput;
 	private boolean timeInput_flag = false;
-	private File currentWrittenFile;
+	private OutputStream currentWrittenFile;
+	private XmlSerializer currentXml;
 	private List<String> onePictureOPerations = new ArrayList<String>();
 	
 	private boolean fork_flag = false;
@@ -108,8 +112,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 			e.printStackTrace();
 		}
 		imageView = (ImageView) findViewById(R.id.imageView1);
-		currentWrittenFile = WriteXML.createTestFile();
-		
+		currentWrittenFile = XMLHelper.getOutputStream();
+		currentXml = XMLHelper.getSerializer(currentWrittenFile);
 		imageChooseIntent = new Intent(this, ImageChooseActivity.class);
 		draw();
 		gestureTrain = new gestureTrain();
@@ -431,13 +435,111 @@ public class MainActivity extends Activity implements OnTouchListener {
 			
 		
 			if (isCompleted) {
-				currentWrittenFile = WriteXML.createTestFile();
+				currentWrittenFile = XMLHelper.getOutputStream();
+				currentXml = XMLHelper.getSerializer(currentWrittenFile);
 				isCompleted = false;
 			}			
-			
-			WriteXML.writeObject(currentImage.getPath(), currentWrittenFile.getPath());		
+			String str1="click;\r\n100,130\r\n";
+			String str2="longClick;\r\n120,130\r\n";
+			String str3="drag;\r\n120,130,150,190\r\n";
+			String str4="dragArea;\r\n120,130,115,129\r\n";
+			String str5 = "delayTime;\r\n10\r\n";
+			String str6 = "expectedValue;\r\n15633\r\n";
+			onePictureOPerations.add(str1);
+			onePictureOPerations.add(str2);
+			onePictureOPerations.add(str3);
+			onePictureOPerations.add(str4);
+			onePictureOPerations.add(str5);
 			for (int i = 0; i < onePictureOPerations.size(); i++) {
-				WriteXML.writeObject(onePictureOPerations.get(i), currentWrittenFile.getPath());
+				String temp=onePictureOPerations.get(i);
+				String[] result=temp.split("\r\n");
+				String[] re1=result[0].split(";");
+				String[] points = result[1].split(",");
+				if(re1.length>1){
+				}else{
+					try {
+					if (re1[0].equals("click")) {
+						
+							currentXml.startTag(null, "Operation");
+						
+							currentXml.attribute(null, "type", "singlePoint");
+							currentXml.attribute(null, "action", "click");
+						
+					}else if (re1[0].equals("longClick")) {
+						currentXml.startTag(null, "Operation");
+						currentXml.attribute(null, "type", "singlePoint");
+						currentXml.attribute(null, "action", "longClick");
+					}else if (re1[0].equals("drag")) {
+						currentXml.startTag(null, "Operation");
+						currentXml.attribute(null, "type", "doublePoint");
+						currentXml.attribute(null, "action", "drag");
+					}else if (re1[0].equals("dragArea")) {
+						currentXml.startTag(null, "Operation");
+						currentXml.attribute(null, "type", "singlePoint");
+						currentXml.attribute(null, "action", "click");
+					}else if (re1[0].equals("delayTime")) {
+						currentXml.startTag(null, "Operation");
+//						currentXml.attribute(null, "type", "");
+						
+						currentXml.attribute(null, "action", "delay");
+						currentXml.startTag(null, "delayTime");
+						currentXml.text(result[1]);
+						currentXml.endTag(null, "delayTime");
+						currentXml.endTag(null, "Operation");
+						continue;
+					}else if (re1[0].equals("expectedValue")) {
+						currentXml.startTag(null, "Operation");
+//						currentXml.attribute(null, "type", "expectedValue");
+						currentXml.attribute(null, "action", "expectedValue");
+						
+						currentXml.startTag(null, "value");
+						currentXml.text(result[1]);
+						currentXml.endTag(null, "value");
+						currentXml.endTag(null, "Operation");
+						continue;
+					}
+					 if(points.length==2){
+						currentXml.startTag(null, "singlePoint");
+						currentXml.startTag(null, "pointX");					
+						currentXml.text(points[0]);
+						currentXml.endTag(null, "ponitX");
+						currentXml.startTag(null, "pointY");					
+						currentXml.text(points[1]);
+						currentXml.endTag(null, "ponitY");
+						currentXml.endTag(null, "singlePoint");
+						currentXml.endTag(null, "Operation");
+						continue;
+					}else if(points.length==4){
+						currentXml.startTag(null, "doublePoint");
+						currentXml.startTag(null, "singlePoint");
+						currentXml.startTag(null, "pointX");					
+						currentXml.text(points[0]);
+						currentXml.endTag(null, "ponitX");
+						currentXml.startTag(null, "pointY");					
+						currentXml.text(points[1]);
+						currentXml.endTag(null, "ponitY");
+						currentXml.endTag(null, "singlePoint");
+						currentXml.startTag(null, "singlePoint");
+						currentXml.startTag(null, "pointX");					
+						currentXml.text(points[2]);
+						currentXml.endTag(null, "ponitX");
+						currentXml.startTag(null, "pointY");					
+						currentXml.text(points[3]);
+						currentXml.endTag(null, "ponitY");
+						currentXml.endTag(null, "singlePoint");
+						currentXml.endTag(null, "doublePoint");
+						currentXml.endTag(null, "Operation");
+						continue;
+					}else{
+						
+					}
+					} catch (IllegalArgumentException | IllegalStateException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				
 			}
 			
 			if (target_flag&&!fork_flag) {
@@ -457,7 +559,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 5:	  // target
 /*-------------- Modify by zhchuch -----------------*/
-			WriteXML.writeObject("targe/r/n", currentWrittenFile.getPath());
+			//WriteXML.writeObject("targe/r/n", currentWrittenFile.getPath());
 			System.out.println("After click Target...");
 			target_flag = true;
 							
@@ -491,7 +593,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				public void onClick(DialogInterface arg0, int arg1) {
 					// TODO Auto-generated method stub
 					input = tv.getText().toString();
-					WriteXML.writeObject("Expected output:"+input+"\r\n", currentWrittenFile.getPath());
+					//WriteXML.writeObject("Expected output:"+input+"\r\r\n", currentWrittenFile.getPath());
+					onePictureOPerations.add("Expected output:"+"\r\n"+input+"\r\r\n");
 					input_flag = true;
 					System.out.println("Your Input[pos-menu-selected]: " +input);
 				}
@@ -510,7 +613,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 					timeInput = timeText.getText().toString();
-					WriteXML.writeObject("Delay time:"+timeInput+"\r\n", currentWrittenFile.getPath());
+					//WriteXML.writeObject("Delay time:"+timeInput+"\r\n", currentWrittenFile.getPath());
+					onePictureOPerations.add("delayTime;"+"\r\n"+timeInput+"\r\n");
 					timeInput_flag = true;
 					System.out.println("Your Input[pos-menu-selected]: " +timeInput);
 				}
@@ -667,13 +771,13 @@ public class MainActivity extends Activity implements OnTouchListener {
 		/*
 		 * 点击Next按钮的时候，先对 之前的图片上的操作 生成一个状态
 		 */
-		if (target_flag&&onePictureOPerations.size()!=0) {
-			WriteXML.writeObject(currentImage.getPath(), currentWrittenFile.getPath());		
-			for (int i = 0; i < onePictureOPerations.size(); i++) {
-				WriteXML.writeObject(onePictureOPerations.get(i), currentWrittenFile.getPath());
-			}
-			
-		}
+//		if (target_flag&&onePictureOPerations.size()!=0) {
+//			WriteXML.writeObject(currentImage.getPath(), currentWrittenFile.getPath());		
+//			for (int i = 0; i < onePictureOPerations.size(); i++) {
+//				WriteXML.writeObject(onePictureOPerations.get(i), currentWrittenFile.getPath());
+//			}
+//			
+//		}
 		
 		onePictureOPerations.clear();
 		

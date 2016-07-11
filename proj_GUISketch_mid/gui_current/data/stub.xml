@@ -131,4 +131,5 @@
 	        <resourceId>scoreTextView</resourceId>
 	        <expectText>8900</expectText>
 	    </operation>
+	    
 </path>
