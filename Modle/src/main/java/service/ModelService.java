@@ -1,5 +1,4 @@
 package service;
-import impl.Result;
 
 public interface ModelService {
     /**

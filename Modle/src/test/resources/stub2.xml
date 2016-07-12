@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<path>
+    <state typeCode="1">
+        <stateId>2</stateId>
+        <fileName>2.png</fileName>
+    </state>
+    <Operation action="click" type="single_point" delayTime="0">
+    <singlePoint>
+        <pointX>631.29</pointX>
+        <pointY>381.25</pointY>
+    </singlePoint>
+    </Operation>
+
+    <state typeCode="1">
+        <stateId>3</stateId>
+        <fileName>3.png</fileName>
+    </state>
+
+    <Operation action="click" type="single_point" delayTime="0">
+        <singlePoint>
+            <pointX>236.65</pointX>
+            <pointY>505.71</pointY>
+        </singlePoint>
+    </Operation>
+
+
+    <state typeCode="2">
+        <stateId>4</stateId>
+        <fileName>4.png</fileName>
+        <doublePoint>
+            <singlePoit>
+                <pointX>685.45245</pointX>
+                <pointY>80.02912</pointY>
+            </singlePoit>
+            <singlePoit>
+                <pointX>685.45245</pointX>
+                <pointY>319.782</pointY>
+            </singlePoit>
+        </doublePoint>
+        <resourceId/>
+        <expectText>1234567890</expectText>
+    </state>
+</path>
