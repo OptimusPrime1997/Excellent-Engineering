@@ -14,4 +14,10 @@ public class RootFrist extends PathStrategy {
     private String findTestPath(List<State> appStates, State rootState, int times) {
         return null;
     }
+
+    @Override
+    public void writeXML(List<State> appStates, String root, int times){
+        
+    }
+
 }

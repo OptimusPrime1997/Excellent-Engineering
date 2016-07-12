@@ -27,13 +27,18 @@ public interface Edge {
 	public String getDestination();
 
 	/**
-	 * 检查边所连接的终结点是否被遍历完全
+	 * 获取这条边访问的次数
 	 * @return
      */
-	public boolean isHasSearchComplete();
+	public int getSearchTimes();
 
 	/**
-	 * 将这个边设置为遍历过
+	 * 增加访问的次数
 	 */
-	public void searchComplete();
+	public void addSearchTimes();
+
+	/**
+	 * 重置访问的次数，可能会用
+	 */
+	public void resetSearchTimes();
 }
