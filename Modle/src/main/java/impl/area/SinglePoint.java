@@ -22,8 +22,8 @@ public class SinglePoint implements Area{
 
 	public String toXML() {
 		String XML = "<singlePoint>\n"+
-					 "\t<pointX>"+Xray+"</pointX>\n"+
-					 "\t<pointY>"+Yray+"</pointY>\n"+
+					 "<pointX>"+Xray+"</pointX>\n"+
+					 "<pointY>"+Yray+"</pointY>\n"+
 				     "</singlePoint>\n";
 
 		return XML;

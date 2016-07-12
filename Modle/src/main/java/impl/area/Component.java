@@ -1,23 +1,26 @@
 package impl.area;
 
 import service.Area;
+import util.ComponentType;
 
 public class Component implements Area{
 	
 	private String id;
-//	private String belongTo;
+	private String type;
 	
 	
-	public Component(String id) {
+	public Component(String id , String type) {
 		super();
 		this.id = id;
-		//this.belongTo = belongTo;
+		this.type = type;
 	}
 
 
 	public String toXML() {
-		// TODO Auto-generated method stub
-		return null;
+		String XML = "<resourceId>" + id + "</resourceId>\n"+
+				     "<componentType>"+ type + "</componentType>\n";
+
+		return XML;
 	}
 
 
