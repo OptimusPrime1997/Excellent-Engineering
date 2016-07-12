@@ -23,5 +23,7 @@ public class Oracle extends State{
         return true;
     }
 
-
+    public String toXML(){
+        return result.toXML();
+    }
 }

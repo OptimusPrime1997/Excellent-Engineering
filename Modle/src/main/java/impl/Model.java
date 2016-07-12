@@ -68,7 +68,10 @@ public class Model implements ModelService{
 	public void setOracle(String oracleName,Result result) {
 		for(State state : states){
 			if(state.isThisName(oracleName)){
+				states.remove(state);
 				state = state.toOracle(result);
+				states.add(state);
+				break;
 			}
 		}
 	}
