@@ -20,4 +20,25 @@ public class VirtualOperation implements Edge {
 		return false;
 	}
 
+	public String getRescoures() {
+		return null;
+	}
+
+	public String getDestination() {
+		return null;
+	}
+
+	public int getSearchTimes() {
+		return 0;
+	}
+
+	public void addSearchTimes() {
+
+	}
+
+	public void resetSearchTimes() {
+
+	}
+
+
 }

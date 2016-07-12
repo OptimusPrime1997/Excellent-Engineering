@@ -10,6 +10,7 @@ public class Operation implements Edge{
 	private String resources;
 	private Area area;
 	private String id;
+	private int delay;
 	private int searchTimes;   //这个用于寻路的时候记录这条边所连接的终结点是否所有的路径都被访问过
 	
 	public Operation(Action action, String destination,String resources, Area area, String id) {
@@ -20,7 +21,20 @@ public class Operation implements Edge{
 		this.area = area;
 		this.id = id;
 		this.searchTimes = 0;
+		this.delay=-1;
 	}
+
+	public Operation(Action action, String destination,String resources, Area area, String id,int delay) {
+		super();
+		this.action = action;
+		this.destination = destination;
+		this.resources = resources;
+		this.area = area;
+		this.id = id;
+		this.searchTimes = 0;
+		this.delay=delay;
+	}
+
 
 
 	public String toXML(){

@@ -5,4 +5,5 @@ package impl;
  */
 public enum Action {
     DRAG,CLICK,DCLICK,LCLICK
+
 }

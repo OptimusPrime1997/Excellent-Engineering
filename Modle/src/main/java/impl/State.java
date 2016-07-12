@@ -59,4 +59,12 @@ public class State {
 	public Oracle toOracle(Result result){
 		return new Oracle(name,id,result,edgeList);
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getId() {
+		return id;
+	}
 }
