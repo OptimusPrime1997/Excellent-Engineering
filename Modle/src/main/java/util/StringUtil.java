@@ -11,4 +11,6 @@ public class StringUtil {
     public static final String delay="delay";
     public static final String id = "id";
     public static final String resourceId = "resourceId";
+    public static final String doublePoint="doublePoint";
+    public static final String singlePoint="singlePoint";
 }
