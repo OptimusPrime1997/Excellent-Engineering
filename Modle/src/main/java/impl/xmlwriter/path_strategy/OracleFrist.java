@@ -7,6 +7,7 @@ import service.Edge;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by Administrator on 2016/7/11.
@@ -116,7 +117,40 @@ public class OracleFrist extends PathStrategy {
      */
     private String searchSingleOraclePath(State oracle,State root,List<State> appStates){
         State ptr = oracle;
-        return null;
+        Iterator<Edge> it = ptr.iterator();
+        Stack<Edge> edgeStack = new Stack<Edge>();
+        Edge edge = null;
+
+        while(ptr != root && !isSearchComplete(oracle,appStates)){    //这里的ptr != root是可行的
+            int stackDeepMemory = edgeStack.size();
+            /*
+            下面的While循环用于寻找一个未被遍历的路径
+            */
+            //-----------------------------------------------------------------------
+            while(true){
+                int index = (int) (Math.random() * ptr.length());
+                edge = ptr.get(index);  //随机选取一条路径
+                if(!edge.isHasSearchComplete()){
+                    edgeStack.push(edge);
+                    ptr = this.findStateByName(appStates,edge.getRescoures());  //由于这个是逆邻接表，边的Rescoures端反而是子节点
+                    break;
+                }
+            }
+            //-----------------------------------------------------------------------
+            if(stackDeepMemory == edgeStack.size()){    //如果没有找到一条可以添加的边，就折返到父节点重新选
+                edge = edgeStack.pop();
+                ptr = this.findStateByName(appStates,edge.getDestination());
+                edge.searchComplete();  //将edge设置为已经遍历过了
+            }
+        }
+        if(edgeStack.empty()){
+            return null;
+        }
+        String XML = "";
+        while(!edgeStack.empty()){
+            XML += edgeStack.pop().toXML();
+        }
+        return XML;
     }
 
     /**
@@ -142,9 +176,10 @@ public class OracleFrist extends PathStrategy {
     private boolean hasUnSearchedEdge(Edge edge,List<State> appStates){
         State state = this.findStateByName(appStates,edge.getRescoures());
         if(state.length() == 0){  //如果链接的是叶子节点，那么肯定遍历完了
+            edge.isHasSearchComplete();
             return true;
         }
-        if(state.length() <= edge.getEdge()){ //如果edge中记录的边的指针已经超过了节点的边的下标的上界，那么也遍历完了
+        if(edge.isHasSearchComplete()){ //如果edge中记录的边的指针已经超过了节点的边的下标的上界，那么也遍历完了
             return true;
         }
         return false;

@@ -37,7 +37,7 @@ public class State {
 	}
 	
 	public boolean isThisName(String name){
-		return this.name.equals(name);
+		return (this.name+this.id).equals(name);	//用于从边的记录中查找边
 	}
 	
 	public Iterator<Edge> iterator(){

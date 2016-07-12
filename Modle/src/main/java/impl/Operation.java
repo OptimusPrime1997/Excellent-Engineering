@@ -10,7 +10,7 @@ public class Operation implements Edge{
 	private String resources;
 	private Area area;
 	private String id;
-	private int ptr;   //这个指向终结点所连接的下一条边
+	private boolean hasSearchComplete;   //这个用于寻路的时候记录这条边所连接的终结点是否所有的路径都被访问过
 	
 	public Operation(Action action, String destination,String resources, Area area, String id) {
 		super();
@@ -19,7 +19,7 @@ public class Operation implements Edge{
 		this.resources = resources;
 		this.area = area;
 		this.id = id;
-		this.ptr = 0;
+		this.hasSearchComplete = false;
 	}
 
 
@@ -40,12 +40,11 @@ public class Operation implements Edge{
 		return destination;
 	}
 
-	public int getEdge() {
-		return ptr;
+	public boolean isHasSearchComplete(){
+		return hasSearchComplete;
 	}
 
-	public void moveToNext() {
-		ptr ++;
+	public void searchComplete(){
+		hasSearchComplete = true;
 	}
-
 }

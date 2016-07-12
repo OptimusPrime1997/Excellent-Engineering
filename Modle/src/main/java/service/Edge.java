@@ -26,15 +26,14 @@ public interface Edge {
      */
 	public String getDestination();
 
-
 	/**
-	 * 下面的一个方法用于遍历，获得一个未遍历完全的下一条边
-	 * @return 这条边的下标
+	 * 检查边所连接的终结点是否被遍历完全
+	 * @return
      */
-	public int getEdge();
+	public boolean isHasSearchComplete();
 
 	/**
-	 * 用于移动边的指针
+	 * 将这个边设置为遍历过
 	 */
-	public void moveToNext();
+	public void searchComplete();
 }
