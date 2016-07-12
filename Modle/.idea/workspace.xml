@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82395ac0-2c95-41e1-b6ac-62f1a22d748a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/Operation.java" afterPath="$PROJECT_DIR$/src/main/java/impl/Operation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/Re_Model.java" afterPath="$PROJECT_DIR$/src/main/java/impl/Re_Model.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/MainActivity.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/MainActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/Model.java" afterPath="$PROJECT_DIR$/src/main/java/impl/Model.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/State.java" afterPath="$PROJECT_DIR$/src/main/java/impl/State.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/xmlwriter/path_strategy/OracleFrist.java" afterPath="$PROJECT_DIR$/src/main/java/impl/xmlwriter/path_strategy/OracleFrist.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/service/Edge.java" afterPath="$PROJECT_DIR$/src/main/java/service/Edge.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/service/ModelService.java" afterPath="$PROJECT_DIR$/src/main/java/service/ModelService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/data/stub.xml" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/data/stub.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/MainActivity.java" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/XMLHelper.java" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/XMLHelper.java" />
     </list>
     <ignored path="Modle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,6 +33,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="State.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/impl/State.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#744#745#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Re_Model.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/impl/Re_Model.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -45,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/impl/Model.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="767">
-              <caret line="61" column="13" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
+              <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#284#291#0" expanded="true" />
@@ -69,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OracleFrist.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OracleFrist.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/impl/xmlwriter/path_strategy/OracleFrist.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="713">
-              <caret line="152" column="19" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
+            <state relative-caret-position="227">
+              <caret line="125" column="14" selection-start-line="125" selection-start-column="14" selection-end-line="125" selection-end-column="14" />
               <folding>
                 <element signature="e#4009#4015#0" expanded="true" />
               </folding>
@@ -128,12 +143,12 @@
         <option value="$PROJECT_DIR$/src/main/java/impl/ModelFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/service/ModelService.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/Model.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/State.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/main/java/impl/Re_Model.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/Operation.java" />
         <option value="$PROJECT_DIR$/src/main/java/service/Edge.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/xmlwriter/path_strategy/OracleFrist.java" />
+        <option value="$PROJECT_DIR$/src/main/java/impl/State.java" />
       </list>
     </option>
   </component>
@@ -866,7 +881,7 @@
       <workItem from="1468035063108" duration="37000" />
       <workItem from="1468198956258" duration="18524000" />
       <workItem from="1468233756689" duration="5490000" />
-      <workItem from="1468286122485" duration="4198000" />
+      <workItem from="1468286122485" duration="4269000" />
     </task>
     <servers />
   </component>
@@ -879,7 +894,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31825000" />
+    <option name="totallyTimeSpent" value="31896000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -948,8 +963,7 @@
           <caret line="42" column="25" selection-start-line="42" selection-start-column="11" selection-end-line="42" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#705#706#0" expanded="true" />
-            <element signature="e#765#766#0" expanded="true" />
+            <element signature="e#744#745#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1225,18 +1239,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/impl/State.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="39" column="65" selection-start-line="39" selection-start-column="65" selection-end-line="39" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#705#706#0" expanded="true" />
-            <element signature="e#765#766#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6912">
@@ -1256,7 +1258,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/impl/Model.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="767">
-          <caret line="61" column="13" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
+          <caret line="62" column="13" selection-start-line="62" selection-start-column="13" selection-end-line="62" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#284#291#0" expanded="true" />
@@ -1287,10 +1289,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/impl/xmlwriter/path_strategy/OracleFrist.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="713">
-          <caret line="152" column="19" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
+        <state relative-caret-position="227">
+          <caret line="125" column="14" selection-start-line="125" selection-start-column="14" selection-end-line="125" selection-end-column="14" />
           <folding>
             <element signature="e#4009#4015#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/impl/State.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="38" column="43" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#744#745#0" expanded="true" />
           </folding>
         </state>
       </provider>
