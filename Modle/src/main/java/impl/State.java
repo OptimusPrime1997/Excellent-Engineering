@@ -12,7 +12,7 @@ public class State {
 	protected List<Edge> edgeList;
     protected int id;
 	
-	public State(String name,int id){
+		public State(String name,int id){
 		this.name = name;
 		edgeList = new ArrayList<Edge>();
         this.id = id;
@@ -37,7 +37,7 @@ public class State {
 	}
 	
 	public boolean isThisName(String name){
-		return this.name.equals(name);
+		return (this.name).equals(name);
 	}
 	
 	public Iterator<Edge> iterator(){

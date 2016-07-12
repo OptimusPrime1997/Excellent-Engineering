@@ -19,12 +19,13 @@ public class Model implements ModelService{
 
 
 	public void setRoot(String rootName,int id) {
-		this.rootName = rootName;		
+		this.rootName = rootName;
+		this.id = id;
 	}
 
 
 
-	public void addEdge(int id, Edge edge) {
+	public void addEdge(int startId,int endId, Edge edge) {
 		boolean isRecord = false;
 		for(State state : states){
 			if(state.isThisName(edge.getRescoures())){
@@ -42,11 +43,11 @@ public class Model implements ModelService{
 		}
 
 		if(!hasDestination){
-			states.add(new State(edge.getDestination() , id));
+			states.add(new State(edge.getDestination(),id));
 		}
 
 		if(!isRecord){
-			State stateNew = new State(edge.getRescoures() , id);
+			State stateNew = new State(edge.getRescoures(),id);
 			stateNew.addEdge(edge);
 			states.add(stateNew);
 			

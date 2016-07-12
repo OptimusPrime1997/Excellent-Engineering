@@ -13,7 +13,7 @@ public interface ModelService {
      * 增加新的边(operation) 两点分别是 start和operation中的destination
      * @param edge
      */
-    public void addEdge(int id, Edge edge);
+    public void addEdge(int startId,int endId, Edge edge);
 
     /**
      * 删除边 原理同addEdge
