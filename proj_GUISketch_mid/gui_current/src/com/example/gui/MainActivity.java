@@ -450,10 +450,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 			String str5 = "delayTime;\r\n10\r\n";
 			String str6 = "expectedValue;\r\n15633\r\n";
 			onePictureOPerations.add(str1);
-			onePictureOPerations.add(str2);
-			onePictureOPerations.add(str3);
-			onePictureOPerations.add(str4);
-			onePictureOPerations.add(str5);
+//			onePictureOPerations.add(str2);
+//			onePictureOPerations.add(str3);
+//			onePictureOPerations.add(str4);
+//			onePictureOPerations.add(str5);
 			for (int i = 0; i < onePictureOPerations.size(); i++) {
 				String temp=onePictureOPerations.get(i);
 				String[] result=temp.split("\r\n");
@@ -557,7 +557,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			draw();
 			break;
 		case MENU_ITEM_COUNTER + 4:	  // drawArea
-			onePictureOPerations.add("draw area ");
+			onePictureOPerations.add("draw area");
 			isDrawArea = true;
 			recogRect_flag = true;
 			break;
@@ -598,7 +598,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					// TODO Auto-generated method stub
 					input = tv.getText().toString();
 					//WriteXML.writeObject("Expected output:"+input+"\r\r\n", currentWrittenFile.getPath());
-					onePictureOPerations.add("Expected output:"+"\r\n"+input+"\r\r\n");
+					onePictureOPerations.add("Expected output:"+"\r\n"+input+"\r\n");
 					input_flag = true;
 					System.out.println("Your Input[pos-menu-selected]: " +input);
 				}
