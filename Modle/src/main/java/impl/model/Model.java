@@ -25,11 +25,14 @@ public class Model implements ModelService{
 	public void setRoot(String rootName,int id) {
 		this.rootName = rootName;
 		this.id = id;
+		System.out.println("\nroot set complete , and the name is :" + rootName
+		                  + "\n" + "id is :"+ id +'\n');
 	}
 
 
 
 	public void addEdge(int startId,int endId, Edge edge) {
+		System.out.println("add edge begin!!!");
 		boolean isRecord = false;
 		for(State state : states){
 			if(state.isThisName(edge.getRescoures())){
@@ -48,13 +51,14 @@ public class Model implements ModelService{
 
 		if(!hasDestination){
 			states.add(new State(edge.getDestination(),id));
+			System.out.println("add a new destination state");
 		}
 
 		if(!isRecord){
 			State stateNew = new State(edge.getRescoures(),id);
 			stateNew.addEdge(edge);
 			states.add(stateNew);
-			
+			System.out.println("add a new rescoures edge");
 		}
 	}
 
@@ -81,6 +85,10 @@ public class Model implements ModelService{
 	}
 
 	public void printXML(int times) {
+		if(states.size() == 0){
+			System.err.println("Model is empty!!!");
+			return;
+		}
 		this.strategy.writeXML(states,rootName,times);
 	}
 

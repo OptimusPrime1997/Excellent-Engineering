@@ -31,6 +31,9 @@ public class RootFrist extends PathStrategy {
 
     private String findTestPath(List<State> appStates, State rootState, int times) {
         State ptr = rootState;
+        if(rootState == null){
+            System.err.println("Invalid root");
+        }
         int search_limit = times * 2;
         List<String> XMLRecord = new ArrayList<String>();
         for(int counter = 0 ; counter < search_limit && XMLRecord.size() < times; counter ++){
