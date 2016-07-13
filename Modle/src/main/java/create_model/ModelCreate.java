@@ -57,13 +57,13 @@ public class ModelCreate {
             String name = elem.elementText(StringUtil.fileName);
             int id = Integer.parseInt(elem.elementText(StringUtil.stateId));
 
-            System.out.println(elem.attributeValue(StringUtil.typeCode));
-            System.out.println(elem.attributeValue(StringUtil.typeCode).equals("1"));
+//            System.out.println(elem.attributeValue(StringUtil.typeCode));
+//            System.out.println(elem.attributeValue(StringUtil.typeCode).equals("1"));
             if(elem.attributeValue(StringUtil.typeCode).equals("1")){
                 if(i!=0)
                 states.add(i, new State(name+id,id));
                 else {
-                    states.add(i,new State(name,id));
+                    states.add(i,new State(name+id,id));
                     model.setRoot(name,id);//设置根节点
                 }
 
@@ -87,11 +87,13 @@ public class ModelCreate {
 //                    }
                 }
                 states.add(i,new Oracle(name,id,result));
+                model.setOracle(name+id,result);
             }
 
 
         }
 
+        System.out.println(operationElements.size());
         //读取所有的中间边 并将其加到边上面
         for(int i = 0 ; i < operationElements.size() ; i++ ){
             State start = states.get(i);
@@ -101,6 +103,7 @@ public class ModelCreate {
             start.addEdge(operation);
             operations.add(i,operation);//WTF
             model.addEdge(start.getId(),next.getId(),operation);
+//            System.out.println(i);
         }
     }
 
@@ -159,7 +162,7 @@ public class ModelCreate {
         }else if(type==Type.SINGLE_POINT){
             Element element = operation.element(StringUtil.singlePoint);
 
-            result = new SinglePoint(Float.parseFloat(element.elementText(StringUtil.pointX)),Float.parseFloat(StringUtil.pointY));
+            result = new SinglePoint(Float.parseFloat(element.elementText(StringUtil.pointX)),Float.parseFloat(element.elementText(StringUtil.pointY)));
         }
         return result;
     }
