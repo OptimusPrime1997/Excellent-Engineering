@@ -1,4 +1,5 @@
 package service;
+
 import impl.oracle_result.Result;
 
 public interface ModelService {

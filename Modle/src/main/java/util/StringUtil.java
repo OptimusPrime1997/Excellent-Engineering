@@ -13,4 +13,7 @@ public class StringUtil {
     public static final String resourceId = "resourceId";
     public static final String doublePoint="doublePoint";
     public static final String singlePoint="singlePoint";
+    public static final String pointX="pointX";
+    public static final String pointY="pointY";
+
 }
