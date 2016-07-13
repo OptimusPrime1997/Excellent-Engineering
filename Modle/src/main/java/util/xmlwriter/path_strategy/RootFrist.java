@@ -62,7 +62,10 @@ public class RootFrist extends PathStrategy {
                     System.out.println("find oracle :) ");
                     String xml =createPathXML(pathRecord,(Oracle) ptr); //由于ptr已经确认是Oracle了，直接强制转换
                     if(!XMLRecord.contains(xml)){
+                        System.out.println("new path :)");
                         XMLRecord.add(xml);
+                    }else{
+                        System.out.println("path already exist :(");
                     }
                 }
                 deep_limit ++;
@@ -120,7 +123,11 @@ public class RootFrist extends PathStrategy {
         }
         int index = (int) (selectList.size() * Math.random());
         System.out.println("Function getMinEdge finished!!!");
-        return state.get(index);
+        System.out.println("Candidate num : "+selectList.size());
+        System.out.println(index);
+        return selectList.get(index);
 
     }
+
+
 }

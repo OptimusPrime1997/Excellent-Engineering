@@ -45,9 +45,9 @@
         <stateId>5</stateId>
         <fileName>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/4.png</fileName>
         <singleComponent>
-            <index>0</index>
+            <index>3</index>
             <resourceType>editView</resourceType>
-            <expect type="text">15528</expect>
+            <expect type="text">14528</expect>
         </singleComponent>
     </state>
 </path>
