@@ -2,10 +2,15 @@ package com.example.gui;
 
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.dom4j.Document;
+import org.dom4j.io.XMLWriter;
+
 import android.annotation.SuppressLint;
 import android.os.Environment;
 
@@ -19,7 +24,7 @@ public class WriteXML {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 		String fileName = simpleDateFormat.format(date);
 		File skRoot = Environment.getExternalStorageDirectory();
-		File totalDir = new File(skRoot.getPath()+"/transdata",fileName+".txt");
+		File totalDir = new File(skRoot.getPath()+"/transdata",fileName+".xml");
 		if (!totalDir.exists()) {		
 			totalDir.getParentFile().mkdirs();
 			try {
@@ -33,17 +38,15 @@ public class WriteXML {
 	}
 	
 	
-	public static void writeObject(String content,String fileName){
-		FileWriter fw;		
+	public static void writeObject(Document document, String fileName) {
 		try {
-			fw = new  FileWriter(fileName , true );
-			fw.write(content);       
-		    fw.close();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			XMLWriter writer = new XMLWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"));
+			writer.write(document);
+			writer.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-    }
+	}
     
 	
 	
