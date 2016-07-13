@@ -9,8 +9,8 @@ import java.io.File;
  */
 public class TestModle{
     public static void main(String[] args){
-        File[] file = new File[1];
-        file[0] = new File(TestModle.class.getClassLoader().getResource("1.xml").getPath());
+        File[] file ;
+        file = new File(TestModle.class.getClassLoader().getResource("test").getPath()).listFiles();
         ModelService modelService = new ModelCreate().getModel(PathStrategyEnum.ROOT_FRIST,file);
         modelService.printXML(10);
     }
