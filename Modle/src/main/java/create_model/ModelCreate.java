@@ -49,6 +49,10 @@ public class ModelCreate {
         List<Element> operationElements = document.getRootElement().elements(StringUtil.operation);
         List<State> states = new ArrayList<State>(stateElements.size());
         List<Edge> operations = new ArrayList<Edge>(operationElements.size());
+        /*****/
+        String oracleName = null;
+        Result result = null;
+        /****/
         //读取所有的状态集
         for(int i = 0 ; i < stateElements.size() ;i++){
             Element elem = stateElements.get(i);
@@ -63,13 +67,14 @@ public class ModelCreate {
                 if(i!=0)
                 states.add(i, new State(name+id,id));
                 else {
+                    id=0;
                     states.add(i,new State(name+id,id));
                     model.setRoot(name,id);//设置根节点
                 }
 
             }else{//是一个oracle
                 //TODO 分析类型产生对应的oracle
-                Result result = null;
+//                Result result = null;
                 String type = elem.attributeValue(StringUtil.type);
                 if(type==null){
                     System.out.print(true);
@@ -86,8 +91,9 @@ public class ModelCreate {
 //                        (MultiComponentResult)result.
 //                    }
                 }
+                oracleName = name+id;
                 states.add(i,new Oracle(name,id,result));
-                model.setOracle(name+id,result);
+                //model.setOracle
             }
 
 
@@ -105,6 +111,8 @@ public class ModelCreate {
             model.addEdge(start.getId(),next.getId(),operation);
 //            System.out.println(i);
         }
+
+        model.setOracle(oracleName,result);
     }
 
     private Edge getOperation(String start,String next ,Element element){
