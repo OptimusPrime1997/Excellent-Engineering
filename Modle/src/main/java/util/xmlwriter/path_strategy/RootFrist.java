@@ -36,6 +36,7 @@ public class RootFrist extends PathStrategy {
         }
         int search_limit = times * 2;
         List<String> XMLRecord = new ArrayList<String>();
+        //System.out.println("times : "+ times);
         for(int counter = 0 ; counter < search_limit && XMLRecord.size() < times; counter ++){
 
             int loop_limit = 0;
@@ -50,24 +51,26 @@ public class RootFrist extends PathStrategy {
                 edge.addSearchTimes();  //边的访问次数加一
                 for(Edge e : pathRecord){   //检查环路
                     if(e == edge){
+                        System.out.println("find a loop");
                         loop_limit ++;
                     }
                 }
                 pathRecord.add(edge);
                 ptr = this.findStateByName(appStates,edge.getDestination());
                 if(ptr.isOracle()){
+                    System.out.println("--------------find oracle----------------");
                     XMLRecord.add(createPathXML(pathRecord,(Oracle) ptr));  //由于ptr已经确认是Oracle了，直接强制转换
                 }
                 deep_limit ++;
             }
             ptr = rootState;
-
+            System.out.println("looping...");
         }
-        String result = "<paths>";
+        String result = "<paths>\n";
         for(String str : XMLRecord){
             result += str;
         }
-        result += "</paths> \n";
+        result += "</paths>\n";
         return result;
     }
 
@@ -91,6 +94,7 @@ public class RootFrist extends PathStrategy {
      * @return 访问次数最少的随机一条边
      */
     private Edge getMinEdge(State state){
+        System.out.println("Function getMinEdge called!!!");
         if(state.length() == 0){
             return null;
         }
@@ -111,6 +115,7 @@ public class RootFrist extends PathStrategy {
             }
         }
         int index = (int) (selectList.size() * Math.random());
+        System.out.println("Function getMinEdge finished!!!");
         return state.get(index);
 
     }

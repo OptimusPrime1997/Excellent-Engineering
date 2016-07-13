@@ -23,7 +23,7 @@ public class Model implements ModelService{
 
 
 	public void setRoot(String rootName,int id) {
-		this.rootName = rootName;
+		this.rootName = rootName + id;
 		this.id = id;
 		System.out.println("\nroot set complete , and the name is :" + rootName
 		                  + "\n" + "id is :"+ id +'\n');

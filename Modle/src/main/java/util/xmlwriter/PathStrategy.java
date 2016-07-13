@@ -52,13 +52,21 @@ public abstract class PathStrategy {
      * @return
      */
     protected State findStateByName(List<State> appStates,String stateName){
+        System.out.println("Function findStateByName called!!!");
         State state = null;
         for(State statePtr : appStates){
+            //System.out.println(statePtr.isThisName(stateName));
             if(statePtr.isThisName(stateName)){
                 state = statePtr;
+                System.out.println("we find the state!!!");
                 break;
             }
         }
+        if(state == null){
+            System.err.println("state dose not exist!!!");
+        }
+        System.out.println("Function findStateByName finished!!!");
         return state;
+
     }
 }
