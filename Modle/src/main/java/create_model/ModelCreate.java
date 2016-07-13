@@ -157,7 +157,7 @@ public class ModelCreate {
             result = new DoublePoint(point1,point2);
         }else if(type==Type.POINT_TO_AREA){
             Element element3 = operation.element(StringUtil.singlePoint);
-            SinglePoint point3 = new SinglePoint(Float.parseFloat(StringUtil.pointX),Float.parseFloat(StringUtil.pointY));
+            SinglePoint point3 = new SinglePoint(Float.parseFloat(element3.elementText(StringUtil.pointX)),Float.parseFloat(element3.elementText(StringUtil.pointY)));
 
             List<Element> elements = operation.element(StringUtil.doublePoint).elements();
             Element element1 = elements.get(0);
