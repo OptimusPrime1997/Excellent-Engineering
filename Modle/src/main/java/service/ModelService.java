@@ -1,5 +1,5 @@
 package service;
-import impl.Result;
+import impl.oracle_result.Result;
 
 public interface ModelService {
     /**

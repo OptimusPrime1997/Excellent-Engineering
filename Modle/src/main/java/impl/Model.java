@@ -3,6 +3,7 @@ package impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import impl.oracle_result.Result;
 import impl.xmlwriter.PathStrategy;
 import service.Edge;
 import service.ModelService;

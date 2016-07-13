@@ -1,4 +1,5 @@
 package impl;
+import impl.oracle_result.Result;
 import service.Edge;
 import java.util.List;
 

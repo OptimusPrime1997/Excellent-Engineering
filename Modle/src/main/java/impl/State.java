@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import impl.oracle_result.Result;
 import service.Edge;
 
 public class State {
