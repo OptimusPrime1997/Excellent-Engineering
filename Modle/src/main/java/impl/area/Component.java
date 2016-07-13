@@ -1,7 +1,6 @@
 package impl.area;
 
 import service.Area;
-import util.ComponentType;
 
 public class Component implements Area{
 	
@@ -17,7 +16,7 @@ public class Component implements Area{
 
 
 	public String toXML() {
-		String XML = "<resourceId>" + id + "</resourceId>\n"+
+		String XML = "<index>" + id + "</index>\n"+
 				     "<componentType>"+ type + "</componentType>\n";
 
 		return XML;
