@@ -58,7 +58,7 @@ public class RootFrist extends PathStrategy {
                 pathRecord.add(edge);
                 ptr = this.findStateByName(appStates,edge.getDestination());
                 if(ptr.isOracle()){
-                    System.out.println("--------------find oracle----------------");
+                    System.out.println("find oracle :) ");
                     XMLRecord.add(createPathXML(pathRecord,(Oracle) ptr));  //由于ptr已经确认是Oracle了，直接强制转换
                 }
                 deep_limit ++;

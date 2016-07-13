@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import impl.oracle_result.Result;
+import impl.state.Oracle;
 import impl.state.State;
 import service.Edge;
 import service.ModelService;
@@ -73,15 +74,18 @@ public class Model implements ModelService{
 	}
 
 
-	public void setOracle(String oracleName, Result result) {
+	public void setOracle(String oracleName,int oracleID ,Result result) {
 		for(State state : states){
 			if(state.isThisName(oracleName)){
 				states.remove(state);
 				state = state.toOracle(result);
 				states.add(state);
-				break;
+
+				return;
 			}
 		}
+		states.add(new Oracle(oracleName,oracleID,result));
+
 	}
 
 	public void printXML(int times) {

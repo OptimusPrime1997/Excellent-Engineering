@@ -30,8 +30,9 @@ public interface ModelService {
      * @param oracleName 最终所要测试的标准状态
      *                   (类似JUNIT的expect result)
      * @param result 状态判断的正确条件
+     * @param oracleId oracle的ID
      */
-    public void setOracle(String oracleName,Result result);
+    public void setOracle(String oracleName,int oracleId,Result result);
 
     /**
      * 用于输出XML
