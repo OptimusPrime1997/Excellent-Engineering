@@ -14,8 +14,11 @@ public class Range implements Area{
 
 
 	public String toXML() {
-		// TODO Auto-generated method stub
-		return null;
+		String XML = "<doublePoint>\n"+
+					 startPoint.toXML()+
+					 endPoint.toXML()+
+					 "</doublePoint>\n";
+		return XML;
 	}
 	public SinglePoint getStartPoint() {
 		return startPoint;

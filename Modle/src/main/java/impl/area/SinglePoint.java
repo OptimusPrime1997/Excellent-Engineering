@@ -6,14 +6,14 @@ public class SinglePoint implements Area{
 	/**
 	 * 单个点的x坐标
 	 */
-	private int Xray;
+	private float Xray;
 	/**
 	 * 单个点的y坐标
 	 */
-	private int Yray;
+	private float Yray;
 	
 	
-	public SinglePoint(int xray, int yray) {
+	public SinglePoint(float xray, float yray) {
 		super();
 		Xray = xray;
 		Yray = yray;
@@ -21,17 +21,22 @@ public class SinglePoint implements Area{
 
 
 	public String toXML() {
-		return null;
+		String XML = "<singlePoint>\n"+
+					 "<pointX>"+Xray+"</pointX>\n"+
+					 "<pointY>"+Yray+"</pointY>\n"+
+				     "</singlePoint>\n";
+
+		return XML;
 	}
 
 
-	public int getXray() {
+	public float getXray() {
 		return Xray;
 	}
 	public void setXray(int xray) {
 		Xray = xray;
 	}
-	public int getYray() {
+	public float getYray() {
 		return Yray;
 	}
 	public void setYray(int yray) {

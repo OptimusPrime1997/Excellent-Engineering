@@ -26,15 +26,19 @@ public interface Edge {
      */
 	public String getDestination();
 
-
 	/**
-	 * 下面的一个方法用于遍历，获得一个未遍历完全的下一条边
-	 * @return 这条边的下标
+	 * 获取这条边访问的次数
+	 * @return
      */
-	public int getEdge();
+	public int getSearchTimes();
 
 	/**
-	 * 用于移动边的指针
+	 * 增加访问的次数
 	 */
-	public void moveToNext();
+	public void addSearchTimes();
+
+	/**
+	 * 重置访问的次数，可能会用
+	 */
+	public void resetSearchTimes();
 }

@@ -1,11 +1,14 @@
 package com.example.gui;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -16,8 +19,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Instrumentation;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,11 +33,15 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.hardware.camera2.CameraCharacteristics.Key;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.RemoteException;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -53,7 +64,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 	private Resources r;
 	private ImageView imageView;
-	
+
 	private Canvas canvas;
 	private Paint paint;
 	private Bitmap alterBitmap;
@@ -68,11 +79,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private combinationGestureTrain comGestureTrain;
 	private IOOperation ioOperation = new IOOperation();
 	private boolean isDrawed = false;// 有没有画过，在MotionEvent.ACTION_UP时置为true
+//	private boolean isMove=false;//有没有移动，在MotionEvent.ACTION_Move时置为true
+//	private boolean isPutDown= false;//有没有按下过，在MotionEvent.ACTION_DOWN时置为true,用于判断单个点击事件
+	
 	private boolean isDrawArea = false;// 是否在绘制区域
 	private File currentImage;// 当前图片
 	private File[] files;// 一个文件夹下所有文件
 	private ArrayList<File> imageFiles = new ArrayList<File>();// 一个文件夹下所有的图片文件
-/*---- Modify By zhchuch ---*/
+	/*---- Modify By zhchuch ---*/
 	private String imagePath;
 	private PointF[] rect;
 	private int countDrawArea = 0;
@@ -81,8 +95,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private boolean target_flag = false;
 	private boolean input_flag = false;
 	private boolean recogRect_flag = false;
-/*-------------------------*/
-	
+	/*-------------------------*/
+
 	private String timeInput;
 	private File currentWrittenFile;
 	private Document currentDocument;
@@ -96,17 +110,65 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private boolean fork_flag = false;
 	private File forkImage;
 	private boolean isCompleted = false;
-	
-	
+
 	private Intent imageChooseIntent;
 	private final int REQUEST_CODE = 1;
 
 	private final int MENU_ITEM_COUNTER = Menu.FIRST;
 	public static final String EXTRA_FILE_CHOOSER = "file_chooser";
 
+	private void setLanguage() {
+		Log.w("WriteXML", "use MainActivity");
+		// 应用内配置语言
+		Resources resources = getResources();// 获得res资源对象
+		Configuration config = resources.getConfiguration();// 获得设置对象
+		DisplayMetrics dm = resources.getDisplayMetrics();// 获得屏幕参数：主要是分辨率，像素等。
+		config.locale = Locale.ENGLISH; // 英文
+		resources.updateConfiguration(config, dm);
+		Log.d("WriteXML", "test changeLanguage");
+	}
+
+	private void putDownMenu() {
+		Log.w("WriteXML", "use putdownMenu");
+		// Runtime runtime = Runtime.getRuntime();
+		// try {
+		// runtime.exec("input keyevent " + KeyEvent.KEYCODE_MENU);
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// Instrumentation inst = new Instrumentation();
+		//// inst.sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN,
+		// KeyEvent.KEYCODE_MENU));
+		// inst.sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
+		// int flag=0;
+		Thread menuThread = new Thread() {
+			public void run() {
+				try {
+
+					Instrumentation inst = new Instrumentation();
+					inst.sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
+				} catch (Exception e) {
+					Log.e("Exception when sendPointerSync", e.toString());
+				}
+			}
+		};
+		menuThread.start();
+		try {
+			menuThread.sleep(50);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		menuThread.run();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		setLanguage();
+
 		setContentView(R.layout.activity_main);
 		try {
 			ioOperation.CreateMdr(sd);
@@ -133,6 +195,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		putDownMenu();
 	}
 
 	private void draw() {
@@ -143,8 +206,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		} else {
 			try {
 				// 读取uri所在的图片
-				bitmap = MediaStore.Images.Media.getBitmap(
-						this.getContentResolver(), Uri.fromFile(currentImage));
+				bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.fromFile(currentImage));
 			} catch (Exception e) {
 				Log.e("[Android]", e.getMessage());
 				Log.e("[Android]", "目录为：" + currentImage.getName());
@@ -153,8 +215,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 		}
 
-		alterBitmap = Bitmap.createBitmap(bitmap.getWidth(),
-				bitmap.getHeight(), bitmap.getConfig());
+		alterBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
 		// System.out.println(bitmap.getWidth() + "");
 		canvas = new Canvas(alterBitmap);
 		paint = new Paint();
@@ -164,21 +225,23 @@ public class MainActivity extends Activity implements OnTouchListener {
 		canvas.drawBitmap(bitmap, matrix, paint);
 		imageView.setImageBitmap(alterBitmap);
 		imageView.setOnTouchListener(this);
+//		putDownMenu();
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
-		
+
 		int action = event.getAction();
+		long lastIndex=0;
 		switch (action) {
 		case MotionEvent.ACTION_DOWN:
 			downx = event.getX();
 			downy = event.getY();
 			graphics.add(new PointF(downx, downy));
-			if (stepCount>2) {
-				jointGraphics.add(new PointF(upx,upy));
+			if (stepCount > 2) {
+				jointGraphics.add(new PointF(upx, upy));
 			}
 			stepCount++;
 			break;
@@ -191,10 +254,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 			downx = upx;
 			downy = upy;
 			graphics.add(new PointF(upx, upy));// 记录点的坐标
-			if (stepCount>2) {
-				jointGraphics.add(new PointF(upx,upy));
+			if (stepCount > 2) {
+				jointGraphics.add(new PointF(upx, upy));
 			}
-
 			break;
 		case MotionEvent.ACTION_UP:
 
@@ -205,12 +267,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 			imageView.invalidate();// 刷新
 			graphics.add(new PointF(upx, upy));
 			isDrawed = true;
-			if (stepCount>2) {
-				jointGraphics.add(new PointF(upx,upy));
+			if (stepCount > 2) {
+				jointGraphics.add(new PointF(upx, upy));
 			}
-			
-			System.out.println("-----------"+isDrawed);
-			System.out.println("-----------"+isDrawArea);
 			/*
 			 * 无论是否在绘制区域都要先创建文件目录
 			 */
@@ -224,24 +283,22 @@ public class MainActivity extends Activity implements OnTouchListener {
 					e.printStackTrace();
 				}
 			}
-
+			
+			
 			if (isDrawArea) { // Selection Area
-				
-				String filePath = getDirName(getPath()) + "temp" + "/"
-						+ getImageName(getPath()) + ".txt";
-				rect = logic.getExteriorRect(graphics);   //计算出矩形的4个点
-				
+				String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
+				rect = logic.getExteriorRect(graphics); // 计算出矩形的4个点
+
 				ioOperation.recordAreaInfo(filePath, graphics, rect);
-/*-------------- Modify by zhchuch -----------------*/
+				/*-------------- Modify by zhchuch -----------------*/
 				countDrawArea++;
-				
-						
-				
+
 				if (test_type == TType.ATOMIC) {
 					System.out.println("GenerateSingState pos[draw]");
-					
-					//modelBuilder.generateSingleState("s"+modelBuilder.state_counter, getImageName(imagePath), 1);
-					/*使用对话框，让用户输入他自己所要想得到的 期待输出结果(Expected-Output)*/
+
+					// modelBuilder.generateSingleState("s"+modelBuilder.state_counter,
+					// getImageName(imagePath), 1);
+					/* 使用对话框，让用户输入他自己所要想得到的 期待输出结果(Expected-Output) */
 					final TextView tv = new EditText(this);
 					Builder inputDailog = new AlertDialog.Builder(this);
 					inputDailog.setTitle("Expected output:");
@@ -259,21 +316,23 @@ public class MainActivity extends Activity implements OnTouchListener {
 					});
 					inputDailog.setNegativeButton("取消", null);
 					inputDailog.show();
-					
+
 					countDrawArea = 0;
 					
 				}
+
 				
 				if (test_type == TType.JOINT) {
 					// 为每一个的 accept 状态，生成 单终止状态
 					System.out.println("JOINT [AccpetState Generating...]");
-					/*使用对话框，让用户输入他自己所要想得到的 期待输出结果(Expected-Output)*/
+					/* 使用对话框，让用户输入他自己所要想得到的 期待输出结果(Expected-Output) */
 					final TextView tv = new EditText(this);
 					Builder inputDialog = new AlertDialog.Builder(this);
 					inputDialog.setTitle("Expected output:");
 					inputDialog.setIcon(android.R.drawable.ic_dialog_info);
 					inputDialog.setView(tv);
 					inputDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
 						@Override
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
@@ -289,12 +348,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 					inputDialog.show();
 					accept_flag = true;
 				}
-				
-			} 
-			
-			
-			//没有draw area,只是单独的手势
+
+			}
+
+			// 没有draw area,只是单独的手势
 			else {
+
 				float[] coordinate = logic.calCoordinate(graphics);// 单击时的中心点
 				canvas.drawCircle(coordinate[0], coordinate[1], 10, paint);
 
@@ -304,12 +363,19 @@ public class MainActivity extends Activity implements OnTouchListener {
 				endPoint.add(graphics.get(endPointIndex));
 				ArrayList<String> recordList = logic.calRecordList(graphics);// 获得用于训练的十五个点的坐标
 				if (clickCount > 0) {
-					String path = getDirName(getPath()) + "temp" + "/"
-							+ getImageName(getPath()) + ".arff";
+					String path = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".arff";
 					ioOperation.recordPoint(path, recordList);
 				}
-				
-				if (isDrawed) {				
+
+				if (isDrawed) {
+					
+//					if(isMove==false&&isPutDown==true){
+//						Toast toast = Toast.makeText(this, "no move", Toast.LENGTH_SHORT);
+//						toast.show();
+//						putDownMenu();
+//						break;
+//					}
+					
 					/*--------- After there, imply the identify action function. ---------*/
 					// savePicture();
 					String operation = "";
@@ -325,10 +391,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if (result[0] != -1) {
 						String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
 						ArrayList<String> operationList = ioOperation.readOperation(filePath);
-						for (int i = 0; i < operationPoint.size(); i++) {
+						for (int i = 0; i < operationPoint.size(); i++){
 
-							if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0 ) {
-								System.out.println("++++++"+result[i]);
+							if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0) {
+								System.out.println("++++++" + result[i]);
 								if (result[i] == 0) { // click
 									operation = "click;" + "\r\n" + format(operationPoint.get(i).x) + ","
 											+ format(operationPoint.get(i).y) + "\r\n";
@@ -343,7 +409,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 									onePictureOPerations.add(operation);
 								}
 								if (result[i] == 2) { // Drag
-									System.out.println("++++++"+result[i]);
+									System.out.println("++++++" + result[i]);
 									operation = "drag;" + "\r\n" + format(operationPoint.get(i).x) + ","
 											+ format(operationPoint.get(i).y) + "," + format(endPoint.get(i).x) + ","
 											+ format(endPoint.get(i).y) + "\r\n";
@@ -354,26 +420,58 @@ public class MainActivity extends Activity implements OnTouchListener {
 							}
 
 						}
-						
-						
-						
+						if(!operation.equals("")){
+							onePictureOPerations.add(operation);
+						}else if(operationPoint.size()>0){
+							
+							Log.w("TAG-p", "into unrecognize case,added:"+(graphics.size()-lastIndex));
+							if((operationPoint.get(operationPoint.size()-1).toString() ).indexOf("PointF(0.0, 0.0)")!=-1){
+								if(graphics.size()-lastIndex<10){
+									Log.w("TAG-p1", "putDownMenu");
+									putDownMenu();
+								}
+							}
+						}
 					}
 
-					/*--------- Before there, imply the identify action function. ---------*/			
-				} else {    
-					Toast toast = Toast.makeText(this, "no draw",Toast.LENGTH_SHORT);
+					/*--------- Before there, imply the identify action function. ---------*/
+				} else {
+
+					Toast toast = Toast.makeText(this, "no draw", Toast.LENGTH_SHORT);
 					toast.show();
+
 				}
 			}
 
 			graphics = new ArrayList<PointF>();
-
+			
+			Log.w("TAG-1", "operationsize:"+onePictureOPerations.size());
+			if(onePictureOPerations.size()>0){
+				Log.w("TAG-2","operationAdd:"+onePictureOPerations.get(operationPoint.size()-1));
+			}else{
+				Log.w("TAG-3","operationAdd:null");
+			}
+			Log.w("TAG-4", "pointsize:"+operationPoint.size());
+			if(operationPoint.size()>0){
+				Log.w("TAG-5","operationPoint:"+operationPoint.get(operationPoint.size()-1));
+			}else{
+				Log.w("TAG-6","operationPoint:null");
+			}
+			Log.w("TAG-7", "graphicsSize:"+jointGraphics.size());
+			if(jointGraphics.size()>0){
+				Log.w("TAG-8","graphics:"+jointGraphics.get(jointGraphics.size()-1));
+			}else{
+				Log.w("TAG-9","graphics:null");
+			}
+			
+			lastIndex=graphics.size();
 			break;
 
 		default:
 			break;
 		}
-
+		
+		
 		return true;
 
 	}
@@ -386,29 +484,29 @@ public class MainActivity extends Activity implements OnTouchListener {
 		menu.add(0, MENU_ITEM_COUNTER + 3, 0, "clear");
 		menu.add(0, MENU_ITEM_COUNTER + 4, 0, "draw Area");
 		menu.add(0, MENU_ITEM_COUNTER + 5, 0, "target");
-		//menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
-		menu.add(0, MENU_ITEM_COUNTER+7, 0, "timer");
-		menu.add(0,MENU_ITEM_COUNTER + 8, 0, "fork");
+		// menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
+		menu.add(0, MENU_ITEM_COUNTER + 7, 0, "timer");
+		menu.add(0, MENU_ITEM_COUNTER + 8, 0, "fork");
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case MENU_ITEM_COUNTER:	// choose
+		case MENU_ITEM_COUNTER: // choose
 			clickCount++;
 			// 判断sd卡是否存在，并且是否具有读写权限
-			if (Environment.getExternalStorageState().equals(
-					Environment.MEDIA_MOUNTED)) {
+			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
-				
+
 			}
+			putDownMenu();
 			break;
-		case MENU_ITEM_COUNTER + 1:	 // next
+		case MENU_ITEM_COUNTER + 1: // next
 			if (clickCount > 0) {
 				nextClickOperation();
 			}
-
+		
 			break;
 		case MENU_ITEM_COUNTER + 2:	 // save
 			
@@ -439,7 +537,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				
 				
 				for (int i = 0; i < result.length; i++) {
-					if (result[i] == -1.00) 
+					if (result[i] == -1.00)
 						break;
 					if (result[i] == 0.00) {
 						combaOperation = "FORALL;"+String.valueOf(rect[0].x)+","+
@@ -578,6 +676,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 			onePictureOPerations.clear();
 			stepCount = 0;
 			draw();
+			
+//			imagePath = data.getStringExtra(EXTRA_FILE_CHOOSER);
+//		Log.w("TAG-P", "onActivityResult:print the uix androidNode");
+//		/*--------------- modify by zhchuch ----------*/
+//		ParseXML parser = getParserByImagePath(imagePath);
+			
 			break;
 		case MENU_ITEM_COUNTER + 4:	  // drawArea
 			//onePictureOPerations.add("draw area");
@@ -590,28 +694,27 @@ public class MainActivity extends Activity implements OnTouchListener {
 			onePictureOPerations.clear();
 			System.out.println("After click Target...");
 			target_flag = true;
-							
-			if (countDrawArea == 0) 
+
+			if (countDrawArea == 0)
 				test_type = TType.ATOMIC;
-			else 
+			else
 				test_type = TType.JOINT;
-			
+
 			System.out.println("GenerateSingState pos[target]");
-						
-			
-/*--------------------------------------------------*/
+
+			/*--------------------------------------------------*/
 			isDrawArea = false;
 			jointGraphics = new ArrayList<PointF>();
 			stepCount = 0;
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			}
-			
+
 			break;
-			
-		case MENU_ITEM_COUNTER + 6://target
-			//getUserInputString();
-			/*这里涉及到 多线程，主线程要等待子线程输入。*/
+
+		case MENU_ITEM_COUNTER + 6:// target
+			// getUserInputString();
+			/* 这里涉及到 多线程，主线程要等待子线程输入。 */
 			final TextView tv = new EditText(this);
 			Builder expectDialog = new AlertDialog.Builder(this);
 			expectDialog.setTitle("Expected output:").setIcon(android.R.drawable.ic_dialog_info);
@@ -624,19 +727,19 @@ public class MainActivity extends Activity implements OnTouchListener {
 					//WriteXML.writeObject("Expected output:"+input+"\r\r\n", currentWrittenFile.getPath());
 					//onePictureOPerations.add("expectedValue;"+"\r\n"+input+"\r\n");
 					input_flag = true;
-					System.out.println("Your Input[pos-menu-selected]: " +input);
+					System.out.println("Your Input[pos-menu-selected]: " + input);
 				}
 			});
-			expectDialog.setNegativeButton("取消", null).show();			
+			expectDialog.setNegativeButton("取消", null).show();
 			break;
-			
-		case MENU_ITEM_COUNTER + 7:    //timer
+
+		case MENU_ITEM_COUNTER + 7: // timer
 			final TextView timeText = new EditText(this);
 			Builder timeDialog = new AlertDialog.Builder(this);
 			timeDialog.setTitle("Wait time");
 			timeDialog.setIcon(android.R.drawable.ic_dialog_info);
 			timeDialog.setView(timeText);
-			timeDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {				
+			timeDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
@@ -668,50 +771,60 @@ public class MainActivity extends Activity implements OnTouchListener {
 				int forkIndex = imageFiles.indexOf(forkImage);
 				currentImage = imageFiles.get(forkIndex);
 				Uri imageUri = Uri.fromFile(currentImage);
-	/*------------ modify by zhchuch ----------*/
+				/*------------ modify by zhchuch ----------*/
 				imagePath = imageUri.toString();
-				//System.out.println("NextImage: Uri="+imageUri.toString()+", ImageName: "+ImageName);
-				ParseXML parser = getParserByImagePath(imagePath);
+				// System.out.println("NextImage: Uri="+imageUri.toString()+",
+				// ImageName: "+ImageName);
 				
-	/*----------------------------------------*/
+				Log.w("TAG-P", "forkCase:print the uix androidNode");
+				ParseXML parser = getParserByImagePath(imagePath);
+
+				/*----------------------------------------*/
 				imageView.setImageURI(imageUri);
 				operationPoint = new ArrayList<PointF>();
 				draw();
-				
 			}
-			break;		
+			putDownMenu();
+			break;
 		default:
 			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	/**
 	 * 找到 可处理当前测试界面(ImageName)的 parser
 	 */
-	private ParseXML getParserByImagePath(String ImagePath)
-	{
-		//System.out.println("ImagePath = "+ImagePath);
-		String[] temp = ImagePath.split("/");
-		String app_name = temp[temp.length - 2];
-		String ImageName = temp[temp.length - 1];
-		String testXMLName = "screen_data/"+app_name+"/" + ImageName.split("\\.")[0] +".uix";
-		//System.out.println("testXMLName = "+testXMLName);
+	private ParseXML getParserByImagePath(String ImagePath) {
+		// System.out.println("ImagePath = "+ImagePath);
 		
-		ParseXML parser = new ParseXML();
-		
+		Log.w("TAG-P2","ImagePath:"+ImagePath);
+		String[] temp = ImagePath.split("\\.");
+//		String app_name = temp[temp.length - 2];
+//		String ImageName = temp[temp.length - 1];
+//		String testXMLName = "screenShotPicture/" + app_name + "/" + ImageName.split("\\.")[0] + ".uix";
+//		if(temp.length>1){
+//		}
+		Log.w("TAG-P2", "splitSize:"+temp.length);
+		for(int i=0;i<temp.length;i++){
+			Log.w("TAG-P2","temp "+i+" "+temp[i]);
+		}
+		String testXMLName=temp[0]+".uix";
+		// System.out.println("testXMLName = "+testXMLName);
+		Log.w("TAG-P2","testxmlName:"+testXMLName);
 		InputStream is_xml = null;
 		try {
-			is_xml = this.getAssets().open(testXMLName);
+//			is_xml = this.getAssets().open(testXMLName);
+			is_xml=new BufferedInputStream(new FileInputStream(new File(testXMLName)));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		parser.parse(is_xml);
-		
+		ParseXML parser = new ParseXML(is_xml);
+
 		return parser;
 	}
-	
+
 	private String getDirName(String image_Path) {
 		// TODO Auto-generated method stub
 		String[] temp = image_Path.split("/");
@@ -727,8 +840,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 		String[] temp = image_Path.split("/");
 		String name = temp[temp.length - 1];
 		// split(".")要转义
-		//String[] nameTemp = name.split("\\.");
-		return name;//nameTemp[0];
+		// String[] nameTemp = name.split("\\.");
+		return name;// nameTemp[0];
 	}
 
 	@Override
@@ -739,10 +852,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 		if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
 			if (data != null) {
 				// uri=Uri.parse("content://media/external/images/media/39");
-				imagePath = data.getStringExtra(EXTRA_FILE_CHOOSER);				
+				imagePath = data.getStringExtra(EXTRA_FILE_CHOOSER);
 
 				currentImage = new File(imagePath);
-								
+
 				System.out.println(currentImage.toString());
 				Uri imageUri = Uri.fromFile(currentImage);
 				imageView.setImageURI(imageUri);
@@ -751,24 +864,24 @@ public class MainActivity extends Activity implements OnTouchListener {
 				for (int i = 0; i < files.length; i++) {
 					if (!files[i].isDirectory()) {
 						String fileName = files[i].getName();
-						String fileType = fileName.substring(fileName
-								.indexOf("."));
+						String fileType = fileName.substring(fileName.indexOf("."));
 						if (isImage(fileType)) {
 							imageFiles.add(files[i]);
 						}
 					}
 
 				}
-/*--------------- modify by zhchuch ----------*/				
+				Log.w("TAG-P", "onActivityResult:print the uix androidNode");
+				/*--------------- modify by zhchuch ----------*/
 				ParseXML parser = getParserByImagePath(imagePath);
 				
-				//tempMG = new ModelBuilder(modelBuilder.cur_parser); 
-/*-------------------------------------------*/	
+				// tempMG = new ModelBuilder(modelBuilder.cur_parser);
+				/*-------------------------------------------*/
 				draw();
 			} else {
 				return;
 			}
-		}// if
+		} // if
 
 	}// OnActivityResult
 
@@ -799,36 +912,40 @@ public class MainActivity extends Activity implements OnTouchListener {
 	}
 
 	private void nextClickOperation() {
-		
+
 		/*
 		 * 点击Next按钮的时候，先对 之前的图片上的操作 生成一个状态
 		 */
-//		if (target_flag&&onePictureOPerations.size()!=0) {
-//			WriteXML.writeObject(currentImage.getPath(), currentWrittenFile.getPath());		
-//			for (int i = 0; i < onePictureOPerations.size(); i++) {
-//				WriteXML.writeObject(onePictureOPerations.get(i), currentWrittenFile.getPath());
-//			}
-//			
-//		}
-		
+		// if (target_flag&&onePictureOPerations.size()!=0) {
+		// WriteXML.writeObject(currentImage.getPath(),
+		// currentWrittenFile.getPath());
+		// for (int i = 0; i < onePictureOPerations.size(); i++) {
+		// WriteXML.writeObject(onePictureOPerations.get(i),
+		// currentWrittenFile.getPath());
+		// }
+		//
+		// }
+
 		onePictureOPerations.clear();
-		
+
 		int currentIndex = imageFiles.indexOf(currentImage);// 获得所选图片在这个文件夹中的序号
 		/*
 		 * 点击next时从currentImage之后的一张图片开始，之前的不再出现
 		 */
 		if (currentIndex == imageFiles.size() - 1) {
-			Toast.makeText(this, "已经是最后一张了", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "This is already last picture!", Toast.LENGTH_SHORT).show();
 			// draw();
 		} else {
 			currentImage = imageFiles.get(currentIndex + 1);
 			Uri imageUri = Uri.fromFile(currentImage);
-/*------------ modify by zhchuch ----------*/
+			/*------------ modify by zhchuch ----------*/
 			imagePath = imageUri.toString();
-			//System.out.println("NextImage: Uri="+imageUri.toString()+", ImageName: "+ImageName);
+			// System.out.println("NextImage: Uri="+imageUri.toString()+",
+			// ImageName: "+ImageName);
+			Log.w("TAG-P", "nextClick:print the uix androidNode");
 			ParseXML parser = getParserByImagePath(imagePath);
-			
-/*----------------------------------------*/
+
+			/*----------------------------------------*/
 			imageView.setImageURI(imageUri);
 			operationPoint = new ArrayList<PointF>();
 			draw();
@@ -836,7 +953,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 	}
 
-	
 	private String format(double input) {
 		DecimalFormat decimalFormat = new DecimalFormat(".00");// 将点的坐标统一保留两位小数
 		String Coordinate = decimalFormat.format(input);

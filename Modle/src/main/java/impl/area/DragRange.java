@@ -10,8 +10,9 @@ public class DragRange extends Range {
 	
 	@Override
 	public String toXML(){
-		return null;
-}
+		String XML = beginPoint.toXML() + super.toXML();
+		return XML;
+	}
 
 	public SinglePoint getBeginPoint() {
 		return beginPoint;
