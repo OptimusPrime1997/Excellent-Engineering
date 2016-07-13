@@ -19,6 +19,7 @@ public class RootFrist extends PathStrategy {
     @Override
     public void writeXML(List<State> appStates, String root, int times){
         String XML = this.findTestPath(appStates,this.findStateByName(appStates,root),times);
+        XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + XML;
         try{
             FileWriter fileWriter=new FileWriter("paths.xml");
             fileWriter.write(XML);
@@ -59,7 +60,10 @@ public class RootFrist extends PathStrategy {
                 ptr = this.findStateByName(appStates,edge.getDestination());
                 if(ptr.isOracle()){
                     System.out.println("find oracle :) ");
-                    XMLRecord.add(createPathXML(pathRecord,(Oracle) ptr));  //由于ptr已经确认是Oracle了，直接强制转换
+                    String xml =createPathXML(pathRecord,(Oracle) ptr); //由于ptr已经确认是Oracle了，直接强制转换
+                    if(!XMLRecord.contains(xml)){
+                        XMLRecord.add(xml);
+                    }
                 }
                 deep_limit ++;
             }
