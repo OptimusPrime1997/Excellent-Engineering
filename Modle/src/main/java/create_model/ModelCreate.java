@@ -50,7 +50,7 @@ public class ModelCreate {
         List<State> states = new ArrayList<State>(stateElements.size());
         List<Edge> operations = new ArrayList<Edge>(operationElements.size());
         /*****/
-        String oracleName = null;
+        Oracle oracle = null;
         Result result = null;
         /****/
         //读取所有的状态集
@@ -91,8 +91,8 @@ public class ModelCreate {
 //                        (MultiComponentResult)result.
 //                    }
                 }
-                oracleName = name+id;
-                states.add(i,new Oracle(name,id,result));
+                oracle = new Oracle(name,id,result);
+                states.add(i,oracle);
                 //model.setOracle
             }
 
@@ -112,7 +112,7 @@ public class ModelCreate {
 //            System.out.println(i);
         }
 
-        model.setOracle(oracleName,result);
+        model.setOracle(oracle.getName(),oracle.getId(),result);
     }
 
     private Edge getOperation(String start,String next ,Element element){
@@ -184,6 +184,7 @@ public class ModelCreate {
         Result result = new SingleComponentResult(Integer.parseInt(index),resultType,componentType,expect);
         return result;
     }
+
 
     private ResultType getResultType(String type){
         type = type.toUpperCase();
