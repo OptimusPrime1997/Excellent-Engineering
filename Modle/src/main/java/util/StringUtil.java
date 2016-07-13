@@ -21,6 +21,9 @@ public class StringUtil {
     public static final String fileName = "fileName";
     public static final String stateId = "stateId";
     public static final String typeCode = "typeCode";
+    public static final String singleComponent = "singleComponent";
+    public static final String multiComponent = "multiComponent";
+    public static final String expect="expect";
 
 
 }

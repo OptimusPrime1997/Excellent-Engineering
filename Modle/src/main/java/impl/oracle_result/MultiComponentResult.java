@@ -12,7 +12,7 @@ public class MultiComponentResult implements Result {
 
 
     public String toXML(){
-        String XML = "";
+        String  XML= "";
         for(SingleComponentResult scr : list){
             XML += scr.toXML();
         }

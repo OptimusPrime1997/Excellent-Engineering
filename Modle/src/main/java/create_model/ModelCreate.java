@@ -5,6 +5,11 @@ import impl.area.*;
 import impl.edge.Operation;
 import impl.edge.VirtualOperation;
 import impl.model.ModelFactory;
+import impl.oracle_result.MultiComponentResult;
+import impl.oracle_result.Result;
+import impl.oracle_result.ResultType;
+import impl.oracle_result.SingleComponentResult;
+import impl.state.Oracle;
 import impl.state.State;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -40,8 +45,8 @@ public class ModelCreate {
 
     private void anaXml(File file){
        Document document =  XMLReader.readXML(file.getPath());
-        List<Element> stateElements = document.getRootElement().elements("state");
-        List<Element> operationElements = document.getRootElement().elements("operation");
+        List<Element> stateElements = document.getRootElement().elements(StringUtil.state);
+        List<Element> operationElements = document.getRootElement().elements(StringUtil.operation);
         List<State> states = new ArrayList<State>(stateElements.size());
         List<Edge> operations = new ArrayList<Edge>(operationElements.size());
         //读取所有的状态集
@@ -51,15 +56,37 @@ public class ModelCreate {
 
             String name = elem.elementText(StringUtil.fileName);
             int id = Integer.parseInt(elem.elementText(StringUtil.stateId));
-            if(elem.attributeValue(StringUtil.typeCode).equals("1")&&i!=0){
-                states.set(i, new State(name+id,id));
 
-            }else if(elem.attribute(StringUtil.typeCode).equals("1")&&i==0){
-                states.set(i,new State(elem.elementText(StringUtil.fileName),Integer.parseInt(elem.elementText("stateId"))));
-                model.setRoot(states.get(i).getName(),states.get(i).getId());//设置根节点
-            }else {//是一个oracle
+            System.out.println(elem.attributeValue(StringUtil.typeCode));
+            System.out.println(elem.attributeValue(StringUtil.typeCode).equals("1"));
+            if(elem.attributeValue(StringUtil.typeCode).equals("1")){
+                if(i!=0)
+                states.add(i, new State(name+id,id));
+                else {
+                    states.add(i,new State(name,id));
+                    model.setRoot(name,id);//设置根节点
+                }
+
+            }else{//是一个oracle
                 //TODO 分析类型产生对应的oracle
-                
+                Result result = null;
+                String type = elem.attributeValue(StringUtil.type);
+                if(type==null){
+                    System.out.print(true);
+                }
+                if(type.equalsIgnoreCase("single_component")){
+                    Element element = elem.element(StringUtil.singleComponent);
+                    result = getSingleComponent(element);
+
+                }else if(type.equalsIgnoreCase("multi_component")){
+                    //TODO 要测试多个组件的内容或者图片
+//                    List<Element> elements = elem.element(StringUtil.multiComponent).elements(StringUtil.singleComponent);
+//                    result = new MultiComponentResult();
+//                    for(Element element : elements){
+//                        (MultiComponentResult)result.
+//                    }
+                }
+                states.add(i,new Oracle(name,id,result));
             }
 
 
@@ -72,7 +99,7 @@ public class ModelCreate {
             Element elem = operationElements.get(i);
             Edge operation = getOperation(start.getName(), next.getName(),elem);
             start.addEdge(operation);
-            operations.set(i,operation);
+            operations.add(i,operation);//WTF
             model.addEdge(start.getId(),next.getId(),operation);
         }
     }
@@ -135,6 +162,23 @@ public class ModelCreate {
             result = new SinglePoint(Float.parseFloat(element.elementText(StringUtil.pointX)),Float.parseFloat(StringUtil.pointY));
         }
         return result;
+    }
+
+    private Result getSingleComponent(Element elem){
+
+        ResultType resultType = getResultType(elem.element(StringUtil.expect).attributeValue(StringUtil.type));
+        String componentType = elem.elementText(StringUtil.resourceType);
+        String index = elem.elementText(StringUtil.resourceId);
+        String expect = elem.elementText(StringUtil.expect);
+        Result result = new SingleComponentResult(Integer.parseInt(index),resultType,componentType,expect);
+        return result;
+    }
+
+    private ResultType getResultType(String type){
+        type = type.toUpperCase();
+
+        return ResultType.valueOf(type);
+
     }
 
 }

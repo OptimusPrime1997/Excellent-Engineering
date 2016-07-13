@@ -1,2 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<path><state typeCode="1"><stateId>2</stateId><fileName>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/2.png</fileName></state><Operation id="0" delayTime="0" action="click" type="single_point"><singlePoint><pointX>690.19</pointX><pointY>373.16</pointY></singlePoint></Operation><state typeCode="1"><stateId>3</stateId><fileName>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/3.png</fileName></state><Operation id="1" delayTime="0" action="click" type="single_point"><singlePoint><pointX>258.21</pointX><pointY>547.19</pointY></singlePoint></Operation><state typeCode="2" type="single_component"><stateId>4</stateId><fileName>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/4.png</fileName><singleComponent><index>3</index><resourceType>editView</resourceType><expect type="text">14528</expect></singleComponent></state></path>
+<path>
+    <state typeCode="1">
+        <stateId>2</stateId>
+        <fileName>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/2.png</fileName>
+    </state>
+    <Operation id="0" delayTime="0" action="click" type="single_point">
+        <singlePoint>
+            <pointX>690.19</pointX>
+            <pointY>373.16</pointY>
+        </singlePoint>
+    </Operation>
+    <state typeCode="1">
+        <stateId>3</stateId>
+        <fileName>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/3.png</fileName>
+    </state>
+    <Operation id="1" delayTime="0" action="click" type="single_point">
+        <singlePoint>
+            <pointX>258.21</pointX>
+            <pointY>547.19</pointY>
+        </singlePoint>
+    </Operation>
+    <state typeCode="2" type="single_component">
+        <stateId>4</stateId>
+        <fileName>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/4.png</fileName>
+        <singleComponent>
+            <index>3</index>
+            <resourceType>editView</resourceType>
+            <expect type="text">14528</expect>
+        </singleComponent>
+    </state>
+</path>
