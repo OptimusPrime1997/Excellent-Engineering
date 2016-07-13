@@ -27,6 +27,9 @@ public class Oracle extends State{
     }
 
     public String toXML(){
-        return result.toXML();
+        String XML = "<oracle type = \"" + result.getClass().getName() + "\">\n"
+                   + result.toXML()
+                   + "</oracle>\n";
+        return XML;
     }
 }

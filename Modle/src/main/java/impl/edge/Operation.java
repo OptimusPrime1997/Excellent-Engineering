@@ -39,7 +39,7 @@ public class Operation implements Edge{
 
 
 	public String toXML(){
-		String XML = "<operation type = " + area.getClass().getName() + " action = " + action.name() + " delayTime = " + delay + ">"
+		String XML = "<operation type = \"" + area.getClass().getName() + "\" action = \"" + action.name() + "\" delayTime = " + delay + ">"
 				   + area.toXML()
 				   + "</operation>";
 		return XML;

@@ -18,8 +18,8 @@ public class DoublePoint implements Area {
 
 
     public String toXML() {
-        // TODO Auto-generated method stub
-        return null;
+
+        return startPoint.toXML() + endPoint.toXML();
     }
     public SinglePoint getStartPoint() {
         return startPoint;
