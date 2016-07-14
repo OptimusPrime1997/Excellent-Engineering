@@ -88,6 +88,7 @@ public class ParseXML {
 	}
 
 	public List<AndroidNode> findWidgetByRect(PointF[] rect) {
+//		rect中包含两个点：左下，右上
 		List<AndroidNode> wid_list = new ArrayList<AndroidNode>();
 
 		// 设定判断 控件是否在Rect区域内的 比例 (2016.04.27)
@@ -99,11 +100,12 @@ public class ParseXML {
 			 * if (mid.x1 >= rect[0].x && mid.x2 <= rect[3].x && mid.y1 >=
 			 * rect[0].y && mid.y2 <= rect[3].y) wid_list.add(mid);
 			 */
+			
 
 			x_cup = Math.max(mid.x1, rect[0].x);
-			x1_cup = Math.min(mid.x2, rect[3].x);
+			x1_cup = Math.min(mid.x2, rect[1].x);
 			y_cup = Math.max(mid.y1, rect[0].y);
-			y1_cup = Math.min(mid.y2, rect[3].y);
+			y1_cup = Math.min(mid.y2, rect[1].y);
 			// 计算两者重合部分的面积，面积大于比例则算选中了控件
 			if ((calRectArea(x_cup, y_cup, x1_cup, y1_cup) / calRectArea(mid.x1, mid.y1, mid.x2, mid.y2)) >= ratio) {
 				wid_list.add(mid);
@@ -117,7 +119,7 @@ public class ParseXML {
 		return (x2 - x1) * (y2 - y1);
 	}
 
-	public void print(List<AndroidNode> nodes) {
+	public static  void print(List<AndroidNode> nodes) {
 		if (nodes != null) {
 			Log.w("TAG-Pn1", "++++++++ Node List (size = " + nodes.size() + ") +++++++++");
 			for (int i = 0; i < nodes.size(); i++) {
