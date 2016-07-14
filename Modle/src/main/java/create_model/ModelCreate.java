@@ -183,7 +183,7 @@ public class ModelCreate {
         String componentType = elem.elementText(StringUtil.resourceType);
         String index = elem.elementText(StringUtil.resourceId);
         String expect = elem.elementText(StringUtil.expect);
-        Result result = new SingleComponentResult(Integer.parseInt(index),resultType,componentType,expect);
+        Result result = new SingleComponentResult(index,resultType,componentType,expect);
         return result;
     }
 
