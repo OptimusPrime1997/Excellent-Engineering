@@ -31,7 +31,7 @@ public class ParseXML {
 	public ParseXML(InputStream input) {
 		node_list = new ArrayList<AndroidNode>();
 		parse(input);
-		print(node_list);
+//		print(node_list);
 	}
 
 	public void parse(InputStream xmlFile) {
@@ -42,10 +42,10 @@ public class ParseXML {
 			String id, tt, wn, pn, bd;
 
 			doc.getDocumentElement().normalize();
-			Log.w("TAG-n1", doc.getDocumentElement().getNodeName());
+			Log.w("TAG-Pn1", doc.getDocumentElement().getNodeName());
 
 			NodeList nodes = doc.getElementsByTagName("node");
-			Log.w("TAG-n2", nodes.getLength() + "");
+			Log.w("TAG-Pn2", nodes.getLength() + "");
 
 			for (int i = 0; i < nodes.getLength(); i++) {
 				Element node = (Element) nodes.item(i);
@@ -54,9 +54,13 @@ public class ParseXML {
 				wn = node.getAttribute("class");
 				pn = node.getAttribute("package");
 				bd = node.getAttribute("bounds");
-
+//				Log.w("TAG-Pn9", "id="+id
+//						+ " text="+tt
+//						+ " class="+wn
+//						+ " package="+pn
+//						+ " bounds="+bd);
 				if (wn.startsWith(CLASS_PRE) && !wn.contains("Layout")) {
-					AndroidNode mid = new AndroidNode(id, tt, wn, pn, bd);
+					AndroidNode mid = new AndroidNode(id, tt, wn.substring(CLASS_PRE.length()), pn, bd);
 					node_list.add(mid);
 				}
 			}
@@ -69,16 +73,17 @@ public class ParseXML {
 	}
 
 	public AndroidNode findWidgetByLocation(double x, double y) {
+		Log.w("TAG-Pn3", "use findwidgetByLocation");
 		AndroidNode mid_and;
 		for (int i = 0; i < node_list.size(); i++) {
 			mid_and = node_list.get(i);
 			// mid_and.print();
 			if (mid_and.isLocated(x, y)) {
-				Log.w("TAG-n3", "find the widget:" + mid_and.getPrintString() + "");
+				Log.w("TAG-Pn3", "found the widget:" + mid_and.getPrintString() + "");
 				return mid_and;
 			}
 		}
-
+		Log.w("TAG-Pn3", "found the id failed");
 		return null;
 	}
 
@@ -105,7 +110,6 @@ public class ParseXML {
 			}
 		}
 		print(wid_list);
-
 		return wid_list;
 	}
 
@@ -115,9 +119,9 @@ public class ParseXML {
 
 	public void print(List<AndroidNode> nodes) {
 		if (nodes != null) {
-			Log.w("TAG-P1", "++++++++ Node List (size = " + nodes.size() + ") +++++++++");
+			Log.w("TAG-Pn1", "++++++++ Node List (size = " + nodes.size() + ") +++++++++");
 			for (int i = 0; i < nodes.size(); i++) {
-				Log.w("TAG-P2", nodes.get(i).getPrintString());
+				Log.w("TAG-Pn2", nodes.get(i).getPrintString());
 			}
 		}
 	}
