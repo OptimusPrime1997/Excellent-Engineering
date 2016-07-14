@@ -80,11 +80,12 @@ public class Model implements ModelService{
 				states.remove(state);
 				state = state.toOracle(result);
 				states.add(state);
-
+				System.out.println("set oracle");
 				return;
 			}
 		}
 		states.add(new Oracle(oracleName,oracleID,result));
+		System.out.println("add oracle");
 
 	}
 
@@ -93,6 +94,7 @@ public class Model implements ModelService{
 			System.err.println("Model is empty!!!");
 			return;
 		}
+		System.out.println("Model has "+states.size() + " states");
 		this.strategy.writeXML(states,rootName,times);
 	}
 

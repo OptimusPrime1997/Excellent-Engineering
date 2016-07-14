@@ -6,13 +6,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.xmlpull.v1.XmlSerializer;
+import org.dom4j.Document;
+import org.dom4j.Element;
 
 import sketch.gui.testing.AndroidNode;
 import sketch.gui.testing.ParseXML;
@@ -94,7 +94,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private String imagePath;
 	private PointF[] rect;
 	private int countDrawArea = 0;
-	private boolean isModelCompleted = false;
 	private TType test_type;
 	private boolean accept_flag = false;
 	private boolean target_flag = false;
@@ -103,11 +102,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 	/*-------------------------*/
 
 	private String timeInput;
-	private boolean timeInput_flag = false;
-	private OutputStream currentWrittenFile;
-	private XmlSerializer currentXml;
-	private List<String> onePictureOPerations = new ArrayList<String>();
-
+	private File currentWrittenFile;
+	private Document currentDocument;
+	private List<String> onePictureOPerations = null;
+	private List<String> targetResult = null;
+	private String combaOperation = null;
+	
+	private int operationId = 0;
+	private Document forkDocument;
+	
 	private boolean fork_flag = false;
 	private File forkImage;
 	private boolean isCompleted = false;
@@ -177,9 +180,16 @@ public class MainActivity extends Activity implements OnTouchListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		onePictureOPerations = new ArrayList<String>();
+		targetResult = new ArrayList<String>();
+		
 		imageView = (ImageView) findViewById(R.id.imageView1);
-		currentWrittenFile = XMLHelper.getOutputStream();
-		currentXml = XMLHelper.getSerializer(currentWrittenFile);
+		currentWrittenFile = WriteXML.createTestFile();		
+		currentDocument = BuildDocument.getDocument();
+		
+		Log.w("WriteXML", "start use com.example.gui.getSerializer");
+		
 		imageChooseIntent = new Intent(this, ImageChooseActivity.class);
 		draw();
 		gestureTrain = new gestureTrain();
@@ -234,7 +244,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			downx = event.getX();
 			downy = event.getY();
 			graphics.add(new PointF(downx, downy));
-			if (stepCount > 2) {
+			if (stepCount >= 2) {
 				jointGraphics.add(new PointF(upx, upy));
 			}
 			stepCount++;
@@ -264,7 +274,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 			if (stepCount > 2) {
 				jointGraphics.add(new PointF(upx, upy));
 			}
-
 			/*
 			 * 无论是否在绘制区域都要先创建文件目录
 			 */
@@ -302,19 +311,17 @@ public class MainActivity extends Activity implements OnTouchListener {
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
 							input = tv.getText().toString();
-							onePictureOPerations.add(String.valueOf(rect[0]) + ",");
-							onePictureOPerations.add(String.valueOf(rect[1]) + ",");
-							onePictureOPerations.add(String.valueOf(rect[2]) + ",");
-							onePictureOPerations.add(String.valueOf(rect[3]) + ",\r\n");
-							onePictureOPerations.add("Expected output:" + "\r\n" + input + "\r\n");
 
+							targetResult.add("expectedValue;"+input+";"+String.valueOf(rect[0].x)+","+
+									String.valueOf(rect[0].y)+"," + String.valueOf(rect[3].x)+","+
+									String.valueOf(rect[3].y));
 						}
 					});
 					inputDailog.setNegativeButton("取消", null);
 					inputDailog.show();
 
 					countDrawArea = 0;
-					isModelCompleted = true;
+					
 				}
 
 				if (test_type == TType.JOINT) {
@@ -332,12 +339,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
 							input = tv.getText().toString();
-							onePictureOPerations.add(String.valueOf(rect[0]) + ",");
-							onePictureOPerations.add(String.valueOf(rect[1]) + ",");
-							onePictureOPerations.add(String.valueOf(rect[2]) + ",");
-							onePictureOPerations.add(String.valueOf(rect[3]) + ",");
-							onePictureOPerations.add("Expected output:" + "\r\n" + input + "\r\n");
-							System.out.println("Your Input[pos-JOINT]: " + input);
+
+							targetResult.add("expectedValue;"+input+";"+String.valueOf(rect[0].x)+","+
+									String.valueOf(rect[0].y)+"," + String.valueOf(rect[3].x)+","+
+									String.valueOf(rect[3].y));
+							System.out.println("Your Input[pos-JOINT]: " +input);
 						}
 					});
 					inputDialog.setNegativeButton("取消", null);
@@ -364,15 +370,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 				}
 
 				if (isDrawed) {
-
-					// if(isMove==false&&isPutDown==true){
-					// Toast toast = Toast.makeText(this, "no move",
-					// Toast.LENGTH_SHORT);
-					// toast.show();
-					// putDownMenu();
-					// break;
-					// }
-
 					/*--------- After there, imply the identify action function. ---------*/
 					// savePicture();
 					String operation = "";
@@ -382,42 +379,53 @@ public class MainActivity extends Activity implements OnTouchListener {
 					/*
 					 * isDrawed为true并且result等于-1时说明只绘制了区域，并没有单击双击拖动这三种操作
 					 */
+					System.out.println(operationPoint.get(0).x);	
+					System.out.println(operationPoint.get(0).y);
+					
 					if (result[0] != -1) {
 						String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
 						ArrayList<String> operationList = ioOperation.readOperation(filePath);
 						for (int i = 0; i < operationPoint.size(); i++) {
 
+							//如果是没有识别的动作坐标会设为0
 							if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0) {
 								System.out.println("++++++" + result[i]);
 								if (result[i] == 0) { // click
 									operation = "click;" + "\r\n" + format(operationPoint.get(i).x) + ","
 											+ format(operationPoint.get(i).y) + "\r\n";
-									// onePictureOPerations.add(operation);
-
+									System.out.println(operation);
+									onePictureOPerations.add(operation);
+									
 								}
-								if (result[i] == 1) { // longclick
-									operation = "longClick;" + "\r\n" + format(operationPoint.get(i).x) + ","
+								else if (result[i] == 1) {  //longclick
+									operation = "lClick;" + "\r\n" + format(operationPoint.get(i).x) + ","
 											+ format(operationPoint.get(i).y) + "\r\n";
+									System.out.println(operation);
+									onePictureOPerations.add(operation);
 								}
-								if (result[i] == 2) { // Drag
+								else if (result[i] == 2) { // Drag
 									System.out.println("++++++" + result[i]);
 									operation = "drag;" + "\r\n" + format(operationPoint.get(i).x) + ","
 											+ format(operationPoint.get(i).y) + "," + format(endPoint.get(i).x) + ","
 											+ format(endPoint.get(i).y) + "\r\n";
-									// onePictureOPerations.add(operation);
+									System.out.println(operation);	
+									onePictureOPerations.add(operation);
 								}
+
+							}
+							else {
+
+								Toast toast = Toast.makeText(this, "no draw", Toast.LENGTH_SHORT);
+								toast.show();
 
 							}
 
 						}
-						if (!operation.equals("")) {
-							onePictureOPerations.add(operation);
-						} else if (operationPoint.size() > 0) {
-
-							Log.w("TAG-p", "into unrecognize case,added:" + (graphics.size() - lastIndex));
-							if ((operationPoint.get(operationPoint.size() - 1).toString())
-									.indexOf("PointF(0.0, 0.0)") != -1) {
-								if (graphics.size() - lastIndex < 10) {
+					 if(operationPoint.size()>0){
+							
+							Log.w("TAG-p", "into unrecognize case,added:"+(graphics.size()-lastIndex));
+							if((operationPoint.get(operationPoint.size()-1).toString() ).indexOf("PointF(0.0, 0.0)")!=-1){
+								if(graphics.size()-lastIndex<10){
 									Log.w("TAG-p1", "putDownMenu");
 									putDownMenu();
 								}
@@ -426,12 +434,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 
 					/*--------- Before there, imply the identify action function. ---------*/
-				} else {
-
-					Toast toast = Toast.makeText(this, "no draw", Toast.LENGTH_SHORT);
-					toast.show();
-
-				}
+				} 
 			}
 
 			graphics = new ArrayList<PointF>();
@@ -498,15 +501,23 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 
 			break;
-		case MENU_ITEM_COUNTER + 2: // save
-
-			// 没有点击target时，只是点击了 draw area, 判断组合情况
-			if (stepCount > 2) {
-
-				// 先获取所有的 joint 信息，并放入训练器进行识别
-				ArrayList<String> recordList = logic.calRecordList(jointGraphics);
-				String path = getDirName(getPath()) + "temp" + "/combinationGesture" + getImageName(getPath())
-						+ ".arff";
+		case MENU_ITEM_COUNTER + 2:	 // save
+			
+			//没有点击target时，只是点击了 draw area, 判断组合情况
+//			System.out.println(onePictureOPerations.isEmpty());
+//			if(onePictureOPerations.isEmpty()){
+//				Toast toast = Toast.makeText(this, "incorrect draw",Toast.LENGTH_SHORT);
+//				toast.show();
+//				break;
+//			}
+			
+			
+			if(stepCount>2){
+				
+				// 先获取所有的 joint 信息，并放入训练器进行识别 
+				ArrayList<String> recordList = logic.calRecordList(jointGraphics);		
+				String path = getDirName(getPath()) + "temp"
+						+ "/combinationGesture" + getImageName(getPath()) + ".arff";
 				ioOperation.recordJointPoint(path, recordList);
 				comGestureTrain = new combinationGestureTrain();
 				try {
@@ -516,149 +527,150 @@ public class MainActivity extends Activity implements OnTouchListener {
 					e.printStackTrace();
 				}
 				double[] result = comGestureTrain.TrainResult(path);
-
-				String combaOperation = "";
+				
+				
 				for (int i = 0; i < result.length; i++) {
 					if (result[i] == -1.00)
 						break;
 					if (result[i] == 0.00) {
-						combaOperation = "FORALL";
-						System.out.println("------------" + result[i]);
-						onePictureOPerations.add(combaOperation);
-					}
+						combaOperation = "FORALL;"+String.valueOf(rect[0].x)+","+
+								String.valueOf(rect[0].y)+"," + String.valueOf(rect[3].x)+","+
+								String.valueOf(rect[3].y);
+						System.out.println("------------"+combaOperation);						
+					}	
 					if (result[i] == 1.00) {
-						combaOperation = "REC_FORALL";
-						System.out.println("------------" + result[i]);
-						onePictureOPerations.add(combaOperation);
+						combaOperation = "REC_FORALL;"+String.valueOf(rect[0].x)+","+
+								String.valueOf(rect[0].y)+"," + String.valueOf(rect[3].x)+","+
+								String.valueOf(rect[3].y);
+						System.out.println("------------"+combaOperation);
+						
 					}
 					if (result[i] == 2.00) {
-						combaOperation = "EXIST";
-						System.out.println("------------" + result[i]);
-						onePictureOPerations.add(combaOperation);
+						combaOperation = "EXIST;"+String.valueOf(rect[0].x)+","+
+								String.valueOf(rect[0].y)+"," + String.valueOf(rect[3].x)+","+
+								String.valueOf(rect[3].y);
+						System.out.println("------------"+combaOperation);
 					}
 				}
 			}
+			
+		
+//			if (isCompleted) {
+//				WriteXML.writeObject(currentDocument, currentWrittenFile.getPath());
+//				currentWrittenFile = WriteXML.createTestFile();
+//				currentDocument = BuildDocument.getDocument();
+//				isCompleted = false;
+//			}	
+			
+		/**
+		 * 用lastElement保存上一个操作，用来保存时延
+		 * 
+		 */
+			Element lastElement = null;
+		
 
-			if (isCompleted) {
-				currentWrittenFile = XMLHelper.getOutputStream();
-				currentXml = XMLHelper.getSerializer(currentWrittenFile);
-				isCompleted = false;
-			}
-			String str1 = "click;\r\n100,130\r\n";
-			String str2 = "longClick;\r\n120,130\r\n";
-			String str3 = "drag;\r\n120,130,150,190\r\n";
-			String str4 = "dragArea;\r\n120,130,115,129\r\n";
-			String str5 = "delayTime;\r\n10\r\n";
-			String str6 = "expectedValue;\r\n15633\r\n";
-			onePictureOPerations.add(str1);
-			// onePictureOPerations.add(str2);
-			// onePictureOPerations.add(str3);
-			// onePictureOPerations.add(str4);
-			// onePictureOPerations.add(str5);
+			String path = currentImage.getPath();
+			Element stateElement = CreateElement.createState(currentDocument.getRootElement(), path);
+			
+			
+			
 			for (int i = 0; i < onePictureOPerations.size(); i++) {
 				String temp = onePictureOPerations.get(i);
+				System.out.println(temp);	
+				
 				String[] result = temp.split("\r\n");
-				String[] re1 = result[0].split(";");
+				String[] operations = result[0].split(";");
 				String[] points = result[1].split(",");
-				if (re1.length > 1) {
-				} else {
-					try {
-						if (re1[0].equals("click")) {
-
-							currentXml.startTag(null, "Operation");
-
-							currentXml.attribute(null, "type", "singlePoint");
-							currentXml.attribute(null, "action", "click");
-
-						} else if (re1[0].equals("longClick")) {
-							currentXml.startTag(null, "Operation");
-							currentXml.attribute(null, "type", "singlePoint");
-							currentXml.attribute(null, "action", "longClick");
-						} else if (re1[0].equals("drag")) {
-							currentXml.startTag(null, "Operation");
-							currentXml.attribute(null, "type", "doublePoint");
-							currentXml.attribute(null, "action", "drag");
-						} else if (re1[0].equals("dragArea")) {
-							currentXml.startTag(null, "Operation");
-							currentXml.attribute(null, "type", "singlePoint");
-							currentXml.attribute(null, "action", "click");
-						} else if (re1[0].equals("delayTime")) {
-							currentXml.startTag(null, "Operation");
-							// currentXml.attribute(null, "type", "");
-
-							currentXml.attribute(null, "action", "delay");
-							currentXml.startTag(null, "delayTime");
-							currentXml.text(result[1]);
-							currentXml.endTag(null, "delayTime");
-							currentXml.endTag(null, "Operation");
-							continue;
-						} else if (re1[0].equals("expectedValue")) {
-							currentXml.startTag(null, "Operation");
-							// currentXml.attribute(null, "type",
-							// "expectedValue");
-							currentXml.attribute(null, "action", "expectedValue");
-
-							currentXml.startTag(null, "value");
-							currentXml.text(result[1]);
-							currentXml.endTag(null, "value");
-							currentXml.endTag(null, "Operation");
-							continue;
-						}
-						if (points.length == 2) {
-							currentXml.startTag(null, "singlePoint");
-							currentXml.startTag(null, "pointX");
-							currentXml.text(points[0]);
-							currentXml.endTag(null, "ponitX");
-							currentXml.startTag(null, "pointY");
-							currentXml.text(points[1]);
-							currentXml.endTag(null, "ponitY");
-							currentXml.endTag(null, "singlePoint");
-							currentXml.endTag(null, "Operation");
-							continue;
-						} else if (points.length == 4) {
-							currentXml.startTag(null, "doublePoint");
-							currentXml.startTag(null, "singlePoint");
-							currentXml.startTag(null, "pointX");
-							currentXml.text(points[0]);
-							currentXml.endTag(null, "ponitX");
-							currentXml.startTag(null, "pointY");
-							currentXml.text(points[1]);
-							currentXml.endTag(null, "ponitY");
-							currentXml.endTag(null, "singlePoint");
-							currentXml.startTag(null, "singlePoint");
-							currentXml.startTag(null, "pointX");
-							currentXml.text(points[2]);
-							currentXml.endTag(null, "ponitX");
-							currentXml.startTag(null, "pointY");
-							currentXml.text(points[3]);
-							currentXml.endTag(null, "ponitY");
-							currentXml.endTag(null, "singlePoint");
-							currentXml.endTag(null, "doublePoint");
-							currentXml.endTag(null, "Operation");
-							continue;
-						} else {
-
-						}
-					} catch (IllegalArgumentException | IllegalStateException | IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				
+				if (operations[0].equals("delayTime")) {
+					String time = result[1];
+					BuildDocument.addAttribute(lastElement, "delayTime", time);
+					continue;
 				}
-
+				
+				
+				Element operationElement = CreateElement.createOPeration(currentDocument.getRootElement(), operationId);
+				operationId++;				
+				lastElement = operationElement;								
+				BuildDocument.addAttribute(operationElement, "delayTime", "0");
+				
+				if (operations[0].equals("click")||operations[0].equals("lClick")) {
+					
+					CreateElement.addSubInfo(operationElement, operations[0], points);
+					
+					if (combaOperation!=null) {
+						String[] combaResults = combaOperation.split(";");
+						String[] combaPoints = combaResults[1].split(",");
+						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {
+							operationElement.remove(operationElement.element("singlePoint"));						
+							CreateElement.addCombaInfo(operationElement, "area", combaPoints, null);
+						}
+					}
+					
+				}else if (operations[0].equals("drag")) {
+					
+					CreateElement.addSubInfo(operationElement, operations[0], points);
+					
+					if (combaOperation!=null) {
+						String[] combaResults = combaOperation.split(";");
+						String[] combaPoints = combaResults[1].split(",");
+						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {											
+							operationElement.remove(operationElement.element("doublePoint"));
+							CreateElement.addCombaInfo(operationElement, "point_to_area", combaPoints, points);
+																		
+						}
+					}
+					
+				}
+					
 			}
-
-			if (target_flag && !fork_flag) {
-				isCompleted = true;
-				target_flag = false;
-				isDrawArea = false;
-				recogRect_flag = false;
+			
+			
+			//写入结果
+			for (int j = 0; j < targetResult.size(); j++) {
+								
+				String temp = targetResult.get(j);
+				
+				System.out.println("-------------"+temp);
+				
+				String[] results = temp.split(";");
+				String[] points = results[2].split(",");
+				
+				
+				BuildDocument.addAttribute(stateElement, "typeCode", "2");
+				BuildDocument.addAttribute(stateElement, "type", "single_component");
+				
+				
+				Element componentElement = BuildDocument.addElement(stateElement, "singleComponent");
+				Element indexElement = BuildDocument.addElement(componentElement, "index");
+				BuildDocument.addText(indexElement, "3");
+				Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
+				BuildDocument.addText(resourceElement, "editView");
+				Element expectElement = BuildDocument.addElement(componentElement, "expect");
+				BuildDocument.addAttribute(expectElement, "type", "text");
+				BuildDocument.addText(expectElement, results[1]);
+				
 			}
-			putDownMenu();
-			break;
-		case MENU_ITEM_COUNTER + 3: // clear
-			operationPoint.clear();
-			graphics.clear();
+			
+			
 			onePictureOPerations.clear();
+			targetResult.clear();
+			combaOperation = null;
+			
+			WriteXML.writeObject(currentDocument, currentWrittenFile.getPath());
+			
+//			if (target_flag&&!fork_flag) {
+//				isCompleted = true;
+//				target_flag = false;
+//				isDrawArea = false;
+//				recogRect_flag = false;
+//			}
+			break;
+		case MENU_ITEM_COUNTER + 3:	  // clear
+			onePictureOPerations.clear();
+			graphics.clear();
+			operationPoint.clear();
+			stepCount = 0;
 			draw();
 
 			// imagePath = data.getStringExtra(EXTRA_FILE_CHOOSER);
@@ -667,14 +679,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 			// ParseXML parser = getParserByImagePath(imagePath);
 
 			break;
-		case MENU_ITEM_COUNTER + 4: // drawArea
-			onePictureOPerations.add("draw area");
+		case MENU_ITEM_COUNTER + 4:	  // drawArea
+			//onePictureOPerations.add("draw area");
 			isDrawArea = true;
 			recogRect_flag = true;
 			break;
-		case MENU_ITEM_COUNTER + 5: // target
-			/*-------------- Modify by zhchuch -----------------*/
-			// WriteXML.writeObject("targe/r/n", currentWrittenFile.getPath());
+		case MENU_ITEM_COUNTER + 5:	  // target
+/*-------------- Modify by zhchuch -----------------*/
+			//WriteXML.writeObject("targe/r/n", currentWrittenFile.getPath());
+			onePictureOPerations.clear();
 			System.out.println("After click Target...");
 			target_flag = true;
 
@@ -707,9 +720,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				public void onClick(DialogInterface arg0, int arg1) {
 					// TODO Auto-generated method stub
 					input = tv.getText().toString();
-					// WriteXML.writeObject("Expected output:"+input+"\r\r\n",
-					// currentWrittenFile.getPath());
-					onePictureOPerations.add("Expected output:" + "\r\n" + input + "\r\n");
+					//WriteXML.writeObject("Expected output:"+input+"\r\r\n", currentWrittenFile.getPath());
+					//onePictureOPerations.add("expectedValue;"+"\r\n"+input+"\r\n");
 					input_flag = true;
 					System.out.println("Your Input[pos-menu-selected]: " + input);
 				}
@@ -728,24 +740,27 @@ public class MainActivity extends Activity implements OnTouchListener {
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 					timeInput = timeText.getText().toString();
-					// WriteXML.writeObject("Delay time:"+timeInput+"\r\n",
-					// currentWrittenFile.getPath());
-					onePictureOPerations.add("delayTime;" + "\r\n" + timeInput + "\r\n");
-					timeInput_flag = true;
-					System.out.println("Your Input[pos-menu-selected]: " + timeInput);
+					//WriteXML.writeObject("Delay time:"+timeInput+"\r\n", currentWrittenFile.getPath());
+					onePictureOPerations.add("delayTime;"+"\r\n"+timeInput+"\r\n");
+					System.out.println("Your Input[pos-menu-selected]: " +timeInput);
 				}
 			});
 			timeDialog.setNegativeButton("取消", null);
 			timeDialog.show();
-			break;
-
-		case MENU_ITEM_COUNTER + 8: // fork
+			break;	
+		
+		case MENU_ITEM_COUNTER + 8:    //fork, fork到之前save的那张的图片
 			if (!fork_flag) {
 				forkImage = currentImage;
+				forkDocument = (Document) currentDocument.clone();
 				fork_flag = true;
-				Toast.makeText(this, "fork成功", Toast.LENGTH_SHORT).show();
-			} else {
+				Toast.makeText(this, "fork success", Toast.LENGTH_SHORT).show();
+			}else {
 				onePictureOPerations.clear();
+				
+				currentDocument = (Document) forkDocument.clone();
+				currentWrittenFile = WriteXML.createTestFile();
+				
 				fork_flag = false;
 				target_flag = false;
 				isDrawArea = false;
@@ -922,6 +937,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 		// }
 		//
 		// }
+		stepCount = 0;
+		graphics.clear();
+		operationPoint.clear();
 		onePictureOPerations.clear();
 		int currentIndex = imageFiles.indexOf(currentImage);// 获得所选图片在这个文件夹中的序号
 		/*

@@ -39,9 +39,9 @@ public class State {
 	}
 	
 	public boolean isThisName(String name){
-		System.out.println(this.name + "  compare to :  " + name);
+		//System.out.println(this.name + "  compare to :  " + name);
 		boolean result = (this.name).equals(name);
-		System.out.println("and the result is : "+result);
+		//System.out.println("and the result is : "+result);
 		return result;
 	}
 	

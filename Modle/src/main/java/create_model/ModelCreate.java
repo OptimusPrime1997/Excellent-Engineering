@@ -36,6 +36,7 @@ public class ModelCreate {
         model = ModelFactory.getModelInstance(type);
 
         for (File file : xmlFiles){
+            System.err.print("test_"+file.getName());
             anaXml(file);
         }
 
@@ -49,6 +50,7 @@ public class ModelCreate {
         List<Element> operationElements = document.getRootElement().elements(StringUtil.operation);
         List<State> states = new ArrayList<State>(stateElements.size());
         List<Edge> operations = new ArrayList<Edge>(operationElements.size());
+
         /*****/
         Oracle oracle = null;
         Result result = null;
@@ -91,11 +93,10 @@ public class ModelCreate {
 //                        (MultiComponentResult)result.
 //                    }
                 }
-                oracle = new Oracle(name,id,result);
+                oracle = new Oracle(name+id,id,result);
                 states.add(i,oracle);
                 //model.setOracle
             }
-
 
         }
 
@@ -113,6 +114,7 @@ public class ModelCreate {
         }
 
         model.setOracle(oracle.getName(),oracle.getId(),result);
+
     }
 
     private Edge getOperation(String start,String next ,Element element){

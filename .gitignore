@@ -1,2 +1,6 @@
 *.class
 /*.class
+proj_GUISketch_mid/gui_current/.classpath
+proj_GUISketch_mid/gui_current/libs/dom4j-1.6.1.jar
+*.classpath
+Modle/target/
