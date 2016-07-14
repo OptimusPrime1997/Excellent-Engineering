@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,10 +21,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Instrumentation;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -33,11 +32,9 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.hardware.camera2.CameraCharacteristics.Key;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.RemoteException;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -105,7 +102,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private String combaOperation = null;
 	
 	private int operationId = 0;
-	private Document forkDocument;
+	private Document forkDocument;  //用于记录fork之前的操作
+	private Document recForAllDocument = null;  //用于记录recForAll之前的操作
+	private int recForAllCount = 0;  
+	
 	
 	private boolean fork_flag = false;
 	private File forkImage;
@@ -504,14 +504,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 2:	 // save
 			
-			//没有点击target时，只是点击了 draw area, 判断组合情况
-//			System.out.println(onePictureOPerations.isEmpty());
-//			if(onePictureOPerations.isEmpty()){
-//				Toast toast = Toast.makeText(this, "incorrect draw",Toast.LENGTH_SHORT);
-//				toast.show();
-//				break;
-//			}
-			
 			
 			if(stepCount>2){
 				
@@ -556,23 +548,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 			
 		
-//			if (isCompleted) {
-//				WriteXML.writeObject(currentDocument, currentWrittenFile.getPath());
-//				currentWrittenFile = WriteXML.createTestFile();
-//				currentDocument = BuildDocument.getDocument();
-//				isCompleted = false;
-//			}	
-			
-		/**
-		 * 用lastElement保存上一个操作，用来保存时延
-		 * 
-		 */
-			Element lastElement = null;
-		
 
+			Element lastElement = null;		//用lastElement保存上一个操作，用来保存时延
 			String path = currentImage.getPath();
 			Element stateElement = CreateElement.createState(currentDocument.getRootElement(), path);
-			
 			
 			
 			for (int i = 0; i < onePictureOPerations.size(); i++) {
@@ -602,9 +581,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if (combaOperation!=null) {
 						String[] combaResults = combaOperation.split(";");
 						String[] combaPoints = combaResults[1].split(",");
-						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {
-							operationElement.remove(operationElement.element("singlePoint"));						
+						operationElement.remove(operationElement.element("singlePoint"));
+						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {													
 							CreateElement.addCombaInfo(operationElement, "area", combaPoints, null);
+						}
+						if (combaResults[0].equals("REC_FORALL")) {
+							//recForAllDocument = (Document) currentDocument.clone();
+							recForAllCount = 4;
+							CreateElement.addVirtual(operationElement, "1");
 						}
 					}
 					
@@ -620,37 +604,28 @@ public class MainActivity extends Activity implements OnTouchListener {
 							CreateElement.addCombaInfo(operationElement, "point_to_area", combaPoints, points);
 																		
 						}
+						if (combaResults[0].equals("REC_FORALL")) {
+							
+							
+						}
 					}
 					
-				}
-					
+				}					
 			}
+			
+			
+			
 			
 			
 			//写入结果
 			for (int j = 0; j < targetResult.size(); j++) {
 								
 				String temp = targetResult.get(j);
-				
-				System.out.println("-------------"+temp);
-				
 				String[] results = temp.split(";");
 				String[] points = results[2].split(",");
 				
-				
-				BuildDocument.addAttribute(stateElement, "typeCode", "2");
-				BuildDocument.addAttribute(stateElement, "type", "single_component");
-				
-				
-				Element componentElement = BuildDocument.addElement(stateElement, "singleComponent");
-				Element indexElement = BuildDocument.addElement(componentElement, "index");
-				BuildDocument.addText(indexElement, "3");
-				Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
-				BuildDocument.addText(resourceElement, "editView");
-				Element expectElement = BuildDocument.addElement(componentElement, "expect");
-				BuildDocument.addAttribute(expectElement, "type", "text");
-				BuildDocument.addText(expectElement, results[1]);
-				
+				CreateElement.setEndState(stateElement, "single_component", results[1]);
+								
 			}
 			
 			
@@ -660,12 +635,28 @@ public class MainActivity extends Activity implements OnTouchListener {
 			
 			WriteXML.writeObject(currentDocument, currentWrittenFile.getPath());
 			
-//			if (target_flag&&!fork_flag) {
-//				isCompleted = true;
-//				target_flag = false;
-//				isDrawArea = false;
-//				recogRect_flag = false;
-//			}
+			System.out.println("--------+"+recForAllCount);
+			
+			//rec_forall
+			Element recOperation = null;
+			if (recForAllCount>0) {
+				Element root = currentDocument.getRootElement();
+				@SuppressWarnings("unchecked")
+				List<Element> operations = root.elements("Operation");
+				for (Element element : operations) {
+					if (element.attribute("isVirutal")!=null) {
+						recOperation = element;
+						break;
+					}
+				}
+				for (int i = 1; i < recForAllCount; i++) {
+					CreateElement.addVirtual(recOperation, i+"");
+					File recWrittenFile = WriteXML.createTestFile();
+					WriteXML.writeObject(currentDocument, recWrittenFile.getPath());
+				}
+			}
+			
+			
 			break;
 		case MENU_ITEM_COUNTER + 3:	  // clear
 			onePictureOPerations.clear();

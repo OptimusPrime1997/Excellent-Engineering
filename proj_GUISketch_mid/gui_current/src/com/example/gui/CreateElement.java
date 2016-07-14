@@ -112,6 +112,42 @@ public class CreateElement {
 			Element point2YElement = BuildDocument.addElement(point2Element, "pointY");
 			BuildDocument.addText(point2YElement, points[3]);
 		}
-	} 
+	}
+	
+	/**
+	 * 设置结束边
+	 * @param element
+	 * @param type
+	 * @param text
+	 */
+	public static void setEndState(Element element,String type,String text){
+		
+		BuildDocument.addAttribute(element, "typeCode", "2");
+		
+		if (type.equals("single_component")) {
+			BuildDocument.addAttribute(element, "type", type);			
+			Element componentElement = BuildDocument.addElement(element, "singleComponent");
+			Element indexElement = BuildDocument.addElement(componentElement, "index");
+			BuildDocument.addText(indexElement, "3");
+			Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
+			BuildDocument.addText(resourceElement, "editView");
+			Element expectElement = BuildDocument.addElement(componentElement, "expect");
+			BuildDocument.addAttribute(expectElement, "type", "text");
+			BuildDocument.addText(expectElement, text);
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param element
+	 * @param index
+	 */
+	public static void addVirtual(Element element,String resuourceId){
+		BuildDocument.addAttribute(element, "type", "component");
+		BuildDocument.addAttribute(element, "isVirutal", "true");
+		Element resourceIdElement = BuildDocument.addElement(element, "resourceId");
+		BuildDocument.addText(resourceIdElement, resuourceId);	
+	}
 
 }
