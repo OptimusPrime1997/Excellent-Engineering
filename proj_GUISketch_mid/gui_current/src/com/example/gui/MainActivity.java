@@ -108,16 +108,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private String combaOperation = null;
 
 	private int operationId = 0;
-<<<<<<< HEAD
-	private Document forkDocument;
-
-=======
 	private Document forkDocument;  //用于记录fork之前的操作
 	private Document recForAllDocument = null;  //用于记录recForAll之前的操作
 	private int recForAllCount = 0;  
 	
 	
->>>>>>> 36d9e0bfdb45bf5cd6058a283e770b0306ab4de0
 	private boolean fork_flag = false;
 	private File forkImage;
 	private boolean isCompleted = false;
@@ -508,25 +503,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 
 			break;
-<<<<<<< HEAD
-		case MENU_ITEM_COUNTER + 2: // save
-
-			// 没有点击target时，只是点击了 draw area, 判断组合情况
-			// System.out.println(onePictureOPerations.isEmpty());
-			// if(onePictureOPerations.isEmpty()){
-			// Toast toast = Toast.makeText(this, "incorrect
-			// draw",Toast.LENGTH_SHORT);
-			// toast.show();
-			// break;
-			// }
-
-			if (stepCount > 2) {
-
-				// 先获取所有的 joint 信息，并放入训练器进行识别
-				ArrayList<String> recordList = logic.calRecordList(jointGraphics);
-				String path = getDirName(getPath()) + "temp" + "/combinationGesture" + getImageName(getPath())
-						+ ".arff";
-=======
 		case MENU_ITEM_COUNTER + 2:	 // save
 			
 			
@@ -536,7 +512,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ArrayList<String> recordList = logic.calRecordList(jointGraphics);		
 				String path = getDirName(getPath()) + "temp"
 						+ "/combinationGesture" + getImageName(getPath()) + ".arff";
->>>>>>> 36d9e0bfdb45bf5cd6058a283e770b0306ab4de0
 				ioOperation.recordJointPoint(path, recordList);
 				comGestureTrain = new combinationGestureTrain();
 				try {
@@ -568,35 +543,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 				}
 			}
-<<<<<<< HEAD
-
-			// if (isCompleted) {
-			// WriteXML.writeObject(currentDocument,
-			// currentWrittenFile.getPath());
-			// currentWrittenFile = WriteXML.createTestFile();
-			// currentDocument = BuildDocument.getDocument();
-			// isCompleted = false;
-			// }
-
-			/**
-			 * 用lastElement保存上一个操作，用来保存时延
-			 * 
-			 */
-			Element lastElement = null;
-=======
-			
-		
->>>>>>> 36d9e0bfdb45bf5cd6058a283e770b0306ab4de0
 
 			Element lastElement = null;		//用lastElement保存上一个操作，用来保存时延
 			String path = currentImage.getPath();
 			Element stateElement = CreateElement.createState(currentDocument.getRootElement(), path);
-<<<<<<< HEAD
-
-=======
-			
-			
->>>>>>> 36d9e0bfdb45bf5cd6058a283e770b0306ab4de0
 			for (int i = 0; i < onePictureOPerations.size(); i++) {
 				String temp = onePictureOPerations.get(i);
 				System.out.println(temp);
@@ -615,18 +565,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 				operationId++;
 				lastElement = operationElement;
 				BuildDocument.addAttribute(operationElement, "delayTime", "0");
-<<<<<<< HEAD
-
-				if (operations[0].equals("click") || operations[0].equals("lClick")) {
-
-					CreateElement.addSubInfo(operationElement, operations[0], points);
-
-					if (combaOperation != null) {
-						String[] combaResults = combaOperation.split(";");
-						String[] combaPoints = combaResults[1].split(",");
-						if (combaResults[0].equals("FORALL") || combaResults[0].equals("EXIST")) {
-							operationElement.remove(operationElement.element("singlePoint"));
-=======
 				
 				if (operations[0].equals("click")||operations[0].equals("lClick")) {
 					
@@ -637,7 +575,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 						String[] combaPoints = combaResults[1].split(",");
 						operationElement.remove(operationElement.element("singlePoint"));
 						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {													
->>>>>>> 36d9e0bfdb45bf5cd6058a283e770b0306ab4de0
 							CreateElement.addCombaInfo(operationElement, "area", combaPoints, null);
 						}
 						if (combaResults[0].equals("REC_FORALL")) {
@@ -646,21 +583,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 							CreateElement.addVirtual(operationElement, "1");
 						}
 					}
-<<<<<<< HEAD
-
-				} else if (operations[0].equals("drag")) {
-
-					CreateElement.addSubInfo(operationElement, operations[0], points);
-
-					if (combaOperation != null) {
-=======
 					
 				}else if (operations[0].equals("drag")) {
 					
 					CreateElement.addSubInfo(operationElement, operations[0], points, parser);
 					
 					if (combaOperation!=null) {
->>>>>>> 36d9e0bfdb45bf5cd6058a283e770b0306ab4de0
 						String[] combaResults = combaOperation.split(";");
 						String[] combaPoints = combaResults[1].split(",");
 						if (combaResults[0].equals("FORALL") || combaResults[0].equals("EXIST")) {
@@ -673,14 +601,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 							
 						}
 					}
-<<<<<<< HEAD
-
-				}
-
-			}
-
-			// 写入结果
-=======
 					
 				}					
 			}
@@ -690,36 +610,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 			
 			
 			//写入结果
->>>>>>> 36d9e0bfdb45bf5cd6058a283e770b0306ab4de0
 			for (int j = 0; j < targetResult.size(); j++) {
 
 				String temp = targetResult.get(j);
-<<<<<<< HEAD
-
-				System.out.println("-------------" + temp);
-
-				String[] results = temp.split(";");
-				String[] points = results[2].split(",");
-
-				BuildDocument.addAttribute(stateElement, "typeCode", "2");
-				BuildDocument.addAttribute(stateElement, "type", "single_component");
-
-				Element componentElement = BuildDocument.addElement(stateElement, "singleComponent");
-				Element indexElement = BuildDocument.addElement(componentElement, "index");
-				BuildDocument.addText(indexElement, "3");
-				Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
-				BuildDocument.addText(resourceElement, "editView");
-				Element expectElement = BuildDocument.addElement(componentElement, "expect");
-				BuildDocument.addAttribute(expectElement, "type", "text");
-				BuildDocument.addText(expectElement, results[1]);
-
-=======
 				String[] results = temp.split(";");
 				String[] points = results[2].split(",");
 				
 				CreateElement.setEndState(stateElement, "single_component", results[1]);
 								
->>>>>>> 36d9e0bfdb45bf5cd6058a283e770b0306ab4de0
 			}
 
 			onePictureOPerations.clear();
@@ -727,15 +625,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 			combaOperation = null;
 
 			WriteXML.writeObject(currentDocument, currentWrittenFile.getPath());
-<<<<<<< HEAD
-
-			// if (target_flag&&!fork_flag) {
-			// isCompleted = true;
-			// target_flag = false;
-			// isDrawArea = false;
-			// recogRect_flag = false;
-			// }
-=======
 			
 			System.out.println("--------+"+recForAllCount);
 			
@@ -757,9 +646,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 					WriteXML.writeObject(currentDocument, recWrittenFile.getPath());
 				}
 			}
-			
-			
->>>>>>> 36d9e0bfdb45bf5cd6058a283e770b0306ab4de0
 			break;
 		case MENU_ITEM_COUNTER + 3: // clear
 			onePictureOPerations.clear();
