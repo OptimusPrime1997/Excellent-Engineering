@@ -240,7 +240,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			downx = event.getX();
 			downy = event.getY();
 			graphics.add(new PointF(downx, downy));
-			if (stepCount > 2) {
+			if (stepCount >= 2) {
 				jointGraphics.add(new PointF(upx, upy));
 			}
 			stepCount++;
@@ -369,12 +369,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 				if (isDrawed) {
 					
-//					if(isMove==false&&isPutDown==true){
-//						Toast toast = Toast.makeText(this, "no move", Toast.LENGTH_SHORT);
-//						toast.show();
-//						putDownMenu();
-//						break;
-//					}
 					
 					/*--------- After there, imply the identify action function. ---------*/
 					// savePicture();
@@ -385,14 +379,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 					/*
 					 * isDrawed为true并且result等于-1时说明只绘制了区域，并没有单击双击拖动这三种操作
 					 */
-					
-					
+					System.out.println(operationPoint.get(0).x);	
+					System.out.println(operationPoint.get(0).y);
 					
 					if (result[0] != -1) {
 						String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
 						ArrayList<String> operationList = ioOperation.readOperation(filePath);
 						for (int i = 0; i < operationPoint.size(); i++){
 
+							//如果是没有识别的动作坐标会设为0
 							if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0) {
 								System.out.println("++++++" + result[i]);
 								if (result[i] == 0) { // click
@@ -402,13 +397,13 @@ public class MainActivity extends Activity implements OnTouchListener {
 									onePictureOPerations.add(operation);
 									
 								}
-								if (result[i] == 1) {  //longclick
+								else if (result[i] == 1) {  //longclick
 									operation = "lClick;" + "\r\n" + format(operationPoint.get(i).x) + ","
 											+ format(operationPoint.get(i).y) + "\r\n";
 									System.out.println(operation);
 									onePictureOPerations.add(operation);
 								}
-								if (result[i] == 2) { // Drag
+								else if (result[i] == 2) { // Drag
 									System.out.println("++++++" + result[i]);
 									operation = "drag;" + "\r\n" + format(operationPoint.get(i).x) + ","
 											+ format(operationPoint.get(i).y) + "," + format(endPoint.get(i).x) + ","
@@ -418,11 +413,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 								}
 
 							}
+							else {
+
+								Toast toast = Toast.makeText(this, "no draw", Toast.LENGTH_SHORT);
+								toast.show();
+
+							}
 
 						}
-						if(!operation.equals("")){
-							onePictureOPerations.add(operation);
-						}else if(operationPoint.size()>0){
+					 if(operationPoint.size()>0){
 							
 							Log.w("TAG-p", "into unrecognize case,added:"+(graphics.size()-lastIndex));
 							if((operationPoint.get(operationPoint.size()-1).toString() ).indexOf("PointF(0.0, 0.0)")!=-1){
@@ -435,12 +434,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 
 					/*--------- Before there, imply the identify action function. ---------*/
-				} else {
-
-					Toast toast = Toast.makeText(this, "no draw", Toast.LENGTH_SHORT);
-					toast.show();
-
-				}
+				} 
 			}
 
 			graphics = new ArrayList<PointF>();
@@ -511,12 +505,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 		case MENU_ITEM_COUNTER + 2:	 // save
 			
 			//没有点击target时，只是点击了 draw area, 判断组合情况
-			System.out.println(onePictureOPerations.isEmpty());
-			if(onePictureOPerations.isEmpty()){
-				Toast toast = Toast.makeText(this, "incorrect draw",Toast.LENGTH_SHORT);
-				toast.show();
-				break;
-			}
+//			System.out.println(onePictureOPerations.isEmpty());
+//			if(onePictureOPerations.isEmpty()){
+//				Toast toast = Toast.makeText(this, "incorrect draw",Toast.LENGTH_SHORT);
+//				toast.show();
+//				break;
+//			}
 			
 			
 			if(stepCount>2){
@@ -543,20 +537,20 @@ public class MainActivity extends Activity implements OnTouchListener {
 						combaOperation = "FORALL;"+String.valueOf(rect[0].x)+","+
 								String.valueOf(rect[0].y)+"," + String.valueOf(rect[3].x)+","+
 								String.valueOf(rect[3].y);
-						System.out.println("------------"+result[i]);						
+						System.out.println("------------"+combaOperation);						
 					}	
 					if (result[i] == 1.00) {
 						combaOperation = "REC_FORALL;"+String.valueOf(rect[0].x)+","+
 								String.valueOf(rect[0].y)+"," + String.valueOf(rect[3].x)+","+
 								String.valueOf(rect[3].y);
-						System.out.println("------------"+result[i]);
+						System.out.println("------------"+combaOperation);
 						
 					}
 					if (result[i] == 2.00) {
 						combaOperation = "EXIST;"+String.valueOf(rect[0].x)+","+
 								String.valueOf(rect[0].y)+"," + String.valueOf(rect[3].x)+","+
 								String.valueOf(rect[3].y);
-						System.out.println("------------"+result[i]);
+						System.out.println("------------"+combaOperation);
 					}
 				}
 			}
@@ -589,7 +583,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				String[] operations = result[0].split(";");
 				String[] points = result[1].split(",");
 				
-				if (operations[0].equals("delayTime")&&lastElement!=null) {
+				if (operations[0].equals("delayTime")) {
 					String time = result[1];
 					BuildDocument.addAttribute(lastElement, "delayTime", time);
 					continue;
@@ -608,8 +602,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if (combaOperation!=null) {
 						String[] combaResults = combaOperation.split(";");
 						String[] combaPoints = combaResults[1].split(",");
-						if (combaResults[0].equals("FORALL")||combaResults.equals("EXIST")) {
-							operationElement.remove(operationElement.element("doublePoint"));
+						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {
+							operationElement.remove(operationElement.element("singlePoint"));						
 							CreateElement.addCombaInfo(operationElement, "area", combaPoints, null);
 						}
 					}
@@ -621,7 +615,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if (combaOperation!=null) {
 						String[] combaResults = combaOperation.split(";");
 						String[] combaPoints = combaResults[1].split(",");
-						if (combaResults[0].equals("FORALL")||combaResults.equals("EXIST")) {											
+						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {											
 							operationElement.remove(operationElement.element("doublePoint"));
 							CreateElement.addCombaInfo(operationElement, "point_to_area", combaPoints, points);
 																		
@@ -662,6 +656,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			
 			onePictureOPerations.clear();
 			targetResult.clear();
+			combaOperation = null;
 			
 			WriteXML.writeObject(currentDocument, currentWrittenFile.getPath());
 			
@@ -674,6 +669,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 3:	  // clear
 			onePictureOPerations.clear();
+			graphics.clear();
+			operationPoint.clear();
 			stepCount = 0;
 			draw();
 			
@@ -925,7 +922,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 		// }
 		//
 		// }
-
+		stepCount = 0;
+		graphics.clear();
+		operationPoint.clear();
 		onePictureOPerations.clear();
 
 		int currentIndex = imageFiles.indexOf(currentImage);// 获得所选图片在这个文件夹中的序号
