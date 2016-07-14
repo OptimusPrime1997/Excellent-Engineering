@@ -2,6 +2,9 @@ package com.example.gui;
 
 import org.dom4j.Element;
 
+import sketch.gui.testing.AndroidNode;
+import sketch.gui.testing.ParseXML;
+
 public class CreateElement {
 	
 	
@@ -83,16 +86,26 @@ public class CreateElement {
 	}
 	
 	
-	public static void addSubInfo(Element element, String action, String[] points){
+	public static void addSubInfo(Element element, String action, String[] points, ParseXML parser){
 		
 		if (action.equals("click")||action.equals("lClick")) {
 			BuildDocument.addAttribute(element, "action", action);
-			BuildDocument.addAttribute(element, "type", "single_point");		
-			Element pointElement = BuildDocument.addElement(element, "singlePoint");
-			Element pointXElement = BuildDocument.addElement(pointElement, "pointX");
-			BuildDocument.addText(pointXElement, points[0]);
-			Element pointYElement = BuildDocument.addElement(pointElement, "pointY");
-			BuildDocument.addText(pointYElement, points[1]);
+			BuildDocument.addAttribute(element, "type", "components");		
+
+			AndroidNode node = parser.findWidgetByLocation
+					(Double.valueOf(points[0]), Double.valueOf(points[1]));
+			if (node!=null) {
+				Element indexElement = BuildDocument.addElement(element, "index");
+				BuildDocument.addText(indexElement, node.text);
+				Element resouceType = BuildDocument.addElement(element, "resourceType");
+				BuildDocument.addText(resouceType, node.widget_name);
+			}else{
+				Element pointElement = BuildDocument.addElement(element, "singlePoint");
+				Element pointXElement = BuildDocument.addElement(pointElement, "pointX");
+				BuildDocument.addText(pointXElement, points[0]);
+				Element pointYElement = BuildDocument.addElement(pointElement, "pointY");
+				BuildDocument.addText(pointYElement, points[1]);
+			}
 		}
 		if (action.equals("drag")) {
 			BuildDocument.addAttribute(element, "action", action);

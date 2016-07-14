@@ -85,6 +85,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private boolean isDrawArea = false;// 是否在绘制区域
 	private File currentImage;// 当前图片
 	private ParseXML parser;
+	
 	private File[] files;// 一个文件夹下所有文件
 	private ArrayList<File> imageFiles = new ArrayList<File>();// 一个文件夹下所有的图片文件
 	/*---- Modify By zhchuch ---*/
@@ -575,7 +576,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				
 				if (operations[0].equals("click")||operations[0].equals("lClick")) {
 					
-					CreateElement.addSubInfo(operationElement, operations[0], points);
+					CreateElement.addSubInfo(operationElement, operations[0], points, parser);
 					
 					if (combaOperation!=null) {
 						String[] combaResults = combaOperation.split(";");
@@ -593,7 +594,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					
 				}else if (operations[0].equals("drag")) {
 					
-					CreateElement.addSubInfo(operationElement, operations[0], points);
+					CreateElement.addSubInfo(operationElement, operations[0], points, parser);
 					
 					if (combaOperation!=null) {
 						String[] combaResults = combaOperation.split(";");
