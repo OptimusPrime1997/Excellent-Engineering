@@ -5,7 +5,7 @@ package impl.oracle_result;
  */
 public class SingleComponentResult implements Result{
 
-    private int index;
+    private String index;
     private ResultType resultType;
     private String componentType;
     private String expect;
@@ -21,7 +21,7 @@ public class SingleComponentResult implements Result{
         return XML;
     }
 
-    public SingleComponentResult(int index, ResultType resultType, String componentType, String expect) {
+    public SingleComponentResult(String index, ResultType resultType, String componentType, String expect) {
         this.index = index;
         this.resultType = resultType;
         this.componentType = componentType;

@@ -2,6 +2,9 @@ package com.example.gui;
 
 import org.dom4j.Element;
 
+import sketch.gui.testing.AndroidNode;
+import sketch.gui.testing.ParseXML;
+
 public class CreateElement {
 	
 	
@@ -83,16 +86,26 @@ public class CreateElement {
 	}
 	
 	
-	public static void addSubInfo(Element element, String action, String[] points){
+	public static void addSubInfo(Element element, String action, String[] points, ParseXML parser){
 		
 		if (action.equals("click")||action.equals("lClick")) {
 			BuildDocument.addAttribute(element, "action", action);
-			BuildDocument.addAttribute(element, "type", "single_point");		
-			Element pointElement = BuildDocument.addElement(element, "singlePoint");
-			Element pointXElement = BuildDocument.addElement(pointElement, "pointX");
-			BuildDocument.addText(pointXElement, points[0]);
-			Element pointYElement = BuildDocument.addElement(pointElement, "pointY");
-			BuildDocument.addText(pointYElement, points[1]);
+			BuildDocument.addAttribute(element, "type", "components");		
+
+			AndroidNode node = parser.findWidgetByLocation
+					(Double.valueOf(points[0]), Double.valueOf(points[1]));
+			if (node!=null) {
+				Element indexElement = BuildDocument.addElement(element, "index");
+				BuildDocument.addText(indexElement, node.text);
+				Element resouceType = BuildDocument.addElement(element, "resourceType");
+				BuildDocument.addText(resouceType, node.widget_name);
+			}else{
+				Element pointElement = BuildDocument.addElement(element, "singlePoint");
+				Element pointXElement = BuildDocument.addElement(pointElement, "pointX");
+				BuildDocument.addText(pointXElement, points[0]);
+				Element pointYElement = BuildDocument.addElement(pointElement, "pointY");
+				BuildDocument.addText(pointYElement, points[1]);
+			}
 		}
 		if (action.equals("drag")) {
 			BuildDocument.addAttribute(element, "action", action);
@@ -112,6 +125,42 @@ public class CreateElement {
 			Element point2YElement = BuildDocument.addElement(point2Element, "pointY");
 			BuildDocument.addText(point2YElement, points[3]);
 		}
-	} 
+	}
+	
+	/**
+	 * 设置结束边
+	 * @param element
+	 * @param type
+	 * @param text
+	 */
+	public static void setEndState(Element element,String type,String text){
+		
+		BuildDocument.addAttribute(element, "typeCode", "2");
+		
+		if (type.equals("single_component")) {
+			BuildDocument.addAttribute(element, "type", type);			
+			Element componentElement = BuildDocument.addElement(element, "singleComponent");
+			Element indexElement = BuildDocument.addElement(componentElement, "index");
+			BuildDocument.addText(indexElement, "3");
+			Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
+			BuildDocument.addText(resourceElement, "editView");
+			Element expectElement = BuildDocument.addElement(componentElement, "expect");
+			BuildDocument.addAttribute(expectElement, "type", "text");
+			BuildDocument.addText(expectElement, text);
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param element
+	 * @param index
+	 */
+	public static void addVirtual(Element element,String resuourceId){
+		BuildDocument.addAttribute(element, "type", "component");
+		BuildDocument.addAttribute(element, "isVirutal", "true");
+		Element resourceIdElement = BuildDocument.addElement(element, "resourceId");
+		BuildDocument.addText(resourceIdElement, resuourceId);	
+	}
 
 }
