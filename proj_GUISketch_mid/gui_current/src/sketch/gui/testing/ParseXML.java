@@ -101,9 +101,9 @@ public class ParseXML {
 			 */
 
 			x_cup = Math.max(mid.x1, rect[0].x);
-			x1_cup = Math.min(mid.x2, rect[3].x);
+			x1_cup = Math.min(mid.x2, rect[1].x);
 			y_cup = Math.max(mid.y1, rect[0].y);
-			y1_cup = Math.min(mid.y2, rect[3].y);
+			y1_cup = Math.min(mid.y2, rect[1].y);
 			// 计算两者重合部分的面积，面积大于比例则算选中了控件
 			if ((calRectArea(x_cup, y_cup, x1_cup, y1_cup) / calRectArea(mid.x1, mid.y1, mid.x2, mid.y2)) >= ratio) {
 				wid_list.add(mid);
