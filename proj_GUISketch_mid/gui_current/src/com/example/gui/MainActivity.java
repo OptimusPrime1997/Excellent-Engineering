@@ -93,6 +93,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 	/*---- Modify By zhchuch ---*/
 	private String imagePath;
 	private PointF[] rect;
+	private PointF[] drawedArea;
+	private boolean myDrawFlag = false;
 	private int countDrawArea = 0;
 	private TType test_type;
 	private boolean accept_flag = false;
@@ -181,7 +183,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		onePictureOPerations = new ArrayList<String>();
 		targetResult = new ArrayList<String>();
 
@@ -293,6 +294,17 @@ public class MainActivity extends Activity implements OnTouchListener {
 			if (isDrawArea) { // Selection Area
 				String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
 				rect = logic.getExteriorRect(graphics); // 计算出矩形的4个点
+				if (myDrawFlag) {
+					drawedArea = rect;
+					myDrawFlag = false;
+				}
+				System.out.println("############");
+				for (int i = 0; i < rect.length; i++) {
+					System.out.print(rect[i].x);
+					System.out.print("   ");
+					System.out.print(rect[i].y);
+					System.out.println();
+				}
 
 				ioOperation.recordAreaInfo(filePath, graphics, rect);
 				/*-------------- Modify by zhchuch -----------------*/
@@ -501,6 +513,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MENU_ITEM_COUNTER: // choose
+			onePictureOPerations.clear();
+			graphics.clear();
+			operationPoint.clear();
+			stepCount = 0;
 			clickCount++;
 			// 判断sd卡是否存在，并且是否具有读写权限
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -538,20 +554,23 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if (result[i] == -1.00)
 						break;
 					if (result[i] == 0.00) {
-						combaOperation = "FORALL;" + String.valueOf(rect[0].x) + "," + String.valueOf(rect[0].y) + ","
-								+ String.valueOf(rect[3].x) + "," + String.valueOf(rect[3].y);
-						System.out.println("------------" + combaOperation);
-					}
+						combaOperation = "FORALL;"+String.valueOf(drawedArea[0].x)+","+
+								String.valueOf(drawedArea[0].y)+"," + String.valueOf(drawedArea[3].x)+","+
+								String.valueOf(drawedArea[3].y);
+						System.out.println("------------"+combaOperation);						
+					}	
 					if (result[i] == 1.00) {
-						combaOperation = "REC_FORALL;" + String.valueOf(rect[0].x) + "," + String.valueOf(rect[0].y)
-								+ "," + String.valueOf(rect[3].x) + "," + String.valueOf(rect[3].y);
-						System.out.println("------------" + combaOperation);
-
+						combaOperation = "REC_FORALL;"+String.valueOf(drawedArea[0].x)+","+
+								String.valueOf(drawedArea[0].y)+"," + String.valueOf(drawedArea[3].x)+","+
+								String.valueOf(drawedArea[3].y);
+						System.out.println("------------"+combaOperation);
+						
 					}
 					if (result[i] == 2.00) {
-						combaOperation = "EXIST;" + String.valueOf(rect[0].x) + "," + String.valueOf(rect[0].y) + ","
-								+ String.valueOf(rect[3].x) + "," + String.valueOf(rect[3].y);
-						System.out.println("------------" + combaOperation);
+						combaOperation = "EXIST;"+String.valueOf(drawedArea[0].x)+","+
+								String.valueOf(drawedArea[0].y)+"," + String.valueOf(drawedArea[3].x)+","+
+								String.valueOf(drawedArea[3].y);
+						System.out.println("------------"+combaOperation);
 					}
 				}
 			}
@@ -561,8 +580,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 			Element stateElement = CreateElement.createState(currentDocument.getRootElement(), path);
 			for (int i = 0; i < onePictureOPerations.size(); i++) {
 				String temp = onePictureOPerations.get(i);
-				System.out.println(temp);
-
+				System.out.println("->>>>>"+temp);	
+				
 				String[] result = temp.split("\r\n");
 				String[] operations = result[0].split(";");
 				String[] points = result[1].split(",");
@@ -579,7 +598,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				BuildDocument.addAttribute(operationElement, "delayTime", "0");
 				
 				if (operations[0].equals("click")||operations[0].equals("lClick")) {
-					
+					System.out.println("come here");
 					CreateElement.addSubInfo(operationElement, operations[0], points, parser);
 					
 					if (combaOperation!=null) {
@@ -587,7 +606,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						String[] combaPoints = combaResults[1].split(",");
 						operationElement.remove(operationElement.element("singlePoint"));
 						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {													
-							CreateElement.addCombaInfo(operationElement, "area", combaPoints, null);
+							CreateElement.addCombaInfo(operationElement, "area", combaPoints, null, parser);
 						}
 						if (combaResults[0].equals("REC_FORALL")) {
 							//recForAllDocument = (Document) currentDocument.clone();
@@ -605,8 +624,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 						String[] combaPoints = combaResults[1].split(",");
 						if (combaResults[0].equals("FORALL") || combaResults[0].equals("EXIST")) {
 							operationElement.remove(operationElement.element("doublePoint"));
-							CreateElement.addCombaInfo(operationElement, "point_to_area", combaPoints, points);
-
+							CreateElement.addCombaInfo(operationElement, "point_to_area", combaPoints, points, parser);
+																		
 						}
 						if (combaResults[0].equals("REC_FORALL")) {
 							
@@ -628,14 +647,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 				String[] results = temp.split(";");
 				String[] points = results[2].split(",");
 				
-				CreateElement.setEndState(stateElement, "single_component", results[1]);
+				CreateElement.setEndState(stateElement, "single_component", results[1], points, parser);
 								
 			}
 
 			onePictureOPerations.clear();
 			targetResult.clear();
 			combaOperation = null;
-
+			isDrawArea = false;
+			
 			WriteXML.writeObject(currentDocument, currentWrittenFile.getPath());
 			
 			System.out.println("--------+"+recForAllCount);
@@ -664,6 +684,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 			graphics.clear();
 			operationPoint.clear();
 			stepCount = 0;
+			if (isDrawArea) {
+				myDrawFlag = true;
+			}			
 			draw();
 
 			// imagePath = data.getStringExtra(EXTRA_FILE_CHOOSER);
@@ -672,8 +695,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 			// ParseXML parser = getParserByImagePath(imagePath);
 
 			break;
-		case MENU_ITEM_COUNTER + 4: // drawArea
-			// onePictureOPerations.add("draw area");
+		case MENU_ITEM_COUNTER + 4:	  // drawArea
+			//onePictureOPerations.add("draw area");
+			myDrawFlag = true;
 			isDrawArea = true;
 			recogRect_flag = true;
 			break;
