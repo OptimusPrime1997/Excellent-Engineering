@@ -1,8 +1,13 @@
 package impl.edge;
 
+import impl.area.Component;
+import impl.area.MultiComponent;
 import service.Area;
 import service.Edge;
 import util.Action;
+
+import java.util.Comparator;
+import java.util.Iterator;
 
 
 public class Operation implements Edge{
@@ -43,6 +48,25 @@ public class Operation implements Edge{
 				+ action.name() + "\" delayTime = \"" + delay + "\">\n"
 				   + area.toXML()
 				   + "</operation>\n";
+		//多个component连续点击的情况
+		if(area instanceof MultiComponent){
+			XML = "";
+			Iterator<Component> iterator = ((MultiComponent) area).getComponents();
+			while(iterator.hasNext()){
+				Component component = iterator.next();
+				if(iterator.hasNext()){
+				XML+="<operation type = \"" + component.getClass().getName() + "\" action = \""
+						+ action.name() + "\" delayTime = \"0\">\n"
+						+ component.toXML()
+						+ "</operation>\n";
+				}else {
+					XML+="<operation type = \"" + component.getClass().getName() + "\" action = \""
+							+ action.name() +  "\" delayTime = \"" + delay + "\">\n"
+							+ component.toXML()
+							+ "</operation>\n";
+				}
+			}
+		}
 		return XML;
 	}
 
