@@ -1,6 +1,6 @@
+/bin/
 *.class
 /*.class
-/bin
-/target
+/target/
 /.DS_Store
 /.settings

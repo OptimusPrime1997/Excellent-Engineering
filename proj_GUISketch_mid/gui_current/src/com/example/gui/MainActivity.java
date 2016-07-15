@@ -38,6 +38,7 @@ import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -123,6 +124,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private final int MENU_ITEM_COUNTER = Menu.FIRST;
 	public static final String EXTRA_FILE_CHOOSER = "file_chooser";
 
+	private Handler mHandler = new Handler();
+	
+        
 	private void setLanguage() {
 		Log.w("TAG-T1", "use MainActivity");
 		// 应用内配置语言
@@ -159,8 +163,16 @@ public class MainActivity extends Activity implements OnTouchListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setLanguage();
+		Intent intent = getIntent();
+
+//        setContentView(R.layout.activity_welcome);
+//        mHandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                startAndFinishThis();
+//            }
+//        }, 2500);
 
 		setContentView(R.layout.activity_main);
 		try {
