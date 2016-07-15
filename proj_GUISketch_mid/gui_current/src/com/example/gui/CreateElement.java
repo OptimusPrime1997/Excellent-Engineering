@@ -1,13 +1,16 @@
 package com.example.gui;
 
+import java.util.List;
+
 import org.dom4j.Element;
 
+import android.graphics.PointF;
 import sketch.gui.testing.AndroidNode;
 import sketch.gui.testing.ParseXML;
 
 public class CreateElement {
 	
-	
+	private static String lastId = "";
 	/**
 	 * 默认创建typeCode为1的state
 	 * @param rootElement
@@ -18,11 +21,19 @@ public class CreateElement {
 		
 		Element stateElement = BuildDocument.addElement(rootElement, "state");
 		String id = path.substring(path.length()-5, path.length()-4);
+		if (lastId.equals(id)) {
+			lastId = (Integer.valueOf(id)+1)+"";
+		}else if(id.compareTo(lastId)>=0){
+			lastId = id;
+		}else {
+			lastId = (Integer.valueOf(lastId)+1)+"";
+		}	
 		BuildDocument.addAttribute(stateElement, "typeCode", "1");
 		
 		Element idElement = BuildDocument.addElement(stateElement, "stateId");
-		BuildDocument.addText(idElement, id);
-			
+		BuildDocument.addText(idElement, lastId);
+		
+		
 		Element pathElement = BuildDocument.addElement(stateElement, "fileName");
 		BuildDocument.addText(pathElement, path);
 		
@@ -42,23 +53,48 @@ public class CreateElement {
 	}
 	
 	
-	public static void addCombaInfo(Element element, String type, String[] points,String[] startPoints){
+	public static void addCombaInfo(Element element, String type, String[] points,String[] startPoints, ParseXML parser){
 		
 		BuildDocument.addAttribute(element, "type", type);							
 		if (type.equals("area")) {
-			Element pointsElement = BuildDocument.addElement(element, "doublePoint");
 			
-			Element point1Element = BuildDocument.addElement(pointsElement, "singlePoint");
-			Element point1XElement = BuildDocument.addElement(point1Element, "pointX");
-			BuildDocument.addText(point1XElement, points[0]);
-			Element point1YElement = BuildDocument.addElement(point1Element, "pointY");
-			BuildDocument.addText(point1YElement, points[1]);
+			PointF pointF1 = new PointF(Float.valueOf(points[0]), Float.valueOf(points[1]));
+			PointF pointF4 = new PointF(Float.valueOf(points[2]), Float.valueOf(points[3]));
+			PointF[] pointFs = new PointF[2];
+			pointFs[0] = pointF1;
+			pointFs[1] = pointF4;
 			
-			Element point2Element = BuildDocument.addElement(pointsElement, "singlePoit");
-			Element point2XElement = BuildDocument.addElement(point2Element, "pointX");
-			BuildDocument.addText(point2XElement, points[2]);
-			Element point2YElement = BuildDocument.addElement(point2Element, "pointY");
-			BuildDocument.addText(point2YElement, points[3]);
+			List<AndroidNode> nodes = parser.findWidgetByRect(pointFs);
+			
+			System.out.println("***********");
+			System.out.println(points[0]);
+			System.out.println(points[1]);
+			System.out.println(points[2]);
+			System.out.println(points[3]);
+			System.out.println(nodes.size());
+			
+			Element resourceList = BuildDocument.addElement(element, "multiComponent");
+			for (int i = 0; i < nodes.size(); i++) {
+				Element singleCompoent = BuildDocument.addElement(resourceList, "singleComponent");
+				Element indexElement = BuildDocument.addElement(singleCompoent, "index");
+				BuildDocument.addText(indexElement, nodes.get(i).text);
+				Element typeElement = BuildDocument.addElement(singleCompoent, "resourceType");
+				BuildDocument.addText(typeElement, nodes.get(i).widget_name);
+			}
+			
+//			Element pointsElement = BuildDocument.addElement(element, "doublePoint");
+//			
+//			Element point1Element = BuildDocument.addElement(pointsElement, "singlePoint");
+//			Element point1XElement = BuildDocument.addElement(point1Element, "pointX");
+//			BuildDocument.addText(point1XElement, points[0]);
+//			Element point1YElement = BuildDocument.addElement(point1Element, "pointY");
+//			BuildDocument.addText(point1YElement, points[1]);
+//			
+//			Element point2Element = BuildDocument.addElement(pointsElement, "singlePoit");
+//			Element point2XElement = BuildDocument.addElement(point2Element, "pointX");
+//			BuildDocument.addText(point2XElement, points[2]);
+//			Element point2YElement = BuildDocument.addElement(point2Element, "pointY");
+//			BuildDocument.addText(point2YElement, points[3]);
 		}							
 		if (type.equals("point_to_area")) {
 			
@@ -87,14 +123,16 @@ public class CreateElement {
 	
 	
 	public static void addSubInfo(Element element, String action, String[] points, ParseXML parser){
-		
+		System.out.println(")))))))))");
 		if (action.equals("click")||action.equals("lClick")) {
 			BuildDocument.addAttribute(element, "action", action);
-			BuildDocument.addAttribute(element, "type", "components");		
+			BuildDocument.addAttribute(element, "type", "component");		
 
 			AndroidNode node = parser.findWidgetByLocation
 					(Double.valueOf(points[0]), Double.valueOf(points[1]));
 			if (node!=null) {
+				System.out.println(node.text);
+				System.out.println(node.widget_name);
 				Element indexElement = BuildDocument.addElement(element, "index");
 				BuildDocument.addText(indexElement, node.text);
 				Element resouceType = BuildDocument.addElement(element, "resourceType");
@@ -133,17 +171,26 @@ public class CreateElement {
 	 * @param type
 	 * @param text
 	 */
-	public static void setEndState(Element element,String type,String text){
+	public static void setEndState(Element element,String type,String text,String[] points, ParseXML parser){
 		
 		BuildDocument.addAttribute(element, "typeCode", "2");
+		
+		PointF pointF1 = new PointF(Float.valueOf(points[0]), Float.valueOf(points[1]));
+		PointF pointF4 = new PointF(Float.valueOf(points[2]), Float.valueOf(points[3]));
+		PointF[] pointFs = new PointF[2];
+		pointFs[0] = pointF1;
+		pointFs[1] = pointF4;
+		List<AndroidNode> nodes = parser.findWidgetByRect(pointFs);
 		
 		if (type.equals("single_component")) {
 			BuildDocument.addAttribute(element, "type", type);			
 			Element componentElement = BuildDocument.addElement(element, "singleComponent");
-			Element indexElement = BuildDocument.addElement(componentElement, "index");
-			BuildDocument.addText(indexElement, "3");
-			Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
-			BuildDocument.addText(resourceElement, "editView");
+			if (nodes.isEmpty()==false&&nodes.get(nodes.size()-1)!=null) {
+				Element indexElement = BuildDocument.addElement(componentElement, "index");
+				BuildDocument.addText(indexElement, nodes.get(nodes.size()-1).text);
+				Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
+				BuildDocument.addText(resourceElement, nodes.get(nodes.size()-1).widget_name);			
+			}
 			Element expectElement = BuildDocument.addElement(componentElement, "expect");
 			BuildDocument.addAttribute(expectElement, "type", "text");
 			BuildDocument.addText(expectElement, text);
