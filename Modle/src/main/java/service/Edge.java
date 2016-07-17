@@ -41,4 +41,11 @@ public interface Edge {
 	 * 重置访问的次数，可能会用
 	 */
 	public void resetSearchTimes();
+
+
+	/**
+	 * 用于打印边
+	 * @return 返回边的信息打印
+     */
+	public String printEdge();
 }

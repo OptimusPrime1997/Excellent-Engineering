@@ -6,6 +6,10 @@ public interface Area {
 	 * @return 返回是符合XML规范的字符串
 	 */
 	public String toXML();
-	
-	
+
+	/**
+	 * 用于打印Area
+	 * @return 返回Area的打印字符串
+     */
+	public String printArea();
 }

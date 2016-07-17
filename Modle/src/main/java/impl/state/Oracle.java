@@ -32,4 +32,21 @@ public class Oracle extends State{
                    + "</oracle>\n";
         return XML;
     }
+
+    @Override
+    public String printState(){
+        String print = "<oracle>\n" +
+                "<result>\n"+
+                result.printResult()+
+                "</result>\n" +
+                "<name>"+this.name+"</name>\n"+
+                "<id>"+this.id+"</id>\n" +
+                "<edges>\n";
+        for(Edge edge : edgeList){
+            print += edge.printEdge();
+        }
+        print += "</edges>\n"+
+                "</oracle>\n";
+        return print;
+    }
 }

@@ -39,4 +39,10 @@ public interface ModelService {
      * @param times 用于指定要找出多少条路径
      */
     public void printXML(int times);
+
+
+    /**
+     * 用于打印模型
+     */
+    public void printModel();
 }

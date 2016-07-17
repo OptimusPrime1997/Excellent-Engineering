@@ -21,6 +21,11 @@ public class DoublePoint implements Area {
 
         return startPoint.toXML() + endPoint.toXML();
     }
+
+    public String printArea() {
+        return null;
+    }
+
     public SinglePoint getStartPoint() {
         return startPoint;
     }

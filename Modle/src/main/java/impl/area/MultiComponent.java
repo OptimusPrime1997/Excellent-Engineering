@@ -31,4 +31,8 @@ public class MultiComponent implements Area {
         }
         return  result;
     }
+
+    public String printArea() {
+        return null;
+    }
 }

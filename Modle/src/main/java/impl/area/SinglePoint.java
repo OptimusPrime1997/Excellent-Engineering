@@ -29,6 +29,14 @@ public class SinglePoint implements Area{
 		return XML;
 	}
 
+	public String printArea() {
+		String print = "<area type = \"SinglePoint\">\n" +
+				"<Xray>"+Xray+"</Xray>\n" +
+				"<Yray>"+Yray+"</Yray>\n" +
+				"</area>\n";
+		return print;
+	}
+
 
 	public float getXray() {
 		return Xray;

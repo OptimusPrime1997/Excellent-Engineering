@@ -95,4 +95,16 @@ public class Operation implements Edge{
 		searchTimes = 0;
 	}
 
+	public String printEdge() {
+		String print = "<edge>\n" +
+				"<action>"+action.name()+"</action>\n" +
+				"<destination>"+this.destination+"</destination>\n" +
+				"<rescourse>"+this.resources+"</rescourse>\n" +
+				area.printArea() +
+				"<id>"+this.id+"</id>\n" +
+				"<delay>"+this.delay+"</delay>\n" +
+				"</edge>\n";
+		return print;
+	}
+
 }

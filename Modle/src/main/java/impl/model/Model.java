@@ -1,5 +1,6 @@
 package impl.model;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,8 +99,24 @@ public class Model implements ModelService{
 		this.strategy.writeXML(states,rootName,times);
 	}
 
+	public void printModel() {
+		String print = "<model>\n";
+		for(State state : states){
+			print += state.printState();
+		}
+		print += "</model>\n";
+		try{
+			FileWriter fileWriter=new FileWriter("model.xml");
+			fileWriter.write(print);
+			fileWriter.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	public String getRootName() {
 		return rootName;
 	}
+
 
 }

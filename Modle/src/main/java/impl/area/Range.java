@@ -20,6 +20,14 @@ public class Range implements Area{
 					 "</doublePoint>\n";
 		return XML;
 	}
+
+	public String printArea() {
+		String print = "<area type = \"Range\">\n" +
+				startPoint.printArea() + endPoint.printArea()
+				+"</area>";
+		return print;
+	}
+
 	public SinglePoint getStartPoint() {
 		return startPoint;
 	}
