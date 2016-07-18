@@ -21,6 +21,14 @@ public class OrOperation implements Result {
         return XML;
     }
 
+    public void setResult1(Result result1) {
+        this.result1 = result1;
+    }
+
+    public void setResult2(Result result2) {
+        this.result2 = result2;
+    }
+
     public String printResult() {
         return this.toXML();
     }

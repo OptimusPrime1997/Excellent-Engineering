@@ -56,7 +56,7 @@ public class CreateElement {
 	public static void addCombaInfo(Element element, String type, String[] points,String[] startPoints, ParseXML parser){
 		
 		BuildDocument.addAttribute(element, "type", type);							
-		if (type.equals("area")) {
+		if (type.equals("multiComponent")) {
 			
 			PointF pointF1 = new PointF(Float.valueOf(points[0]), Float.valueOf(points[1]));
 			PointF pointF4 = new PointF(Float.valueOf(points[2]), Float.valueOf(points[3]));
