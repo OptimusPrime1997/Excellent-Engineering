@@ -6,7 +6,7 @@
 <edge>
 <action>CLICK</action>
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/3.png4</destination>
-<rescourse>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/2.png2</rescourse>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/2.png2</resource>
 <area type = "SinglePoint">
 <Xray>258.21</Xray>
 <Yray>547.19</Yray>
@@ -23,7 +23,7 @@
 <edge>
 <action>CLICK</action>
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/2.png2</destination>
-<rescourse>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/1.png0</rescourse>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/1.png0</resource>
 <area type = "SinglePoint">
 <Xray>690.19</Xray>
 <Yray>373.16</Yray>
@@ -34,7 +34,7 @@
 <edge>
 <action>DRAG</action>
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/2.png3</destination>
-<rescourse>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/1.png0</rescourse>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/1.png0</resource>
 null<id>0</id>
 <delay>0</delay>
 </edge>
@@ -47,7 +47,7 @@ null<id>0</id>
 <edge>
 <action>DRAG</action>
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/4.png5</destination>
-<rescourse>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/3.png4</rescourse>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/3.png4</resource>
 <area type = "Range">
 <area type = "SinglePoint">
 <Xray>100.23</Xray>
@@ -63,7 +63,7 @@ null<id>0</id>
 <edge>
 <action>DRAG</action>
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/4.png6</destination>
-<rescourse>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/3.png4</rescourse>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/3.png4</resource>
 <area type = "Range">
 <area type = "SinglePoint">
 <Xray>100.23</Xray>
@@ -99,7 +99,7 @@ null<id>0</id>
 <edge>
 <action>LCLICK</action>
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/3.png4</destination>
-<rescourse>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/2.png3</rescourse>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPAngryBird/2.png3</resource>
 <area type = "SinglePoint">
 <Xray>258.21</Xray>
 <Yray>547.19</Yray>

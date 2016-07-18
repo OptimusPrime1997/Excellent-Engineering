@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.sun.javafx.sg.prism.NGShape;
 import impl.oracle_result.Result;
 import impl.state.Oracle;
 import impl.state.State;
@@ -23,6 +24,21 @@ public class Model implements ModelService{
 	protected PathStrategy strategy = new RootFrist();
 
 
+	/**
+	 * 构造函数生成一个模型
+	 * @param states
+	 * @param rootName
+	 * @param id
+     */
+	public Model(List<State> states , String rootName,int id){
+		this.rootName = rootName;
+		this.id = id;
+		this.states = states;
+	}
+
+	public Model(){
+
+	}
 
 	public void setRoot(String rootName,int id) {
 		this.rootName = rootName + id;

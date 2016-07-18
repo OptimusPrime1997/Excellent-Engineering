@@ -33,6 +33,11 @@ public class MultiComponent implements Area {
     }
 
     public String printArea() {
-        return null;
+        String result = "<area type=\"MultiComponent\">\n";
+        for(Component component : componentList){
+            result+=component.printArea();
+        }
+        result+="</area>\n";
+        return result;
     }
 }

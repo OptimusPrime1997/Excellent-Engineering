@@ -14,6 +14,16 @@ public class DragRange extends Range {
 		return XML;
 	}
 
+	@Override
+	public String printArea() {
+		String temp = super.printArea();
+		String result = "<area type=\"DragRange\">\n";
+		result+=temp;
+		result+=beginPoint.printArea();
+		result+="</area>";
+		return  result;
+	}
+
 	public SinglePoint getBeginPoint() {
 		return beginPoint;
 	}

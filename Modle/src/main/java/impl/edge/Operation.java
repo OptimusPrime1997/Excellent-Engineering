@@ -99,7 +99,7 @@ public class Operation implements Edge{
 		String print = "<edge>\n" +
 				"<action>"+action.name()+"</action>\n" +
 				"<destination>"+this.destination+"</destination>\n" +
-				"<rescourse>"+this.resources+"</rescourse>\n" +
+				"<resource>"+this.resources+"</resource>\n" +
 				area.printArea() +
 				"<id>"+this.id+"</id>\n" +
 				"<delay>"+this.delay+"</delay>\n" +
