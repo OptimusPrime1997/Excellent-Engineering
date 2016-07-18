@@ -14,6 +14,7 @@ import java.util.Locale;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
+import sketch.gui.testing.AndroidNode;
 import sketch.gui.testing.ParseXML;
 import sketch.gui.testing.TType;
 import android.R.id;
@@ -37,6 +38,7 @@ import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -93,6 +95,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private String imagePath;
 	private PointF[] rect;
 	private PointF[] drawedArea;
+	private List<AndroidNode> nodes = new ArrayList<AndroidNode>();
 	private TType test_type;
 
 	private boolean myDrawFlag = false;
@@ -117,7 +120,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private int operationId = 0;
 	private Document forkDocument; // 用于记录fork之前的操作
 	private Document recForAllDocument = null; // 用于记录recForAll之前的操作
-	private int recForAllCount = 0;
+	private boolean recFlag = false;
 
 	private File forkImage;
 	private boolean isCompleted = false;
@@ -203,6 +206,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		targetResult = new ArrayList<String>();
 
 		imageView = (ImageView) findViewById(R.id.imageView1);
+		
 		currentWrittenFile = WriteXML.createTestFile();
 		currentDocument = BuildDocument.getDocument();
 
@@ -225,6 +229,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		if (clickCount == 0) {
 			r = this.getResources();
 			bitmap = BitmapFactory.decodeResource(r, R.drawable.messi);// 只读,不能直接在bmp上画
+			return;
 		} else {
 			try {
 				// 读取uri所在的图片
@@ -245,8 +250,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 		paint.setStrokeWidth(10);
 		Matrix matrix = new Matrix();
 		canvas.drawBitmap(bitmap, matrix, paint);
+		imageView.setDrawingCacheEnabled(true);
+		
 		imageView.setImageBitmap(alterBitmap);
 		imageView.setOnTouchListener(this);
+			
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -308,6 +316,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 
 			if (isDrawArea) { // Selection Area
+							
 				String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
 				rect = logic.getExteriorRect(graphics); // 计算出矩形的4个点
 				if (myDrawFlag) {
@@ -315,7 +324,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 					myDrawFlag = false;
 				}
 				
+				
 				ioOperation.recordAreaInfo(filePath, graphics, rect);
+				
+				
 				/*-------------- Modify by zhchuch -----------------*/
 				countDrawArea++;
 
@@ -424,54 +436,81 @@ public class MainActivity extends Activity implements OnTouchListener {
 									if (result[i] == 0) { // click
 										operation = "click;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "\r\n";
-										System.out.println(operation);
+										
 										onePictureOPerations.add(operation);
 
 									} else if (result[i] == 1) { // longclick
 										operation = "lClick;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "\r\n";
-										System.out.println(operation);
+										
 										onePictureOPerations.add(operation);
 									} else if (result[i] == 2) { // Drag
-										System.out.println("++++++" + result[i]);
+										
 										operation = "drag;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "," + format(endPoint.get(i).x)
 												+ "," + format(endPoint.get(i).y) + "\r\n";
-										System.out.println(operation);
+										
 										onePictureOPerations.add(operation);
 									}
 
 								} else {
+									
 									if (i == (operationPoint.size() - 1)) {
-										Toast toast = Toast.makeText(this, "no draw", Toast.LENGTH_SHORT);
+										final Toast toast = Toast.makeText(this, "unidentified draw", Toast.LENGTH_SHORT);				
 										toast.show();
+										new Handler().postDelayed(new Runnable() {
+											
+											@Override
+											public void run() {
+												// TODO Auto-generated method stub	
+												toast.cancel();
+											}
+										}, 800);
+										
+										onePictureOPerations.clear();
+										graphics.clear();
+										operationPoint.clear();
+										stepCount = 0;
+										draw();
 									}
 								}
 
 							}
-							if (operationPoint.size() > 0) {
-								Log.w("TAG-p", "into unrecognize case,added:" + (graphics.size() - lastIndex));
-								if ((operationPoint.get(operationPoint.size() - 1).toString())
-										.indexOf("PointF(0.0, 0.0)") != -1) {
-									if (graphics.size() - lastIndex < 10) {
-										Log.w("TAG-p1", "putDownMenu");
-										putDownMenu();
-									}
-								}
-							}
+//							if (operationPoint.size() > 0) {
+//								Log.w("TAG-p", "into unrecognize case,added:" + (graphics.size() - lastIndex));
+//								if ((operationPoint.get(operationPoint.size() - 1).toString())
+//										.indexOf("PointF(0.0, 0.0)") != -1) {
+//									if (graphics.size() - lastIndex < 10) {
+//										Log.w("TAG-p1", "putDownMenu");
+//										Log.w("TAG-size", onePictureOPerations.size()+"");
+//										//draw();
+//										//graphics.clear();
+//										//operationPoint.clear();
+//										putDownMenu();
+//										
+//										
+//									}
+//								}
+//							}
 						}
 					} else {
-						Log.w("TAG-C", "gePath() is null,pointSize:" + operationPoint.size());
-						if (operationPoint.size() > 0) {
-							Log.w("TAG-P", "into unrecognize case,added:" + (graphics.size() - lastIndex));
-							if ((operationPoint.get(operationPoint.size() - 1).toString())
-									.indexOf("PointF(0.0, 0.0)") != -1) {
-								if (graphics.size() - lastIndex < 10) {
-									Log.w("TAG-P1", "putDownMenu");
-									putDownMenu();
-								}
-							}
-						}
+//						Log.w("TAG-C", "gePath() is null,pointSize:" + operationPoint.size());
+//						if (operationPoint.size() > 0) {
+//							Log.w("TAG-P", "into unrecognize case,added:" + (graphics.size() - lastIndex));
+//							if ((operationPoint.get(operationPoint.size() - 1).toString())
+//									.indexOf("PointF(0.0, 0.0)") != -1) {
+//								if (graphics.size() - lastIndex < 10) {
+//									Log.w("TAG-P1", "putDownMenu");
+//									//draw();
+//									//graphics.clear();
+//									//operationPoint.clear();
+//									Log.w("TAG-size", onePictureOPerations.size()+"");
+//									putDownMenu();
+//									
+//									
+//								}
+//							}
+//						}
 					}
 					/*--------- Before there, imply the identify action function. ---------*/
 				}
@@ -479,26 +518,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 			graphics = new ArrayList<PointF>();
 
-			Log.w("TAG-1", "operationsize:" + onePictureOPerations.size());
-			if (onePictureOPerations.size() > 0) {
-				Log.w("TAG-2", "operationAdd:" + onePictureOPerations.get(operationPoint.size() - 1));
-			} else {
-				Log.w("TAG-3", "operationAdd:null");
-			}
-			Log.w("TAG-4", "pointsize:" + operationPoint.size());
-			if (operationPoint.size() > 0) {
-				Log.w("TAG-5", "operationPoint:" + operationPoint.get(operationPoint.size() - 1));
-			} else {
-				Log.w("TAG-6", "operationPoint:null");
-			}
-			Log.w("TAG-7", "graphicsSize:" + jointGraphics.size());
-			if (jointGraphics.size() > 0) {
-				Log.w("TAG-8", "graphics:" + jointGraphics.get(jointGraphics.size() - 1));
-			} else {
-				Log.w("TAG-9", "graphics:null");
-			}
-
+			
 			lastIndex = graphics.size();
+			graphics.clear();
+			operationPoint.clear();
 			break;
 
 		default:
@@ -511,8 +534,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, MENU_ITEM_COUNTER, 0, "choose");
-		menu.add(0, MENU_ITEM_COUNTER + 9, 1, "exit");
+		menu.add(0, MENU_ITEM_COUNTER, 0, "choose").setIcon(R.drawable.menu_choose);
+		menu.add(0, MENU_ITEM_COUNTER + 9, 1, "exit").setIcon(R.drawable.menu_exit);
 		// menu.add(0, MENU_ITEM_COUNTER + 1, 0, "next");
 		// menu.add(0, MENU_ITEM_COUNTER + 2, 0, "save");
 		// menu.add(0, MENU_ITEM_COUNTER + 3, 0, "clear");
@@ -529,27 +552,36 @@ public class MainActivity extends Activity implements OnTouchListener {
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		if (isStartPage == false && startPage_Flag == false) {
-			menu.add(0, MENU_ITEM_COUNTER + 1, 2, "next");
-			menu.add(0, MENU_ITEM_COUNTER + 2, 3, "save");
-			menu.add(0, MENU_ITEM_COUNTER + 3, 4, "clear");
+			menu.add(0, MENU_ITEM_COUNTER + 1, 2, "next").setIcon(R.drawable.menu_next);
+			menu.add(0, MENU_ITEM_COUNTER + 2, 3, "save").setIcon(R.drawable.menu_save);
+			menu.add(0, MENU_ITEM_COUNTER + 3, 4, "clear").setIcon(R.drawable.menu_clear);
 
-			SubMenu sub1 = menu.addSubMenu(0, MENU_ITEM_COUNTER + 10, 5, "more");
-			sub1.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
-			sub1.add(1, MENU_ITEM_COUNTER + 5, 7, "target");
+			SubMenu sub1 = menu.addSubMenu(0, MENU_ITEM_COUNTER + 10, 5, "more").setIcon(R.drawable.menu_more);
+			
+			sub1.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area").setIcon(R.drawable.menu_area);
+			sub1.add(1, MENU_ITEM_COUNTER + 5, 7, "target").setIcon(R.drawable.menu_target);
 			// menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
-			sub1.add(1, MENU_ITEM_COUNTER + 7, 8, "timer");
-			sub1.add(1, MENU_ITEM_COUNTER + 8, 9, "fork");
+			sub1.add(1, MENU_ITEM_COUNTER + 7, 8, "timer").setIcon(R.drawable.menu_timer);
+			sub1.add(1, MENU_ITEM_COUNTER + 8, 9, "fork").setIcon(R.drawable.menu_fork);
 			startPage_Flag = true;
 		}
 		if (target_flag == true && target_menu_flag == true) {
-//			SubMenu sub2 = menu.findItem(MENU_ITEM_COUNTER + 10).getSubMenu();
-//			sub2.removeItem(MENU_ITEM_COUNTER + 5);
-//			sub2.removeItem(MENU_ITEM_COUNTER + 7);
-//			sub2.removeItem(MENU_ITEM_COUNTER + 8);
-			menu.removeItem(MENU_ITEM_COUNTER + 10);
-			menu.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
+			SubMenu sub2 = menu.findItem(MENU_ITEM_COUNTER + 10).getSubMenu();
+			sub2.removeItem(MENU_ITEM_COUNTER + 5);
+			sub2.removeItem(MENU_ITEM_COUNTER + 7);
+			sub2.removeItem(MENU_ITEM_COUNTER + 8);
+			
+			sub2.add(2,MENU_ITEM_COUNTER+11,10,"and").setIcon(R.drawable.menu_left_bracket);
+			sub2.add(2,MENU_ITEM_COUNTER+12,11,"or").setIcon(R.drawable.menu_right_bracket);
+			sub2.add(2,MENU_ITEM_COUNTER+13,12,"invert").setIcon(R.drawable.menu_left_bracket);
+			
+			sub2.add(2,MENU_ITEM_COUNTER+14,13,"left bracket").setIcon(R.drawable.menu_left_bracket);
+			sub2.add(2,MENU_ITEM_COUNTER+15,14,"right bracket").setIcon(R.drawable.menu_right_bracket);
+//			menu.removeItem(MENU_ITEM_COUNTER + 10);
+//			menu.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
 			target_menu_flag = false;
 		}
+		
 		return true;
 	}
 
@@ -657,7 +689,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			}
-			putDownMenu();
+			//putDownMenu();
 			break;
 		case MENU_ITEM_COUNTER + 1: // next
 			if (clickCount > 0) {
@@ -742,8 +774,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 						if (combaResults[0].equals("REC_FORALL")) {
 							// recForAllDocument = (Document)
 							// currentDocument.clone();
-							recForAllCount = 4;
-							CreateElement.addVirtual(operationElement, "1");
+							PointF[] twoPoints = new PointF[2];
+							twoPoints[0] = drawedArea[0];
+							twoPoints[1] = drawedArea[3];
+							System.out.println(twoPoints[0].x);
+							System.out.println(twoPoints[1].x);
+							nodes = parser.findWidgetByRect(twoPoints);
+							
+							CreateElement.addVirtual(operationElement, nodes.get(0));
 						}
 					}
 
@@ -775,6 +813,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				String[] points = results[2].split(",");
 
 				CreateElement.setEndState(stateElement, "single_component", results[1], points, parser);
+				recFlag = true;
 			}
 
 			onePictureOPerations.clear();
@@ -782,11 +821,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 			combaOperation = null;
 			isDrawArea = false;
 			WriteXML.writeObject(currentDocument, currentWrittenFile.getPath());
-			System.out.println("--------+" + recForAllCount);
+			System.out.println("--------+" + nodes.size());
 
 			// rec_forall
 			Element recOperation = null;
-			if (recForAllCount > 0) {
+			if (nodes.size() > 0 && recFlag) {
 				Element root = currentDocument.getRootElement();
 				@SuppressWarnings("unchecked")
 				List<Element> operations = root.elements("Operation");
@@ -796,8 +835,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 						break;
 					}
 				}
-				for (int i = 1; i < recForAllCount; i++) {
-					CreateElement.addVirtual(recOperation, i + "");
+				for (int i = 1; i < nodes.size(); i++) {
+					CreateElement.replaceElement(recOperation, nodes.get(i));
 					File recWrittenFile = WriteXML.createTestFile();
 					WriteXML.writeObject(currentDocument, recWrittenFile.getPath());
 				}
@@ -901,6 +940,22 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 9:// exit
 			exitDialog();
+			break;
+		case MENU_ITEM_COUNTER + 11:// and
+			
+			break;
+		case MENU_ITEM_COUNTER + 12:// or
+			
+			break;
+		case MENU_ITEM_COUNTER + 13:// invert
+			
+			break;
+
+		case MENU_ITEM_COUNTER + 14:// right bracket
+	
+			break;
+		case MENU_ITEM_COUNTER + 15:// right bracket
+	
 			break;
 		default:
 			break;
@@ -1142,5 +1197,17 @@ public class MainActivity extends Activity implements OnTouchListener {
 		DecimalFormat decimalFormat = new DecimalFormat(".00");// 将点的坐标统一保留两位小数
 		String Coordinate = decimalFormat.format(input);
 		return Coordinate;
+	}
+	
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+           //do something...
+			exitDialog();
+            return true;
+        }
+		return super.onKeyDown(keyCode, event);
 	}
 }
