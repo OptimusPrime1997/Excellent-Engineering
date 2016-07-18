@@ -534,8 +534,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, MENU_ITEM_COUNTER, 0, "choose");
-		menu.add(0, MENU_ITEM_COUNTER + 9, 1, "exit");
+		menu.add(0, MENU_ITEM_COUNTER, 0, "choose").setIcon(R.drawable.menu_choose);
+		menu.add(0, MENU_ITEM_COUNTER + 9, 1, "exit").setIcon(R.drawable.menu_exit);
 		// menu.add(0, MENU_ITEM_COUNTER + 1, 0, "next");
 		// menu.add(0, MENU_ITEM_COUNTER + 2, 0, "save");
 		// menu.add(0, MENU_ITEM_COUNTER + 3, 0, "clear");
@@ -552,27 +552,36 @@ public class MainActivity extends Activity implements OnTouchListener {
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		if (isStartPage == false && startPage_Flag == false) {
-			menu.add(0, MENU_ITEM_COUNTER + 1, 2, "next");
-			menu.add(0, MENU_ITEM_COUNTER + 2, 3, "save");
-			menu.add(0, MENU_ITEM_COUNTER + 3, 4, "clear");
+			menu.add(0, MENU_ITEM_COUNTER + 1, 2, "next").setIcon(R.drawable.menu_next);
+			menu.add(0, MENU_ITEM_COUNTER + 2, 3, "save").setIcon(R.drawable.menu_save);
+			menu.add(0, MENU_ITEM_COUNTER + 3, 4, "clear").setIcon(R.drawable.menu_clear);
 
-			SubMenu sub1 = menu.addSubMenu(0, MENU_ITEM_COUNTER + 10, 5, "more");
-			sub1.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
-			sub1.add(1, MENU_ITEM_COUNTER + 5, 7, "target");
+			SubMenu sub1 = menu.addSubMenu(0, MENU_ITEM_COUNTER + 10, 5, "more").setIcon(R.drawable.menu_more);
+			
+			sub1.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area").setIcon(R.drawable.menu_area);
+			sub1.add(1, MENU_ITEM_COUNTER + 5, 7, "target").setIcon(R.drawable.menu_target);
 			// menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
-			sub1.add(1, MENU_ITEM_COUNTER + 7, 8, "timer");
-			sub1.add(1, MENU_ITEM_COUNTER + 8, 9, "fork");
+			sub1.add(1, MENU_ITEM_COUNTER + 7, 8, "timer").setIcon(R.drawable.menu_timer);
+			sub1.add(1, MENU_ITEM_COUNTER + 8, 9, "fork").setIcon(R.drawable.menu_fork);
 			startPage_Flag = true;
 		}
 		if (target_flag == true && target_menu_flag == true) {
-//			SubMenu sub2 = menu.findItem(MENU_ITEM_COUNTER + 10).getSubMenu();
-//			sub2.removeItem(MENU_ITEM_COUNTER + 5);
-//			sub2.removeItem(MENU_ITEM_COUNTER + 7);
-//			sub2.removeItem(MENU_ITEM_COUNTER + 8);
-			menu.removeItem(MENU_ITEM_COUNTER + 10);
-			menu.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
+			SubMenu sub2 = menu.findItem(MENU_ITEM_COUNTER + 10).getSubMenu();
+			sub2.removeItem(MENU_ITEM_COUNTER + 5);
+			sub2.removeItem(MENU_ITEM_COUNTER + 7);
+			sub2.removeItem(MENU_ITEM_COUNTER + 8);
+			
+			sub2.add(2,MENU_ITEM_COUNTER+11,10,"and").setIcon(R.drawable.menu_left_bracket);
+			sub2.add(2,MENU_ITEM_COUNTER+12,11,"or").setIcon(R.drawable.menu_right_bracket);
+			sub2.add(2,MENU_ITEM_COUNTER+13,12,"invert").setIcon(R.drawable.menu_left_bracket);
+			
+			sub2.add(2,MENU_ITEM_COUNTER+14,13,"left bracket").setIcon(R.drawable.menu_left_bracket);
+			sub2.add(2,MENU_ITEM_COUNTER+15,14,"right bracket").setIcon(R.drawable.menu_right_bracket);
+//			menu.removeItem(MENU_ITEM_COUNTER + 10);
+//			menu.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
 			target_menu_flag = false;
 		}
+		
 		return true;
 	}
 
@@ -931,6 +940,22 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 9:// exit
 			exitDialog();
+			break;
+		case MENU_ITEM_COUNTER + 11:// and
+			
+			break;
+		case MENU_ITEM_COUNTER + 12:// or
+			
+			break;
+		case MENU_ITEM_COUNTER + 13:// invert
+			
+			break;
+
+		case MENU_ITEM_COUNTER + 14:// right bracket
+	
+			break;
+		case MENU_ITEM_COUNTER + 15:// right bracket
+	
 			break;
 		default:
 			break;

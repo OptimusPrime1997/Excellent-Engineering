@@ -28,7 +28,19 @@ public final class R {
         public static final int ic_folder=0x7f020003;
         public static final int ic_image=0x7f020004;
         public static final int ic_launcher=0x7f020005;
-        public static final int messi=0x7f020006;
+        public static final int menu_area=0x7f020006;
+        public static final int menu_choose=0x7f020007;
+        public static final int menu_clear=0x7f020008;
+        public static final int menu_exit=0x7f020009;
+        public static final int menu_fork=0x7f02000a;
+        public static final int menu_left_bracket=0x7f02000b;
+        public static final int menu_more=0x7f02000c;
+        public static final int menu_next=0x7f02000d;
+        public static final int menu_right_bracket=0x7f02000e;
+        public static final int menu_save=0x7f02000f;
+        public static final int menu_target=0x7f020010;
+        public static final int menu_timer=0x7f020011;
+        public static final int messi=0x7f020012;
     }
     public static final class id {
         public static final int btExit=0x7f070002;
