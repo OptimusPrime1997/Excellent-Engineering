@@ -125,6 +125,9 @@ public class ImageChooseActivity extends Activity {
 				intent.putExtra(MainActivity.EXTRA_FILE_CHOOSER,
 						fileInfo.getFilePath());
 				setResult(RESULT_OK, intent);
+				
+				MainActivity.isStartPage=false;
+				
 				finish();
 			} else { // 其他文件.....
 				toast(getText(R.string.open_file_error_format));

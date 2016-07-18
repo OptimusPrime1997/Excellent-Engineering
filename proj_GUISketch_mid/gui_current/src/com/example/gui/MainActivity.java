@@ -8,22 +8,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-import sketch.gui.testing.AndroidNode;
 import sketch.gui.testing.ParseXML;
 import sketch.gui.testing.TType;
+import android.R.id;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Instrumentation;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -33,12 +33,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -46,6 +44,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.EditText;
@@ -87,20 +86,25 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private boolean isDrawArea = false;// 是否在绘制区域
 	private File currentImage;// 当前图片
 	private ParseXML parser;
-	
+
 	private File[] files;// 一个文件夹下所有文件
 	private ArrayList<File> imageFiles = new ArrayList<File>();// 一个文件夹下所有的图片文件
 	/*---- Modify By zhchuch ---*/
 	private String imagePath;
 	private PointF[] rect;
 	private PointF[] drawedArea;
+	private TType test_type;
+
 	private boolean myDrawFlag = false;
 	private int countDrawArea = 0;
-	private TType test_type;
 	private boolean accept_flag = false;
 	private boolean target_flag = false;
+	public static boolean target_menu_flag = true;// true时显示target，false不显示,最开始时显示
 	private boolean input_flag = false;
 	private boolean recogRect_flag = false;
+	private boolean fork_flag = false;
+	public static boolean isStartPage = true;
+	public static boolean startPage_Flag = false;
 	/*-------------------------*/
 
 	private String timeInput;
@@ -111,12 +115,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private String combaOperation = null;
 
 	private int operationId = 0;
-	private Document forkDocument;  //用于记录fork之前的操作
-	private Document recForAllDocument = null;  //用于记录recForAll之前的操作
-	private int recForAllCount = 0;  
-	
-	
-	private boolean fork_flag = false;
+	private Document forkDocument; // 用于记录fork之前的操作
+	private Document recForAllDocument = null; // 用于记录recForAll之前的操作
+	private int recForAllCount = 0;
+
 	private File forkImage;
 	private boolean isCompleted = false;
 
@@ -125,10 +127,23 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 	private final int MENU_ITEM_COUNTER = Menu.FIRST;
 	public static final String EXTRA_FILE_CHOOSER = "file_chooser";
+	private Bundle bundle;
+	/**
+	 * init the variables
+	 */
+	private void init() {
+		myDrawFlag = false;
+		countDrawArea = 0;
+		accept_flag = false;
+		target_flag = false;
+		target_menu_flag = true;// true时显示target，false不显示,最开始时显示
+		input_flag = false;
+		recogRect_flag = false;
+		fork_flag = false;
+		isStartPage = true;
+		startPage_Flag = false;
+	}
 
-	private Handler mHandler = new Handler();
-	
-        
 	private void setLanguage() {
 		Log.w("TAG-T1", "use MainActivity");
 		// 应用内配置语言
@@ -165,16 +180,17 @@ public class MainActivity extends Activity implements OnTouchListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.bundle=savedInstanceState;
 		setLanguage();
 		Intent intent = getIntent();
 
-//        setContentView(R.layout.activity_welcome);
-//        mHandler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                startAndFinishThis();
-//            }
-//        }, 2500);
+		// setContentView(R.layout.activity_welcome);
+		// mHandler.postDelayed(new Runnable() {
+		// @Override
+		// public void run() {
+		// startAndFinishThis();
+		// }
+		// }, 2500);
 
 		setContentView(R.layout.activity_main);
 		try {
@@ -378,14 +394,18 @@ public class MainActivity extends Activity implements OnTouchListener {
 				int endPointIndex = logic.calEndPoint(graphics);
 				endPoint.add(graphics.get(endPointIndex));
 				ArrayList<String> recordList = logic.calRecordList(graphics);// 获得用于训练的十五个点的坐标
-				if (clickCount > 0) {
+				if (clickCount > 0)
+
+				{
 					if (getPath() != null) {
 						String path = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".arff";
 						ioOperation.recordPoint(path, recordList);
 					}
 				}
 
-				if (isDrawed) {
+				if (isDrawed)
+
+				{
 					/*--------- After there, imply the identify action function. ---------*/
 					// savePicture();
 					String operation = "";
@@ -462,6 +482,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 					/*--------- Before there, imply the identify action function. ---------*/
 				}
+
 			}
 			graphics = new ArrayList<PointF>();
 
@@ -498,17 +519,138 @@ public class MainActivity extends Activity implements OnTouchListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, MENU_ITEM_COUNTER, 0, "choose");
-		menu.add(0, MENU_ITEM_COUNTER + 1, 0, "next");
-		menu.add(0, MENU_ITEM_COUNTER + 2, 0, "save");
-		menu.add(0, MENU_ITEM_COUNTER + 3, 0, "clear");
-		menu.add(0, MENU_ITEM_COUNTER + 4, 0, "draw Area");
-		menu.add(0, MENU_ITEM_COUNTER + 5, 0, "target");
-		// menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
-		menu.add(0, MENU_ITEM_COUNTER + 7, 0, "timer");
-		menu.add(0, MENU_ITEM_COUNTER + 8, 0, "fork");
+		menu.add(0, MENU_ITEM_COUNTER + 9, 1, "exit");
+		// menu.add(0, MENU_ITEM_COUNTER + 1, 0, "next");
+		// menu.add(0, MENU_ITEM_COUNTER + 2, 0, "save");
+		// menu.add(0, MENU_ITEM_COUNTER + 3, 0, "clear");
+		// menu.add(0, MENU_ITEM_COUNTER + 4, 0, "draw Area");
+		//
+		// SubMenu sub1=menu.addSubMenu("more");
+		// sub1.add(1, MENU_ITEM_COUNTER + 5, 0, "target");
+		// // menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
+		// sub1.add(1, MENU_ITEM_COUNTER + 7, 0, "timer");
+		// sub1.add(1, MENU_ITEM_COUNTER + 8, 0, "fork");
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if (isStartPage == false && startPage_Flag == false) {
+			menu.add(0, MENU_ITEM_COUNTER + 1, 2, "next");
+			menu.add(0, MENU_ITEM_COUNTER + 2, 3, "save");
+			menu.add(0, MENU_ITEM_COUNTER + 3, 4, "clear");
+
+			SubMenu sub1 = menu.addSubMenu(0, MENU_ITEM_COUNTER + 10, 5, "more");
+			sub1.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
+			sub1.add(1, MENU_ITEM_COUNTER + 5, 7, "target");
+			// menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
+			sub1.add(1, MENU_ITEM_COUNTER + 7, 8, "timer");
+			sub1.add(1, MENU_ITEM_COUNTER + 8, 9, "fork");
+			startPage_Flag = true;
+		}
+		if (target_flag == true && target_menu_flag == true) {
+//			SubMenu sub2 = menu.findItem(MENU_ITEM_COUNTER + 10).getSubMenu();
+//			sub2.removeItem(MENU_ITEM_COUNTER + 5);
+//			sub2.removeItem(MENU_ITEM_COUNTER + 7);
+//			sub2.removeItem(MENU_ITEM_COUNTER + 8);
+			menu.removeItem(MENU_ITEM_COUNTER + 10);
+			menu.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
+			target_menu_flag = false;
+		}
+		return true;
+	}
+
+	/**
+	 * exit app confirm dialog
+	 */
+	protected void exitDialog() {
+		AlertDialog.Builder builder = new Builder(MainActivity.this);
+		builder.setMessage("Exit now?");
+		builder.setTitle("Promption");
+		builder.setPositiveButton("Confirm", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				MainActivity.this.finish();
+			}
+		});
+		builder.setNegativeButton("Cancel", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+
+	/**
+	 * handle target->save without fork tag
+	 */
+	protected void saveNoForkDialog() {
+		AlertDialog.Builder builder = new Builder(MainActivity.this);
+		builder.setMessage("Save success!");
+		builder.setTitle("Choose Next Step");
+		builder.setPositiveButton("Back to home", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+				backHome();
+				// MainActivity.this.finish();
+			}
+		});
+		builder.setNegativeButton("Exit", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				MainActivity.this.finish();
+			}
+		});
+		builder.create().show();
+	}
+
+	/**
+	 * handle target->save with fork tag
+	 */
+	protected void saveForkDialog() {
+		AlertDialog.Builder builder = new Builder(MainActivity.this);
+		builder.setMessage("This path savesed!");
+		builder.setTitle("Choose Dialog");
+		builder.setPositiveButton("Back to fork", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				handleFork();
+			}
+		});
+		builder.setNegativeButton("Exit", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				MainActivity.this.finish();
+			}
+		});
+		builder.setNeutralButton("Back to home", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+				backHome();
+			}
+		});
+		builder.create().show();
+	}
+
+	/**
+	 * back to home page function
+	 */
+	public void backHome() {
+		// TODO Auto-generated method stub
+		Intent intent = new Intent(MainActivity.this, MainActivity.class);
+		init();
+		startActivity(intent);
+		finish();
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -521,7 +663,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 			// 判断sd卡是否存在，并且是否具有读写权限
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
-
 			}
 			putDownMenu();
 			break;
@@ -531,15 +672,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 
 			break;
-		case MENU_ITEM_COUNTER + 2:	 // save
-			
-			
-			if(stepCount>2){
-				
-				// 先获取所有的 joint 信息，并放入训练器进行识别 
-				ArrayList<String> recordList = logic.calRecordList(jointGraphics);		
-				String path = getDirName(getPath()) + "temp"
-						+ "/combinationGesture" + getImageName(getPath()) + ".arff";
+		case MENU_ITEM_COUNTER + 2: // save
+			if (stepCount > 2) {
+				// 先获取所有的 joint 信息，并放入训练器进行识别
+				ArrayList<String> recordList = logic.calRecordList(jointGraphics);
+				String path = getDirName(getPath()) + "temp" + "/combinationGesture" + getImageName(getPath())
+						+ ".arff";
 				ioOperation.recordJointPoint(path, recordList);
 				comGestureTrain = new combinationGestureTrain();
 				try {
@@ -554,34 +692,34 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if (result[i] == -1.00)
 						break;
 					if (result[i] == 0.00) {
-						combaOperation = "FORALL;"+String.valueOf(drawedArea[0].x)+","+
-								String.valueOf(drawedArea[0].y)+"," + String.valueOf(drawedArea[3].x)+","+
-								String.valueOf(drawedArea[3].y);
-						System.out.println("------------"+combaOperation);						
-					}	
+						combaOperation = "FORALL;" + String.valueOf(drawedArea[0].x) + ","
+								+ String.valueOf(drawedArea[0].y) + "," + String.valueOf(drawedArea[3].x) + ","
+								+ String.valueOf(drawedArea[3].y);
+						System.out.println("------------" + combaOperation);
+					}
 					if (result[i] == 1.00) {
-						combaOperation = "REC_FORALL;"+String.valueOf(drawedArea[0].x)+","+
-								String.valueOf(drawedArea[0].y)+"," + String.valueOf(drawedArea[3].x)+","+
-								String.valueOf(drawedArea[3].y);
-						System.out.println("------------"+combaOperation);
-						
+						combaOperation = "REC_FORALL;" + String.valueOf(drawedArea[0].x) + ","
+								+ String.valueOf(drawedArea[0].y) + "," + String.valueOf(drawedArea[3].x) + ","
+								+ String.valueOf(drawedArea[3].y);
+						System.out.println("------------" + combaOperation);
+
 					}
 					if (result[i] == 2.00) {
-						combaOperation = "EXIST;"+String.valueOf(drawedArea[0].x)+","+
-								String.valueOf(drawedArea[0].y)+"," + String.valueOf(drawedArea[3].x)+","+
-								String.valueOf(drawedArea[3].y);
-						System.out.println("------------"+combaOperation);
+						combaOperation = "EXIST;" + String.valueOf(drawedArea[0].x) + ","
+								+ String.valueOf(drawedArea[0].y) + "," + String.valueOf(drawedArea[3].x) + ","
+								+ String.valueOf(drawedArea[3].y);
+						System.out.println("------------" + combaOperation);
 					}
 				}
 			}
 
-			Element lastElement = null;		//用lastElement保存上一个操作，用来保存时延
+			Element lastElement = null; // 用lastElement保存上一个操作，用来保存时延
 			String path = currentImage.getPath();
 			Element stateElement = CreateElement.createState(currentDocument.getRootElement(), path);
 			for (int i = 0; i < onePictureOPerations.size(); i++) {
 				String temp = onePictureOPerations.get(i);
-				System.out.println("->>>>>"+temp);	
-				
+				System.out.println("->>>>>" + temp);
+
 				String[] result = temp.split("\r\n");
 				String[] operations = result[0].split(";");
 				String[] points = result[1].split(",");
@@ -596,86 +734,86 @@ public class MainActivity extends Activity implements OnTouchListener {
 				operationId++;
 				lastElement = operationElement;
 				BuildDocument.addAttribute(operationElement, "delayTime", "0");
-				
-				if (operations[0].equals("click")||operations[0].equals("lClick")) {
+
+				if (operations[0].equals("click") || operations[0].equals("lClick")) {
 					System.out.println("come here");
 					CreateElement.addSubInfo(operationElement, operations[0], points, parser);
-					
-					if (combaOperation!=null) {
+
+					if (combaOperation != null) {
 						String[] combaResults = combaOperation.split(";");
 						String[] combaPoints = combaResults[1].split(",");
 						operationElement.remove(operationElement.element("singlePoint"));
-						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {													
+						if (combaResults[0].equals("FORALL") || combaResults[0].equals("EXIST")) {
 							CreateElement.addCombaInfo(operationElement, "area", combaPoints, null, parser);
 						}
 						if (combaResults[0].equals("REC_FORALL")) {
-							//recForAllDocument = (Document) currentDocument.clone();
+							// recForAllDocument = (Document)
+							// currentDocument.clone();
 							recForAllCount = 4;
 							CreateElement.addVirtual(operationElement, "1");
 						}
 					}
-					
-				}else if (operations[0].equals("drag")) {
-					
+
+				} else if (operations[0].equals("drag")) {
+
 					CreateElement.addSubInfo(operationElement, operations[0], points, parser);
-					
-					if (combaOperation!=null) {
+
+					if (combaOperation != null) {
 						String[] combaResults = combaOperation.split(";");
 						String[] combaPoints = combaResults[1].split(",");
 						if (combaResults[0].equals("FORALL") || combaResults[0].equals("EXIST")) {
 							operationElement.remove(operationElement.element("doublePoint"));
 							CreateElement.addCombaInfo(operationElement, "point_to_area", combaPoints, points, parser);
-																		
+
 						}
 						if (combaResults[0].equals("REC_FORALL")) {
-							
-							
+
 						}
 					}
-					
-				}					
+
+				}
 			}
-			
-			
-			
-			
-			
-			//写入结果
+
+			// 写入结果
 			for (int j = 0; j < targetResult.size(); j++) {
 
 				String temp = targetResult.get(j);
 				String[] results = temp.split(";");
 				String[] points = results[2].split(",");
-				
+
 				CreateElement.setEndState(stateElement, "single_component", results[1], points, parser);
-								
 			}
 
 			onePictureOPerations.clear();
 			targetResult.clear();
 			combaOperation = null;
 			isDrawArea = false;
-			
 			WriteXML.writeObject(currentDocument, currentWrittenFile.getPath());
-			
-			System.out.println("--------+"+recForAllCount);
-			
-			//rec_forall
+			System.out.println("--------+" + recForAllCount);
+
+			// rec_forall
 			Element recOperation = null;
-			if (recForAllCount>0) {
+			if (recForAllCount > 0) {
 				Element root = currentDocument.getRootElement();
 				@SuppressWarnings("unchecked")
 				List<Element> operations = root.elements("Operation");
 				for (Element element : operations) {
-					if (element.attribute("isVirutal")!=null) {
+					if (element.attribute("isVirutal") != null) {
 						recOperation = element;
 						break;
 					}
 				}
 				for (int i = 1; i < recForAllCount; i++) {
-					CreateElement.addVirtual(recOperation, i+"");
+					CreateElement.addVirtual(recOperation, i + "");
 					File recWrittenFile = WriteXML.createTestFile();
 					WriteXML.writeObject(currentDocument, recWrittenFile.getPath());
+				}
+			}
+			if (target_flag) {
+				if (fork_flag) {
+					saveForkDialog();
+				} else {
+					saveNoForkDialog();
 				}
 			}
 			break;
@@ -686,7 +824,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			stepCount = 0;
 			if (isDrawArea) {
 				myDrawFlag = true;
-			}			
+			}
 			draw();
 
 			// imagePath = data.getStringExtra(EXTRA_FILE_CHOOSER);
@@ -695,8 +833,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 			// ParseXML parser = getParserByImagePath(imagePath);
 
 			break;
-		case MENU_ITEM_COUNTER + 4:	  // drawArea
-			//onePictureOPerations.add("draw area");
+		case MENU_ITEM_COUNTER + 4: // drawArea
+			// onePictureOPerations.add("draw area");
 			myDrawFlag = true;
 			isDrawArea = true;
 			recogRect_flag = true;
@@ -707,7 +845,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 			onePictureOPerations.clear();
 			System.out.println("After click Target...");
 			target_flag = true;
-
 			if (countDrawArea == 0)
 				test_type = TType.ATOMIC;
 			else
@@ -722,17 +859,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			}
-
 			break;
-
-		case MENU_ITEM_COUNTER + 6:// target
+		case MENU_ITEM_COUNTER + 6:// enter text
 			// getUserInputString();
 			/* 这里涉及到 多线程，主线程要等待子线程输入。 */
 			final TextView tv = new EditText(this);
 			Builder expectDialog = new AlertDialog.Builder(this);
 			expectDialog.setTitle("Expected output:").setIcon(android.R.drawable.ic_dialog_info);
 			expectDialog.setView(tv);
-			expectDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			expectDialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface arg0, int arg1) {
 					// TODO Auto-generated method stub
@@ -744,7 +879,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					System.out.println("Your Input[pos-menu-selected]: " + input);
 				}
 			});
-			expectDialog.setNegativeButton("取消", null).show();
+			expectDialog.setNegativeButton("Cancel", null).show();
 			break;
 
 		case MENU_ITEM_COUNTER + 7: // timer
@@ -753,7 +888,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			timeDialog.setTitle("Wait time");
 			timeDialog.setIcon(android.R.drawable.ic_dialog_info);
 			timeDialog.setView(timeText);
-			timeDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			timeDialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
@@ -764,47 +899,54 @@ public class MainActivity extends Activity implements OnTouchListener {
 					System.out.println("Your Input[pos-menu-selected]: " + timeInput);
 				}
 			});
-			timeDialog.setNegativeButton("取消", null);
+			timeDialog.setNegativeButton("Cancel", null);
 			timeDialog.show();
 			break;
 
 		case MENU_ITEM_COUNTER + 8: // fork, fork到之前save的那张的图片
-			if (!fork_flag) {
-				forkImage = currentImage;
-				forkDocument = (Document) currentDocument.clone();
-				fork_flag = true;
-				Toast.makeText(this, "fork success", Toast.LENGTH_SHORT).show();
-			} else {
-				onePictureOPerations.clear();
-
-				currentDocument = (Document) forkDocument.clone();
-				currentWrittenFile = WriteXML.createTestFile();
-
-				fork_flag = false;
-				target_flag = false;
-				isDrawArea = false;
-				int forkIndex = imageFiles.indexOf(forkImage);
-				currentImage = imageFiles.get(forkIndex);
-				Uri imageUri = Uri.fromFile(currentImage);
-				/*------------ modify by zhchuch ----------*/
-				imagePath = imageUri.toString();
-				// System.out.println("NextImage: Uri="+imageUri.toString()+",
-				// ImageName: "+ImageName);
-
-				Log.w("TAG-P", "forkCase:print the uix androidNode");
-				ParseXML parser = getParserByImagePath(imagePath);
-
-				/*----------------------------------------*/
-				imageView.setImageURI(imageUri);
-				operationPoint = new ArrayList<PointF>();
-				draw();
-			}
-			putDownMenu();
+			handleFork();
+			break;
+		case MENU_ITEM_COUNTER + 9:// exit
+			exitDialog();
 			break;
 		default:
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void handleFork() {
+		if (!fork_flag) {
+			forkImage = currentImage;
+			forkDocument = (Document) currentDocument.clone();
+			fork_flag = true;
+			Toast.makeText(this, "fork success", Toast.LENGTH_SHORT).show();
+		} else {
+			onePictureOPerations.clear();
+
+			currentDocument = (Document) forkDocument.clone();
+			currentWrittenFile = WriteXML.createTestFile();
+
+			fork_flag = false;
+			target_flag = false;
+			isDrawArea = false;
+			int forkIndex = imageFiles.indexOf(forkImage);
+			currentImage = imageFiles.get(forkIndex);
+			Uri imageUri = Uri.fromFile(currentImage);
+			/*------------ modify by zhchuch ----------*/
+			imagePath = imageUri.toString();
+			// System.out.println("NextImage: Uri="+imageUri.toString()+",
+			// ImageName: "+ImageName);
+
+			Log.w("TAG-P", "forkCase:print the uix androidNode");
+			ParseXML parser = getParserByImagePath(imagePath);
+
+			/*----------------------------------------*/
+			imageView.setImageURI(imageUri);
+			operationPoint = new ArrayList<PointF>();
+			draw();
+		}
+		putDownMenu();
 	}
 
 	/**

@@ -25,5 +25,6 @@ public class PreMainActivity extends Activity {
 	protected void change() {
 		Intent intent = new Intent(PreMainActivity.this, MainActivity.class);
 		startActivity(intent);
+		finish();
 	}
 }
