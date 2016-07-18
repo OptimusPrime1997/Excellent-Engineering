@@ -286,14 +286,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					drawedArea = rect;
 					myDrawFlag = false;
 				}
-				System.out.println("############");
-				for (int i = 0; i < rect.length; i++) {
-					System.out.print(rect[i].x);
-					System.out.print("   ");
-					System.out.print(rect[i].y);
-					System.out.println();
-				}
-
+				
 				ioOperation.recordAreaInfo(filePath, graphics, rect);
 				/*-------------- Modify by zhchuch -----------------*/
 				countDrawArea++;
@@ -594,7 +587,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						String[] combaPoints = combaResults[1].split(",");
 						operationElement.remove(operationElement.element("singlePoint"));
 						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {													
-							CreateElement.addCombaInfo(operationElement, "area", combaPoints, null, parser);
+							CreateElement.addCombaInfo(operationElement, "multiComponent", combaPoints, null, parser);
 						}
 						if (combaResults[0].equals("REC_FORALL")) {
 							//recForAllDocument = (Document) currentDocument.clone();
