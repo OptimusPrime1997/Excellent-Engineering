@@ -20,4 +20,8 @@ public class NotOperation implements Result {
     public String printResult() {
         return this.toXML();
     }
+
+    public void setResult(Result result) {
+        this.result = result;
+    }
 }
