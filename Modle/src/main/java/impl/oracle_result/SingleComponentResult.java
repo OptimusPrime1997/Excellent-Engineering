@@ -21,6 +21,10 @@ public class SingleComponentResult implements Result{
         return XML;
     }
 
+    public String printResult() {
+        return this.toXML();
+    }
+
     public SingleComponentResult(String index, ResultType resultType, String componentType, String expect) {
         this.index = index;
         this.resultType = resultType;

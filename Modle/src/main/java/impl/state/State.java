@@ -73,4 +73,17 @@ public class State {
 	public int getId() {
 		return id;
 	}
+
+	public String printState(){
+		String print = "<state>\n" +
+				"<name>"+this.name+"</name>\n"+
+				"<id>"+this.id+"</id>\n" +
+				"<edges>\n";
+		for(Edge edge : edgeList){
+			print += edge.printEdge();
+		}
+		print += "</edges>\n"+
+				"</state>\n";
+		return print;
+	}
 }

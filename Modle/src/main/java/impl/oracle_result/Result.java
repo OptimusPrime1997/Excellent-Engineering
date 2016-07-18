@@ -9,4 +9,10 @@ public interface Result {
      * @return
      */
     public String toXML();
+
+    /**
+     * 用于打印Result
+     * @return Result打印的String
+     */
+    public String printResult();
 }

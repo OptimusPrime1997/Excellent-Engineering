@@ -173,6 +173,17 @@ public class ModelCreate {
             Element element = operation.element(StringUtil.singlePoint);
 
             result = new SinglePoint(Float.parseFloat(element.elementText(StringUtil.pointX)),Float.parseFloat(element.elementText(StringUtil.pointY)));
+        }else if(type==Type.MULTICOMPONENT){
+            MultiComponent multiComponent = new MultiComponent();
+            List<Element> elements = operation.element(StringUtil.multiComponent).elements();
+            for(Element element:elements){
+                Component component = new Component(element.elementText(StringUtil.resourceId),
+                        element.elementText(StringUtil.resourceType));
+                multiComponent.addComponent(component);
+
+            }
+
+            result = multiComponent;
         }
         return result;
     }

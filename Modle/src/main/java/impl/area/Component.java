@@ -22,6 +22,14 @@ public class Component implements Area{
 		return XML;
 	}
 
+	public String printArea() {
+		String print = "<area  type = \"Component\">\n" +
+				"<type>" + type + "</type>\n" +
+				"<id>"+id+"</id>\n" +
+				"</area>\n";
+		return print;
+	}
+
 
 	public String getId() {
 		return id;

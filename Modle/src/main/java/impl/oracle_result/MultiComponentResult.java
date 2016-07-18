@@ -19,6 +19,10 @@ public class MultiComponentResult implements Result {
         return XML;
     }
 
+    public String printResult() {
+        return this.toXML();
+    }
+
     public void add(SingleComponentResult scr){
         list.add(scr);
     }
