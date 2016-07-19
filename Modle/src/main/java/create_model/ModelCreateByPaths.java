@@ -5,7 +5,6 @@ import impl.area.*;
 import impl.edge.Operation;
 import impl.edge.VirtualOperation;
 import impl.model.ModelFactory;
-import impl.oracle_result.MultiComponentResult;
 import impl.oracle_result.Result;
 import impl.oracle_result.ResultType;
 import impl.oracle_result.SingleComponentResult;
@@ -28,7 +27,7 @@ import java.util.List;
 /**
  * Created by 王栋 on 2016/7/13 0013.
  */
-public class ModelCreate {
+public class ModelCreateByPaths {
 
     private ModelService model;
 

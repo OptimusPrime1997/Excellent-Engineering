@@ -7,6 +7,7 @@ public class StringUtil {
 
     public static final String isVirtual = "isVirtual";
     public static final String action = "action";
+    public static final String name = "name";
     public static final String type = "type";
     public static final String delay="delayTime";
     public static final String id = "id";
@@ -18,12 +19,21 @@ public class StringUtil {
     public static final String resourceType = "resourceType";
     public static final String operation = "Operation";
     public static final String state = "state";
+    public static final String oracle = "oracle";
     public static final String fileName = "fileName";
     public static final String stateId = "stateId";
     public static final String typeCode = "typeCode";
     public static final String singleComponent = "singleComponent";
     public static final String multiComponent = "multiComponent";
     public static final String expect="expect";
-
+    public static final String edges = "edges";
+    public static final String edge = "edge";
+    public static final String result = "result";
+    public static final String resource = "resource";
+    public static final String destination = "destination";
+    public static final String area = "area";
+    public static final String range = "range";
+    public static final String dragRange = "dragRange";
+    public static final String component = "component";
 
 }

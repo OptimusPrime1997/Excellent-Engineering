@@ -2,20 +2,51 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb37ce74-bd28-4aa0-9ea1-b202d1356b34" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/impl/oracle_result/PixelsResult.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/impl/oracle_result/ResultTreeFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/ResultTreeFactoryTestDriver.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_area.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_choose.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_clear.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_exit.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_fork.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_left_bracket.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_more.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_next.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_right_bracket.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_save.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_target.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/menu_timer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/Test0Tag.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/test.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/impl/Action.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/impl/Model.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/impl/Operation.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/impl/State.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/impl/VirtualOperation.class" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/create_model/ModelCreate.java" afterPath="$PROJECT_DIR$/src/main/java/create_model/ModelCreateByPaths.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/impl/area/Component.class" afterPath="$PROJECT_DIR$/target/classes/impl/area/Component.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/impl/area/DragRange.class" afterPath="$PROJECT_DIR$/target/classes/impl/area/DragRange.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/impl/area/Range.class" afterPath="$PROJECT_DIR$/target/classes/impl/area/Range.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/impl/area/SinglePoint.class" afterPath="$PROJECT_DIR$/target/classes/impl/area/SinglePoint.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/service/Area.class" afterPath="$PROJECT_DIR$/target/classes/service/Area.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/service/Edge.class" afterPath="$PROJECT_DIR$/target/classes/service/Edge.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/service/ModelService.class" afterPath="$PROJECT_DIR$/target/classes/service/ModelService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/MainActivity.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/MainActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$drawable.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$drawable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$id.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$layout.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$string.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$string.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$style.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$style.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gitignore" afterPath="$PROJECT_DIR$/../.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/One_Pecese_1_0.iml" afterPath="$PROJECT_DIR$/One_Pecese_1_0.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model.xml" afterPath="$PROJECT_DIR$/model.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/TestModel.java" afterPath="$PROJECT_DIR$/src/main/java/TestModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/area/DoublePoint.java" afterPath="$PROJECT_DIR$/src/main/java/impl/area/DoublePoint.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/area/DragRange.java" afterPath="$PROJECT_DIR$/src/main/java/impl/area/DragRange.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/area/MultiComponent.java" afterPath="$PROJECT_DIR$/src/main/java/impl/area/MultiComponent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/edge/Operation.java" afterPath="$PROJECT_DIR$/src/main/java/impl/edge/Operation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/model/Model.java" afterPath="$PROJECT_DIR$/src/main/java/impl/model/Model.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/util/StringUtil.java" afterPath="$PROJECT_DIR$/src/main/java/util/StringUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/gen/com/example/gui/R.java" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/gen/com/example/gui/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/CreateElement.java" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/CreateElement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/MainActivity.java" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/MainActivity.java" />
     </list>
     <ignored path="One_Pecese_1_0.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,8 +88,8 @@
       <file leaf-file-name="ResultTreeFactoryTestDriver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/ResultTreeFactoryTestDriver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+            <state relative-caret-position="180">
+              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,53 +112,13 @@
       </file>
     </leaf>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/TestModle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/create_model/ModelCreate.java" />
-        <option value="$PROJECT_DIR$/src/main/java/service/ModelService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/service/Edge.java" />
-        <option value="$PROJECT_DIR$/src/main/java/service/Area.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/area/DoublePoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/area/MultiComponent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/edge/Operation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/area/Component.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/area/Range.java" />
-        <option value="$PROJECT_DIR$/src/main/java/TestModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/edge/VirtualOperation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/model/Model.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/state/State.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/Result.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/SingleComponentResult.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/MultiComponentResult.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/state/Oracle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/area/SinglePoint.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/OrOperation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/AndOperation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/NotOperation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/PixelsResult.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/LeftBracket.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/ResultTree.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/ResultFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/ResultCreater.java" />
-        <option value="$PROJECT_DIR$/src/main/java/impl/oracle_result/ResultTreeFactory.java" />
-        <option value="$PROJECT_DIR$/src/test/java/ResultTreeFactoryTestDriver.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
       </list>
     </option>
   </component>
@@ -616,42 +607,26 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
-  <component name="RunManager" selected="Application.ResultTreeFactoryTestDriver">
-    <configuration default="false" name="TestModel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in One_Pecese_1_0">
+    <configuration default="false" name="All in One_Pecese_1_0" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="TestModel" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <module name="One_Pecese_1_0" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="One_Pecese_1_0" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
       <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="ResultTreeFactoryTestDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="ResultTreeFactoryTestDriver" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="One_Pecese_1_0" />
-      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -868,7 +843,6 @@
       <setting name="cmdLine" value="run-app" />
       <setting name="passParentEnv" value="true" />
       <setting name="launchBrowser" value="true" />
-      <setting name="depsClasspath" value="false" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
     </configuration>
@@ -1034,12 +1008,6 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -1055,43 +1023,31 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.TestModel" />
-      <item index="1" class="java.lang.String" itemvalue="Application.ResultTreeFactoryTestDriver" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="JUnit.All in One_Pecese_1_0" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.ResultTreeFactoryTestDriver" />
-        <item index="1" class="java.lang.String" itemvalue="Application.TestModel" />
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.All in One_Pecese_1_0" />
       </list>
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="fb37ce74-bd28-4aa0-9ea1-b202d1356b34" name="Default" comment="" />
-      <created>1468569796471</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1468569796471</updated>
-      <workItem from="1468721098091" duration="2090000" />
-      <workItem from="1468804382710" duration="3980000" />
-      <workItem from="1468830832748" duration="175000" />
-      <workItem from="1468834181952" duration="1972000" />
-      <workItem from="1468891024569" duration="4291000" />
-    </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="All_in_One_Pecese_1_0 - 2016.07.19 at 10h 37m 13s.xml">
+      <configuration name="All in One_Pecese_1_0" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12508000" />
+    <option name="totallyTimeSpent" value="154000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1147,17 +1103,6 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
-  </component>
-  <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USER_GROUPS">
-      <collection />
-    </option>
-    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-      <collection />
-    </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1485,8 +1430,8 @@
         <state relative-caret-position="486">
           <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
           <folding>
-            <element signature="e#729#730#0" expanded="true" />
-            <element signature="e#764#765#0" expanded="true" />
+            <element signature="e#729#730#0" expanded="false" />
+            <element signature="e#764#765#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1524,42 +1469,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1062">
+          <caret line="31" column="38" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/ResultTreeFactoryTestDriver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+        <state relative-caret-position="180">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
