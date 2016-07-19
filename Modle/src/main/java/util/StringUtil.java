@@ -35,5 +35,18 @@ public class StringUtil {
     public static final String range = "range";
     public static final String dragRange = "dragRange";
     public static final String component = "component";
+    public static final String Xray = "Xray";
+    public static final String Yray = "Yray";
+    public static final String not = "not";
+    public static final String or = "or";
+    public static final String and = "and";
+    public static final String rightBrack = "rightBracket";
+    public static final String leftBrack = "leftBracket";
+    public static final String color = "color";
+    public static final String red = "red";
+    public static final String blue = "blue";
+    public static final String green = "green";
+
+
 
 }

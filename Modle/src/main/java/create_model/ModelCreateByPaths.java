@@ -5,9 +5,7 @@ import impl.area.*;
 import impl.edge.Operation;
 import impl.edge.VirtualOperation;
 import impl.model.ModelFactory;
-import impl.oracle_result.Result;
-import impl.oracle_result.ResultType;
-import impl.oracle_result.SingleComponentResult;
+import impl.oracle_result.*;
 import impl.state.Oracle;
 import impl.state.State;
 import org.dom4j.Document;
@@ -75,23 +73,22 @@ public class ModelCreateByPaths {
 
             }else{//是一个oracle
                 //TODO 分析类型产生对应的oracle
-//                Result result = null;
-                String type = elem.attributeValue(StringUtil.type);
-                if(type==null){
-                    System.out.print(true);
-                }
-                if(type.equalsIgnoreCase("single_component")){
-                    Element element = elem.element(StringUtil.singleComponent);
-                    result = getSingleComponent(element);
 
-                }else if(type.equalsIgnoreCase("multi_component")){
-                    //TODO 要测试多个组件的内容或者图片
-//                    List<Element> elements = elem.element(StringUtil.multiComponent).elements(StringUtil.singleComponent);
-//                    result = new MultiComponentResult();
-//                    for(Element element : elements){
-//                        (MultiComponentResult)result.
-//                    }
-                }
+//                String type = elem.attributeValue(StringUtil.type);
+//                if(type.equalsIgnoreCase("single_component")){
+//                    Element element = elem.element(StringUtil.singleComponent);
+//                    result = getSingleComponent(element);
+//
+//                }else if(type.equalsIgnoreCase("multi_component")){
+//                    //TODO 要测试多个组件的内容或者图片 估计都不到这里了 都被not or and 和 multiComponent包含了
+////                    List<Element> elements = elem.element(StringUtil.multiComponent).elements(StringUtil.singleComponent);
+////                    result = new MultiComponentResult();
+////                    for(Element element : elements){
+////                        (MultiComponentResult)result.
+////                    }
+//                }
+
+                result = getResult(elem);
                 oracle = new Oracle(name+id,id,result);
                 states.add(i,oracle);
                 //model.setOracle
@@ -187,13 +184,54 @@ public class ModelCreateByPaths {
         return result;
     }
 
-    private Result getSingleComponent(Element elem){
 
+    //TODO 分析result 获取result
+    private Result getResult(Element elem){
+        ResultTreeFactory result = new ResultTreeFactory();
+        List<Element> elements = elem.elements();
+        for(Element element : elements){
+            String name = element.getName();
+            if(name.equalsIgnoreCase(StringUtil.stateId)||element.getName().equalsIgnoreCase(StringUtil.fileName))
+                continue;
+
+            if(name.equals(StringUtil.or)||name.equals(StringUtil.and)||name.equals(StringUtil.not)){
+//                System.err.println("test1");
+                result.put(name);
+            }else if(name.equals(StringUtil.rightBrack)){
+//                System.err.println("test2");
+                result.put(")");
+            }else if(name.equals(StringUtil.leftBrack)){
+//                System.err.println("test3");
+                result.put("(");
+            }else if(name.equals(StringUtil.singleComponent)){
+//                System.err.println("test4");
+                result.put(getSingleComponent(element));
+            }
+        }
+        return result.createResultTree();
+    }
+
+
+    private Result getSingleComponent(Element elem){
+        Result result = null;
         ResultType resultType = getResultType(elem.element(StringUtil.expect).attributeValue(StringUtil.type));
+        if(resultType == ResultType.TEXT){
         String componentType = elem.elementText(StringUtil.resourceType);
         String index = elem.elementText(StringUtil.resourceId);
         String expect = elem.elementText(StringUtil.expect);
-        Result result = new SingleComponentResult(index,resultType,componentType,expect);
+        result = new SingleComponentResult(index,resultType,componentType,expect);
+        }else if (resultType==ResultType.IMAGE){
+            Element singlePoint = elem.element(StringUtil.expect).element(StringUtil.singlePoint);
+            Element color = elem.element(StringUtil.expect).element(StringUtil.color);
+            int[] rgb = new int[3];
+            int x = Integer.parseInt(singlePoint.elementText(StringUtil.pointX));
+            int y = Integer.parseInt(singlePoint.elementText(StringUtil.pointY));
+            rgb[0]= Integer.parseInt(color.elementText(StringUtil.red));
+            rgb[1]= Integer.parseInt(color.elementText(StringUtil.green));
+            rgb[2]= Integer.parseInt(color.elementText(StringUtil.blue));
+            result = new PixelsResult(rgb,x,y);
+
+        }
         return result;
     }
 
