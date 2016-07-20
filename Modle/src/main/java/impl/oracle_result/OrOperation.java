@@ -7,6 +7,12 @@ public class OrOperation implements Result {
     private Result result1;
     private Result result2;
 
+
+    public OrOperation(){
+        result1=null;
+        result2=null;
+    }
+
     public OrOperation(Result result1, Result result2) {
         this.result1 = result1;
         this.result2 = result2;

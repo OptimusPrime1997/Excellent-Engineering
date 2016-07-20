@@ -25,7 +25,8 @@ public class RootFrist extends PathStrategy {
         try{
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD-HH-MM-SS");
-            File file = new File("C://Users/Administrator/Documents/ONE_PEICE"+sdf.format(date)+".xml");
+            File file = new File("paths/"+sdf.format(date)+".xml");
+
             if(!file.getParentFile().exists()) {
                 System.err.println("making the parent file ...");
                 if(!file.getParentFile().mkdirs()) {

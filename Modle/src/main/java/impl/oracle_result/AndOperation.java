@@ -12,6 +12,10 @@ public class AndOperation implements Result {
         this.result2 = result2;
     }
 
+    public AndOperation(){
+        this.result1 = null;
+        this.result2 = null;
+    }
     public String toXML() {
         String XML = "<and>\n" +
                 result1.toXML() +

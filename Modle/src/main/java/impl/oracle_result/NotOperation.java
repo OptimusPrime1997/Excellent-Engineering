@@ -6,6 +6,7 @@ package impl.oracle_result;
 public class NotOperation implements Result {
     private Result result;
 
+    public NotOperation(){ this.result = null;}
     public NotOperation(Result result) {
         this.result = result;
     }

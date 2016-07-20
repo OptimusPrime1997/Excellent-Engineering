@@ -8,8 +8,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>re</id>
+<type>re</type>
+<id>Button</id>
 </area>
 <id>1</id>
 <delay>0</delay>
@@ -19,8 +19,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>re</id>
+<type>re</type>
+<id>Button</id>
 </area>
 <id>1</id>
 <delay>0</delay>
@@ -30,8 +30,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>re</id>
+<type>re</type>
+<id>Button</id>
 </area>
 <id>1</id>
 <delay>0</delay>
@@ -42,32 +42,32 @@
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
 <area type="MultiComponent">
 <area  type = "Component">
-<type>Button</type>
-<id>re</id>
+<type>re</type>
+<id>Button</id>
 </area>
 <area  type = "Component">
-<type>Button</type>
-<id>si</id>
+<type>si</type>
+<id>Button</id>
 </area>
 <area  type = "Component">
-<type>Button</type>
-<id>mi</id>
+<type>mi</type>
+<id>Button</id>
 </area>
 <area  type = "Component">
-<type>Button</type>
-<id>sol</id>
+<type>sol</type>
+<id>Button</id>
 </area>
 <area  type = "Component">
-<type>Button</type>
-<id>do</id>
+<type>do</type>
+<id>Button</id>
 </area>
 <area  type = "Component">
-<type>Button</type>
-<id>fa</id>
+<type>fa</type>
+<id>Button</id>
 </area>
 <area  type = "Component">
-<type>Button</type>
-<id>la</id>
+<type>la</type>
+<id>Button</id>
 </area>
 </area>
 <id>1</id>
@@ -78,8 +78,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>do</id>
+<type>do</type>
+<id>Button</id>
 </area>
 <id>1</id>
 <delay>0</delay>
@@ -89,8 +89,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>do</id>
+<type>do</type>
+<id>Button</id>
 </area>
 <id>1</id>
 <delay>0</delay>
@@ -100,8 +100,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>si</id>
+<type>si</type>
+<id>Button</id>
 </area>
 <id>1</id>
 <delay>0</delay>
@@ -111,8 +111,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>do</id>
+<type>do</type>
+<id>Button</id>
 </area>
 <id>1</id>
 <delay>0</delay>
@@ -128,8 +128,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>Training</id>
+<type>Training</type>
+<id>Button</id>
 </area>
 <id>0</id>
 <delay>0</delay>
@@ -139,8 +139,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>Training</id>
+<type>Training</type>
+<id>Button</id>
 </area>
 <id>0</id>
 <delay>0</delay>
@@ -150,8 +150,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>Training</id>
+<type>Training</type>
+<id>Button</id>
 </area>
 <id>0</id>
 <delay>0</delay>
@@ -161,8 +161,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png5</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>Training</id>
+<type>Training</type>
+<id>Button</id>
 </area>
 <id>0</id>
 <delay>0</delay>
@@ -172,8 +172,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>Training</id>
+<type>Training</type>
+<id>Button</id>
 </area>
 <id>0</id>
 <delay>0</delay>
@@ -183,8 +183,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>Training</id>
+<type>Training</type>
+<id>Button</id>
 </area>
 <id>0</id>
 <delay>0</delay>
@@ -194,8 +194,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>Training</id>
+<type>Training</type>
+<id>Button</id>
 </area>
 <id>0</id>
 <delay>0</delay>
@@ -205,8 +205,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>Training</id>
+<type>Training</type>
+<id>Button</id>
 </area>
 <id>0</id>
 <delay>0</delay>
@@ -216,8 +216,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>Training</id>
+<type>Training</type>
+<id>Button</id>
 </area>
 <id>0</id>
 <delay>0</delay>
@@ -233,8 +233,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>End Game</id>
+<type>End Game</type>
+<id>Button</id>
 </area>
 <id>2</id>
 <delay>0</delay>
@@ -244,8 +244,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>End Game</id>
+<type>End Game</type>
+<id>Button</id>
 </area>
 <id>2</id>
 <delay>5</delay>
@@ -255,8 +255,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>End Game</id>
+<type>End Game</type>
+<id>Button</id>
 </area>
 <id>2</id>
 <delay>0</delay>
@@ -266,8 +266,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>End Game</id>
+<type>End Game</type>
+<id>Button</id>
 </area>
 <id>2</id>
 <delay>0</delay>
@@ -277,8 +277,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>End Game</id>
+<type>End Game</type>
+<id>Button</id>
 </area>
 <id>2</id>
 <delay>0</delay>
@@ -288,8 +288,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>End Game</id>
+<type>End Game</type>
+<id>Button</id>
 </area>
 <id>2</id>
 <delay>0</delay>
@@ -299,8 +299,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>End Game</id>
+<type>End Game</type>
+<id>Button</id>
 </area>
 <id>2</id>
 <delay>0</delay>
@@ -310,8 +310,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>End Game</id>
+<type>End Game</type>
+<id>Button</id>
 </area>
 <id>2</id>
 <delay>0</delay>
@@ -327,8 +327,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png6</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png5</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>fa</id>
+<type>fa</type>
+<id>Button</id>
 </area>
 <id>3</id>
 <delay>0</delay>
@@ -344,8 +344,8 @@
 <destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png7</destination>
 <resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png6</resource>
 <area  type = "Component">
-<type>Button</type>
-<id>End Game</id>
+<type>End Game</type>
+<id>Button</id>
 </area>
 <id>4</id>
 <delay>0</delay>

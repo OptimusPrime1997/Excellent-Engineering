@@ -224,6 +224,23 @@ public class CreateElement {
 	}
 	
 	
+	public static void addRGB(Element element, String[] points, int[] colors){
+		Element componentElement = BuildDocument.addElement(element, "singleComponent");
+		Element expectElement = BuildDocument.addElement(componentElement, "expect");
+		BuildDocument.addAttribute(expectElement, "type", "image");
+		Element pointElement = BuildDocument.addElement(expectElement, "singlePoint");
+		Element pointXElement = BuildDocument.addElement(pointElement, "pointX");
+		BuildDocument.addText(pointXElement, points[0]);
+		Element pointYElement = BuildDocument.addElement(pointElement, "pointY");
+		BuildDocument.addText(pointYElement, points[1]);
+		Element colorElement = BuildDocument.addElement(expectElement, "color");
+		Element redElement = BuildDocument.addElement(colorElement, "red");
+		BuildDocument.addText(redElement, colors[0]+"");
+		Element greenElement = BuildDocument.addElement(colorElement, "green");
+		BuildDocument.addText(greenElement, colors[1]+"");
+		Element blueElement = BuildDocument.addElement(colorElement, "blue");
+		BuildDocument.addText(blueElement, colors[2]+"");
+	}
 	
 
 }

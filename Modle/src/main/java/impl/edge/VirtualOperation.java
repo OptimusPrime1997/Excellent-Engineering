@@ -41,7 +41,7 @@ public class VirtualOperation implements Edge {
 	}
 
 	public String printEdge() {
-		return null;
+		return "<edge></edge>";
 	}
 
 
