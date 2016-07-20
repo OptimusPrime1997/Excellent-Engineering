@@ -16,8 +16,10 @@ public class Component implements Area{
 
 
 	public String toXML() {
-		String XML = "<index>" + id + "</index>\n"+
-				     "<componentType>"+ type + "</componentType>\n";
+		String XML = "<Component>\n" +
+				"<index>" + id + "</index>\n"+
+				"<componentType>"+ type + "</componentType>\n" +
+				"</Component>\n";
 
 		return XML;
 	}

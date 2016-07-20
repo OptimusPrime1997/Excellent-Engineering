@@ -18,7 +18,10 @@ public class DoublePoint implements Area {
 
 
     public String toXML() {
-        return startPoint.toXML() + endPoint.toXML();
+        String XML = "<DoublePoint>\n";
+        XML += startPoint.toXML() + endPoint.toXML();
+        XML += "</DoublePoint>\n";
+        return XML;
     }
 
     public String printArea() {

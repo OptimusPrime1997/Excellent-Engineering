@@ -44,31 +44,14 @@ public class Operation implements Edge{
 
 
 	public String toXML(){
-		String XML = "<operation type = \"" + area.getClass().getName() + "\" action = \""
+		String XML = "<operation type = \"" + area.getClass().getSimpleName() + "\" action = \""
 				+ action.name() + "\" delayTime = \"" + delay + "\">\n"
 				   + area.toXML()
 				   + "</operation>\n";
-		//多个component连续点击的情况
-		if(area instanceof MultiComponent){
-			XML = "";
-			Iterator<Component> iterator = ((MultiComponent) area).getComponents();
-			while(iterator.hasNext()){
-				Component component = iterator.next();
-				if(iterator.hasNext()){
-				XML+="<operation type = \"" + component.getClass().getName() + "\" action = \""
-						+ action.name() + "\" delayTime = \"0\">\n"
-						+ component.toXML()
-						+ "</operation>\n";
-				}else {
-					XML+="<operation type = \"" + component.getClass().getName() + "\" action = \""
-							+ action.name() +  "\" delayTime = \"" + delay + "\">\n"
-							+ component.toXML()
-							+ "</operation>\n";
-				}
-			}
-		}
+
 		return XML;
 	}
+
 
 
 	public boolean hasSameID(String operationId){
