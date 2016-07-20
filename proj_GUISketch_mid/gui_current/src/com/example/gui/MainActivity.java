@@ -554,8 +554,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 			sub2.add(2, MENU_ITEM_COUNTER + 12, 11, "or").setIcon(R.drawable.or);
 			sub2.add(2, MENU_ITEM_COUNTER + 13, 12, "invert").setIcon(R.drawable.invert);
 
-			sub2.add(2, MENU_ITEM_COUNTER + 14, 13, "left bracket").setIcon(R.drawable.menu_left_bracket);
-			sub2.add(2, MENU_ITEM_COUNTER + 15, 14, "right bracket").setIcon(R.drawable.menu_right_bracket);
+			sub2.add(2,MENU_ITEM_COUNTER + 16, 13, "point").setIcon(R.drawable.invert);
+			
+			sub2.add(2, MENU_ITEM_COUNTER + 14, 14, "left bracket").setIcon(R.drawable.menu_left_bracket);
+			sub2.add(2, MENU_ITEM_COUNTER + 15, 15, "right bracket").setIcon(R.drawable.menu_right_bracket);
 			// menu.removeItem(MENU_ITEM_COUNTER + 10);
 			// menu.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
 			target_menu_flag = false;
@@ -933,6 +935,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 15:// right bracket
 
+			break;
+		case MENU_ITEM_COUNTER + 16://point
+			
 			break;
 		default:
 			break;
