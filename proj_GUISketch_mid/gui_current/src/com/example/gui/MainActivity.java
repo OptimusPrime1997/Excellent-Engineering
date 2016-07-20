@@ -103,8 +103,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private boolean input_flag = false;
 	private boolean recogRect_flag = false;
 	private boolean fork_flag = false;
-	public static boolean isStartPage = true;
 	public static boolean startPage_Flag = false;
+	public static boolean isStartPage = true;
+	private  boolean chooseItem=false;
 	/*-------------------------*/
 
 	private String timeInput;
@@ -128,6 +129,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private final int MENU_ITEM_COUNTER = Menu.FIRST;
 	public static final String EXTRA_FILE_CHOOSER = "file_chooser";
 	private Bundle bundle;
+
 	/**
 	 * init the variables
 	 */
@@ -180,7 +182,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.bundle=savedInstanceState;
+		this.bundle = savedInstanceState;
 		setLanguage();
 		Intent intent = getIntent();
 
@@ -314,7 +316,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					drawedArea = rect;
 					myDrawFlag = false;
 				}
-				
+
 				ioOperation.recordAreaInfo(filePath, graphics, rect);
 				/*-------------- Modify by zhchuch -----------------*/
 				countDrawArea++;
@@ -534,7 +536,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			menu.add(0, MENU_ITEM_COUNTER + 3, 4, "clear").setIcon(R.drawable.menu_clear);
 
 			SubMenu sub1 = menu.addSubMenu(0, MENU_ITEM_COUNTER + 10, 5, "more").setIcon(R.drawable.menu_more);
-			
+
 			sub1.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area").setIcon(R.drawable.menu_area);
 			sub1.add(1, MENU_ITEM_COUNTER + 5, 7, "target").setIcon(R.drawable.menu_target);
 			// menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
@@ -547,18 +549,18 @@ public class MainActivity extends Activity implements OnTouchListener {
 			sub2.removeItem(MENU_ITEM_COUNTER + 5);
 			sub2.removeItem(MENU_ITEM_COUNTER + 7);
 			sub2.removeItem(MENU_ITEM_COUNTER + 8);
-			
-			sub2.add(2,MENU_ITEM_COUNTER+11,10,"and").setIcon(R.drawable.menu_left_bracket);
-			sub2.add(2,MENU_ITEM_COUNTER+12,11,"or").setIcon(R.drawable.menu_right_bracket);
-			sub2.add(2,MENU_ITEM_COUNTER+13,12,"invert").setIcon(R.drawable.menu_left_bracket);
-			
-			sub2.add(2,MENU_ITEM_COUNTER+14,13,"left bracket").setIcon(R.drawable.menu_left_bracket);
-			sub2.add(2,MENU_ITEM_COUNTER+15,14,"right bracket").setIcon(R.drawable.menu_right_bracket);
-//			menu.removeItem(MENU_ITEM_COUNTER + 10);
-//			menu.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
+
+			sub2.add(2, MENU_ITEM_COUNTER + 11, 10, "and").setIcon(R.drawable.and);
+			sub2.add(2, MENU_ITEM_COUNTER + 12, 11, "or").setIcon(R.drawable.or);
+			sub2.add(2, MENU_ITEM_COUNTER + 13, 12, "invert").setIcon(R.drawable.invert);
+
+			sub2.add(2, MENU_ITEM_COUNTER + 14, 13, "left bracket").setIcon(R.drawable.menu_left_bracket);
+			sub2.add(2, MENU_ITEM_COUNTER + 15, 14, "right bracket").setIcon(R.drawable.menu_right_bracket);
+			// menu.removeItem(MENU_ITEM_COUNTER + 10);
+			// menu.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
 			target_menu_flag = false;
 		}
-		
+
 		return true;
 	}
 
@@ -653,6 +655,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		startActivity(intent);
 		finish();
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -745,7 +748,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						String[] combaResults = combaOperation.split(";");
 						String[] combaPoints = combaResults[1].split(",");
 						operationElement.remove(operationElement.element("singlePoint"));
-						if (combaResults[0].equals("FORALL")||combaResults[0].equals("EXIST")) {													
+						if (combaResults[0].equals("FORALL") || combaResults[0].equals("EXIST")) {
 							CreateElement.addCombaInfo(operationElement, "multiComponent", combaPoints, null, parser);
 						}
 						if (combaResults[0].equals("REC_FORALL")) {
@@ -846,7 +849,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 			// WriteXML.writeObject("targe/r/n", currentWrittenFile.getPath());
 			onePictureOPerations.clear();
 			System.out.println("After click Target...");
-			target_flag = true;
 			if (countDrawArea == 0)
 				test_type = TType.ATOMIC;
 			else
@@ -860,6 +862,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 			stepCount = 0;
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
+				if (chooseItem == true) {
+					target_flag = true;
+				} else {
+					target_flag = false;
+				}
 			}
 			break;
 		case MENU_ITEM_COUNTER + 6:// enter text
@@ -912,20 +919,20 @@ public class MainActivity extends Activity implements OnTouchListener {
 			exitDialog();
 			break;
 		case MENU_ITEM_COUNTER + 11:// and
-			
+
 			break;
 		case MENU_ITEM_COUNTER + 12:// or
-			
+
 			break;
 		case MENU_ITEM_COUNTER + 13:// invert
-			
+
 			break;
 
 		case MENU_ITEM_COUNTER + 14:// right bracket
-	
+
 			break;
 		case MENU_ITEM_COUNTER + 15:// right bracket
-	
+
 			break;
 		default:
 			break;
@@ -1060,6 +1067,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 
 				}
+				chooseItem=true;
 				Log.w("TAG-P", "onActivityResult:print the uix androidNode");
 				/*--------------- modify by zhchuch ----------*/
 
@@ -1067,6 +1075,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				/*-------------------------------------------*/
 				draw();
 			} else {
+				chooseItem=false;
 				return;
 			}
 		} // if

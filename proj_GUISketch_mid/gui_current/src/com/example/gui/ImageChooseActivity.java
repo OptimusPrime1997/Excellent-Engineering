@@ -3,6 +3,7 @@ package com.example.gui;
 import java.io.File;
 import java.util.ArrayList;
 import android.os.Bundle;
+import android.util.Log;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import weka.gui.Main;
 import android.widget.GridView;
 import android.widget.Toast;
 import android.view.KeyEvent;
@@ -28,13 +30,16 @@ public class ImageChooseActivity extends Activity {
 
 	private ArrayList<FileInfo> mFileLists;
 	private ImageChooserAdapter mAdatper;
+//	public static  boolean chooseItem=false;
 
 	@SuppressLint("SdCardPath")
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_image_choose);
-
+		
+//		MainActivity.chooseItem=false;
+		
 		myPicturePath = "/mnt/sdcard/screenShotPicture";
 
 		mBackView = findViewById(R.id.imgBackFolder);
@@ -105,6 +110,9 @@ public class ImageChooseActivity extends Activity {
 				break;
 			case R.id.btExit:
 				setResult(RESULT_CANCELED);
+				Log.w("TAG-exit", "chooseItem is false");
+//				MainActivity.chooseItem=false;
+				
 				finish();
 				break;
 			default:
@@ -124,10 +132,12 @@ public class ImageChooseActivity extends Activity {
 				Intent intent = new Intent();
 				intent.putExtra(MainActivity.EXTRA_FILE_CHOOSER,
 						fileInfo.getFilePath());
-				setResult(RESULT_OK, intent);
 				
 				MainActivity.isStartPage=false;
+				Log.w("TAG-select", "choose an image");
+//				MainActivity.chooseItem=true;
 				
+				setResult(RESULT_OK, intent);
 				finish();
 			} else { // 其他文件.....
 				toast(getText(R.string.open_file_error_format));
