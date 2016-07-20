@@ -188,6 +188,11 @@ public class ModelCreateByPaths {
     //TODO 分析result 获取result
     private Result getResult(Element elem){
         ResultTreeFactory result = new ResultTreeFactory();
+        //如果不包含与或非操作
+        if(elem.element(StringUtil.or)==null&&elem.element(StringUtil.not)==null&&elem.element(StringUtil.and)==null){
+            return getSingleComponent(elem.element(StringUtil.singleComponent));
+        }
+
         List<Element> elements = elem.elements();
         for(Element element : elements){
             String name = element.getName();

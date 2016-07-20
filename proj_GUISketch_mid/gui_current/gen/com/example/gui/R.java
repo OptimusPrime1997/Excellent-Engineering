@@ -72,6 +72,7 @@ public final class R {
         public static final int empty_hint=0x7f050002;
         public static final int hello_world=0x7f050005;
         public static final int open_file_error_format=0x7f050003;
+        public static final int sub_menu_test=0x7f050006;
         public static final int title_activity_image_choose=0x7f050001;
         public static final int title_activity_pre_main=0x7f050004;
     }

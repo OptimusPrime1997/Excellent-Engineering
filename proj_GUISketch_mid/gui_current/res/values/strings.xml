@@ -7,5 +7,6 @@
     <string name="open_file_error_format">The format of file is error</string>
     <string name="title_activity_pre_main">PreMainActivity</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="sub_menu_test">SubMenuTest</string>
+        
 </resources>

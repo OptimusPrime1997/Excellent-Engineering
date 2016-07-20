@@ -46,6 +46,9 @@ public class StringUtil {
     public static final String red = "red";
     public static final String blue = "blue";
     public static final String green = "green";
+    public static final String pixelsResult = "pixelsResult";
+    public static final String componentType = "componentType";
+    public static final String resultType = "resultType";
 
 
 

@@ -17,7 +17,6 @@ import org.dom4j.Element;
 import sketch.gui.testing.AndroidNode;
 import sketch.gui.testing.ParseXML;
 import sketch.gui.testing.TType;
-import android.R.id;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -108,7 +107,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private boolean fork_flag = false;
 	public static boolean startPage_Flag = false;
 	public static boolean isStartPage = true;
-	private  boolean chooseItem=false;
+
+	private boolean chooseItem = false;
 	/*-------------------------*/
 
 	private String timeInput;
@@ -132,11 +132,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private final int MENU_ITEM_COUNTER = Menu.FIRST;
 	public static final String EXTRA_FILE_CHOOSER = "file_chooser";
 	private Bundle bundle;
-	
+
 	private int leftBracketCount = 0;
 	private int rightBracketCount = 0;
 	private boolean hasOracle = false;
-	
+
 	/**
 	 * init the variables
 	 */
@@ -212,7 +212,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		targetResult = new ArrayList<String>();
 
 		imageView = (ImageView) findViewById(R.id.imageView1);
-		
+
 		currentWrittenFile = WriteXML.createTestFile();
 		currentDocument = BuildDocument.getDocument();
 
@@ -257,10 +257,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 		Matrix matrix = new Matrix();
 		canvas.drawBitmap(bitmap, matrix, paint);
 		imageView.setDrawingCacheEnabled(true);
-		
+
 		imageView.setImageBitmap(alterBitmap);
 		imageView.setOnTouchListener(this);
-			
+
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -322,7 +322,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 
 			if (isDrawArea) { // Selection Area
-							
+
 				String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
 				rect = logic.getExteriorRect(graphics); // 计算出矩形的4个点
 				if (myDrawFlag) {
@@ -330,8 +330,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					myDrawFlag = false;
 				}
 				ioOperation.recordAreaInfo(filePath, graphics, rect);
-				
-				
+
 				/*-------------- Modify by zhchuch -----------------*/
 				countDrawArea++;
 
@@ -382,8 +381,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 							targetResult.add("expectedValue;" + input + ";" + String.valueOf(rect[0].x) + ","
 									+ String.valueOf(rect[0].y) + "," + String.valueOf(rect[3].x) + ","
 									+ String.valueOf(rect[3].y));
-							
-							
+
 							System.out.println("Your Input[pos-JOINT]: " + input);
 						}
 					});
@@ -432,7 +430,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						System.out.println(operationPoint.get(0).y);
 
 						if (result[0] != -1) {
-							
+
 							for (int i = 0; i < operationPoint.size(); i++) {
 
 								// 如果是没有识别的动作坐标会设为0
@@ -441,37 +439,39 @@ public class MainActivity extends Activity implements OnTouchListener {
 									if (result[i] == 0) { // click
 										operation = "click;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "\r\n";
-										
+
 										onePictureOPerations.add(operation);
 
 									} else if (result[i] == 1) { // longclick
 										operation = "lClick;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "\r\n";
-										
+
 										onePictureOPerations.add(operation);
 									} else if (result[i] == 2) { // Drag
-										
+
 										operation = "drag;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "," + format(endPoint.get(i).x)
 												+ "," + format(endPoint.get(i).y) + "\r\n";
-										
+
 										onePictureOPerations.add(operation);
 									}
 
 								} else {
-									
+
 									if (i == (operationPoint.size() - 1)) {
-										final Toast toast = Toast.makeText(this, "unidentified draw", Toast.LENGTH_SHORT);				
+										final Toast toast = Toast.makeText(this, "unidentified draw",
+												Toast.LENGTH_SHORT);
 										toast.show();
 										new Handler().postDelayed(new Runnable() {
-											
+
 											@Override
 											public void run() {
-												// TODO Auto-generated method stub	
+												// TODO Auto-generated method
+												// stub
 												toast.cancel();
 											}
 										}, 800);
-										
+
 										onePictureOPerations.clear();
 										graphics.clear();
 										operationPoint.clear();
@@ -481,41 +481,47 @@ public class MainActivity extends Activity implements OnTouchListener {
 								}
 
 							}
-//							if (operationPoint.size() > 0) {
-//								Log.w("TAG-p", "into unrecognize case,added:" + (graphics.size() - lastIndex));
-//								if ((operationPoint.get(operationPoint.size() - 1).toString())
-//										.indexOf("PointF(0.0, 0.0)") != -1) {
-//									if (graphics.size() - lastIndex < 10) {
-//										Log.w("TAG-p1", "putDownMenu");
-//										Log.w("TAG-size", onePictureOPerations.size()+"");
-//										//draw();
-//										//graphics.clear();
-//										//operationPoint.clear();
-//										putDownMenu();
-//										
-//										
-//									}
-//								}
-//							}
+							// if (operationPoint.size() > 0) {
+							// Log.w("TAG-p", "into unrecognize case,added:" +
+							// (graphics.size() - lastIndex));
+							// if ((operationPoint.get(operationPoint.size() -
+							// 1).toString())
+							// .indexOf("PointF(0.0, 0.0)") != -1) {
+							// if (graphics.size() - lastIndex < 10) {
+							// Log.w("TAG-p1", "putDownMenu");
+							// Log.w("TAG-size",
+							// onePictureOPerations.size()+"");
+							// //draw();
+							// //graphics.clear();
+							// //operationPoint.clear();
+							// putDownMenu();
+							//
+							//
+							// }
+							// }
+							// }
 						}
 					} else {
-//						Log.w("TAG-C", "gePath() is null,pointSize:" + operationPoint.size());
-//						if (operationPoint.size() > 0) {
-//							Log.w("TAG-P", "into unrecognize case,added:" + (graphics.size() - lastIndex));
-//							if ((operationPoint.get(operationPoint.size() - 1).toString())
-//									.indexOf("PointF(0.0, 0.0)") != -1) {
-//								if (graphics.size() - lastIndex < 10) {
-//									Log.w("TAG-P1", "putDownMenu");
-//									//draw();
-//									//graphics.clear();
-//									//operationPoint.clear();
-//									Log.w("TAG-size", onePictureOPerations.size()+"");
-//									putDownMenu();
-//									
-//									
-//								}
-//							}
-//						}
+						// Log.w("TAG-C", "gePath() is null,pointSize:" +
+						// operationPoint.size());
+						// if (operationPoint.size() > 0) {
+						// Log.w("TAG-P", "into unrecognize case,added:" +
+						// (graphics.size() - lastIndex));
+						// if ((operationPoint.get(operationPoint.size() -
+						// 1).toString())
+						// .indexOf("PointF(0.0, 0.0)") != -1) {
+						// if (graphics.size() - lastIndex < 10) {
+						// Log.w("TAG-P1", "putDownMenu");
+						// //draw();
+						// //graphics.clear();
+						// //operationPoint.clear();
+						// Log.w("TAG-size", onePictureOPerations.size()+"");
+						// putDownMenu();
+						//
+						//
+						// }
+						// }
+						// }
 					}
 					/*--------- Before there, imply the identify action function. ---------*/
 				}
@@ -523,7 +529,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 			graphics = new ArrayList<PointF>();
 
-			
 			lastIndex = graphics.size();
 			graphics.clear();
 			operationPoint.clear();
@@ -580,8 +585,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 			sub2.add(2, MENU_ITEM_COUNTER + 12, 11, "or").setIcon(R.drawable.or);
 			sub2.add(2, MENU_ITEM_COUNTER + 13, 12, "invert").setIcon(R.drawable.invert);
 
-			sub2.add(2,MENU_ITEM_COUNTER + 16, 13, "point").setIcon(R.drawable.invert);
-			
+			sub2.add(2, MENU_ITEM_COUNTER + 16, 13, "point").setIcon(R.drawable.invert);
+
 			sub2.add(2, MENU_ITEM_COUNTER + 14, 14, "left bracket").setIcon(R.drawable.menu_left_bracket);
 			sub2.add(2, MENU_ITEM_COUNTER + 15, 15, "right bracket").setIcon(R.drawable.menu_right_bracket);
 			// menu.removeItem(MENU_ITEM_COUNTER + 10);
@@ -652,7 +657,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				handleFork();
+				// handleFork();
+				// PopupMenu popupMenu=new PopupMenu(this,);
+				Intent intent = new Intent(MainActivity.this, ForkListActivity.class);
+				ArrayList<String> lists = new ArrayList<String>();
+				lists.add("/mnt/sdcard/screenShotPicture/LearnMusicShot/1.png");
+				lists.add("/mnt/sdcard/screenShotPicture/LearnMusicShot/2.png");
+				intent.putExtra("sList", lists);
+				startActivity(intent);
 			}
 		});
 		builder.setNegativeButton("Exit", new OnClickListener() {
@@ -697,7 +709,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			}
-			//putDownMenu();
+			// putDownMenu();
 			break;
 		case MENU_ITEM_COUNTER + 1: // next
 			if (clickCount > 0) {
@@ -727,16 +739,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if (result[i] == 0.00) {
 						combaOperation = "FORALL;" + String.valueOf(drawedArea[0].x) + ","
 								+ String.valueOf(drawedArea[0].y) + "," + String.valueOf(drawedArea[3].x) + ","
-								+ String.valueOf(drawedArea[3].y);					
+								+ String.valueOf(drawedArea[3].y);
 						System.out.println("------------" + combaOperation);
-						
+
 					}
 					if (result[i] == 1.00) {
 						combaOperation = "REC_FORALL;" + String.valueOf(drawedArea[0].x) + ","
 								+ String.valueOf(drawedArea[0].y) + "," + String.valueOf(drawedArea[3].x) + ","
 								+ String.valueOf(drawedArea[3].y);
 						System.out.println("------------" + combaOperation);
-						
 
 					}
 					if (result[i] == 2.00) {
@@ -744,7 +755,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 								+ String.valueOf(drawedArea[0].y) + "," + String.valueOf(drawedArea[3].x) + ","
 								+ String.valueOf(drawedArea[3].y);
 						System.out.println("------------" + combaOperation);
-						
+
 					}
 				}
 			}
@@ -791,7 +802,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 							System.out.println(twoPoints[0].x);
 							System.out.println(twoPoints[1].x);
 							nodes = parser.findWidgetByRect(twoPoints);
-							
+
 							CreateElement.addVirtual(operationElement, nodes.get(0));
 						}
 					}
@@ -821,16 +832,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 				String temp = targetResult.get(j);
 				String[] results = temp.split(";");
-				
-				if (results.length>1) {
+
+				if (results.length > 1) {
 					String[] points = results[2].split(",");
 					CreateElement.setEndState(stateElement, "single_component", results[1], points, parser);
 					recFlag = true;
-				}else if (results.length==1) {
+				} else if (results.length == 1) {
 					BuildDocument.addElement(stateElement, results[0]);
 				}
-				
-				
+
 			}
 
 			onePictureOPerations.clear();
@@ -850,7 +860,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				for (Element element : operations) {
 					if (element.attribute("isVirutal") != null) {
 						recOperation = element;
-						System.out.println("```````````"+element);
+						System.out.println("```````````" + element);
 						break;
 					}
 				}
@@ -912,6 +922,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
 				if (chooseItem == true) {
 					target_flag = true;
+					chooseItem = false;
 				} else {
 					target_flag = false;
 				}
@@ -966,11 +977,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 9:// exit
 			exitDialog();
+			// Intent intent = new Intent(MainActivity.this, SubMenuTest.class);
+			// startActivity(intent);
 			break;
 		case MENU_ITEM_COUNTER + 11:// and
 			if (!hasOracle) {
-				PromptDialog.showPromptDialog(this, 
-						"You should have at least one Oracle before use this operation!");
+				PromptDialog.showPromptDialog(this, "You should have at least one Oracle before use this operation!");
 				break;
 			}
 			targetResult.add("and;");
@@ -978,15 +990,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 			break;
 		case MENU_ITEM_COUNTER + 12:// or
 			if (!hasOracle) {
-				PromptDialog.showPromptDialog(this, 
-						"You should have at least one Oracle before use this operation!");
+				PromptDialog.showPromptDialog(this, "You should have at least one Oracle before use this operation!");
 				break;
 			}
 			targetResult.add("or;");
 			startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			break;
 		case MENU_ITEM_COUNTER + 13:// invert( not operation)
-			
+
 			targetResult.add("not;");
 			startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			break;
@@ -997,7 +1008,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			break;
 		case MENU_ITEM_COUNTER + 15:// right bracket
-			if (leftBracketCount<=rightBracketCount) {
+			if (leftBracketCount <= rightBracketCount) {
 				PromptDialog.showPromptDialog(this,
 						"You should have at least one left bracket before use this operation!");
 				break;
@@ -1005,7 +1016,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			targetResult.add("rightBrack;");
 			rightBracketCount++;
 			break;
-		case MENU_ITEM_COUNTER + 16://point
+		case MENU_ITEM_COUNTER + 16:// point
 			break;
 		default:
 			break;
@@ -1022,6 +1033,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		Toast.makeText(this, "fork success", Toast.LENGTH_SHORT).show();
 			
 	}
+
 
 		
 	
@@ -1145,7 +1157,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 
 				}
-				chooseItem=true;
+				if (data.getBooleanExtra("chooseItem", false) == true) {
+					chooseItem = true;
+					Log.w("TAG-T3", "chooseItem:" + chooseItem);
+				} else {
+					chooseItem = false;
+				}
 				Log.w("TAG-P", "onActivityResult:print the uix androidNode");
 				/*--------------- modify by zhchuch ----------*/
 
@@ -1153,7 +1170,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				/*-------------------------------------------*/
 				draw();
 			} else {
-				chooseItem=false;
+				chooseItem = false;
 				return;
 			}
 		} // if
@@ -1255,16 +1272,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 		String Coordinate = decimalFormat.format(input);
 		return Coordinate;
 	}
-	
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-           //do something...
+			// do something...
 			exitDialog();
-            return true;
-        }
+			return true;
+		}
 		return super.onKeyDown(keyCode, event);
 	}
 }

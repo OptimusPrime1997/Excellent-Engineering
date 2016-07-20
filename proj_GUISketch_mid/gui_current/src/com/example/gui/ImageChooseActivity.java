@@ -30,16 +30,16 @@ public class ImageChooseActivity extends Activity {
 
 	private ArrayList<FileInfo> mFileLists;
 	private ImageChooserAdapter mAdatper;
-//	public static  boolean chooseItem=false;
+	// public static boolean chooseItem=false;
 
 	@SuppressLint("SdCardPath")
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_image_choose);
-		
-//		MainActivity.chooseItem=false;
-		
+
+		// MainActivity.chooseItem=false;
+
 		myPicturePath = "/mnt/sdcard/screenShotPicture";
 
 		mBackView = findViewById(R.id.imgBackFolder);
@@ -86,8 +86,7 @@ public class ImageChooseActivity extends Activity {
 			if (files[i].isDirectory()) {
 				isDirectory = true;
 			}
-			FileInfo fileInfo = new FileInfo(fileAbsolutePath, fileName,
-					isDirectory);
+			FileInfo fileInfo = new FileInfo(fileAbsolutePath, fileName, isDirectory);
 			mFileLists.add(fileInfo);
 		}
 		// When first enter , the object of mAdatper don't initialized
@@ -111,8 +110,8 @@ public class ImageChooseActivity extends Activity {
 			case R.id.btExit:
 				setResult(RESULT_CANCELED);
 				Log.w("TAG-exit", "chooseItem is false");
-//				MainActivity.chooseItem=false;
-				
+				// MainActivity.chooseItem=false;
+
 				finish();
 				break;
 			default:
@@ -122,21 +121,19 @@ public class ImageChooseActivity extends Activity {
 	};
 
 	private AdapterView.OnItemClickListener mItemClickListener = new OnItemClickListener() {
-		public void onItemClick(AdapterView<?> adapterView, View view,
-				int position, long id) {
-			FileInfo fileInfo = (FileInfo) (((ImageChooserAdapter) adapterView
-					.getAdapter()).getItem(position));
-			if (fileInfo.isDirectory()) // 点击项为文件夹, 显示该文件夹下所有文件
+		public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+			FileInfo fileInfo = (FileInfo) (((ImageChooserAdapter) adapterView.getAdapter()).getItem(position));
+			if (fileInfo.isDirectory()) { // 点击项为文件夹, 显示该文件夹下所有文件
 				updateFileItems(fileInfo.getFilePath());
-			else if (fileInfo.isImage()) { // 是图片 ， 则将该路径通知给调用者
+			} else if (fileInfo.isImage()) { // 是图片 ， 则将该路径通知给调用者
 				Intent intent = new Intent();
-				intent.putExtra(MainActivity.EXTRA_FILE_CHOOSER,
-						fileInfo.getFilePath());
-				
-				MainActivity.isStartPage=false;
+				intent.putExtra(MainActivity.EXTRA_FILE_CHOOSER, fileInfo.getFilePath());
+
+				intent.putExtra("chooseItem", true);
+				MainActivity.isStartPage = false;
 				Log.w("TAG-select", "choose an image");
-//				MainActivity.chooseItem=true;
-				
+				// MainActivity.chooseItem=true;
+
 				setResult(RESULT_OK, intent);
 				finish();
 			} else { // 其他文件.....
@@ -146,8 +143,7 @@ public class ImageChooseActivity extends Activity {
 	};
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (event.getAction() == KeyEvent.ACTION_DOWN
-				&& event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+		if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
 			backProcess();
 			return true;
 		}
