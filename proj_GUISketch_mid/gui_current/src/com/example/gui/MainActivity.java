@@ -119,11 +119,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private String combaOperation = null;
 
 	private int operationId = 0;
-	private Document forkDocument; // 用于记录fork之前的操作
+	private List<Document> forkDocuments = new ArrayList<Document>(); // 用于记录fork之前的操作
 	private Document recForAllDocument = null; // 用于记录recForAll之前的操作
 	private boolean recFlag = false;
 
-	private File forkImage;
+	private List<File> forkImages = new ArrayList<File>();
 	private boolean isCompleted = false;
 
 	private Intent imageChooseIntent;
@@ -997,10 +997,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			break;
 		case MENU_ITEM_COUNTER + 13:// invert( not operation)
-			if (!hasOracle) {
-				PromptDialog.showPromptDialog(this, "You should have at least one Oracle before use this operation!");
-				break;
-			}
+
 			targetResult.add("not;");
 			startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			break;
@@ -1028,37 +1025,44 @@ public class MainActivity extends Activity implements OnTouchListener {
 	}
 
 	public void handleFork() {
-		if (!fork_flag) {
-			forkImage = currentImage;
-			forkDocument = (Document) currentDocument.clone();
-			fork_flag = true;
-			Toast.makeText(this, "fork success", Toast.LENGTH_SHORT).show();
-		} else {
-			onePictureOPerations.clear();
-			currentDocument = (Document) forkDocument.clone();
-			currentWrittenFile = WriteXML.createTestFile();
 
-			fork_flag = false;
-			target_flag = false;
-			isDrawArea = false;
-			int forkIndex = imageFiles.indexOf(forkImage);
-			currentImage = imageFiles.get(forkIndex);
-			Uri imageUri = Uri.fromFile(currentImage);
-			/*------------ modify by zhchuch ----------*/
-			imagePath = imageUri.toString();
-			// System.out.println("NextImage: Uri="+imageUri.toString()+",
-			// ImageName: "+ImageName);
-
-			Log.w("TAG-P", "forkCase:print the uix androidNode");
-			ParseXML parser = getParserByImagePath(imagePath);
-
-			/*----------------------------------------*/
-			imageView.setImageURI(imageUri);
-			operationPoint = new ArrayList<PointF>();
-			draw();
-		}
-		putDownMenu();
+		forkImages.add(currentImage);
+		Document temp = (Document) currentDocument.clone();
+		forkDocuments.add(temp);
+		fork_flag = true;
+		Toast.makeText(this, "fork success", Toast.LENGTH_SHORT).show();
+			
 	}
+
+
+		
+	
+	public void returnToFork(String forkedPath){
+		onePictureOPerations.clear();
+		int queryIndex = 0;
+		for (int i = forkImages.size()-1; i >= 0; i--) {
+			if (forkImages.get(i).getPath().equals(forkedPath)) {
+				queryIndex = i;
+				break;
+			}
+		}
+		File forkImage = forkImages.get(queryIndex);
+		forkImages.remove(queryIndex);
+		currentDocument = (Document) forkDocuments.get(queryIndex).clone();
+		forkDocuments.remove(queryIndex);
+		currentWrittenFile = WriteXML.createTestFile();
+		target_flag = false;
+		isDrawArea = false;
+		int forkIndex = imageFiles.indexOf(forkImage);
+		currentImage = imageFiles.get(forkIndex);
+		Uri imageUri = Uri.fromFile(currentImage);
+		
+		imagePath = imageUri.toString();
+		imageView.setImageURI(imageUri);
+		operationPoint = new ArrayList<PointF>();
+		draw();
+	}
+	
 
 	/**
 	 * 找到 可处理当前测试界面(ImageName)的 parser

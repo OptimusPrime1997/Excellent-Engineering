@@ -48,13 +48,12 @@ public final class R {
     public static final class id {
         public static final int RelativeLayout_Item=0x7f070008;
         public static final int btExit=0x7f070002;
-        public static final int gridview=0x7f07000c;
+        public static final int gridview=0x7f07000b;
         public static final int gvFileChooser=0x7f070003;
         public static final int imageView1=0x7f070005;
         public static final int imgBackFolder=0x7f070000;
         public static final int imgFileIcon=0x7f070006;
         public static final int iv_icon=0x7f070009;
-        public static final int list_view=0x7f07000b;
         public static final int tvEmptyHint=0x7f070004;
         public static final int tvFileName=0x7f070007;
         public static final int tvPath=0x7f070001;
@@ -66,8 +65,7 @@ public final class R {
         public static final int activity_pre_main=0x7f030002;
         public static final int filechooser_gridview_item=0x7f030003;
         public static final int item=0x7f030004;
-        public static final int layout_list=0x7f030005;
-        public static final int view=0x7f030006;
+        public static final int view=0x7f030005;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
