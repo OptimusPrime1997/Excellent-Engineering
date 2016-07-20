@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="993fe614-28a4-46e7-9f3a-27512c08a655" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/and.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/invert.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/or.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/paths/2016-07-202-10-07-267.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/paths/2016-07-202-10-07-430.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/paths/2016-07-202-10-07-943.xml" />
@@ -25,10 +22,6 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/test/2016-07-15_11_36_54.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/test/2016-07-15_11_38_17.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/test/2016-07-15_11_39_38.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/test/2016-07-15_11_40_29.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/layout/item.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/layout/view.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/SubMenuTest.java" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/test/stub1.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/test/stub2.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/test/stub1.xml" afterPath="" />
@@ -37,8 +30,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/test/stub2.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-classes/test/stub1.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/target/test-classes/test/stub2.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/impl/area/Component.class" afterPath="$PROJECT_DIR$/target/classes/impl/area/Component.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/impl/area/SinglePoint.class" afterPath="$PROJECT_DIR$/target/classes/impl/area/SinglePoint.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/ImageChooseActivity.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/ImageChooseActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/ImageChooserAdapter.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/ImageChooserAdapter.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/MainActivity.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/MainActivity.class" />
@@ -81,7 +72,18 @@
     <favorites_list name="One_Pecese_1_0" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-270">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -584,16 +586,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1469007394546</updated>
-      <workItem from="1469007399206" duration="29000" />
+      <workItem from="1469007399206" duration="57000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29000" />
+    <option name="totallyTimeSpent" value="57000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -607,7 +609,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -636,7 +638,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-270">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
