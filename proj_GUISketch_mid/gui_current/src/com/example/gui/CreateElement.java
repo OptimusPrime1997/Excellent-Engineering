@@ -203,11 +203,27 @@ public class CreateElement {
 	 * @param element
 	 * @param index
 	 */
-	public static void addVirtual(Element element,String resuourceId){
+	public static void addVirtual(Element element,AndroidNode node){
 		BuildDocument.addAttribute(element, "type", "component");
 		BuildDocument.addAttribute(element, "isVirutal", "true");
-		Element resourceIdElement = BuildDocument.addElement(element, "resourceId");
-		BuildDocument.addText(resourceIdElement, resuourceId);	
+		Element indexElement = BuildDocument.addElement(element, "index");
+		BuildDocument.addText(indexElement, node.text);	
+		Element resourceElement = BuildDocument.addElement(element, "resourceType");
+		BuildDocument.addText(resourceElement, node.widget_name); 
 	}
+	
+	public static void replaceElement(Element element, AndroidNode node){
+		Element deleteIndex = element.element("index");
+		element.remove(deleteIndex);
+		Element deleteResource = element.element("resourceType");
+		element.remove(deleteResource);
+		Element indexElement = BuildDocument.addElement(element, "index");
+		BuildDocument.addText(indexElement, node.text);	
+		Element resourceElement = BuildDocument.addElement(element, "resourceType");
+		BuildDocument.addText(resourceElement, node.widget_name);
+	}
+	
+	
+	
 
 }

@@ -37,6 +37,23 @@ public class WriteXML {
 		return totalDir;		 
 	}
 	
+	public static File createTestFileForRec(int i){
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss_"+(i+""));
+		String fileName = simpleDateFormat.format(date);
+		File skRoot = Environment.getExternalStorageDirectory();
+		File totalDir = new File(skRoot.getPath()+"/transdata",fileName+".xml");
+		if (!totalDir.exists()) {		
+			totalDir.getParentFile().mkdirs();
+			try {
+				totalDir.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return totalDir;		 
+	}
 	
 	public static void writeObject(Document document, String fileName) {
 		try {

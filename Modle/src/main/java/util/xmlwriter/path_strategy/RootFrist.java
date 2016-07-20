@@ -5,7 +5,9 @@ import impl.state.State;
 import util.xmlwriter.PathStrategy;
 import service.Edge;
 
+import java.io.File;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -21,7 +23,17 @@ public class RootFrist extends PathStrategy {
         String XML = this.findTestPath(appStates,this.findStateByName(appStates,root),times);
         XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + XML;
         try{
-            FileWriter fileWriter=new FileWriter("paths.xml");
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD-HH-MM-SS");
+            File file = new File("C://Users/Administrator/Documents/ONE_PEICE"+sdf.format(date)+".xml");
+            if(!file.getParentFile().exists()) {
+                System.err.println("making the parent file ...");
+                if(!file.getParentFile().mkdirs()) {
+                    System.err.println("parent file making failed!");
+                }
+            }
+
+            FileWriter fileWriter=new FileWriter(file);
             fileWriter.write(XML);
             fileWriter.close();
         }catch(Exception e){

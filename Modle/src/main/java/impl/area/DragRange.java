@@ -10,8 +10,20 @@ public class DragRange extends Range {
 	
 	@Override
 	public String toXML(){
-		String XML = beginPoint.toXML() + super.toXML();
+		String XML = "<DragRange>\n" +
+				      beginPoint.toXML() + super.toXML() +
+				     "</DragRange>\n";
 		return XML;
+	}
+
+	@Override
+	public String printArea() {
+		String temp = super.printArea();
+		String result = "<area type=\"DragRange\">\n";
+		result+=temp;
+		result+=beginPoint.printArea();
+		result+="</area>";
+		return  result;
 	}
 
 	public SinglePoint getBeginPoint() {
