@@ -222,5 +222,8 @@ public class CreateElement {
 		Element resourceElement = BuildDocument.addElement(element, "resourceType");
 		BuildDocument.addText(resourceElement, node.widget_name);
 	}
+	
+	
+	
 
 }

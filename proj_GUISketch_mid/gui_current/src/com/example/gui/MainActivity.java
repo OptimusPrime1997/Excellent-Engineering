@@ -131,6 +131,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private final int MENU_ITEM_COUNTER = Menu.FIRST;
 	public static final String EXTRA_FILE_CHOOSER = "file_chooser";
 	private Bundle bundle;
+	
+	private int leftBracketCount = 0;
+	private int rightBracketCount = 0;
+	private boolean hasOracle = false;
+	
 	/**
 	 * init the variables
 	 */
@@ -346,7 +351,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
 							input = tv.getText().toString();
-
+							hasOracle = true;
 							targetResult.add("expectedValue;" + input + ";" + String.valueOf(rect[0].x) + ","
 									+ String.valueOf(rect[0].y) + "," + String.valueOf(rect[3].x) + ","
 									+ String.valueOf(rect[3].y));
@@ -374,10 +379,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
 							input = tv.getText().toString();
-
+							hasOracle = true;
 							targetResult.add("expectedValue;" + input + ";" + String.valueOf(rect[0].x) + ","
 									+ String.valueOf(rect[0].y) + "," + String.valueOf(rect[3].x) + ","
 									+ String.valueOf(rect[3].y));
+							
+							
 							System.out.println("Your Input[pos-JOINT]: " + input);
 						}
 					});
@@ -426,8 +433,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						System.out.println(operationPoint.get(0).y);
 
 						if (result[0] != -1) {
-							String filePath = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".txt";
-							ArrayList<String> operationList = ioOperation.readOperation(filePath);
+							
 							for (int i = 0; i < operationPoint.size(); i++) {
 
 								// 如果是没有识别的动作坐标会设为0
@@ -719,14 +725,16 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if (result[i] == 0.00) {
 						combaOperation = "FORALL;" + String.valueOf(drawedArea[0].x) + ","
 								+ String.valueOf(drawedArea[0].y) + "," + String.valueOf(drawedArea[3].x) + ","
-								+ String.valueOf(drawedArea[3].y);
+								+ String.valueOf(drawedArea[3].y);					
 						System.out.println("------------" + combaOperation);
+						
 					}
 					if (result[i] == 1.00) {
 						combaOperation = "REC_FORALL;" + String.valueOf(drawedArea[0].x) + ","
 								+ String.valueOf(drawedArea[0].y) + "," + String.valueOf(drawedArea[3].x) + ","
 								+ String.valueOf(drawedArea[3].y);
 						System.out.println("------------" + combaOperation);
+						
 
 					}
 					if (result[i] == 2.00) {
@@ -734,6 +742,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 								+ String.valueOf(drawedArea[0].y) + "," + String.valueOf(drawedArea[3].x) + ","
 								+ String.valueOf(drawedArea[3].y);
 						System.out.println("------------" + combaOperation);
+						
 					}
 				}
 			}
@@ -810,10 +819,16 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 				String temp = targetResult.get(j);
 				String[] results = temp.split(";");
-				String[] points = results[2].split(",");
-
-				CreateElement.setEndState(stateElement, "single_component", results[1], points, parser);
-				recFlag = true;
+				
+				if (results.length>1) {
+					String[] points = results[2].split(",");
+					CreateElement.setEndState(stateElement, "single_component", results[1], points, parser);
+					recFlag = true;
+				}else if (results.length==1) {
+					BuildDocument.addElement(stateElement, results[0]);
+				}
+				
+				
 			}
 
 			onePictureOPerations.clear();
@@ -826,18 +841,22 @@ public class MainActivity extends Activity implements OnTouchListener {
 			// rec_forall
 			Element recOperation = null;
 			if (nodes.size() > 0 && recFlag) {
+				System.out.println("recrec....");
 				Element root = currentDocument.getRootElement();
 				@SuppressWarnings("unchecked")
 				List<Element> operations = root.elements("Operation");
 				for (Element element : operations) {
 					if (element.attribute("isVirutal") != null) {
 						recOperation = element;
+						System.out.println("```````````"+element);
 						break;
 					}
 				}
 				for (int i = 1; i < nodes.size(); i++) {
+					System.out.println("rec2rec2....");
 					CreateElement.replaceElement(recOperation, nodes.get(i));
-					File recWrittenFile = WriteXML.createTestFile();
+					File recWrittenFile = WriteXML.createTestFileForRec(i);
+					System.out.println(recWrittenFile.getPath());
 					WriteXML.writeObject(currentDocument, recWrittenFile.getPath());
 				}
 			}
@@ -904,6 +923,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				public void onClick(DialogInterface arg0, int arg1) {
 					// TODO Auto-generated method stub
 					input = tv.getText().toString();
+					hasOracle = true;
 					// WriteXML.writeObject("Expected output:"+input+"\r\r\n",
 					// currentWrittenFile.getPath());
 					// onePictureOPerations.add("expectedValue;"+"\r\n"+input+"\r\n");
@@ -942,20 +962,46 @@ public class MainActivity extends Activity implements OnTouchListener {
 			exitDialog();
 			break;
 		case MENU_ITEM_COUNTER + 11:// and
-			
+			if (!hasOracle) {
+				PromptDialog.showPromptDialog(this, 
+						"You should have at least one Oracle before use this operation!");
+				break;
+			}
+			targetResult.add("and;");
+			startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			break;
 		case MENU_ITEM_COUNTER + 12:// or
-			
+			if (!hasOracle) {
+				PromptDialog.showPromptDialog(this, 
+						"You should have at least one Oracle before use this operation!");
+				break;
+			}
+			targetResult.add("or;");
+			startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			break;
-		case MENU_ITEM_COUNTER + 13:// invert
-			
+		case MENU_ITEM_COUNTER + 13:// invert( not operation)
+			if (!hasOracle) {
+				PromptDialog.showPromptDialog(this, 
+						"You should have at least one Oracle before use this operation!");
+				break;
+			}
+			targetResult.add("not;");
+			startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			break;
 
-		case MENU_ITEM_COUNTER + 14:// right bracket
-	
+		case MENU_ITEM_COUNTER + 14:// left bracket
+			leftBracketCount++;
+			targetResult.add("leftBracket;");
+			startActivityForResult(imageChooseIntent, REQUEST_CODE);
 			break;
 		case MENU_ITEM_COUNTER + 15:// right bracket
-	
+			if (leftBracketCount<=rightBracketCount) {
+				PromptDialog.showPromptDialog(this,
+						"You should have at least one left bracket before use this operation!");
+				break;
+			}
+			targetResult.add("rightBrack;");
+			rightBracketCount++;
 			break;
 		default:
 			break;
