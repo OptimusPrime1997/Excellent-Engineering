@@ -128,6 +128,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 	private Intent imageChooseIntent;
 	private final int REQUEST_CODE = 1;
+	private final int FORK_REQUES_CODE = 2;
 
 	private final int MENU_ITEM_COUNTER = Menu.FIRST;
 	public static final String EXTRA_FILE_CHOOSER = "file_chooser";
@@ -661,10 +662,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 				// PopupMenu popupMenu=new PopupMenu(this,);
 				Intent intent = new Intent(MainActivity.this, ForkListActivity.class);
 				ArrayList<String> lists = new ArrayList<String>();
-				lists.add("/mnt/sdcard/screenShotPicture/LearnMusicShot/1.png");
-				lists.add("/mnt/sdcard/screenShotPicture/LearnMusicShot/2.png");
+				for (int i = 0; i < forkImages.size(); i++) {
+					lists.add(forkImages.get(i).getPath());
+				}
 				intent.putExtra("sList", lists);
-				startActivity(intent);
+				//startActivity(intent);
+				startActivityForResult(intent, FORK_REQUES_CODE);
 			}
 		});
 		builder.setNegativeButton("Exit", new OnClickListener() {
@@ -1059,6 +1062,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 		
 		imagePath = imageUri.toString();
 		imageView.setImageURI(imageUri);
+		parser = getParserByImagePath(imageUri.toString());
+		
 		operationPoint = new ArrayList<PointF>();
 		draw();
 	}
@@ -1174,6 +1179,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				return;
 			}
 		} // if
+		
+		if (resultCode == RESULT_OK && requestCode == FORK_REQUES_CODE) {
+			if (data!=null) {
+				String choosePath = data.getStringExtra("choosePath");
+				System.out.println("this is the returned..."+choosePath);
+				returnToFork(choosePath);
+			}
+		}
 
 	}// OnActivityResult
 
