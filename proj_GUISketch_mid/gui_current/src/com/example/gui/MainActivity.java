@@ -17,7 +17,9 @@ import org.dom4j.Element;
 import sketch.gui.testing.AndroidNode;
 import sketch.gui.testing.ParseXML;
 import sketch.gui.testing.TType;
-import android.R.bool;
+
+import weka.gui.LogWindow;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -140,10 +142,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private boolean hasOracle = false;
 	private boolean isPointOperation = false;
 
+	public static final String FORK_ITEM = "fork_item";
+
 	/**
 	 * init the variables
 	 */
 	private void init() {
+		isStartPage = false;
+		startPage_Flag = false;
 		myDrawFlag = false;
 		countDrawArea = 0;
 		accept_flag = false;
@@ -152,30 +158,24 @@ public class MainActivity extends Activity implements OnTouchListener {
 		input_flag = false;
 		recogRect_flag = false;
 		fork_flag = false;
-		isStartPage = true;
-		startPage_Flag = false;
 	}
 
 	private void setLanguage() {
-		Log.w("TAG-T1", "use MainActivity");
 		// 应用内配置语言
 		Resources resources = getResources();// 获得res资源对象
 		Configuration config = resources.getConfiguration();// 获得设置对象
 		DisplayMetrics dm = resources.getDisplayMetrics();// 获得屏幕参数：主要是分辨率，像素等。
 		config.locale = Locale.ENGLISH; // 英文
 		resources.updateConfiguration(config, dm);
-		Log.d("TAG-T1", "test changeLanguage");
 	}
 
 	private void putDownMenu() {
-		Log.w("TAG-T1", "use putdownMenu");
 		Thread menuThread = new Thread() {
 			public void run() {
 				try {
 					Instrumentation inst = new Instrumentation();
 					inst.sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
 				} catch (Exception e) {
-					Log.w("TAG-T1", e.toString());
 				}
 			}
 		};
@@ -263,7 +263,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 		imageView.setImageBitmap(alterBitmap);
 		imageView.setOnTouchListener(this);
-
 	}
 
 	@SuppressLint("ClickableViewAccessibility")
@@ -579,13 +578,20 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
+		Log.w("TAG-T0", "onPrePareOptionsMenu:isStartPage:" + isStartPage + ",startPage_Flag:" + startPage_Flag
+				+ "---target_flag:" + target_flag + ",target_menu_flag:" + target_menu_flag);
+
 		if (isStartPage == false && startPage_Flag == false) {
+			Log.w("TAG-T1", "isStartPage:" + isStartPage + ",startPage_Flag:" + startPage_Flag);
+			menu.clear();
+			menu.add(0, MENU_ITEM_COUNTER, 0, "choose").setIcon(R.drawable.menu_choose);
+			menu.add(0, MENU_ITEM_COUNTER + 9, 1, "exit").setIcon(R.drawable.menu_exit);
 			menu.add(0, MENU_ITEM_COUNTER + 1, 2, "next").setIcon(R.drawable.menu_next);
 			menu.add(0, MENU_ITEM_COUNTER + 2, 3, "save").setIcon(R.drawable.menu_save);
 			menu.add(0, MENU_ITEM_COUNTER + 3, 4, "clear").setIcon(R.drawable.menu_clear);
 
 			SubMenu sub1 = menu.addSubMenu(0, MENU_ITEM_COUNTER + 10, 5, "more").setIcon(R.drawable.menu_more);
-
+			sub1.clear();
 			sub1.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area").setIcon(R.drawable.menu_area);
 			sub1.add(1, MENU_ITEM_COUNTER + 5, 7, "target").setIcon(R.drawable.menu_target);
 			// menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
@@ -594,6 +600,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			startPage_Flag = true;
 		}
 		if (target_flag == true && target_menu_flag == true) {
+			Log.w("TAG-T2", "target_flag:" + target_flag + ",target_menu_flag:" + target_menu_flag);
 			SubMenu sub2 = menu.findItem(MENU_ITEM_COUNTER + 10).getSubMenu();
 			sub2.removeItem(MENU_ITEM_COUNTER + 5);
 			sub2.removeItem(MENU_ITEM_COUNTER + 7);
@@ -677,13 +684,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 				dialog.dismiss();
 				// handleFork();
 				// PopupMenu popupMenu=new PopupMenu(this,);
-				Intent intent = new Intent(MainActivity.this, ForkListActivity.class);
+				Intent intent = new Intent(MainActivity.this, ForkChooseActivity.class);
 				ArrayList<String> lists = new ArrayList<String>();
 				for (int i = 0; i < forkImages.size(); i++) {
 					lists.add(forkImages.get(i).getPath());
 				}
 				intent.putExtra("sList", lists);
-				//startActivity(intent);
 				startActivityForResult(intent, FORK_REQUES_CODE);
 			}
 		});
@@ -958,12 +964,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 			jointGraphics = new ArrayList<PointF>();
 			stepCount = 0;
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				chooseItem = false;
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
 				if (chooseItem == true) {
+					Log.w("TAG-Q9", "change the target_flag to true");
 					target_flag = true;
 					chooseItem = false;
-				} else {
-					target_flag = false;
 				}
 			}
 			break;
@@ -1076,16 +1082,13 @@ public class MainActivity extends Activity implements OnTouchListener {
 		forkDocuments.add(temp);
 		fork_flag = true;
 		Toast.makeText(this, "fork success", Toast.LENGTH_SHORT).show();
-			
+
 	}
 
-
-		
-	
-	public void returnToFork(String forkedPath){
+	public void returnToFork(String forkedPath) {
 		onePictureOPerations.clear();
 		int queryIndex = 0;
-		for (int i = forkImages.size()-1; i >= 0; i--) {
+		for (int i = forkImages.size() - 1; i >= 0; i--) {
 			if (forkImages.get(i).getPath().equals(forkedPath)) {
 				queryIndex = i;
 				break;
@@ -1096,20 +1099,26 @@ public class MainActivity extends Activity implements OnTouchListener {
 		currentDocument = (Document) forkDocuments.get(queryIndex).clone();
 		forkDocuments.remove(queryIndex);
 		currentWrittenFile = WriteXML.createTestFile();
-		target_flag = false;
-		isDrawArea = false;
+		// isStartPage = true;
+		// startPage_Flag = false;
+		// target_flag = false;
+		// target_menu_flag = true;
+		// isDrawArea = false;
+
+		init();
+		Log.w("TAG-T10", "---init the variable");
+
 		int forkIndex = imageFiles.indexOf(forkImage);
 		currentImage = imageFiles.get(forkIndex);
 		Uri imageUri = Uri.fromFile(currentImage);
-		
+
 		imagePath = imageUri.toString();
 		imageView.setImageURI(imageUri);
 		parser = getParserByImagePath(imageUri.toString());
-		
+
 		operationPoint = new ArrayList<PointF>();
 		draw();
 	}
-	
 
 	/**
 	 * 找到 可处理当前测试界面(ImageName)的 parser
@@ -1202,30 +1211,26 @@ public class MainActivity extends Activity implements OnTouchListener {
 							imageFiles.add(files[i]);
 						}
 					}
-
 				}
+				Log.v("TAG-Q2", "mainactivity chooseItem:" + data.getBooleanExtra("chooseItem", false));
 				if (data.getBooleanExtra("chooseItem", false) == true) {
 					chooseItem = true;
-					Log.w("TAG-T3", "chooseItem:" + chooseItem);
 				} else {
 					chooseItem = false;
 				}
-				Log.w("TAG-P", "onActivityResult:print the uix androidNode");
+				Log.w("TAG-T4", "onActivityResult use the activity");
 				/*--------------- modify by zhchuch ----------*/
 
 				// tempMG = new ModelBuilder(modelBuilder.cur_parser);
 				/*-------------------------------------------*/
 				draw();
 			} else {
-				chooseItem = false;
 				return;
 			}
-		} // if
-		
-		if (resultCode == RESULT_OK && requestCode == FORK_REQUES_CODE) {
-			if (data!=null) {
+		} else if (resultCode == RESULT_OK && requestCode == FORK_REQUES_CODE) {
+			if (data != null) {
 				String choosePath = data.getStringExtra("choosePath");
-				System.out.println("this is the returned..."+choosePath);
+				System.out.println("this is the returned..." + choosePath);
 				returnToFork(choosePath);
 			}
 		}
