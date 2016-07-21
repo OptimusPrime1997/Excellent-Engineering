@@ -1229,7 +1229,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 		} else if (resultCode == RESULT_OK && requestCode == FORK_REQUES_CODE) {
 			if (data != null) {
-				String choosePath = data.getStringExtra("choosePath");
+				String choosePath = data.getStringExtra(FORK_ITEM);
 				System.out.println("this is the returned..." + choosePath);
 				returnToFork(choosePath);
 			}
