@@ -225,6 +225,7 @@ public class CreateElement {
 	
 	
 	public static void addRGB(Element element, String[] points, int[] colors){
+		BuildDocument.addAttribute(element, "typeCode", "2");
 		Element componentElement = BuildDocument.addElement(element, "singleComponent");
 		Element expectElement = BuildDocument.addElement(componentElement, "expect");
 		BuildDocument.addAttribute(expectElement, "type", "image");

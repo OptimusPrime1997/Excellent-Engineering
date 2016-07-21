@@ -17,7 +17,9 @@ import org.dom4j.Element;
 import sketch.gui.testing.AndroidNode;
 import sketch.gui.testing.ParseXML;
 import sketch.gui.testing.TType;
+
 import weka.gui.LogWindow;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -138,6 +140,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private int leftBracketCount = 0;
 	private int rightBracketCount = 0;
 	private boolean hasOracle = false;
+	private boolean isPointOperation = false;
 
 	public static final String FORK_ITEM = "fork_item";
 
@@ -434,24 +437,39 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 								// 如果是没有识别的动作坐标会设为0
 								if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0) {
-									System.out.println("++++++" + result[i]);
+									System.out.println("wwwwwww" + result[i]);
 									if (result[i] == 0) { // click
 										operation = "click;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "\r\n";
-
+										if (isPointOperation) {
+											targetResult.add("point;"+format(operationPoint.get(i).x) + ","
+													+ format(operationPoint.get(i).y));
+											System.out.println("point;"+format(operationPoint.get(i).x) + ","
+													+ format(operationPoint.get(i).y));
+											break;
+											
+										}
 										onePictureOPerations.add(operation);
 
 									} else if (result[i] == 1) { // longclick
 										operation = "lClick;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "\r\n";
-
+										if (isPointOperation) {
+											targetResult.add("point;"+format(operationPoint.get(i).x) + ","
+													+ format(operationPoint.get(i).y));
+											System.out.println("point;"+format(operationPoint.get(i).x) + ","
+													+ format(operationPoint.get(i).y));
+											break;
+										}
 										onePictureOPerations.add(operation);
 									} else if (result[i] == 2) { // Drag
 
 										operation = "drag;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "," + format(endPoint.get(i).x)
 												+ "," + format(endPoint.get(i).y) + "\r\n";
-
+										if (isPointOperation) {
+											break;
+										}
 										onePictureOPerations.add(operation);
 									}
 
@@ -640,7 +658,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 				// TODO Auto-generated method stub
 				dialog.dismiss();
 				backHome();
-				// MainActivity.this.finish();
 			}
 		});
 		builder.setNegativeButton("Exit", new OnClickListener() {
@@ -841,10 +858,29 @@ public class MainActivity extends Activity implements OnTouchListener {
 				String temp = targetResult.get(j);
 				String[] results = temp.split(";");
 
-				if (results.length > 1) {
-					String[] points = results[2].split(",");
-					CreateElement.setEndState(stateElement, "single_component", results[1], points, parser);
-					recFlag = true;
+				if (results.length > 1) {				
+					if (!results[0].equals("point")) {	
+						String[] points = results[2].split(",");
+						CreateElement.setEndState(stateElement, "single_component", results[1], points, parser);
+						recFlag = true;
+					}else{
+						String[] points = results[1].split(",");
+						Bitmap bitmap = null;
+						try {
+							bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.fromFile(currentImage));
+						
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						int color = bitmap.getPixel((int)Double.parseDouble(points[0]), (int)Double.parseDouble(points[1]));
+						int[] colors = new int[3];
+						colors[0] = Color.red(color);
+						colors[1] = Color.green(color);
+						colors[2] = Color.blue(color);
+						CreateElement.addRGB(stateElement, points, colors);
+					}
+					
 				} else if (results.length == 1) {
 					BuildDocument.addElement(stateElement, results[0]);
 				}
@@ -880,6 +916,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					WriteXML.writeObject(currentDocument, recWrittenFile.getPath());
 				}
 			}
+			Log.w("TAG-Q10", "target_flag:"+target_flag+"fork_flag:"+fork_flag);
 			if (target_flag) {
 				if (fork_flag) {
 					saveForkDialog();
@@ -927,11 +964,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 			jointGraphics = new ArrayList<PointF>();
 			stepCount = 0;
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-				chooseItem = false;
+//				chooseItem = false;
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
+				Log.w("TAG-Q9", "case fork chooseItem:"+chooseItem);
 				if (chooseItem == true) {
 					Log.w("TAG-Q9", "change the target_flag to true");
-					target_flag = true;
+					target_flag=true;
 					chooseItem = false;
 				}
 			}
@@ -1025,6 +1063,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 			rightBracketCount++;
 			break;
 		case MENU_ITEM_COUNTER + 16:// point
+			isDrawArea = false;
+			stepCount = 0;
+			graphics.clear();
+			operationPoint.clear();
+			isPointOperation = true;
+			draw();
 			break;
 		default:
 			break;
@@ -1175,7 +1219,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 				} else {
 					chooseItem = false;
 				}
-				Log.w("TAG-T4", "onActivityResult use the activity");
 				/*--------------- modify by zhchuch ----------*/
 
 				// tempMG = new ModelBuilder(modelBuilder.cur_parser);
