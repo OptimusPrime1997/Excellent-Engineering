@@ -127,6 +127,7 @@ public class ImageChooseActivity extends Activity {
 
 				intent.putExtra("chooseItem", true);
 				MainActivity.isStartPage = false;
+				
 				Log.w("TAG-Q1", "chooseImageActivity set chooseItem is true");
 
 				setResult(RESULT_OK, intent);

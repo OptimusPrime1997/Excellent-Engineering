@@ -658,7 +658,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 				// TODO Auto-generated method stub
 				dialog.dismiss();
 				backHome();
-				// MainActivity.this.finish();
 			}
 		});
 		builder.setNegativeButton("Exit", new OnClickListener() {
@@ -917,6 +916,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					WriteXML.writeObject(currentDocument, recWrittenFile.getPath());
 				}
 			}
+			Log.w("TAG-Q10", "target_flag:"+target_flag+"fork_flag:"+fork_flag);
 			if (target_flag) {
 				if (fork_flag) {
 					saveForkDialog();
@@ -964,11 +964,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 			jointGraphics = new ArrayList<PointF>();
 			stepCount = 0;
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-				chooseItem = false;
+//				chooseItem = false;
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
+				Log.w("TAG-Q9", "case fork chooseItem:"+chooseItem);
 				if (chooseItem == true) {
 					Log.w("TAG-Q9", "change the target_flag to true");
-					target_flag = true;
+					target_flag=true;
 					chooseItem = false;
 				}
 			}
@@ -1218,7 +1219,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 				} else {
 					chooseItem = false;
 				}
-				Log.w("TAG-T4", "onActivityResult use the activity");
 				/*--------------- modify by zhchuch ----------*/
 
 				// tempMG = new ModelBuilder(modelBuilder.cur_parser);
