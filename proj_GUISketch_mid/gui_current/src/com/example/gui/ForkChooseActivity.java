@@ -41,7 +41,7 @@ public class ForkChooseActivity extends Activity {
 		// myPicturePath = "/mnt/sdcard/screenShotPicture";
 		// mBackView = findViewById(R.id.imgBackFolder);
 		// mBackView.setOnClickListener(mClickListener);
-		
+
 		Intent intent = getIntent();
 		ArrayList<String> paths = intent.getStringArrayListExtra("sList");
 		ArrayList<FileInfo> fileInfoList = convertFileInfo(paths);
@@ -53,10 +53,11 @@ public class ForkChooseActivity extends Activity {
 		mGridView = (GridView) findViewById(R.id.gvFileChooser);
 		mGridView.setEmptyView(findViewById(R.id.tvEmptyHint));
 		mGridView.setOnItemClickListener(mItemClickListener);
-		if(fileInfoList==null){
+		if (fileInfoList == null) {
+			Log.w("TAG-T8", "exit the activity");
 			setResult(RESULT_CANCELED);
 			finish();
-		}else{
+		} else {
 			Log.w("TAG-M1", fileInfoList.get(0).getFilePath());
 			setGridViewAdapter(fileInfoList);
 		}
@@ -74,14 +75,14 @@ public class ForkChooseActivity extends Activity {
 		for (Iterator<String> t = paths.iterator(); t.hasNext();) {
 			String temp = t.next();
 			String tempName = getFileName(temp);
-			if(tempName==null){
+			if (tempName == null) {
 				continue;
-			}else{
-				FileInfo info=new FileInfo(temp, tempName, false);
+			} else {
+				FileInfo info = new FileInfo(temp, tempName, false);
 				fileList.add(info);
 			}
 		}
-		if(fileList.size()>0){
+		if (fileList.size() > 0) {
 			return fileList;
 		}
 		return null;
@@ -89,12 +90,14 @@ public class ForkChooseActivity extends Activity {
 
 	/**
 	 * split string to get filename
+	 * 
 	 * @param temp
 	 * @return
 	 */
 	private String getFileName(String temp) {
 		// TODO Auto-generated method stub
-		String[] list = temp.split("\\\\");
+		Log.w("TAG-T8", "path:" + temp);
+		String[] list = temp.split("\\/");
 		if (list.length > 1) {
 			return list[list.length - 1];
 		}
@@ -112,67 +115,68 @@ public class ForkChooseActivity extends Activity {
 	// 读取文件
 	private void updateFileItems(ArrayList<FileInfo> infos) {
 		mTvPath.setText("all fork images");
-		mFileLists=infos;
-//		mLastFilePath = filePath;
-//
-//		if (mFileLists == null)
-//			mFileLists = new ArrayList<FileInfo>();
-//		if (!mFileLists.isEmpty())
-//			mFileLists.clear();
-//
-//		File[] files = folderScan(filePath);
-//		if (files == null)
-//			return;
-//
-//		for (int i = 0; i < files.length; i++) {
-//			if (files[i].isHidden()) // 不显示隐藏文件
-//				continue;
-//
-//			String fileAbsolutePath = files[i].getAbsolutePath();
-//			String fileName = files[i].getName();
-//			boolean isDirectory = false;
-//			if (files[i].isDirectory()) {
-//				isDirectory = true;
-//			}
-//			FileInfo fileInfo = new FileInfo(fileAbsolutePath, fileName, isDirectory);
-//			mFileLists.add(fileInfo);
-//		}
+		mFileLists = infos;
+		// mLastFilePath = filePath;
+		//
+		// if (mFileLists == null)
+		// mFileLists = new ArrayList<FileInfo>();
+		// if (!mFileLists.isEmpty())
+		// mFileLists.clear();
+		//
+		// File[] files = folderScan(filePath);
+		// if (files == null)
+		// return;
+		//
+		// for (int i = 0; i < files.length; i++) {
+		// if (files[i].isHidden()) // 不显示隐藏文件
+		// continue;
+		//
+		// String fileAbsolutePath = files[i].getAbsolutePath();
+		// String fileName = files[i].getName();
+		// boolean isDirectory = false;
+		// if (files[i].isDirectory()) {
+		// isDirectory = true;
+		// }
+		// FileInfo fileInfo = new FileInfo(fileAbsolutePath, fileName,
+		// isDirectory);
+		// mFileLists.add(fileInfo);
+		// }
 		// When first enter , the object of mAdatper don't initialized
 		if (mAdatper != null)
 			mAdatper.notifyDataSetChanged(); // 重新刷新
 	}
-	
+
 	// 根据路径更新数据，并且通知Adatper数据改变
-		private void updateFileItems(String filePath) {
-			mLastFilePath = filePath;
-			mTvPath.setText(mLastFilePath);
+	private void updateFileItems(String filePath) {
+		mLastFilePath = filePath;
+		mTvPath.setText(mLastFilePath);
 
-			if (mFileLists == null)
-				mFileLists = new ArrayList<FileInfo>();
-			if (!mFileLists.isEmpty())
-				mFileLists.clear();
+		if (mFileLists == null)
+			mFileLists = new ArrayList<FileInfo>();
+		if (!mFileLists.isEmpty())
+			mFileLists.clear();
 
-			File[] files = folderScan(filePath);
-			if (files == null)
-				return;
+		File[] files = folderScan(filePath);
+		if (files == null)
+			return;
 
-			for (int i = 0; i < files.length; i++) {
-				if (files[i].isHidden()) // 不显示隐藏文件
-					continue;
+		for (int i = 0; i < files.length; i++) {
+			if (files[i].isHidden()) // 不显示隐藏文件
+				continue;
 
-				String fileAbsolutePath = files[i].getAbsolutePath();
-				String fileName = files[i].getName();
-				boolean isDirectory = false;
-				if (files[i].isDirectory()) {
-					isDirectory = true;
-				}
-				FileInfo fileInfo = new FileInfo(fileAbsolutePath, fileName, isDirectory);
-				mFileLists.add(fileInfo);
+			String fileAbsolutePath = files[i].getAbsolutePath();
+			String fileName = files[i].getName();
+			boolean isDirectory = false;
+			if (files[i].isDirectory()) {
+				isDirectory = true;
 			}
-			// When first enter , the object of mAdatper don't initialized
-			if (mAdatper != null)
-				mAdatper.notifyDataSetChanged(); // 重新刷新
+			FileInfo fileInfo = new FileInfo(fileAbsolutePath, fileName, isDirectory);
+			mFileLists.add(fileInfo);
 		}
+		// When first enter , the object of mAdatper don't initialized
+		if (mAdatper != null)
+			mAdatper.notifyDataSetChanged(); // 重新刷新
+	}
 
 	// 获得当前路径的所有文件
 	private File[] folderScan(String path) {
@@ -197,16 +201,20 @@ public class ForkChooseActivity extends Activity {
 			}
 		}
 	};
-
 	private AdapterView.OnItemClickListener mItemClickListener = new OnItemClickListener() {
+		@Override
 		public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+			Log.w("TAG-T5", "item clicked");
 			FileInfo fileInfo = (FileInfo) (((ImageChooserAdapter) adapterView.getAdapter()).getItem(position));
 			if (fileInfo.isDirectory()) // 点击项为文件夹, 显示该文件夹下所有文件
 				updateFileItems(fileInfo.getFilePath());
 			else if (fileInfo.isImage()) { // 是图片 ， 则将该路径通知给调用者
 				Intent intent = new Intent();
-				intent.putExtra(MainActivity.EXTRA_FILE_CHOOSER, fileInfo.getFilePath());
-
+//				intent.putExtra(MainActivity.EXTRA_FILE_CHOOSER, fileInfo.getFilePath());
+				
+				intent.putExtra(MainActivity.FORK_ITEM,fileInfo.getFilePath());
+				
+				
 				// intent.putExtra("chooseItem", true);
 				// MainActivity.isStartPage=false;
 				// Log.w("TAG-select", "choose an image");

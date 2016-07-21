@@ -128,6 +128,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 	private Intent imageChooseIntent;
 	private final int REQUEST_CODE = 1;
+	private final int REQUEST_FORK = 2;
 
 	private final int MENU_ITEM_COUNTER = Menu.FIRST;
 	public static final String EXTRA_FILE_CHOOSER = "file_chooser";
@@ -136,6 +137,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private int leftBracketCount = 0;
 	private int rightBracketCount = 0;
 	private boolean hasOracle = false;
+
+	public static final String FORK_ITEM = "fork_item";
 
 	/**
 	 * init the variables
@@ -659,12 +662,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 				dialog.dismiss();
 				// handleFork();
 				// PopupMenu popupMenu=new PopupMenu(this,);
-				Intent intent = new Intent(MainActivity.this, ForkListActivity.class);
+				Intent intent = new Intent(MainActivity.this, ForkChooseActivity.class);
 				ArrayList<String> lists = new ArrayList<String>();
 				lists.add("/mnt/sdcard/screenShotPicture/LearnMusicShot/1.png");
 				lists.add("/mnt/sdcard/screenShotPicture/LearnMusicShot/2.png");
 				intent.putExtra("sList", lists);
-				startActivity(intent);
+				startActivityForResult(intent, REQUEST_FORK);
 			}
 		});
 		builder.setNegativeButton("Exit", new OnClickListener() {
@@ -1031,16 +1034,13 @@ public class MainActivity extends Activity implements OnTouchListener {
 		forkDocuments.add(temp);
 		fork_flag = true;
 		Toast.makeText(this, "fork success", Toast.LENGTH_SHORT).show();
-			
+
 	}
 
-
-		
-	
-	public void returnToFork(String forkedPath){
+	public void returnToFork(String forkedPath) {
 		onePictureOPerations.clear();
 		int queryIndex = 0;
-		for (int i = forkImages.size()-1; i >= 0; i--) {
+		for (int i = forkImages.size() - 1; i >= 0; i--) {
 			if (forkImages.get(i).getPath().equals(forkedPath)) {
 				queryIndex = i;
 				break;
@@ -1056,13 +1056,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 		int forkIndex = imageFiles.indexOf(forkImage);
 		currentImage = imageFiles.get(forkIndex);
 		Uri imageUri = Uri.fromFile(currentImage);
-		
+
 		imagePath = imageUri.toString();
 		imageView.setImageURI(imageUri);
 		operationPoint = new ArrayList<PointF>();
 		draw();
 	}
-	
 
 	/**
 	 * 找到 可处理当前测试界面(ImageName)的 parser
@@ -1169,7 +1168,43 @@ public class MainActivity extends Activity implements OnTouchListener {
 				// tempMG = new ModelBuilder(modelBuilder.cur_parser);
 				/*-------------------------------------------*/
 				draw();
-			} else {
+			} else if(resultCode == RESULT_OK && requestCode == REQUEST_FORK){
+
+				// uri=Uri.parse("content://media/external/images/media/39");
+				imagePath = data.getStringExtra(FORK_ITEM);
+
+				currentImage = new File(imagePath);
+
+				System.out.println(currentImage.toString());
+				Uri imageUri = Uri.fromFile(currentImage);
+
+				parser = getParserByImagePath(imageUri.toString());
+
+				imageView.setImageURI(imageUri);
+				File dir = new File(getDirName(imagePath));
+				files = dir.listFiles();
+				for (int i = 0; i < files.length; i++) {
+					if (!files[i].isDirectory()) {
+						String fileName = files[i].getName();
+						String fileType = fileName.substring(fileName.indexOf("."));
+						if (isImage(fileType)) {
+							imageFiles.add(files[i]);
+						}
+					}
+				}
+				if (data.getBooleanExtra("chooseItem", false) == true) {
+					chooseItem = true;
+					Log.w("TAG-T3", "chooseItem:" + chooseItem);
+				} else {
+					chooseItem = false;
+				}
+				Log.w("TAG-P", "onActivityResult:print the uix androidNode");
+				/*--------------- modify by zhchuch ----------*/
+
+				// tempMG = new ModelBuilder(modelBuilder.cur_parser);
+				/*-------------------------------------------*/
+				draw();
+			}else {
 				chooseItem = false;
 				return;
 			}

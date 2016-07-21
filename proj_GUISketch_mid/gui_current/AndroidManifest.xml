@@ -50,6 +50,12 @@
             android:label="@string/title_activity_image_choose"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
+          <activity
+            android:name=".ForkChooseActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_image_choose"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
     </application>
 
 </manifest>
