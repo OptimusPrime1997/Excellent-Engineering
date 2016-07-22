@@ -17,8 +17,9 @@ public class PacketPanel extends JPanel {
     private JScrollPane treeView;
     private FileTree tree;
     private TextPanel textPanel;
+    private ConsolePane consolePane;
 
-    public PacketPanel(JFrame jframe , TextPanel textPanel){
+    public PacketPanel(JFrame jframe , TextPanel textPanel ,ConsolePane consolePane){
         this.setSize(jframe.getWidth()/4,jframe.getHeight()/20*14);
         this.setLocation(0,jframe.getHeight()/20);
         this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
@@ -36,7 +37,21 @@ public class PacketPanel extends JPanel {
         this.add(BorderLayout.CENTER,treeView);
         System.out.println(treeView.getSize());
         System.out.println(this.getSize());
+        this.consolePane = consolePane;
         //this.repaint();
+    }
+
+    public String getFilePath(TreePath path){
+        String filePath = "C://";
+        Object[] p =path.getPath();
+        if(!p[p.length-1].toString().contains(".")){
+            return null;
+        }
+        for(int x = 0 ; x < p.length - 1 ; x++){
+            filePath += p[x].toString() + '/';
+        }
+        filePath += p[p.length - 1].toString();
+        return filePath;
     }
 
     class TreeListener implements MouseListener{
@@ -47,18 +62,10 @@ public class PacketPanel extends JPanel {
             if(e.getClickCount() != 2){
                 return;
             }
-
-            System.out.println(path.toString());
-            String filePath = "C://";
-            Object[] p =path.getPath();
-            if(!p[p.length-1].toString().contains(".")){
-                 return;
+            if(path == null){
+                return;
             }
-            for(int x = 0 ; x < p.length - 1 ; x++){
-                filePath += p[x].toString() + '/';
-            }
-            filePath += p[p.length - 1].toString();
-            textPanel.openFile(filePath);
+            textPanel.openFile(getFilePath(path));
         }
 
         @Override
@@ -89,36 +96,41 @@ public class PacketPanel extends JPanel {
 
         }
     }
-}
-
-class TreeRunListener implements MouseListener{
-    private TreePath treePath;
-    public TreeRunListener(TreePath path){
-        this.treePath = path;
-    }
-    @Override
-    public void mouseClicked(MouseEvent e) {
+    class TreeRunListener implements MouseListener{
+        private TreePath treePath;
+        public TreeRunListener(TreePath path){
+            this.treePath = path;
+        }
+        @Override
+        public void mouseClicked(MouseEvent e) {
 
 
-    }
+        }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
+        @Override
+        public void mousePressed(MouseEvent e) {
 
-    }
+        }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        System.out.println(treePath);
-    }
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            String path = getFilePath(treePath);
+            System.out.println(path);
+            if(path.contains(".xml")){
+                consolePane.runXML(path);
+            }else if(!path.contains(".")){
+                consolePane.runApp(path);
+            }
+        }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
+        @Override
+        public void mouseEntered(MouseEvent e) {
 
-    }
+        }
 
-    @Override
-    public void mouseExited(MouseEvent e) {
+        @Override
+        public void mouseExited(MouseEvent e) {
 
+        }
     }
 }

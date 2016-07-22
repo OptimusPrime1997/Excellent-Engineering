@@ -22,8 +22,9 @@ public class MainView extends JFrame{
 
         toolPanel = new ToolPanel(this);
         textPanel = new TextPanel(this);
-        packetPanel = new PacketPanel(this, textPanel);
         consolePane = new ConsolePane(this);
+        packetPanel = new PacketPanel(this, textPanel , consolePane);
+
 
 
         this.getContentPane().add(toolPanel,this.initToolPanelPosition());

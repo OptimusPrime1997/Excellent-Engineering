@@ -12,7 +12,8 @@ import java.awt.*;
 public class ToolPanel extends JToolBar {
     private ToolButton jbtNew = new ToolButton("new");
     private ToolButton jbtOpen = new ToolButton("open");
-    private ToolButton jbtPrint = new ToolButton("print");
+    private ToolButton jbtPrint = new ToolButton("run");
+
     private JFrame jFrame;
     public ToolPanel(JFrame jFrame){
         this.setBounds(0,0,jFrame.getWidth(),jFrame.getHeight()/20);
@@ -26,6 +27,7 @@ public class ToolPanel extends JToolBar {
         this.jFrame = jFrame;
 
     }
+
 
 
 
