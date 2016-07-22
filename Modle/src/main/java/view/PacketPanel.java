@@ -5,11 +5,8 @@ import view.resources_manage.FileTree;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.TreePath;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -19,14 +16,18 @@ import java.awt.event.MouseListener;
 public class PacketPanel extends JPanel {
     private JScrollPane treeView;
     private FileTree tree;
-    public PacketPanel(JFrame jframe ,ResultPanel resultPanel){
-        this.setSize(jframe.getWidth()/4,jframe.getHeight()/7*6);
-        this.setLocation(0,jframe.getHeight()/7);
+    private TextPanel textPanel;
+
+    public PacketPanel(JFrame jframe , TextPanel textPanel){
+        this.setSize(jframe.getWidth()/4,jframe.getHeight()/20*14);
+        this.setLocation(0,jframe.getHeight()/20);
         this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
         this.setLayout(new BorderLayout());
+        this.textPanel = textPanel;
         FileList list = new FileList();
         tree = new FileTree(list);
         tree.addMouseListener(new TreeListener());
+        tree.setRootVisible(false);
         //tree.setDoubleBuffered(true);
         //list.setDoubleBuffered(true);
         treeView = new JScrollPane(tree);
@@ -39,14 +40,25 @@ public class PacketPanel extends JPanel {
     }
 
     class TreeListener implements MouseListener{
-
+        TreePath path;
         @Override
         public void mouseClicked(MouseEvent e) {
+            path = tree.getSelectionPath();
+            if(e.getClickCount() != 2){
+                return;
+            }
 
-                TreePath path = tree.getSelectionPath();
-                System.out.println(path.toString());
-
-
+            System.out.println(path.toString());
+            String filePath = "C://";
+            Object[] p =path.getPath();
+            if(!p[p.length-1].toString().contains(".")){
+                 return;
+            }
+            for(int x = 0 ; x < p.length - 1 ; x++){
+                filePath += p[x].toString() + '/';
+            }
+            filePath += p[p.length - 1].toString();
+            textPanel.openFile(filePath);
         }
 
         @Override
@@ -58,10 +70,11 @@ public class PacketPanel extends JPanel {
         @Override
         public void mouseReleased(MouseEvent e) {
             if(e.isPopupTrigger()) {
-                System.out.println("func called");
                 JPopupMenu popMenu = new JPopupMenu();
-                JMenuItem MenuLeafNode1 = new JMenuItem("测试用");
-                popMenu.add(MenuLeafNode1);
+                JMenuItem menuLeafNode1 = new JMenuItem("         run        ");
+                menuLeafNode1.addMouseListener(new TreeRunListener(path));
+                menuLeafNode1.setFont(new Font("Consolas",Font.BOLD,12));
+                popMenu.add(menuLeafNode1);
                 popMenu.show(e.getComponent(), e.getX(), e.getY());
             }
         }
@@ -75,5 +88,37 @@ public class PacketPanel extends JPanel {
         public void mouseExited(MouseEvent e) {
 
         }
+    }
+}
+
+class TreeRunListener implements MouseListener{
+    private TreePath treePath;
+    public TreeRunListener(TreePath path){
+        this.treePath = path;
+    }
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        System.out.println(treePath);
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
