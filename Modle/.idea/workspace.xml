@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="993fe614-28a4-46e7-9f3a-27512c08a655" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/jsyntaxpane-1.0.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/view/ConsolePane.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/view/text_manage/MyShowPane.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/view/tools/TabbedPanel.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/view/ResultPanel.java" afterPath="$PROJECT_DIR$/src/main/java/view/TextPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/One_Pecese_1_0.iml" afterPath="$PROJECT_DIR$/One_Pecese_1_0.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/MainView.java" afterPath="$PROJECT_DIR$/src/main/java/view/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/PacketPanel.java" afterPath="$PROJECT_DIR$/src/main/java/view/PacketPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/ToolPanel.java" afterPath="$PROJECT_DIR$/src/main/java/view/ToolPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/resources_manage/FileTree.java" afterPath="$PROJECT_DIR$/src/main/java/view/resources_manage/FileTree.java" />
-    </list>
+    <list default="true" id="993fe614-28a4-46e7-9f3a-27512c08a655" name="Default" comment="" />
     <ignored path="One_Pecese_1_0.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -896,15 +882,15 @@
       <workItem from="1469019512078" duration="1969000" />
       <workItem from="1469062942496" duration="9130000" />
       <workItem from="1469081332456" duration="12162000" />
-      <workItem from="1469150361356" duration="8546000" />
+      <workItem from="1469150361356" duration="8641000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35534000" />
+    <option name="totallyTimeSpent" value="35629000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
