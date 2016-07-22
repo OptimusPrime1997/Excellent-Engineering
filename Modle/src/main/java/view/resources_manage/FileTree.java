@@ -3,7 +3,6 @@ package view.resources_manage;
 /**
  * Created by Administrator on 2016/7/21.
  */
-import view.ResultPanel;
 
 import java.awt.Component;
 import java.io.File;
@@ -11,11 +10,8 @@ import java.util.Vector;
 
 import javax.swing.Icon;
 import javax.swing.JTree;
-import javax.swing.event.TreeExpansionEvent;
-import javax.swing.event.TreeExpansionListener;
 import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeModel;
