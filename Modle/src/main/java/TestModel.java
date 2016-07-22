@@ -10,7 +10,7 @@ import java.io.File;
 public class TestModel {
     public static void main(String[] args){
         File[] file ;
-        file = new File(TestModel.class.getClassLoader().getResource("test").getPath()).listFiles();
+        file = new File(TestModel.class.getClassLoader().getResource("test1").getPath()).listFiles();
         ModelService modelService = new ModelCreateByPaths().getModel(PathStrategyEnum.ROOT_FRIST,file);
         modelService.printXML(10);
         modelService.printModel();

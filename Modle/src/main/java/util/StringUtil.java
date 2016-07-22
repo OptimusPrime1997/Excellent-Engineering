@@ -49,6 +49,8 @@ public class StringUtil {
     public static final String pixelsResult = "pixelsResult";
     public static final String componentType = "componentType";
     public static final String resultType = "resultType";
+    public static final String input = "input";
+    public static final String textComponent = "textComponent";
 
 
 

@@ -135,6 +135,9 @@ public class ModelCreateByPaths {
 
         if(type==Type.COMPONENT){
             result = new Component(operation.elementText(StringUtil.resourceId),operation.elementText(StringUtil.resourceType));
+        }else if (type==Type.TEXTCOMPONENT){//输入框
+            result = new TextComponent(operation.elementText(StringUtil.resourceId),operation.elementText(StringUtil.resourceType),operation.elementText(StringUtil.input));
+
         }else if(type==Type.AREA){
             List<Element> elements = operation.element(StringUtil.doublePoint).elements();
             Element element1 = elements.get(0);
@@ -229,8 +232,8 @@ public class ModelCreateByPaths {
             Element singlePoint = elem.element(StringUtil.expect).element(StringUtil.singlePoint);
             Element color = elem.element(StringUtil.expect).element(StringUtil.color);
             int[] rgb = new int[3];
-            int x = Integer.parseInt(singlePoint.elementText(StringUtil.pointX));
-            int y = Integer.parseInt(singlePoint.elementText(StringUtil.pointY));
+            float x = Float.parseFloat(singlePoint.elementText(StringUtil.pointX));
+            float y = Float.parseFloat(singlePoint.elementText(StringUtil.pointY));
             rgb[0]= Integer.parseInt(color.elementText(StringUtil.red));
             rgb[1]= Integer.parseInt(color.elementText(StringUtil.green));
             rgb[2]= Integer.parseInt(color.elementText(StringUtil.blue));
