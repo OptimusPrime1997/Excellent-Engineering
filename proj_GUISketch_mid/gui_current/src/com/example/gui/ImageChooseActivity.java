@@ -30,15 +30,12 @@ public class ImageChooseActivity extends Activity {
 
 	private ArrayList<FileInfo> mFileLists;
 	private ImageChooserAdapter mAdatper;
-	// public static boolean chooseItem=false;
 
 	@SuppressLint("SdCardPath")
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_image_choose);
-
-		// MainActivity.chooseItem=false;
 
 		myPicturePath = "/mnt/sdcard/screenShotPicture";
 
@@ -110,7 +107,6 @@ public class ImageChooseActivity extends Activity {
 			case R.id.btExit:
 				setResult(RESULT_CANCELED);
 				Log.w("TAG-exit", "chooseItem is false");
-				// MainActivity.chooseItem=false;
 
 				finish();
 				break;
@@ -131,8 +127,8 @@ public class ImageChooseActivity extends Activity {
 
 				intent.putExtra("chooseItem", true);
 				MainActivity.isStartPage = false;
-				Log.w("TAG-select", "choose an image");
-				// MainActivity.chooseItem=true;
+				
+				Log.w("TAG-Q1", "chooseImageActivity set chooseItem is true");
 
 				setResult(RESULT_OK, intent);
 				finish();
