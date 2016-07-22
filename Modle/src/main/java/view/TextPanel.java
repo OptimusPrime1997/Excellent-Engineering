@@ -1,6 +1,5 @@
 package view;
 
-import jsyntaxpane.syntaxkits.JavaSyntaxKit;
 import view.text_manage.MyShowPane;
 import view.tools.TabbedPanel;
 
