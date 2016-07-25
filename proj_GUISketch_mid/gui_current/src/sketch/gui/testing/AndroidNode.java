@@ -1,5 +1,7 @@
 package sketch.gui.testing;
 
+import java.util.HashMap;
+
 /**
  * AndroidNode is used to store the Widget-Information of the GUI.png
  * 
@@ -81,5 +83,20 @@ public class AndroidNode {
 		String str = "<node index=\"" + index + "\" text=\"" + text + "\" resource-id=\"" + resourceId + "\" class=\""
 				+ widget_name + "\" package=\"" + package_name + "\" bounds=\"" + bounds + "\" />";
 		return str;
+	}
+
+	/**
+	 *return the map to transfer the module 3
+	 * @return
+	 */
+	public HashMap<String, String> getMap() {
+		HashMap<String, String> node = new HashMap<>();
+		node.put("index", index);
+		node.put("text", text);
+		node.put("resource-id", resourceId);
+		node.put("class", widget_name);
+		node.put("package", "package_name");
+		node.put("bounds", bounds);
+		return node;
 	}
 }
