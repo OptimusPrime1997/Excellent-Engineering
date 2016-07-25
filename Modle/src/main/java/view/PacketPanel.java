@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -101,6 +102,12 @@ public class PacketPanel extends JPanel {
                 menuLeafNode1.addMouseListener(new TreeRunListener(path));
                 menuLeafNode1.setFont(new Font("Consolas",Font.BOLD,12));
                 JMenuItem menuItem = new JMenuItem("load model");
+                menuItem.addMouseListener(new MouseAdapter(){
+                    public void mouseReleased(MouseEvent e) {
+                        String treePath = getFilePath(path);
+                        consolePane.loadApp(treePath + "/model.xml");
+                    }
+                });
                 popMenu.add(menuLeafNode1);
                 popMenu.add(menuItem);
                 JMenuItem menuItem2 = new JMenuItem("build path");
@@ -157,38 +164,5 @@ public class PacketPanel extends JPanel {
 
         }
     }
-
-    class PathBuildListener implements MouseListener{
-        private TreePath treePath;
-        public PathBuildListener(TreePath path){
-            this.treePath = path;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-    }
-
 
 }
