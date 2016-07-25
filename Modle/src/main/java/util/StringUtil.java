@@ -51,6 +51,7 @@ public class StringUtil {
     public static final String resultType = "resultType";
     public static final String input = "input";
     public static final String textComponent = "textComponent";
+    public static final String message = "message";
 
 
 

@@ -134,9 +134,9 @@ public class ModelCreateByPaths {
         Area result = null;
 
         if(type==Type.COMPONENT){
-            result = new Component(operation.elementText(StringUtil.resourceId),operation.elementText(StringUtil.resourceType));
+            result = new Component(operation.elementText(StringUtil.resourceId),operation.elementText(StringUtil.resourceType),operation.elementText(StringUtil.message));
         }else if (type==Type.TEXTCOMPONENT){//输入框
-            result = new TextComponent(operation.elementText(StringUtil.resourceId),operation.elementText(StringUtil.resourceType),operation.elementText(StringUtil.input));
+            result = new TextComponent(operation.elementText(StringUtil.resourceId),operation.elementText(StringUtil.resourceType),operation.elementText(StringUtil.message),operation.elementText(StringUtil.input));
 
         }else if(type==Type.AREA){
             List<Element> elements = operation.element(StringUtil.doublePoint).elements();
@@ -177,7 +177,7 @@ public class ModelCreateByPaths {
             List<Element> elements = operation.element(StringUtil.multiComponent).elements();
             for(Element element:elements){
                 Component component = new Component(element.elementText(StringUtil.resourceId),
-                        element.elementText(StringUtil.resourceType));
+                        element.elementText(StringUtil.resourceType),element.elementText(StringUtil.message));
                 multiComponent.addComponent(component);
 
             }
@@ -227,7 +227,8 @@ public class ModelCreateByPaths {
         String componentType = elem.elementText(StringUtil.resourceType);
         String index = elem.elementText(StringUtil.resourceId);
         String expect = elem.elementText(StringUtil.expect);
-        result = new SingleComponentResult(index,resultType,componentType,expect);
+        String message = elem.elementText(StringUtil.message);
+        result = new SingleComponentResult(index,resultType,componentType,expect,message);
         }else if (resultType==ResultType.IMAGE){
             Element singlePoint = elem.element(StringUtil.expect).element(StringUtil.singlePoint);
             Element color = elem.element(StringUtil.expect).element(StringUtil.color);

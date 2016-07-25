@@ -9,10 +9,10 @@ import impl.oracle_result.SingleComponentResult;
 public class ResultTreeFactoryTestDriver {
 
     public static void main(String args[]){
-        SingleComponentResult sr1 = new SingleComponentResult("1", ResultType.IMAGE,"Button","abc");
-        SingleComponentResult sr2 = new SingleComponentResult("2", ResultType.IMAGE,"Button","abc");
-        SingleComponentResult sr3 = new SingleComponentResult("3", ResultType.IMAGE,"Button","abc");
-        SingleComponentResult sr4 = new SingleComponentResult("4", ResultType.IMAGE,"Button","abc");
+        SingleComponentResult sr1 = new SingleComponentResult("1", ResultType.IMAGE,"Button","abc","");
+        SingleComponentResult sr2 = new SingleComponentResult("2", ResultType.IMAGE,"Button","abc","");
+        SingleComponentResult sr3 = new SingleComponentResult("3", ResultType.IMAGE,"Button","abc","");
+        SingleComponentResult sr4 = new SingleComponentResult("4", ResultType.IMAGE,"Button","abc","");
         ResultTreeFactory rf = new ResultTreeFactory();
         rf.put("not");
         rf.put(sr1);

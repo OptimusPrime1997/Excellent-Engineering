@@ -6,12 +6,14 @@ public class Component implements Area{
 	
 	protected String id;
 	protected String type;
+	protected String message;
 	
 	
-	public Component(String id , String type) {
+	public Component(String id , String type,String message) {
 		super();
 		this.id = id;
 		this.type = type;
+		this.message = message;
 	}
 
 
@@ -19,6 +21,7 @@ public class Component implements Area{
 		String XML = "<Component>\n" +
 				"<index>" + id + "</index>\n"+
 				"<componentType>"+ type + "</componentType>\n" +
+				"<message>"+message+"</message>\n"+
 				"</Component>\n";
 
 		return XML;
@@ -28,6 +31,7 @@ public class Component implements Area{
 		String print = "<area  type = \"Component\">\n" +
 				"<type>" + type + "</type>\n" +
 				"<id>"+id+"</id>\n" +
+				"<message>"+message+"</message>"+
 				"</area>\n";
 		return print;
 	}

@@ -105,7 +105,8 @@ public class ModelCreateByModel {
                 ResultType resultType = ResultType.valueOf(elem.elementText(StringUtil.resultType).toUpperCase());
                 String type = elem.elementText(StringUtil.componentType);
                 String expect = elem.elementText(StringUtil.expect);
-                result = new SingleComponentResult(index,resultType,type,expect);
+                String message = elem.elementText(StringUtil.message);
+                result = new SingleComponentResult(index,resultType,type,expect,message);
                 return result;
             }else if(name.equalsIgnoreCase(StringUtil.pixelsResult)){
                 float x = Float.parseFloat(elem.elementText(StringUtil.Xray));
@@ -201,7 +202,8 @@ public class ModelCreateByModel {
             String componentType = element.elementText(StringUtil.type);
             String id = element.elementText(StringUtil.id);
             String input = element.elementText(StringUtil.input);
-            area = new TextComponent(componentType,id,input);
+            String message = element.elementText(StringUtil.message);
+            area = new TextComponent(componentType,id,message,input);
         }
 
         return area;
@@ -220,7 +222,8 @@ public class ModelCreateByModel {
     private Component getComponent(Element element){
         String type = element.elementText(StringUtil.type);
         String id = element.elementText(StringUtil.id);
-        Component component = new Component(type,id);
+        String message = element.elementText(StringUtil.message);
+        Component component = new Component(type,id,message);
         return component;
     }
 }
