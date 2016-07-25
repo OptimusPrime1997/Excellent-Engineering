@@ -1,5 +1,6 @@
 package view;
 
+import view.tools.CreateProjectAdapter;
 import view.tools.ToolButton;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class ToolPanel extends JToolBar {
         jbtNew.setBorderPainted(false);
         jbtOpen.setBorderPainted(false);
         jbtPrint.setBorderPainted(false);
+        jbtNew.addMouseListener(new CreateProjectAdapter("C://ONE_PIECE",jFrame));
         this.add(jbtNew);
         this.add(jbtOpen);
         this.add(jbtPrint);

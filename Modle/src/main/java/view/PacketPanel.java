@@ -39,7 +39,9 @@ public class PacketPanel extends JPanel {
         //System.out.println(this.getSize());
         this.consolePane = consolePane;
     }
-
+    public void refreshTree(){
+        tree.refreshTree();
+    }
     public String getFilePath(TreePath path){
         String filePath = "C://";
         Object[] p =path.getPath();
@@ -106,6 +108,9 @@ public class PacketPanel extends JPanel {
                 popMenu.show(e.getComponent(), e.getX(), e.getY());
             }
         }
+
+
+
 
         @Override
         public void mouseEntered(MouseEvent e) {

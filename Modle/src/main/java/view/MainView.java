@@ -111,6 +111,10 @@ public class MainView extends JFrame{
         constraints.ipadx = this.getWidth();
         return constraints;
     }
+
+    public void refreshTree(){
+        packetPanel.refreshTree();
+    }
     public static void main(String[] args){
         MainView mainView = new MainView();
     }

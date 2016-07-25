@@ -1,5 +1,7 @@
 package view.tools;
 
+import view.MainView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,33 +27,39 @@ public class CreateProjectAdapter implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        System.out.println("点击了");
         int width = 300;
         int height = 100;
         JButton button = new JButton("确认");
-        final JTextField textField = new JTextField(80);
+        final JTextField textField = new JTextField(20);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int)dimension.getWidth();
         int y = (int)dimension.getHeight();
 
-        JDialog jDialog = new JDialog();
+        final JDialog jDialog = new JDialog();
+        jDialog.setTitle("填写项目名称");
         jDialog.setBounds((x-width)/2,(y-height)/2,width,height);
-        jDialog.getContentPane().setLayout(new GridLayout(1,3));
+        jDialog.getContentPane().setLayout(new FlowLayout());
         jDialog.getContentPane().add(new JLabel("项目名"));
         jDialog.getContentPane().add(textField);
         jDialog.getContentPane().add(button);
+
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String projectName = textField.getText();
+                jDialog.dispose();
                 JFileChooser jfc2 = new JFileChooser();
                 jfc2.setMultiSelectionEnabled(true);
                 int nRetVal = jfc2.showDialog(parent,"选择");
                 if (nRetVal == JFileChooser.APPROVE_OPTION){
                     //生成sketch文件夹
-                    File root = new File(rootDir+ File.separatorChar+textField.getText());
+                    File root = new File(rootDir+ File.separatorChar+projectName);
                     System.out.println(root.getAbsolutePath());
                     File sktch = new File(root.getAbsolutePath()+File.separatorChar+"sketch");
                     if (!sktch.exists()||!sktch.isDirectory()){
-                        sktch.mkdir();
+                        System.out.println("生成对应的文件夹");
+                        sktch.mkdirs();
                     }
                     //生成sketch文件夹
 
@@ -64,14 +72,22 @@ public class CreateProjectAdapter implements MouseListener{
 
                     }
 
+                    ((MainView)parent).refreshTree();
+
                 }
             }
         });
+
+        jDialog.setModal(true);
+        jDialog.setVisible(true);
+
     }
 
 
     private void copy(File file,File copyFile){
+
         try {
+
             BufferedOutputStream copyBOS = new BufferedOutputStream(new FileOutputStream(copyFile));
             BufferedInputStream fileBIS = new BufferedInputStream(new FileInputStream(file));
             byte[] buf = new byte[1024*512];
