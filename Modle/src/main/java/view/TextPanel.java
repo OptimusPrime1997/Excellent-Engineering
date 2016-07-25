@@ -33,9 +33,17 @@ public class TextPanel extends JPanel {
             //myShowPane.setEditorKit(new JavaSyntaxKit());
             JScrollPane jScrollPane = new JScrollPane(myShowPane);
             String name[] = path.split("/");
+            for(int x = 0 ;  x < tb.getTabCount() ; x++){
+                if(tb.getTitleAt(x).equals(name[name.length - 1])){
+                    tb.setSelectedIndex(x);
+                    return;
+                }
+            }
+
             tb.addTab(name[name.length - 1],jScrollPane);
 
             tb.setTabComponentAt(tb.indexOfComponent(jScrollPane),new TabbedPanel(tb,path));
+            tb.setSelectedIndex(tb.indexOfComponent(jScrollPane));
             panel_count ++ ;
         } catch (IOException e) {
             e.printStackTrace();

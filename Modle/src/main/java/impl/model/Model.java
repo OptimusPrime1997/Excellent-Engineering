@@ -22,7 +22,7 @@ public class Model implements ModelService{
 	protected String rootName = null;
     protected int id;
 	protected PathStrategy strategy = new RootFrist();
-
+	protected String savePath;
 
 	/**
 	 * 构造函数生成一个模型
@@ -38,6 +38,9 @@ public class Model implements ModelService{
 
 	public Model(){
 
+	}
+	public Model(String savePath){
+		this.savePath = savePath;
 	}
 
 	public void setRoot(String rootName,int id) {
@@ -112,7 +115,7 @@ public class Model implements ModelService{
 			return;
 		}
 		System.out.println("Model has "+states.size() + " states");
-		this.strategy.writeXML(states,rootName,times);
+		this.strategy.writeXML(states,rootName,times,this.savePath + "/paths.xml");
 	}
 
 	public void printModel() {
@@ -122,7 +125,7 @@ public class Model implements ModelService{
 		}
 		print += "</model>\n";
 		try{
-			FileWriter fileWriter=new FileWriter("model.xml");
+			FileWriter fileWriter=new FileWriter(this.savePath  + "/model.xml");
 			fileWriter.write(print);
 			fileWriter.close();
 		}catch(Exception e){

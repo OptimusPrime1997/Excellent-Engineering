@@ -19,13 +19,13 @@ public class RootFrist extends PathStrategy {
     private final int DEEP_LIMIT = 15;
 
     @Override
-    public void writeXML(List<State> appStates, String root, int times){
+    public void writeXML(List<State> appStates, String root, int times,String savePath){
         String XML = this.findTestPath(appStates,this.findStateByName(appStates,root),times);
         XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + XML;
         try{
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD-HH-MM-SS");
-            File file = new File("paths/"+sdf.format(date)+".xml");
+            File file = new File(savePath);
 
             if(!file.getParentFile().exists()) {
                 System.err.println("making the parent file ...");
@@ -40,7 +40,6 @@ public class RootFrist extends PathStrategy {
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
 
     private String findTestPath(List<State> appStates, State rootState, int times) {

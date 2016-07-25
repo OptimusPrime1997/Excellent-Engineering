@@ -5,10 +5,10 @@ package impl.oracle_result;
  */
 public class PixelsResult implements Result {
     private int[] RGB;
-    private int Xray;
-    private int Yray;
+    private float Xray;
+    private float Yray;
 
-    public PixelsResult(int[] RGB , int Xray , int Yray) {
+    public PixelsResult(int[] RGB , float Xray , float Yray) {
         this.RGB = RGB;
         this.Xray = Xray;
         this.Yray = Yray;

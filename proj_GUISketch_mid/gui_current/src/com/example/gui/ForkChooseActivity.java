@@ -34,6 +34,7 @@ public class ForkChooseActivity extends Activity {
 
 	@SuppressLint("SdCardPath")
 	protected void onCreate(Bundle savedInstanceState) {
+		System.out.println("ssssssssssss");
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_image_choose);
