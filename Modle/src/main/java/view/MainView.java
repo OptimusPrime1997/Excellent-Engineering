@@ -44,11 +44,13 @@ public class MainView extends JFrame{
 
             }
         });
-
-        toolPanel = new ToolPanel(this);
-        textPanel = new TextPanel(this);
         consolePane = new ConsolePane(this);
+        textPanel = new TextPanel(this);
+
+
+
         packetPanel = new PacketPanel(this, textPanel , consolePane);
+        toolPanel = new ToolPanel(this,consolePane,textPanel,packetPanel);
 
 
 
