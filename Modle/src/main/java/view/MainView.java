@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by Administrator on 2016/7/20.
@@ -18,7 +20,30 @@ public class MainView extends JFrame{
         Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width/6*5,screenSize.height/6*5);
         this.setLocation(screenSize.width/2-this.getWidth()/2,screenSize.height/2-this.getHeight()/2);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                if(!textPanel.hasUnSavedFile()){
+                    System.exit(0);
+                }
+                int option = JOptionPane.showConfirmDialog(null,
+                        "文件已修改，是否保存？", "保存文件？", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE, null);
+                switch (option) {
+                    case JOptionPane.YES_NO_OPTION: {
+                        textPanel.saveAllFile();
+                        System.exit(0);
+                    }
+                    case JOptionPane.NO_OPTION:
+                        System.exit(0);
+
+                }
+
+
+
+            }
+        });
 
         toolPanel = new ToolPanel(this);
         textPanel = new TextPanel(this);
