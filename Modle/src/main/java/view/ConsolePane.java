@@ -67,6 +67,10 @@ public class ConsolePane extends JPanel {
 
     }
 
+    public void loadApp(String path){
+
+    }
+    
     public void resetProcessBar(){
         this.progressBar.setValue(0);
         this.process = 0;
@@ -98,6 +102,7 @@ public class ConsolePane extends JPanel {
         @Override
         public void run() {
             System.out.println("run begin");
+            resetProcessBar();
             ModelCreateByPaths modelCreateByPaths = new ModelCreateByPaths();
             File[] files = new File[xmlPath.size()];
             int x = 0;
@@ -112,6 +117,7 @@ public class ConsolePane extends JPanel {
             textField.setText("building the path");
             modelService.printXML(num);   //这里默认是20
             textField.setText("build finish");
+
         }
     }
 }

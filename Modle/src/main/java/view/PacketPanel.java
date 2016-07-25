@@ -158,37 +158,4 @@ public class PacketPanel extends JPanel {
         }
     }
 
-    class PathBuildListener implements MouseListener{
-        private TreePath treePath;
-        public PathBuildListener(TreePath path){
-            this.treePath = path;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-    }
-
-
 }
