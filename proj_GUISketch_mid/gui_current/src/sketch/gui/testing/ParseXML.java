@@ -31,7 +31,7 @@ public class ParseXML {
 	public ParseXML(InputStream input) {
 		node_list = new ArrayList<AndroidNode>();
 		parse(input);
-//		print(node_list);
+		// print(node_list);
 	}
 
 	public void parse(InputStream xmlFile) {
@@ -39,7 +39,7 @@ public class ParseXML {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = dbFactory.newDocumentBuilder();
 			Document doc = docBuilder.parse(xmlFile);
-			String id, tt, wn, pn, bd;
+			String id, tt, wn, pn, bd, rd;
 
 			doc.getDocumentElement().normalize();
 			Log.w("TAG-Pn1", doc.getDocumentElement().getNodeName());
@@ -54,13 +54,11 @@ public class ParseXML {
 				wn = node.getAttribute("class");
 				pn = node.getAttribute("package");
 				bd = node.getAttribute("bounds");
-//				Log.w("TAG-Pn9", "id="+id
-//						+ " text="+tt
-//						+ " class="+wn
-//						+ " package="+pn
-//						+ " bounds="+bd);
+				rd = node.getAttribute("resource-id");
+				Log.w("TAG-Pn9", "id=" + id + " text=" + tt + " class=" + wn + " resource-id=" + rd + " package=" + pn
+						+ " bounds=" + bd);
 				if (wn.startsWith(CLASS_PRE) && !wn.contains("Layout")) {
-					AndroidNode mid = new AndroidNode(id, tt, wn.substring(CLASS_PRE.length()), pn, bd);
+					AndroidNode mid = new AndroidNode(id, tt, wn.substring(CLASS_PRE.length()), pn, bd, rd);
 					node_list.add(mid);
 				}
 			}
@@ -88,7 +86,7 @@ public class ParseXML {
 	}
 
 	public List<AndroidNode> findWidgetByRect(PointF[] rect) {
-//		rect中包含两个点：左下，右上
+		// rect中包含两个点：左下，右上
 		List<AndroidNode> wid_list = new ArrayList<AndroidNode>();
 
 		// 设定判断 控件是否在Rect区域内的 比例 (2016.04.27)
@@ -100,7 +98,6 @@ public class ParseXML {
 			 * if (mid.x1 >= rect[0].x && mid.x2 <= rect[3].x && mid.y1 >=
 			 * rect[0].y && mid.y2 <= rect[3].y) wid_list.add(mid);
 			 */
-			
 
 			x_cup = Math.max(mid.x1, rect[0].x);
 			x1_cup = Math.min(mid.x2, rect[1].x);
@@ -119,7 +116,7 @@ public class ParseXML {
 		return (x2 - x1) * (y2 - y1);
 	}
 
-	public static  void print(List<AndroidNode> nodes) {
+	public static void print(List<AndroidNode> nodes) {
 		if (nodes != null) {
 			Log.w("TAG-Pn1", "++++++++ Node List (size = " + nodes.size() + ") +++++++++");
 			for (int i = 0; i < nodes.size(); i++) {
