@@ -83,7 +83,7 @@ public class MainView extends JFrame{
         packetPos.gridy = 1;
         //packetPos.weighty = this.getHeight() / 30 * 18;
        // packetPos.weightx = this.getWidth() / 4;
-        packetPos.ipady = this.getHeight() / 30 * 21;
+        packetPos.ipady = this.getHeight() / 30 * 28;
         packetPos.ipadx = this.getWidth() / 4;
         return packetPos;
     }
@@ -95,7 +95,7 @@ public class MainView extends JFrame{
         textPos.gridheight = 1;
         textPos.gridx = 1;
         textPos.gridy = 1;
-        textPos.weighty = this.getHeight() / 30 * 21;
+        textPos.weighty = this.getHeight() / 30 * 28;
         textPos.weightx = this.getWidth() / 4 * 3;
         return textPos;
     }
@@ -107,7 +107,7 @@ public class MainView extends JFrame{
         constraints.gridheight = 1;
         constraints.gridx = 0;
         constraints.gridy = 2;
-        constraints.ipady = this.getHeight() / 30 * 8;
+        constraints.ipady = this.getHeight() / 30 * 1;
         constraints.ipadx = this.getWidth();
         return constraints;
     }
