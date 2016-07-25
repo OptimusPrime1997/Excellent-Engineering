@@ -44,7 +44,7 @@ public class PacketPanel extends JPanel {
         tree.refreshTree();
     }
     public String getFilePath(TreePath path){
-        String filePath = "C://";
+        String filePath = "./";
         Object[] p =path.getPath();
         for(int x = 0 ; x < p.length - 1 ; x++){
             filePath += p[x].toString() + '/';

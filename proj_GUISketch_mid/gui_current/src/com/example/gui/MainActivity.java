@@ -709,22 +709,39 @@ public class MainActivity extends Activity implements OnTouchListener {
 	 * exit app confirm dialog
 	 */
 	protected void exitDialog() {
-		AlertDialog.Builder builder = new Builder(MainActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-		builder.setMessage("Exit now?");
-		builder.setTitle("Promption");
-		builder.setPositiveButton("Confirm", new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				MainActivity.this.finish();
-			}
-		});
-		builder.setNegativeButton("Cancel", new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
+//		AlertDialog.Builder builder = new Builder(MainActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+//		builder.setMessage("Exit now?");
+//		builder.setTitle("Promption");
+//		builder.setPositiveButton("Confirm", new OnClickListener() {
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				dialog.dismiss();
+//				MainActivity.this.finish();
+//			}
+//		});
+//		builder.setNegativeButton("Cancel", new OnClickListener() {
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				dialog.dismiss();
+//			}
+//		});
+//		builder.create().show();
+		CustomDialog.Builder builder = new CustomDialog.Builder(this);  
+		builder.setMessage("Exit now?");  
+		builder.setTitle("Prompt");  
+		builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {  
+		    public void onClick(DialogInterface dialog, int which) {  
+		        dialog.dismiss();  
+		        MainActivity.this.finish();
+		    }  
+		});  
+		  
+		builder.setNegativeButton("Cancel",  
+		        new android.content.DialogInterface.OnClickListener() {  
+		            public void onClick(DialogInterface dialog, int which) {  
+		                dialog.dismiss();  
+		            }  
+		        });  
 		builder.create().show();
 	}
 
@@ -965,11 +982,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						}
 						int color = bitmap.getPixel((int) Double.parseDouble(points[0]),
 								(int) Double.parseDouble(points[1]));
-						int[] colors = new int[3];
-						colors[0] = Color.red(color);
-						colors[1] = Color.green(color);
-						colors[2] = Color.blue(color);
-						CreateElement.addRGB(stateElement, points, colors);
+						CreateElement.addRGB(stateElement, points, color);
 					}
 
 				} else if (results.length == 1) {
