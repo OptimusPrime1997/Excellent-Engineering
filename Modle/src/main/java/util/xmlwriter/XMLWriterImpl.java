@@ -11,10 +11,8 @@ public class XMLWriterImpl implements XMLWriter {
 
     private final int SEARCH_UPPER_LIMIT = 10;
 
-
-    public void writeXML(PathStrategy pathStrategy){
+    @Override
+    public void writeXML(PathStrategy strategy, String savePath) {
 
     }
-
-
 }

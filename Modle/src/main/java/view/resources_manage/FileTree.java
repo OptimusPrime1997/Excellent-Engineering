@@ -26,6 +26,13 @@ public class FileTree extends JTree {
 
     private FileList theList;
 
+    public void refreshTree(){
+        theList  = new FileList();
+        setModel(new FileSystemModel(new FolderNode()));
+//        this.setCellRenderer(new FolderRenderer());
+//        this.setSelectionRow(0);
+        this.repaint();
+    }
     public FileTree(FileList list) {
         theList = list;
         setModel(new FileSystemModel(new FolderNode()));

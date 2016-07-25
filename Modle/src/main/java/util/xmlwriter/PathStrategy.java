@@ -12,7 +12,7 @@ import java.util.Stack;
  */
 public abstract class PathStrategy {
 
-    public void writeXML(List<State> appStates, String root, int times){}
+    public void writeXML(List<State> appStates, String root, int times,String savePath){}
 
     /**
      * 用于获取一条路径的XML

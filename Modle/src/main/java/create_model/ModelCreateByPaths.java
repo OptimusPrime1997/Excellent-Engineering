@@ -29,8 +29,8 @@ public class ModelCreateByPaths {
 
     private ModelService model;
 
-    public ModelService getModel(PathStrategyEnum type, File[] xmlFiles){
-        model = ModelFactory.getModelInstance(type);
+    public ModelService getModel(PathStrategyEnum type, File[] xmlFiles,String savePath){
+        model = ModelFactory.getModelInstance(type,savePath);
 
         for (File file : xmlFiles){
             System.err.print("test_"+file.getName());

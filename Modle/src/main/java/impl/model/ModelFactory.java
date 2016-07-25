@@ -8,12 +8,12 @@ import service.ModelService;
  */
 public class ModelFactory {
 
-    public static ModelService getModelInstance(PathStrategyEnum pe){
+    public static ModelService getModelInstance(PathStrategyEnum pe,String savePath){
         switch(pe){
             case ORACLE_FRIST:
-                return new Re_Model();
+                return new Re_Model(savePath);
             case ROOT_FRIST:
-                return new Model();
+                return new Model(savePath);
         }
         return null;
     }
