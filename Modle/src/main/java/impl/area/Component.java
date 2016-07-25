@@ -4,8 +4,8 @@ import service.Area;
 
 public class Component implements Area{
 	
-	private String id;
-	private String type;
+	protected String id;
+	protected String type;
 	
 	
 	public Component(String id , String type) {

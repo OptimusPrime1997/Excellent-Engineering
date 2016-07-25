@@ -99,19 +99,31 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private PointF[] drawedArea;
 	private List<AndroidNode> nodes = new ArrayList<AndroidNode>();
 	private TType test_type;
+	private int countDrawArea = 0;
 
 	private boolean myDrawFlag = false;
-	private int countDrawArea = 0;
 	private boolean accept_flag = false;
-	private boolean target_flag = false;
-	public static boolean target_menu_flag = true;// true时显示target，false不显示,最开始时显示
+
 	private boolean input_flag = false;
 	private boolean recogRect_flag = false;
-	private boolean fork_flag = false;
+
+	/**
+	 * imagechooseactivity choose an item,it must be true
+	 */
+	private boolean chooseItem = false;
+	/**
+	 * when target_flag and target_menu_flag are all true,into menu case
+	 */
+	private boolean target_flag = false;
+	public static boolean target_menu_flag = true;// true时显示target，false不显示,最开始时显示
+
+	/**
+	 * startPage and flag are false,into menu case
+	 */
 	public static boolean startPage_Flag = false;
 	public static boolean isStartPage = true;
 
-	private boolean chooseItem = false;
+	private boolean fork_flag = false;
 	/*-------------------------*/
 
 	private String timeInput;
@@ -145,18 +157,42 @@ public class MainActivity extends Activity implements OnTouchListener {
 	public static final String FORK_ITEM = "fork_item";
 
 	/**
-	 * init the variables
+	 * startactivity init the variables
 	 */
 	private void init() {
-		isStartPage = false;
+		isStartPage = true;
 		startPage_Flag = false;
+
 		myDrawFlag = false;
 		countDrawArea = 0;
 		accept_flag = false;
+		recogRect_flag = false;
+		input_flag = false;
+
+		chooseItem = false;
 		target_flag = false;
 		target_menu_flag = true;// true时显示target，false不显示,最开始时显示
-		input_flag = false;
+
+		fork_flag = false;
+	}
+
+	/**
+	 * return to fork use it to init variable
+	 */
+	private void backHomeInit() {
+		isStartPage = false;
+		startPage_Flag = false;
+
+		myDrawFlag = false;
+		countDrawArea = 0;
+		accept_flag = false;
 		recogRect_flag = false;
+		input_flag = false;
+
+		chooseItem = false;
+		target_flag = false;
+		target_menu_flag = true;// true时显示target，false不显示,最开始时显示
+
 		fork_flag = false;
 	}
 
@@ -193,6 +229,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.bundle = savedInstanceState;
+
+		init();
+
 		setLanguage();
 		Intent intent = getIntent();
 
@@ -442,12 +481,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 										operation = "click;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "\r\n";
 										if (isPointOperation) {
-											targetResult.add("point;"+format(operationPoint.get(i).x) + ","
+											targetResult.add("point;" + format(operationPoint.get(i).x) + ","
 													+ format(operationPoint.get(i).y));
-											System.out.println("point;"+format(operationPoint.get(i).x) + ","
+											System.out.println("point;" + format(operationPoint.get(i).x) + ","
 													+ format(operationPoint.get(i).y));
 											break;
-											
+
 										}
 										onePictureOPerations.add(operation);
 
@@ -455,9 +494,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 										operation = "lClick;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "\r\n";
 										if (isPointOperation) {
-											targetResult.add("point;"+format(operationPoint.get(i).x) + ","
+											targetResult.add("point;" + format(operationPoint.get(i).x) + ","
 													+ format(operationPoint.get(i).y));
-											System.out.println("point;"+format(operationPoint.get(i).x) + ","
+											System.out.println("point;" + format(operationPoint.get(i).x) + ","
 													+ format(operationPoint.get(i).y));
 											break;
 										}
@@ -597,6 +636,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			// menu.add(0, MENU_ITEM_COUNTER + 6, 0, "enter text");
 			sub1.add(1, MENU_ITEM_COUNTER + 7, 8, "timer").setIcon(R.drawable.menu_timer);
 			sub1.add(1, MENU_ITEM_COUNTER + 8, 9, "fork").setIcon(R.drawable.menu_fork);
+			sub1.add(1, MENU_ITEM_COUNTER + 17, 10, "input");
 			startPage_Flag = true;
 		}
 		if (target_flag == true && target_menu_flag == true) {
@@ -606,14 +646,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 			sub2.removeItem(MENU_ITEM_COUNTER + 7);
 			sub2.removeItem(MENU_ITEM_COUNTER + 8);
 
-			sub2.add(2, MENU_ITEM_COUNTER + 11, 10, "and").setIcon(R.drawable.and);
-			sub2.add(2, MENU_ITEM_COUNTER + 12, 11, "or").setIcon(R.drawable.or);
-			sub2.add(2, MENU_ITEM_COUNTER + 13, 12, "invert").setIcon(R.drawable.invert);
+			sub2.add(2, MENU_ITEM_COUNTER + 11, 11, "and").setIcon(R.drawable.and);
+			sub2.add(2, MENU_ITEM_COUNTER + 12, 12, "or").setIcon(R.drawable.or);
+			sub2.add(2, MENU_ITEM_COUNTER + 13, 13, "invert").setIcon(R.drawable.invert);
 
-			sub2.add(2, MENU_ITEM_COUNTER + 16, 13, "point").setIcon(R.drawable.invert);
+			sub2.add(2, MENU_ITEM_COUNTER + 16, 14, "point").setIcon(R.drawable.invert);
 
-			sub2.add(2, MENU_ITEM_COUNTER + 14, 14, "left bracket").setIcon(R.drawable.menu_left_bracket);
-			sub2.add(2, MENU_ITEM_COUNTER + 15, 15, "right bracket").setIcon(R.drawable.menu_right_bracket);
+			sub2.add(2, MENU_ITEM_COUNTER + 14, 15, "left bracket").setIcon(R.drawable.menu_left_bracket);
+			sub2.add(2, MENU_ITEM_COUNTER + 15, 16, "right bracket").setIcon(R.drawable.menu_right_bracket);
 			// menu.removeItem(MENU_ITEM_COUNTER + 10);
 			// menu.add(1, MENU_ITEM_COUNTER + 4, 6, "draw Area");
 			target_menu_flag = false;
@@ -669,10 +709,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 		});
 		builder.create().show();
 	}
-
-	/**
-	 * handle target->save with fork tag
-	 */
+	
+		/**
+		 * handle target->save with fork tag
+		 */
 	protected void saveForkDialog() {
 		AlertDialog.Builder builder = new Builder(MainActivity.this);
 		builder.setMessage("This path savesed!");
@@ -716,7 +756,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 	public void backHome() {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(MainActivity.this, MainActivity.class);
-		init();
+		// init();
+		// isStartPage=false;
 		startActivity(intent);
 		finish();
 	}
@@ -858,29 +899,31 @@ public class MainActivity extends Activity implements OnTouchListener {
 				String temp = targetResult.get(j);
 				String[] results = temp.split(";");
 
-				if (results.length > 1) {				
-					if (!results[0].equals("point")) {	
+				if (results.length > 1) {
+					if (!results[0].equals("point")) {
 						String[] points = results[2].split(",");
 						CreateElement.setEndState(stateElement, "single_component", results[1], points, parser);
 						recFlag = true;
-					}else{
+					} else {
 						String[] points = results[1].split(",");
 						Bitmap bitmap = null;
 						try {
-							bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.fromFile(currentImage));
-						
+							bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),
+									Uri.fromFile(currentImage));
+
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						int color = bitmap.getPixel((int)Double.parseDouble(points[0]), (int)Double.parseDouble(points[1]));
+						int color = bitmap.getPixel((int) Double.parseDouble(points[0]),
+								(int) Double.parseDouble(points[1]));
 						int[] colors = new int[3];
 						colors[0] = Color.red(color);
 						colors[1] = Color.green(color);
 						colors[2] = Color.blue(color);
 						CreateElement.addRGB(stateElement, points, colors);
 					}
-					
+
 				} else if (results.length == 1) {
 					BuildDocument.addElement(stateElement, results[0]);
 				}
@@ -916,7 +959,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					WriteXML.writeObject(currentDocument, recWrittenFile.getPath());
 				}
 			}
-			Log.w("TAG-Q10", "target_flag:"+target_flag+"fork_flag:"+fork_flag);
+			Log.w("TAG-Q10", "target_flag:" + target_flag + "fork_flag:" + fork_flag);
 			if (target_flag) {
 				if (fork_flag) {
 					saveForkDialog();
@@ -964,12 +1007,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 			jointGraphics = new ArrayList<PointF>();
 			stepCount = 0;
 			if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-//				chooseItem = false;
 				startActivityForResult(imageChooseIntent, REQUEST_CODE);
-				Log.w("TAG-Q9", "case fork chooseItem:"+chooseItem);
+				Log.w("TAG-Q9", "case fork chooseItem:" + chooseItem);
 				if (chooseItem == true) {
 					Log.w("TAG-Q9", "change the target_flag to true");
-					target_flag=true;
+					target_flag = true;
 					chooseItem = false;
 				}
 			}
@@ -1070,6 +1112,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 			isPointOperation = true;
 			draw();
 			break;
+			
+		case MENU_ITEM_COUNTER + 17:
+			
 		default:
 			break;
 		}
@@ -1106,7 +1151,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		// target_menu_flag = true;
 		// isDrawArea = false;
 
-		init();
+		backHomeInit();
 		Log.w("TAG-T10", "---init the variable");
 
 		int forkIndex = imageFiles.indexOf(forkImage);

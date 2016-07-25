@@ -2,23 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="993fe614-28a4-46e7-9f3a-27512c08a655" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/model.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/One_Pecese_1_0.iml" afterPath="$PROJECT_DIR$/One_Pecese_1_0.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/impl/area/TextComponent.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/test1/11.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/button_style.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/layout/mydialog.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/PopDialogTest.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/messi.png" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/messi1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/ImageChooserAdapter.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/ImageChooserAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/MainActivity.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/MainActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$drawable.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$drawable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$id.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$layout.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$string.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$string.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$style.class" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/bin/classes/com/example/gui/R$style.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/messi.png" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/drawable-hdpi/messi.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/TestModel.java" afterPath="$PROJECT_DIR$/src/main/java/TestModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/create_model/ModelCreateByModel.java" afterPath="$PROJECT_DIR$/src/main/java/create_model/ModelCreateByModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/create_model/ModelCreateByPaths.java" afterPath="$PROJECT_DIR$/src/main/java/create_model/ModelCreateByPaths.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/model/Model.java" afterPath="$PROJECT_DIR$/src/main/java/impl/model/Model.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/model/ModelFactory.java" afterPath="$PROJECT_DIR$/src/main/java/impl/model/ModelFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/model/Re_Model.java" afterPath="$PROJECT_DIR$/src/main/java/impl/model/Re_Model.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/service/XMLWriter.java" afterPath="$PROJECT_DIR$/src/main/java/service/XMLWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/util/xmlwriter/PathStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/util/xmlwriter/PathStrategy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/util/xmlwriter/XMLWriterImpl.java" afterPath="$PROJECT_DIR$/src/main/java/util/xmlwriter/XMLWriterImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/util/xmlwriter/path_strategy/RootFrist.java" afterPath="$PROJECT_DIR$/src/main/java/util/xmlwriter/path_strategy/RootFrist.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/ConsolePane.java" afterPath="$PROJECT_DIR$/src/main/java/view/ConsolePane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/PacketPanel.java" afterPath="$PROJECT_DIR$/src/main/java/view/PacketPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/TextPanel.java" afterPath="$PROJECT_DIR$/src/main/java/view/TextPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/resources_manage/FileTree.java" afterPath="$PROJECT_DIR$/src/main/java/view/resources_manage/FileTree.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/area/Component.java" afterPath="$PROJECT_DIR$/src/main/java/impl/area/Component.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/impl/oracle_result/PixelsResult.java" afterPath="$PROJECT_DIR$/src/main/java/impl/oracle_result/PixelsResult.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/util/Action.java" afterPath="$PROJECT_DIR$/src/main/java/util/Action.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/util/StringUtil.java" afterPath="$PROJECT_DIR$/src/main/java/util/StringUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/util/Type.java" afterPath="$PROJECT_DIR$/src/main/java/util/Type.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/.gitignore" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/gen/com/example/gui/R.java" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/gen/com/example/gui/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/layout/activity_image_choose.xml" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/layout/activity_image_choose.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/ForkChooseActivity.java" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/ForkChooseActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/MainActivity.java" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/SubMenuTest.java" afterPath="$PROJECT_DIR$/../proj_GUISketch_mid/gui_current/src/com/example/gui/SubMenuTest.java" />
     </list>
     <ignored path="One_Pecese_1_0.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,7 +86,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConsolePane.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ConsolePane.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/view/ConsolePane.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="227">
@@ -81,6 +94,16 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestModel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/TestModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -135,7 +158,6 @@
         <option value="$PROJECT_DIR$/src/main/java/impl/model/Re_Model.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/model/ModelFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/create_model/ModelCreateByPaths.java" />
-        <option value="$PROJECT_DIR$/src/main/java/TestModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/resources_manage/FileTree.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/PacketPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/service/XMLWriter.java" />
@@ -144,6 +166,7 @@
         <option value="$PROJECT_DIR$/src/main/java/util/xmlwriter/path_strategy/RootFrist.java" />
         <option value="$PROJECT_DIR$/src/main/java/impl/model/Model.java" />
         <option value="$PROJECT_DIR$/src/main/java/view/ConsolePane.java" />
+        <option value="$PROJECT_DIR$/src/main/java/TestModel.java" />
       </list>
     </option>
   </component>
@@ -999,15 +1022,15 @@
       <workItem from="1469178033557" duration="2597000" />
       <workItem from="1469236674996" duration="2174000" />
       <workItem from="1469244030605" duration="542000" />
-      <workItem from="1469408844299" duration="1625000" />
+      <workItem from="1469408844299" duration="1779000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11993000" />
+    <option name="totallyTimeSpent" value="12147000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1379,14 +1402,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/TestModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/service/XMLWriter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -1460,6 +1475,14 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/TestModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

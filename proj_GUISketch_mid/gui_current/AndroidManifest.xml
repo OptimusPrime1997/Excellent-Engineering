@@ -34,7 +34,7 @@
             android:label="@string/title_activity_pre_main" >
         </activity>
         <activity
-            android:name=".SubMenuTest"
+            android:name=".PopDialogTest"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/sub_menu_test" >
         </activity>
@@ -42,7 +42,8 @@
             android:name=".ImageChooseActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_image_choose"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+            <!-- android:theme="@android:style/Theme.Dialog"  -->
         </activity>
         <activity
             android:name=".ForkChooseActivity"

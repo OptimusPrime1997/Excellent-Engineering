@@ -108,8 +108,8 @@ public class ModelCreateByModel {
                 result = new SingleComponentResult(index,resultType,type,expect);
                 return result;
             }else if(name.equalsIgnoreCase(StringUtil.pixelsResult)){
-                int x = Integer.parseInt(elem.elementText(StringUtil.Xray));
-                int y = Integer.parseInt(elem.elementText(StringUtil.Yray));
+                float x = Float.parseFloat(elem.elementText(StringUtil.Xray));
+                float y = Float.parseFloat(elem.elementText(StringUtil.Yray));
                 int[] rgb = new int[3];
                 rgb[0]=Integer.parseInt(elem.elementText("r"));
                 rgb[1]=Integer.parseInt(elem.elementText("g"));
@@ -200,6 +200,11 @@ public class ModelCreateByModel {
                 ((MultiComponent)area).addComponent(getComponent(elem));
             }
 
+        }else if(type.equalsIgnoreCase(StringUtil.textComponent)){
+            String componentType = element.elementText(StringUtil.type);
+            String id = element.elementText(StringUtil.id);
+            String input = element.elementText(StringUtil.input);
+            area = new TextComponent(componentType,id,input);
         }
 
         return area;

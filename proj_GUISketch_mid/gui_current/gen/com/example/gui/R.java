@@ -28,31 +28,36 @@ public final class R {
     public static final class drawable {
         public static final int and=0x7f020000;
         public static final int background=0x7f020001;
-        public static final int ic_action_search=0x7f020002;
-        public static final int ic_file_unknown=0x7f020003;
-        public static final int ic_folder=0x7f020004;
-        public static final int ic_image=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int invert=0x7f020007;
-        public static final int menu_area=0x7f020008;
-        public static final int menu_choose=0x7f020009;
-        public static final int menu_clear=0x7f02000a;
-        public static final int menu_exit=0x7f02000b;
-        public static final int menu_fork=0x7f02000c;
-        public static final int menu_left_bracket=0x7f02000d;
-        public static final int menu_more=0x7f02000e;
-        public static final int menu_next=0x7f02000f;
-        public static final int menu_right_bracket=0x7f020010;
-        public static final int menu_save=0x7f020011;
-        public static final int menu_target=0x7f020012;
-        public static final int menu_timer=0x7f020013;
-        public static final int messi=0x7f020014;
-        public static final int or=0x7f020015;
+        public static final int button_style=0x7f020002;
+        public static final int ic_action_search=0x7f020003;
+        public static final int ic_file_unknown=0x7f020004;
+        public static final int ic_folder=0x7f020005;
+        public static final int ic_image=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int invert=0x7f020008;
+        public static final int menu_area=0x7f020009;
+        public static final int menu_choose=0x7f02000a;
+        public static final int menu_clear=0x7f02000b;
+        public static final int menu_exit=0x7f02000c;
+        public static final int menu_fork=0x7f02000d;
+        public static final int menu_left_bracket=0x7f02000e;
+        public static final int menu_more=0x7f02000f;
+        public static final int menu_next=0x7f020010;
+        public static final int menu_right_bracket=0x7f020011;
+        public static final int menu_save=0x7f020012;
+        public static final int menu_target=0x7f020013;
+        public static final int menu_timer=0x7f020014;
+        public static final int messi=0x7f020015;
+        public static final int messi1=0x7f020016;
+        public static final int or=0x7f020017;
     }
     public static final class id {
         public static final int RelativeLayout_Item=0x7f080008;
         public static final int btExit=0x7f080002;
-        public static final int gridview=0x7f08000c;
+        public static final int bt_pengyouquan=0x7f08000e;
+        public static final int bt_weibo=0x7f08000d;
+        public static final int bt_weixin=0x7f08000c;
+        public static final int gridview=0x7f08000f;
         public static final int gvFileChooser=0x7f080003;
         public static final int imageView1=0x7f080005;
         public static final int imgBackFolder=0x7f080000;
@@ -71,7 +76,8 @@ public final class R {
         public static final int filechooser_gridview_item=0x7f030003;
         public static final int item=0x7f030004;
         public static final int layout_list=0x7f030005;
-        public static final int view=0x7f030006;
+        public static final int mydialog=0x7f030006;
+        public static final int view=0x7f030007;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
