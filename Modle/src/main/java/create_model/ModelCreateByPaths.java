@@ -231,13 +231,10 @@ public class ModelCreateByPaths {
         }else if (resultType==ResultType.IMAGE){
             Element singlePoint = elem.element(StringUtil.expect).element(StringUtil.singlePoint);
             Element color = elem.element(StringUtil.expect).element(StringUtil.color);
-            int[] rgb = new int[3];
             float x = Float.parseFloat(singlePoint.elementText(StringUtil.pointX));
             float y = Float.parseFloat(singlePoint.elementText(StringUtil.pointY));
-            rgb[0]= Integer.parseInt(color.elementText(StringUtil.red));
-            rgb[1]= Integer.parseInt(color.elementText(StringUtil.green));
-            rgb[2]= Integer.parseInt(color.elementText(StringUtil.blue));
-            result = new PixelsResult(rgb,x,y);
+            String colorStr = color.getText();
+            result = new PixelsResult(colorStr,x,y);
 
         }
         return result;

@@ -110,11 +110,8 @@ public class ModelCreateByModel {
             }else if(name.equalsIgnoreCase(StringUtil.pixelsResult)){
                 float x = Float.parseFloat(elem.elementText(StringUtil.Xray));
                 float y = Float.parseFloat(elem.elementText(StringUtil.Yray));
-                int[] rgb = new int[3];
-                rgb[0]=Integer.parseInt(elem.elementText("r"));
-                rgb[1]=Integer.parseInt(elem.elementText("g"));
-                rgb[2]=Integer.parseInt(elem.elementText("b"));
-                result = new PixelsResult(rgb,x,y);
+                String color = elem.elementText(StringUtil.color);
+                result = new PixelsResult(color,x,y);
                 return result;
             }
 
