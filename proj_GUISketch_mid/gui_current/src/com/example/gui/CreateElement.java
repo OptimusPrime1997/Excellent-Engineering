@@ -163,6 +163,20 @@ public class CreateElement {
 			Element point2YElement = BuildDocument.addElement(point2Element, "pointY");
 			BuildDocument.addText(point2YElement, points[3]);
 		}
+		
+		if ("input".equals(action)) {
+			BuildDocument.addAttribute(element, "action", action);
+			BuildDocument.addAttribute(element, "type", "textComponent");
+			AndroidNode node = parser.findWidgetByLocation
+					(Double.valueOf(points[0]), Double.valueOf(points[1]));
+			if (node!=null) {
+				Element indexElement = BuildDocument.addElement(element, "index");
+				BuildDocument.addText(indexElement, node.text);
+				Element resouceType = BuildDocument.addElement(element, "resourceType");
+				BuildDocument.addText(resouceType, node.widget_name);
+			}
+			
+		}
 	}
 	
 	/**

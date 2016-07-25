@@ -4,6 +4,7 @@ package view.tools;
  * Created by Administrator on 2016/7/22.
  */
 import view.TextPanel;
+import view.text_manage.MyShowPane;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -16,12 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 /**
  * 可关闭的JTabbedPane标签
@@ -88,6 +84,9 @@ public class TabbedPanel extends JPanel {
             addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     int i = pane.indexOfTabComponent(TabbedPanel.this);
+                    JScrollPane scrollPane =(JScrollPane) pane.getComponentAt(i);
+                    MyShowPane myShowPane = (MyShowPane) scrollPane.getViewport().getView();
+                    myShowPane.close();
                     if (i != -1)  pane.remove(i);
                 }
             });

@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+<path> 
+<operation type = "MultiComponent" action = "CLICK" delayTime = "0">
+<MultiComponent>
+<Component>
+<index>Button</index>
+<componentType>re</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>si</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>mi</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>sol</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>do</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>fa</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>la</componentType>
+</Component>
+</MultiComponent>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>End Game</componentType>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>fail</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+</or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>do</componentType>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>End Game</componentType>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>fail</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+</or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>do</componentType>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "5">
+<Component>
+<index>Button</index>
+<componentType>End Game</componentType>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>fail</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+</or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>si</componentType>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>End Game</componentType>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>fail</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+</or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>re</componentType>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>End Game</componentType>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>fail</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+</or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>si</componentType>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "5">
+<Component>
+<index>Button</index>
+<componentType>End Game</componentType>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>fail</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+</or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "MultiComponent" action = "CLICK" delayTime = "0">
+<MultiComponent>
+<Component>
+<index>Button</index>
+<componentType>re</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>si</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>mi</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>sol</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>do</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>fa</componentType>
+</Component>
+<Component>
+<index>Button</index>
+<componentType>la</componentType>
+</Component>
+</MultiComponent>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "5">
+<Component>
+<index>Button</index>
+<componentType>End Game</componentType>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>fail</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+</or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>re</componentType>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "5">
+<Component>
+<index>Button</index>
+<componentType>End Game</componentType>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>fail</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+</or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+</paths>

@@ -153,6 +153,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private int rightBracketCount = 0;
 	private boolean hasOracle = false;
 	private boolean isPointOperation = false;
+	
+	private boolean isInputOperation= false;
 
 	public static final String FORK_ITEM = "fork_item";
 
@@ -478,25 +480,66 @@ public class MainActivity extends Activity implements OnTouchListener {
 								if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0) {
 									System.out.println("wwwwwww" + result[i]);
 									if (result[i] == 0) { // click
+										
+										if (isInputOperation) {
+											operation = "input;" + "\r\n" + format(operationPoint.get(i).x) + ","
+													+ format(operationPoint.get(i).y) + "\r\n";
+											final TextView tv = new EditText(this);
+											Builder inputDailog = new AlertDialog.Builder(this);
+											inputDailog.setTitle("Expected input:");
+											inputDailog.setIcon(android.R.drawable.ic_dialog_info);
+											inputDailog.setView(tv).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+												@Override
+												public void onClick(DialogInterface arg0, int arg1) {
+													// TODO Auto-generated method stub
+													input = tv.getText().toString();													
+												}
+											});
+											inputDailog.setNegativeButton("取消", null);
+											inputDailog.show();
+											
+											System.out.println("sosossos"+operation);
+											isInputOperation = false;
+											onePictureOPerations.add(operation);
+											break;							
+										}
 										operation = "click;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "\r\n";
 										if (isPointOperation) {
 											targetResult.add("point;" + format(operationPoint.get(i).x) + ","
 													+ format(operationPoint.get(i).y));
-											System.out.println("point;" + format(operationPoint.get(i).x) + ","
-													+ format(operationPoint.get(i).y));
 											break;
-
 										}
 										onePictureOPerations.add(operation);
 
 									} else if (result[i] == 1) { // longclick
+										if (isInputOperation) {
+											operation = "input;" + "\r\n" + format(operationPoint.get(i).x) + ","
+													+ format(operationPoint.get(i).y) + "\r\n";
+											final TextView tv = new EditText(this);
+											Builder inputDailog = new AlertDialog.Builder(this);
+											inputDailog.setTitle("Expected input:");
+											inputDailog.setIcon(android.R.drawable.ic_dialog_info);
+											inputDailog.setView(tv).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+												@Override
+												public void onClick(DialogInterface arg0, int arg1) {
+													// TODO Auto-generated method stub
+													input = tv.getText().toString();
+													System.out.println("--->>"+input);
+												}
+											});
+											inputDailog.setNegativeButton("取消", null);
+											inputDailog.show();
+											//operation += input;
+											System.out.println("sosossos"+operation);
+											isInputOperation = false;
+											onePictureOPerations.add(operation);
+											break;							
+										}
 										operation = "lClick;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "\r\n";
 										if (isPointOperation) {
 											targetResult.add("point;" + format(operationPoint.get(i).x) + ","
-													+ format(operationPoint.get(i).y));
-											System.out.println("point;" + format(operationPoint.get(i).x) + ","
 													+ format(operationPoint.get(i).y));
 											break;
 										}
@@ -907,6 +950,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 						}
 					}
 
+				} else if ("input".equals(operations[0])) {
+					System.out.println("get input.....");
+					CreateElement.addSubInfo(operationElement, operations[0], points, parser);
+					Element inputElement = BuildDocument.addElement(operationElement, "input");
+					BuildDocument.addText(inputElement, input);
 				}
 			}
 
@@ -1130,8 +1178,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 			draw();
 			break;
 			
-		case MENU_ITEM_COUNTER + 17:
-			
+		case MENU_ITEM_COUNTER + 17:   //input
+			isInputOperation = true;		
 		default:
 			break;
 		}

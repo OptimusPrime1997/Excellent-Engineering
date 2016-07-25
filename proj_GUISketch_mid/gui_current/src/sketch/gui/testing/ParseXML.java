@@ -69,7 +69,8 @@ public class ParseXML {
 	public AndroidNode findWidgetByLocation(double x, double y) {
 		Log.w("TAG-Pn3", "use findwidgetByLocation");
 		AndroidNode mid_and;
-		for (int i = 0; i < node_list.size(); i++) {
+		//for (int i = 0; i < node_list.size(); i++) {
+		for (int i = node_list.size()-1; i>=0; i--) {
 			mid_and = node_list.get(i);
 			// mid_and.print();
 			if (mid_and.isLocated(x, y)) {

@@ -6,9 +6,8 @@ import view.tools.TabbedPanel;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016/7/20.
@@ -16,6 +15,7 @@ import java.io.IOException;
 public class TextPanel extends JPanel {
     private JTabbedPane tb = new JTabbedPane();
     private int panel_count = 0;
+    private ArrayList<MyShowPane> list = new ArrayList<MyShowPane>();
     public TextPanel(JFrame jFrame){
         this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
         this.setLayout(new BorderLayout());
@@ -29,7 +29,7 @@ public class TextPanel extends JPanel {
         }
         try {
 
-            MyShowPane myShowPane = new MyShowPane(path);
+            MyShowPane myShowPane = new MyShowPane(path,this);
             //myShowPane.setEditorKit(new JavaSyntaxKit());
             JScrollPane jScrollPane = new JScrollPane(myShowPane);
             String name[] = path.split("/");
@@ -50,7 +50,35 @@ public class TextPanel extends JPanel {
         }
     }
 
+    public void addSaveCount(MyShowPane myShowPane){
+        if(!list.contains(myShowPane)){
+            list.add(myShowPane);
+        }
+    }
 
+    public void subSaveCount(MyShowPane myShowPane){
+        list.remove(myShowPane);
+    }
 
+    public boolean hasUnSavedFile(){
+        if(list.size() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public void saveFile(){
+        JScrollPane scrollPane = (JScrollPane) tb.getComponentAt(tb.getSelectedIndex());
+        MyShowPane myShowPane = (MyShowPane) scrollPane.getViewport().getView();
+        if(myShowPane.hasModified()){
+            list.remove(myShowPane);
+        }
 
+    }
+
+    public void saveAllFile(){
+        for(MyShowPane myShowPane : list){
+            myShowPane.saveFile();
+        }
+    }
 }

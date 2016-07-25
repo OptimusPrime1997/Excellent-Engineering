@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by Administrator on 2016/7/20.
@@ -18,12 +20,37 @@ public class MainView extends JFrame{
         Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width/6*5,screenSize.height/6*5);
         this.setLocation(screenSize.width/2-this.getWidth()/2,screenSize.height/2-this.getHeight()/2);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                if(!textPanel.hasUnSavedFile()){
+                    System.exit(0);
+                }
+                int option = JOptionPane.showConfirmDialog(null,
+                        "文件已修改，是否保存？", "保存文件？", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE, null);
+                switch (option) {
+                    case JOptionPane.YES_NO_OPTION: {
+                        textPanel.saveAllFile();
+                        System.exit(0);
+                    }
+                    case JOptionPane.NO_OPTION:
+                        System.exit(0);
 
-        toolPanel = new ToolPanel(this);
-        textPanel = new TextPanel(this);
+                }
+
+
+
+            }
+        });
         consolePane = new ConsolePane(this);
+        textPanel = new TextPanel(this);
+
+
+
         packetPanel = new PacketPanel(this, textPanel , consolePane);
+        toolPanel = new ToolPanel(this,consolePane,textPanel,packetPanel);
 
 
 
@@ -58,7 +85,7 @@ public class MainView extends JFrame{
         packetPos.gridy = 1;
         //packetPos.weighty = this.getHeight() / 30 * 18;
        // packetPos.weightx = this.getWidth() / 4;
-        packetPos.ipady = this.getHeight() / 30 * 21;
+        packetPos.ipady = this.getHeight() / 30 * 28;
         packetPos.ipadx = this.getWidth() / 4;
         return packetPos;
     }
@@ -70,7 +97,7 @@ public class MainView extends JFrame{
         textPos.gridheight = 1;
         textPos.gridx = 1;
         textPos.gridy = 1;
-        textPos.weighty = this.getHeight() / 30 * 21;
+        textPos.weighty = this.getHeight() / 30 * 28;
         textPos.weightx = this.getWidth() / 4 * 3;
         return textPos;
     }
@@ -82,9 +109,13 @@ public class MainView extends JFrame{
         constraints.gridheight = 1;
         constraints.gridx = 0;
         constraints.gridy = 2;
-        constraints.ipady = this.getHeight() / 30 * 8;
+        constraints.ipady = this.getHeight() / 30 * 1;
         constraints.ipadx = this.getWidth();
         return constraints;
+    }
+
+    public void refreshTree(){
+        packetPanel.refreshTree();
     }
     public static void main(String[] args){
         MainView mainView = new MainView();
