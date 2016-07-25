@@ -21,7 +21,7 @@ public class ToolPanel extends JToolBar {
         jbtNew.setBorderPainted(false);
         jbtOpen.setBorderPainted(false);
         jbtPrint.setBorderPainted(false);
-        jbtNew.addMouseListener(new CreateProjectAdapter("C://ONE_PIECE",jFrame));
+        jbtNew.addMouseListener(new CreateProjectAdapter("./ONE_PIECE",jFrame));
         this.add(jbtNew);
         this.add(jbtOpen);
         this.add(jbtPrint);
