@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="993fe614-28a4-46e7-9f3a-27512c08a655" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/MainView.java" afterPath="$PROJECT_DIR$/src/main/java/view/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/TextPanel.java" afterPath="$PROJECT_DIR$/src/main/java/view/TextPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/text_manage/MyShowPane.java" afterPath="$PROJECT_DIR$/src/main/java/view/text_manage/MyShowPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/view/tools/TabbedPanel.java" afterPath="$PROJECT_DIR$/src/main/java/view/tools/TabbedPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="One_Pecese_1_0.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -997,12 +994,12 @@
       <workItem from="1469178033557" duration="2597000" />
       <workItem from="1469236674996" duration="2174000" />
       <workItem from="1469244030605" duration="542000" />
-      <workItem from="1469408844299" duration="5921000" />
+      <workItem from="1469408844299" duration="6509000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16289000" />
+    <option name="totallyTimeSpent" value="16877000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
