@@ -68,6 +68,9 @@ public class PacketPanel extends JPanel {
         return false;
     }
 
+    public TreePath getSelectionPath(){
+        return tree.getSelectionPath();
+    }
     class TreeListener implements MouseListener{
         TreePath path;
         @Override
