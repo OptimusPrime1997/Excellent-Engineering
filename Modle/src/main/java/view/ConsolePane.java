@@ -1,5 +1,6 @@
 package view;
 
+import create_model.ModelCreateByModel;
 import create_model.ModelCreateByPaths;
 import service.ModelService;
 import util.xmlwriter.PathStrategyEnum;
@@ -68,7 +69,17 @@ public class ConsolePane extends JPanel {
     }
 
     public void loadApp(String path){
-
+        final File file = new File(path);
+        System.out.println(path);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ModelService modelService = new ModelCreateByModel().getModel(file);
+                int num = Integer.parseInt(JOptionPane.showInputDialog(null,"please input the count of the paths you want to create"));
+                modelService.printXML(num);
+            }
+        });
+        thread.run();
     }
     
     public void resetProcessBar(){
