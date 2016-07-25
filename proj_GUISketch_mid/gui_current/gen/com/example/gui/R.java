@@ -52,32 +52,38 @@ public final class R {
         public static final int or=0x7f020017;
     }
     public static final class id {
-        public static final int RelativeLayout_Item=0x7f080008;
+        public static final int RelativeLayout_Item=0x7f08000d;
         public static final int btExit=0x7f080002;
-        public static final int bt_pengyouquan=0x7f08000e;
-        public static final int bt_weibo=0x7f08000d;
-        public static final int bt_weixin=0x7f08000c;
-        public static final int gridview=0x7f08000f;
+        public static final int bt_pengyouquan=0x7f080013;
+        public static final int bt_weibo=0x7f080012;
+        public static final int bt_weixin=0x7f080011;
+        public static final int content=0x7f080006;
+        public static final int gridview=0x7f080014;
         public static final int gvFileChooser=0x7f080003;
         public static final int imageView1=0x7f080005;
         public static final int imgBackFolder=0x7f080000;
-        public static final int imgFileIcon=0x7f080006;
-        public static final int iv_icon=0x7f080009;
-        public static final int list_view=0x7f08000b;
+        public static final int imgFileIcon=0x7f08000b;
+        public static final int iv_icon=0x7f08000e;
+        public static final int list_view=0x7f080010;
+        public static final int message=0x7f080008;
+        public static final int negativeButton=0x7f08000a;
+        public static final int positiveButton=0x7f080009;
+        public static final int title=0x7f080007;
         public static final int tvEmptyHint=0x7f080004;
-        public static final int tvFileName=0x7f080007;
+        public static final int tvFileName=0x7f08000c;
         public static final int tvPath=0x7f080001;
-        public static final int tv_title=0x7f08000a;
+        public static final int tv_title=0x7f08000f;
     }
     public static final class layout {
         public static final int activity_image_choose=0x7f030000;
         public static final int activity_main=0x7f030001;
         public static final int activity_pre_main=0x7f030002;
-        public static final int filechooser_gridview_item=0x7f030003;
-        public static final int item=0x7f030004;
-        public static final int layout_list=0x7f030005;
-        public static final int mydialog=0x7f030006;
-        public static final int view=0x7f030007;
+        public static final int dialog_normal_layout=0x7f030003;
+        public static final int filechooser_gridview_item=0x7f030004;
+        public static final int item=0x7f030005;
+        public static final int layout_list=0x7f030006;
+        public static final int mydialog=0x7f030007;
+        public static final int view=0x7f030008;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
@@ -117,6 +123,7 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int MyDialog=0x7f070004;
         /**  对话框样式 
          */
         public static final int Theme_Light_Dialog=0x7f070003;
