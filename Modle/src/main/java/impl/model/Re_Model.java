@@ -12,7 +12,9 @@ public class Re_Model extends Model {
     /**
      * 由于使用逆邻接链表，训练策略也要做相应的改动
      */
-    public Re_Model(){
+    public Re_Model(String savePath)
+    {
+        super(savePath);
         this.strategy = new OracleFrist();
     }
 

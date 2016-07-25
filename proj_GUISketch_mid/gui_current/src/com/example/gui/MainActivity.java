@@ -387,7 +387,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					Builder inputDailog = new AlertDialog.Builder(this);
 					inputDailog.setTitle("Expected output:");
 					inputDailog.setIcon(android.R.drawable.ic_dialog_info);
-					inputDailog.setView(tv).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					inputDailog.setView(tv).setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface arg0, int arg1) {
 							// TODO Auto-generated method stub
@@ -398,7 +398,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 									+ String.valueOf(rect[3].y));
 						}
 					});
-					inputDailog.setNegativeButton("取消", null);
+					inputDailog.setNegativeButton("Cancel", null);
 					inputDailog.show();
 
 					countDrawArea = 0;
@@ -709,7 +709,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	 * exit app confirm dialog
 	 */
 	protected void exitDialog() {
-		AlertDialog.Builder builder = new Builder(MainActivity.this);
+		AlertDialog.Builder builder = new Builder(MainActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 		builder.setMessage("Exit now?");
 		builder.setTitle("Promption");
 		builder.setPositiveButton("Confirm", new OnClickListener() {
@@ -732,7 +732,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	 * handle target->save without fork tag
 	 */
 	protected void saveNoForkDialog() {
-		AlertDialog.Builder builder = new Builder(MainActivity.this);
+		AlertDialog.Builder builder = new Builder(MainActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 		builder.setMessage("Save success!");
 		builder.setTitle("Choose Next Step");
 		builder.setPositiveButton("Back to home", new OnClickListener() {

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<path>
+    <state typeCode="1">
+        <stateId>1</stateId>
+        <fileName>/mnt/sdcard/screenShotPicture/screen_data/summation/1.png</fileName>
+    </state>
+    <Operation id="0" delayTime="0" action="click" type="component">
+        <index></index>
+        <resourceType>TextView</resourceType>
+    </Operation><state typeCode="1">
+    <stateId>2</stateId>
+    <fileName>/mnt/sdcard/screenShotPicture/screen_data/summation/2.png</fileName>
+</state>
+    <Operation id="1" delayTime="0" action="input" type="textComponent">
+        <index>Label</index>
+        <resourceType>EditText</resourceType>
+        <input>test</input>
+    </Operation>
+    <state typeCode="1">
+        <stateId>3</stateId>
+        <fileName>/mnt/sdcard/screenShotPicture/screen_data/summation/2.png</fileName>
+    </state><Operation id="2" delayTime="0" action="input" type="textComponent">
+    <index>Value</index>
+    <resourceType>EditText</resourceType>
+    <input>6</input>
+</Operation>
+    <state typeCode="1">
+        <stateId>5</stateId>
+        <fileName>/mnt/sdcard/screenShotPicture/screen_data/summation/2.png</fileName>
+    </state><Operation id="3" delayTime="0" action="click" type="component">
+    <index>Item</index>
+    <resourceType>TextView</resourceType>
+</Operation>
+    <state typeCode="2" type="single_component">
+        <stateId>6</stateId>
+        <fileName>/mnt/sdcard/screenShotPicture/screen_data/summation/3.png</fileName>
+        <singleComponent>
+            <index>9.99</index>
+            <resourceType>TextView</resourceType>
+            <expect type="text">9.99</expect>
+        </singleComponent>
+    </state>
+</path>

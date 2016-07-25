@@ -10,7 +10,9 @@ public class AndroidNode {
 	public String text;
 	public String widget_name;
 	public String package_name;
+	public String resourceId;
 	public String bounds;
+	
 	public float x1, y1, x2, y2;
 
 	public AndroidNode() {
@@ -18,12 +20,13 @@ public class AndroidNode {
 		index = text = widget_name = package_name = bounds = "";
 	}
 
-	public AndroidNode(String i, String t, String w, String p, String b) {
+	public AndroidNode(String i, String t, String w, String p, String b,String r) {
 		index = i;
 		text = t;
 		widget_name = w;
 		package_name = p;
 		bounds = b;
+		resourceId=r;
 		convert();
 	}
 
@@ -76,7 +79,7 @@ public class AndroidNode {
 
 	public String getPrintString() {
 		 return ("AndoirdNode[ index: " + index + " text: " + text + " class: " + widget_name + " package: "
-				+ package_name + " bounds: " + bounds + "]\n");
+				+ package_name+"resourceId:"+resourceId + " bounds: " + bounds + "]\n");
 	}
 
 	/*

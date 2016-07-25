@@ -35,15 +35,17 @@ public class ConsolePane extends JPanel {
         this.add(scrollPane);
     }
 
-    public void runXML(String path){
-        System.out.println("build new task");
-        RunningTask runningTask = new RunningTask();
-        runningTask.addPath(path);
-        Thread thread = new Thread(runningTask);
-        thread.run();
-    }
 
     public void runApp(String path){
+        System.out.println(path);
+        File file = new File(path);
+        File[] fileList = file.listFiles();
+        RunningTask runningTask = new RunningTask(path.replace("sketch",""));
+        for(File f : fileList){
+            runningTask.addPath(f);
+        }
+        Thread thread = new Thread(runningTask);
+        thread.run();
 
     }
 
@@ -57,10 +59,15 @@ public class ConsolePane extends JPanel {
     }
 
     class RunningTask implements Runnable{
-        private ArrayList<String> xmlPath = new ArrayList<String>();
+        private ArrayList<File> xmlPath = new ArrayList<File>();
+        private String appFloderPath;
+        public RunningTask(String appFloderPath){
+            System.out.println(appFloderPath);
+            this.appFloderPath = appFloderPath;
+        }
 
-        public void addPath(String path){
-            xmlPath.add(path);
+        public void addPath(File file){
+            xmlPath.add(file);
         }
 
         @Override
@@ -69,12 +76,13 @@ public class ConsolePane extends JPanel {
             ModelCreateByPaths modelCreateByPaths = new ModelCreateByPaths();
             File[] files = new File[xmlPath.size()];
             int x = 0;
-            for(String path : xmlPath){
-                files[x] = new File(path);
+            for(File f : xmlPath){
+                files[x] = f;
                 x++;
             }
-            ModelService modelService = modelCreateByPaths.getModel(PathStrategyEnum.ROOT_FRIST,files);
+            ModelService modelService = modelCreateByPaths.getModel(PathStrategyEnum.ROOT_FRIST,files,appFloderPath);
             modelService.printModel();
+            modelService.printXML(20);   //这里默认是20
         }
     }
 }

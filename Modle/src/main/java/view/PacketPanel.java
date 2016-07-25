@@ -29,29 +29,40 @@ public class PacketPanel extends JPanel {
         tree = new FileTree(list);
         tree.addMouseListener(new TreeListener());
         tree.setRootVisible(false);
-        //tree.setDoubleBuffered(true);
-        //list.setDoubleBuffered(true);
+        tree.setDoubleBuffered(true);
+        list.setDoubleBuffered(true);
         treeView = new JScrollPane(tree);
         treeView.setSize(jframe.getWidth()/4,jframe.getHeight()/5*4);
         treeView.setLocation(0,0);
         this.add(BorderLayout.CENTER,treeView);
-        System.out.println(treeView.getSize());
-        System.out.println(this.getSize());
+        //System.out.println(treeView.getSize());
+        //System.out.println(this.getSize());
         this.consolePane = consolePane;
-        //this.repaint();
     }
 
     public String getFilePath(TreePath path){
         String filePath = "C://";
         Object[] p =path.getPath();
-        if(!p[p.length-1].toString().contains(".")){
-            return null;
-        }
         for(int x = 0 ; x < p.length - 1 ; x++){
             filePath += p[x].toString() + '/';
         }
         filePath += p[p.length - 1].toString();
         return filePath;
+    }
+
+    public boolean isFloder(TreePath path){
+        Object[] p = path.getPath();
+        if(p[p.length - 1].toString().contains(".")){
+            return false;
+        }
+        return true;
+    }
+    public boolean isRootPacket(TreePath path){
+        Object[] p = path.getPath();
+        if(p.length == 2){
+            return true;
+        }
+        return false;
     }
 
     class TreeListener implements MouseListener{
@@ -65,7 +76,10 @@ public class PacketPanel extends JPanel {
             if(path == null){
                 return;
             }
-            textPanel.openFile(getFilePath(path));
+            if(!isFloder(path)){
+                textPanel.openFile(getFilePath(path));
+            }
+
         }
 
         @Override
@@ -76,12 +90,19 @@ public class PacketPanel extends JPanel {
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            if(e.isPopupTrigger()) {
+            if(path == null){
+                return;
+            }
+            if(e.isPopupTrigger() && isRootPacket(path)) {
                 JPopupMenu popMenu = new JPopupMenu();
-                JMenuItem menuLeafNode1 = new JMenuItem("         run        ");
+                JMenuItem menuLeafNode1 = new JMenuItem("output model");
                 menuLeafNode1.addMouseListener(new TreeRunListener(path));
                 menuLeafNode1.setFont(new Font("Consolas",Font.BOLD,12));
+                JMenuItem menuItem = new JMenuItem("load model");
                 popMenu.add(menuLeafNode1);
+                popMenu.add(menuItem);
+                JMenuItem menuItem2 = new JMenuItem("build path");
+
                 popMenu.show(e.getComponent(), e.getX(), e.getY());
             }
         }
@@ -116,11 +137,9 @@ public class PacketPanel extends JPanel {
         public void mouseReleased(MouseEvent e) {
             String path = getFilePath(treePath);
             System.out.println(path);
-            if(path.contains(".xml")){
-                consolePane.runXML(path);
-            }else if(!path.contains(".")){
-                consolePane.runApp(path);
-            }
+            consolePane.runApp(path + "/sketch");
+
+            tree.refreshTree();
         }
 
         @Override
@@ -133,4 +152,38 @@ public class PacketPanel extends JPanel {
 
         }
     }
+
+    class PathBuildListener implements MouseListener{
+        private TreePath treePath;
+        public PathBuildListener(TreePath path){
+            this.treePath = path;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    }
+
+
 }
