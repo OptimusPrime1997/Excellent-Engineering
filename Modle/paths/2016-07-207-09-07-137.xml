@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index></index>
+<componentType>TextView</componentType>
+</Component>
+</operation>
+<operation type = "TextComponent" action = "INPUT" delayTime = "0">
+<textComponent>
+<index>Label</index>
+<componentType>EditText</componentType>
+<input>test</input>
+</textComponent>
+</operation>
+<operation type = "TextComponent" action = "INPUT" delayTime = "0">
+<textComponent>
+<index>Value</index>
+<componentType>EditText</componentType>
+<input>6</input>
+</textComponent>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Item</index>
+<componentType>TextView</componentType>
+</Component>
+</operation>
+<oracle type = "SingleComponentResult">
+<singleComponent>
+<index>9.99</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>9.99</expect>
+</singleComponent>
+</oracle>
+</path> 
+</paths>

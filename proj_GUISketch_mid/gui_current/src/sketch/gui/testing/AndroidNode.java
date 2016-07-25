@@ -12,7 +12,7 @@ public class AndroidNode {
 	public String package_name;
 	public String resourceId;
 	public String bounds;
-	
+
 	public float x1, y1, x2, y2;
 
 	public AndroidNode() {
@@ -20,13 +20,13 @@ public class AndroidNode {
 		index = text = widget_name = package_name = bounds = "";
 	}
 
-	public AndroidNode(String i, String t, String w, String p, String b,String r) {
+	public AndroidNode(String i, String t, String w, String p, String b, String r) {
 		index = i;
 		text = t;
 		widget_name = w;
 		package_name = p;
 		bounds = b;
-		resourceId=r;
+		resourceId = r;
 		convert();
 	}
 
@@ -65,10 +65,10 @@ public class AndroidNode {
 				}
 			}
 		}
-		x1=Math.min(x1, x2);
-		x2=Math.max(x1, x2);
-		y1=Math.min(y1, y2);
-		y2=Math.max(y1, y2);
+		x1 = Math.min(x1, x2);
+		x2 = Math.max(x1, x2);
+		y1 = Math.min(y1, y2);
+		y2 = Math.max(y1, y2);
 	}
 
 	public boolean isLocated(double x, double y) {
@@ -78,16 +78,8 @@ public class AndroidNode {
 	}
 
 	public String getPrintString() {
-		 return ("AndoirdNode[ index: " + index + " text: " + text + " class: " + widget_name + " package: "
-				+ package_name+"resourceId:"+resourceId + " bounds: " + bounds + "]\n");
+		String str = "<node index=\"" + index + "\" text=\"" + text + "\" resource-id=\"" + resourceId + "\" class=\""
+				+ widget_name + "\" package=\"" + package_name + "\" bounds=\"" + bounds + "\" />";
+		return str;
 	}
-
-	/*
-	 * public static void main(String[] args) { bounds = "[0,25][540,960]";
-	 * convert(); System.out.println("x1 = "+x1+", x2 = "+x2+", y1 = "+y1+
-	 * ", y2 = "+y2);
-	 * 
-	 * bounds= "[0.2,34.43][400,20.0]"; convert(); System.out.println("x1 = "
-	 * +x1+", x2 = "+x2+", y1 = "+y1+", y2 = "+y2); }
-	 */
 }

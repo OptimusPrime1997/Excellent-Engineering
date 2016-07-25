@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -39,9 +40,11 @@ public class PacketPanel extends JPanel {
         //System.out.println(this.getSize());
         this.consolePane = consolePane;
     }
-
+    public void refreshTree(){
+        tree.refreshTree();
+    }
     public String getFilePath(TreePath path){
-        String filePath = "C://";
+        String filePath = "./";
         Object[] p =path.getPath();
         for(int x = 0 ; x < p.length - 1 ; x++){
             filePath += p[x].toString() + '/';
@@ -65,6 +68,9 @@ public class PacketPanel extends JPanel {
         return false;
     }
 
+    public TreePath getSelectionPath(){
+        return tree.getSelectionPath();
+    }
     class TreeListener implements MouseListener{
         TreePath path;
         @Override
@@ -99,6 +105,12 @@ public class PacketPanel extends JPanel {
                 menuLeafNode1.addMouseListener(new TreeRunListener(path));
                 menuLeafNode1.setFont(new Font("Consolas",Font.BOLD,12));
                 JMenuItem menuItem = new JMenuItem("load model");
+                menuItem.addMouseListener(new MouseAdapter(){
+                    public void mouseReleased(MouseEvent e) {
+                        String treePath = getFilePath(path);
+                        consolePane.loadApp(treePath + "/model.xml");
+                    }
+                });
                 popMenu.add(menuLeafNode1);
                 popMenu.add(menuItem);
                 JMenuItem menuItem2 = new JMenuItem("build path");
@@ -106,6 +118,9 @@ public class PacketPanel extends JPanel {
                 popMenu.show(e.getComponent(), e.getX(), e.getY());
             }
         }
+
+
+
 
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -152,38 +167,5 @@ public class PacketPanel extends JPanel {
 
         }
     }
-
-    class PathBuildListener implements MouseListener{
-        private TreePath treePath;
-        public PathBuildListener(TreePath path){
-            this.treePath = path;
-        }
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-    }
-
 
 }

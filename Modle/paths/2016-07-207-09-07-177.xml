@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Charsets</index>
+<componentType>TextView</componentType>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>UTF-8 (default)</index>
+<componentType>TextView</componentType>
+</Component>
+</operation>
+<oracle type = "SingleComponentResult">
+<singleComponent>
+<index>Charset "UTF-8"</index>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>UTF-8</expect>
+</singleComponent>
+</oracle>
+</path> 
+</paths>
