@@ -983,11 +983,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						}
 						int color = bitmap.getPixel((int) Double.parseDouble(points[0]),
 								(int) Double.parseDouble(points[1]));
-						int[] colors = new int[3];
-						colors[0] = Color.red(color);
-						colors[1] = Color.green(color);
-						colors[2] = Color.blue(color);
-						CreateElement.addRGB(stateElement, points, colors);
+						CreateElement.addRGB(stateElement, points, color);
 					}
 
 				} else if (results.length == 1) {

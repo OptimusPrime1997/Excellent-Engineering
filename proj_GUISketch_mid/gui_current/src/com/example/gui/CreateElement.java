@@ -80,6 +80,8 @@ public class CreateElement {
 				BuildDocument.addText(indexElement, nodes.get(i).text);
 				Element typeElement = BuildDocument.addElement(singleCompoent, "resourceType");
 				BuildDocument.addText(typeElement, nodes.get(i).widget_name);
+				Element messageElement = BuildDocument.addElement(singleCompoent, "message");
+				BuildDocument.addText(messageElement, nodes.get(i).getPrintString());
 			}
 			
 //			Element pointsElement = BuildDocument.addElement(element, "doublePoint");
@@ -137,6 +139,8 @@ public class CreateElement {
 				BuildDocument.addText(indexElement, node.text);
 				Element resouceType = BuildDocument.addElement(element, "resourceType");
 				BuildDocument.addText(resouceType, node.widget_name);
+				Element message = BuildDocument.addElement(element, "message");
+				BuildDocument.addText(message, node.getPrintString());
 			}else{
 				Element pointElement = BuildDocument.addElement(element, "singlePoint");
 				Element pointXElement = BuildDocument.addElement(pointElement, "pointX");
@@ -174,6 +178,8 @@ public class CreateElement {
 				BuildDocument.addText(indexElement, node.text);
 				Element resouceType = BuildDocument.addElement(element, "resourceType");
 				BuildDocument.addText(resouceType, node.widget_name);
+				Element message = BuildDocument.addElement(element, "message");
+				BuildDocument.addText(message, node.getPrintString());
 			}
 			
 		}
@@ -199,11 +205,19 @@ public class CreateElement {
 		if (type.equals("single_component")) {
 			BuildDocument.addAttribute(element, "type", type);			
 			Element componentElement = BuildDocument.addElement(element, "singleComponent");
-			if (nodes.isEmpty()==false&&nodes.get(nodes.size()-1)!=null) {
+//			if (nodes.isEmpty()==false&&nodes.get(nodes.size()-1)!=null) {
+//				Element indexElement = BuildDocument.addElement(componentElement, "index");
+//				BuildDocument.addText(indexElement, nodes.get(nodes.size()-1).text);
+//				Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
+//				BuildDocument.addText(resourceElement, nodes.get(nodes.size()-1).widget_name);			
+//			}
+			if (nodes.isEmpty()==false) {
 				Element indexElement = BuildDocument.addElement(componentElement, "index");
-				BuildDocument.addText(indexElement, nodes.get(nodes.size()-1).text);
+				BuildDocument.addText(indexElement, nodes.get(0).text);
 				Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
-				BuildDocument.addText(resourceElement, nodes.get(nodes.size()-1).widget_name);			
+				BuildDocument.addText(resourceElement, nodes.get(0).widget_name);
+				Element resouceId = BuildDocument.addElement(componentElement, "message");
+				BuildDocument.addText(resouceId, nodes.get(0).getPrintString());
 			}
 			Element expectElement = BuildDocument.addElement(componentElement, "expect");
 			BuildDocument.addAttribute(expectElement, "type", "text");
@@ -224,6 +238,8 @@ public class CreateElement {
 		BuildDocument.addText(indexElement, node.text);	
 		Element resourceElement = BuildDocument.addElement(element, "resourceType");
 		BuildDocument.addText(resourceElement, node.widget_name); 
+		Element message = BuildDocument.addElement(element, "message");
+		BuildDocument.addText(message, node.getPrintString());
 	}
 	
 	public static void replaceElement(Element element, AndroidNode node){
@@ -231,14 +247,18 @@ public class CreateElement {
 		element.remove(deleteIndex);
 		Element deleteResource = element.element("resourceType");
 		element.remove(deleteResource);
+		Element deletemessage = element.element("message");
+		deletemessage.detach();
 		Element indexElement = BuildDocument.addElement(element, "index");
 		BuildDocument.addText(indexElement, node.text);	
 		Element resourceElement = BuildDocument.addElement(element, "resourceType");
 		BuildDocument.addText(resourceElement, node.widget_name);
+		Element message = BuildDocument.addElement(element, "message");
+		BuildDocument.addText(message, node.getPrintString());
 	}
 	
 	
-	public static void addRGB(Element element, String[] points, int[] colors){
+	public static void addRGB(Element element, String[] points, int color){
 		BuildDocument.addAttribute(element, "typeCode", "2");
 		Element componentElement = BuildDocument.addElement(element, "singleComponent");
 		Element expectElement = BuildDocument.addElement(componentElement, "expect");
@@ -249,12 +269,7 @@ public class CreateElement {
 		Element pointYElement = BuildDocument.addElement(pointElement, "pointY");
 		BuildDocument.addText(pointYElement, points[1]);
 		Element colorElement = BuildDocument.addElement(expectElement, "color");
-		Element redElement = BuildDocument.addElement(colorElement, "red");
-		BuildDocument.addText(redElement, colors[0]+"");
-		Element greenElement = BuildDocument.addElement(colorElement, "green");
-		BuildDocument.addText(greenElement, colors[1]+"");
-		Element blueElement = BuildDocument.addElement(colorElement, "blue");
-		BuildDocument.addText(blueElement, colors[2]+"");
+		BuildDocument.addText(colorElement, color+"");
 	}
 	
 
