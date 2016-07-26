@@ -81,6 +81,27 @@ public class ConsolePane extends JPanel {
         });
         thread.run();
     }
+
+    public void createScript(String path){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String activity = JOptionPane.showInputDialog(null,"please input the main activity");
+                JFileChooser jdir = new JFileChooser();
+                jdir.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                //设置对话框标题
+                jdir.setDialogTitle("请选择路径");
+                if (JFileChooser.APPROVE_OPTION == jdir.showOpenDialog(null)) {//用户点击了确定
+                    String savePath = jdir.getSelectedFile().getAbsolutePath();//取得路径选择
+                    System.out.println(savePath);
+                }else{
+                    return;
+                }
+
+            }
+        });
+        thread.run();
+    }
     
     public void resetProcessBar(){
         this.progressBar.setValue(0);

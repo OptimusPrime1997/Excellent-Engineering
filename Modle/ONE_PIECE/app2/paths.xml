@@ -58,156 +58,6 @@
 <message>null</message>
 </Component>
 </operation>
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>do</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>End Game</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<oracle type = "OrOperation">
-<or>
-<and>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<message>null</message>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>correct</expect>
-</singleComponent>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<message>null</message>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>1</expect>
-</singleComponent>
-</and>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<message>null</message>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>0</expect>
-</singleComponent>
-</or>
-</oracle>
-</path> 
-<path> 
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>Training</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>si</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>End Game</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<oracle type = "OrOperation">
-<or>
-<and>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<message>null</message>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>correct</expect>
-</singleComponent>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<message>null</message>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>1</expect>
-</singleComponent>
-</and>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<message>null</message>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>0</expect>
-</singleComponent>
-</or>
-</oracle>
-</path> 
-<path> 
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>Training</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>do</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<operation type = "Component" action = "CLICK" delayTime = "5">
-<Component>
-<index>End Game</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<oracle type = "OrOperation">
-<or>
-<and>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<message>null</message>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>correct</expect>
-</singleComponent>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<message>null</message>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>1</expect>
-</singleComponent>
-</and>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<message>null</message>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>0</expect>
-</singleComponent>
-</or>
-</oracle>
-</path> 
-<path> 
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>Training</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
 <operation type = "MultiComponent" action = "CLICK" delayTime = "0">
 <MultiComponent>
 <Component>
@@ -292,39 +142,7 @@
 </operation>
 <operation type = "Component" action = "CLICK" delayTime = "0">
 <Component>
-<index>fa</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>End Game</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<oracle type = "SingleComponentResult">
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<message>null</message>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>1</expect>
-</singleComponent>
-</oracle>
-</path> 
-<path> 
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>Training</index>
-<componentType>Button</componentType>
-<message>null</message>
-</Component>
-</operation>
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>si</index>
+<index>re</index>
 <componentType>Button</componentType>
 <message>null</message>
 </Component>
@@ -374,7 +192,189 @@
 </operation>
 <operation type = "Component" action = "CLICK" delayTime = "0">
 <Component>
-<index>re</index>
+<index>do</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>End Game</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Training</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>si</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>End Game</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Training</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>fa</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>End Game</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<oracle type = "SingleComponentResult">
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Training</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>do</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "5">
+<Component>
+<index>End Game</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Training</index>
+<componentType>Button</componentType>
+<message>null</message>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>si</index>
 <componentType>Button</componentType>
 <message>null</message>
 </Component>
