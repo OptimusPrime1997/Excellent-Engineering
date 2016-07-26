@@ -10,7 +10,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>re</id>
-</area>
+<message>null</message></area>
 <id>1</id>
 <delay>0</delay>
 </edge>
@@ -21,7 +21,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>re</id>
-</area>
+<message>null</message></area>
 <id>1</id>
 <delay>0</delay>
 </edge>
@@ -32,7 +32,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>re</id>
-</area>
+<message>null</message></area>
 <id>1</id>
 <delay>0</delay>
 </edge>
@@ -44,42 +44,31 @@
 <area  type = "Component">
 <type>Button</type>
 <id>re</id>
-</area>
+<message>null</message></area>
 <area  type = "Component">
 <type>Button</type>
 <id>si</id>
-</area>
+<message>null</message></area>
 <area  type = "Component">
 <type>Button</type>
 <id>mi</id>
-</area>
+<message>null</message></area>
 <area  type = "Component">
 <type>Button</type>
 <id>sol</id>
-</area>
+<message>null</message></area>
 <area  type = "Component">
 <type>Button</type>
 <id>do</id>
-</area>
+<message>null</message></area>
 <area  type = "Component">
 <type>Button</type>
 <id>fa</id>
-</area>
+<message>null</message></area>
 <area  type = "Component">
 <type>Button</type>
 <id>la</id>
-</area>
-</area>
-<id>1</id>
-<delay>0</delay>
-</edge>
-<edge>
-<action>CLICK</action>
-<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
-<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
-<area  type = "Component">
-<type>Button</type>
-<id>do</id>
+<message>null</message></area>
 </area>
 <id>1</id>
 <delay>0</delay>
@@ -91,7 +80,18 @@
 <area  type = "Component">
 <type>Button</type>
 <id>do</id>
-</area>
+<message>null</message></area>
+<id>1</id>
+<delay>0</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>do</id>
+<message>null</message></area>
 <id>1</id>
 <delay>0</delay>
 </edge>
@@ -102,7 +102,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>si</id>
-</area>
+<message>null</message></area>
 <id>1</id>
 <delay>0</delay>
 </edge>
@@ -113,7 +113,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>do</id>
-</area>
+<message>null</message></area>
 <id>1</id>
 <delay>0</delay>
 </edge>
@@ -130,7 +130,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>Training</id>
-</area>
+<message>null</message></area>
 <id>0</id>
 <delay>0</delay>
 </edge>
@@ -141,7 +141,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>Training</id>
-</area>
+<message>null</message></area>
 <id>0</id>
 <delay>0</delay>
 </edge>
@@ -152,7 +152,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>Training</id>
-</area>
+<message>null</message></area>
 <id>0</id>
 <delay>0</delay>
 </edge>
@@ -163,7 +163,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>Training</id>
-</area>
+<message>null</message></area>
 <id>0</id>
 <delay>0</delay>
 </edge>
@@ -174,7 +174,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>Training</id>
-</area>
+<message>null</message></area>
 <id>0</id>
 <delay>0</delay>
 </edge>
@@ -185,7 +185,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>Training</id>
-</area>
+<message>null</message></area>
 <id>0</id>
 <delay>0</delay>
 </edge>
@@ -196,7 +196,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>Training</id>
-</area>
+<message>null</message></area>
 <id>0</id>
 <delay>0</delay>
 </edge>
@@ -207,7 +207,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>Training</id>
-</area>
+<message>null</message></area>
 <id>0</id>
 <delay>0</delay>
 </edge>
@@ -218,7 +218,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>Training</id>
-</area>
+<message>null</message></area>
 <id>0</id>
 <delay>0</delay>
 </edge>
@@ -235,7 +235,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>End Game</id>
-</area>
+<message>null</message></area>
 <id>2</id>
 <delay>0</delay>
 </edge>
@@ -246,7 +246,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>End Game</id>
-</area>
+<message>null</message></area>
 <id>2</id>
 <delay>5</delay>
 </edge>
@@ -257,7 +257,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>End Game</id>
-</area>
+<message>null</message></area>
 <id>2</id>
 <delay>0</delay>
 </edge>
@@ -268,7 +268,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>End Game</id>
-</area>
+<message>null</message></area>
 <id>2</id>
 <delay>0</delay>
 </edge>
@@ -279,7 +279,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>End Game</id>
-</area>
+<message>null</message></area>
 <id>2</id>
 <delay>0</delay>
 </edge>
@@ -290,7 +290,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>End Game</id>
-</area>
+<message>null</message></area>
 <id>2</id>
 <delay>0</delay>
 </edge>
@@ -301,7 +301,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>End Game</id>
-</area>
+<message>null</message></area>
 <id>2</id>
 <delay>0</delay>
 </edge>
@@ -312,7 +312,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>End Game</id>
-</area>
+<message>null</message></area>
 <id>2</id>
 <delay>0</delay>
 </edge>
@@ -329,7 +329,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>fa</id>
-</area>
+<message>null</message></area>
 <id>3</id>
 <delay>0</delay>
 </edge>
@@ -346,7 +346,7 @@
 <area  type = "Component">
 <type>Button</type>
 <id>End Game</id>
-</area>
+<message>null</message></area>
 <id>4</id>
 <delay>0</delay>
 </edge>
@@ -356,6 +356,7 @@
 <result>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>1</expect>
@@ -373,12 +374,14 @@
 <or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>fail</expect>
 </singleComponent>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>correct</expect>
@@ -386,6 +389,7 @@
 </or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>1</expect>
@@ -393,6 +397,7 @@
 </and>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>0</expect>

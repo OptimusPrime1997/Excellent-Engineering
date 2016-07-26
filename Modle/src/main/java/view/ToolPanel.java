@@ -40,6 +40,7 @@ public class ToolPanel extends JToolBar {
                 super.mouseClicked(e);
                 TreePath treePath = packetPanel.getSelectionPath();
                 consolePane.loadApp(packetPanel.getFilePath(treePath)+File.separator+"model.xml");
+                packetPanel.refreshTree();
             }
         });
         jbtPrint.addMouseListener(new MouseAdapter() {
@@ -48,6 +49,7 @@ public class ToolPanel extends JToolBar {
                 super.mouseClicked(e);
                 TreePath treePath = packetPanel.getSelectionPath();
                 consolePane.runApp(packetPanel.getFilePath(treePath)+File.separator+"sketch");
+                packetPanel.refreshTree();
             }
         });
 

@@ -5,12 +5,14 @@
 <Component>
 <index>Button</index>
 <componentType>do</componentType>
+<message>null</message>
 </Component>
 </operation>
 <operation type = "Component" action = "CLICK" delayTime = "0">
 <Component>
 <index>Button</index>
 <componentType>End Game</componentType>
+<message>null</message>
 </Component>
 </operation>
 <oracle type = "OrOperation">
@@ -19,12 +21,14 @@
 <or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>fail</expect>
 </singleComponent>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>correct</expect>
@@ -32,6 +36,7 @@
 </or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>1</expect>
@@ -39,6 +44,59 @@
 </and>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</or>
+</oracle>
+</path> 
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>si</componentType>
+<message>null</message>
+</Component>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Button</index>
+<componentType>End Game</componentType>
+<message>null</message>
+</Component>
+</operation>
+<oracle type = "OrOperation">
+<or>
+<and>
+<or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>fail</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>correct</expect>
+</singleComponent>
+</or>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>0</expect>
@@ -51,12 +109,14 @@
 <Component>
 <index>Button</index>
 <componentType>re</componentType>
+<message>null</message>
 </Component>
 </operation>
 <operation type = "Component" action = "CLICK" delayTime = "0">
 <Component>
 <index>Button</index>
 <componentType>End Game</componentType>
+<message>null</message>
 </Component>
 </operation>
 <oracle type = "OrOperation">
@@ -65,12 +125,14 @@
 <or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>fail</expect>
 </singleComponent>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>correct</expect>
@@ -78,6 +140,7 @@
 </or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>1</expect>
@@ -85,6 +148,7 @@
 </and>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>0</expect>
@@ -98,30 +162,37 @@
 <Component>
 <index>Button</index>
 <componentType>re</componentType>
+<message>null</message>
 </Component>
 <Component>
 <index>Button</index>
 <componentType>si</componentType>
+<message>null</message>
 </Component>
 <Component>
 <index>Button</index>
 <componentType>mi</componentType>
+<message>null</message>
 </Component>
 <Component>
 <index>Button</index>
 <componentType>sol</componentType>
+<message>null</message>
 </Component>
 <Component>
 <index>Button</index>
 <componentType>do</componentType>
+<message>null</message>
 </Component>
 <Component>
 <index>Button</index>
 <componentType>fa</componentType>
+<message>null</message>
 </Component>
 <Component>
 <index>Button</index>
 <componentType>la</componentType>
+<message>null</message>
 </Component>
 </MultiComponent>
 </operation>
@@ -129,6 +200,7 @@
 <Component>
 <index>Button</index>
 <componentType>End Game</componentType>
+<message>null</message>
 </Component>
 </operation>
 <oracle type = "OrOperation">
@@ -137,12 +209,14 @@
 <or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>fail</expect>
 </singleComponent>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>correct</expect>
@@ -150,6 +224,7 @@
 </or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>1</expect>
@@ -157,98 +232,7 @@
 </and>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>0</expect>
-</singleComponent>
-</or>
-</oracle>
-</path> 
-<path> 
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>Button</index>
-<componentType>do</componentType>
-</Component>
-</operation>
-<operation type = "Component" action = "CLICK" delayTime = "5">
-<Component>
-<index>Button</index>
-<componentType>End Game</componentType>
-</Component>
-</operation>
-<oracle type = "OrOperation">
-<or>
-<and>
-<or>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>fail</expect>
-</singleComponent>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>correct</expect>
-</singleComponent>
-</or>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>1</expect>
-</singleComponent>
-</and>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>0</expect>
-</singleComponent>
-</or>
-</oracle>
-</path> 
-<path> 
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>Button</index>
-<componentType>si</componentType>
-</Component>
-</operation>
-<operation type = "Component" action = "CLICK" delayTime = "0">
-<Component>
-<index>Button</index>
-<componentType>End Game</componentType>
-</Component>
-</operation>
-<oracle type = "OrOperation">
-<or>
-<and>
-<or>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>fail</expect>
-</singleComponent>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>correct</expect>
-</singleComponent>
-</or>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
-<resultType>TEXT</resultType>
-<componentType>TextView</componentType>
-<expect>1</expect>
-</singleComponent>
-</and>
-<singleComponent>
-<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>0</expect>
@@ -261,12 +245,14 @@
 <Component>
 <index>Button</index>
 <componentType>re</componentType>
+<message>null</message>
 </Component>
 </operation>
 <operation type = "Component" action = "CLICK" delayTime = "5">
 <Component>
 <index>Button</index>
 <componentType>End Game</componentType>
+<message>null</message>
 </Component>
 </operation>
 <oracle type = "OrOperation">
@@ -275,12 +261,14 @@
 <or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>fail</expect>
 </singleComponent>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>correct</expect>
@@ -288,6 +276,7 @@
 </or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>1</expect>
@@ -295,6 +284,7 @@
 </and>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>0</expect>
@@ -306,13 +296,15 @@
 <operation type = "Component" action = "CLICK" delayTime = "0">
 <Component>
 <index>Button</index>
-<componentType>si</componentType>
+<componentType>do</componentType>
+<message>null</message>
 </Component>
 </operation>
 <operation type = "Component" action = "CLICK" delayTime = "5">
 <Component>
 <index>Button</index>
 <componentType>End Game</componentType>
+<message>null</message>
 </Component>
 </operation>
 <oracle type = "OrOperation">
@@ -321,12 +313,14 @@
 <or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>fail</expect>
 </singleComponent>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>correct</expect>
@@ -334,6 +328,7 @@
 </or>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>1</expect>
@@ -341,6 +336,7 @@
 </and>
 <singleComponent>
 <index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
 <resultType>TEXT</resultType>
 <componentType>TextView</componentType>
 <expect>0</expect>
