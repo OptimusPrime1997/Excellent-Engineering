@@ -27,7 +27,7 @@ public class ConsolePane extends JPanel {
         this.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
         this.setLayout(new GridLayout(1,2));
         this.frame = jframe;
-        progressBar.setValue(70);
+        progressBar.setValue(0);
         progressBar.setForeground(Color.green);
         progressBar.setVisible(false);
         textField.setEditable(false);
@@ -86,11 +86,13 @@ public class ConsolePane extends JPanel {
         this.progressBar.setValue(0);
         this.process = 0;
         this.max = 0;
+        this.progressBar.setVisible(false);
     }
 
     public void setMax(int max){
         this.max = max;
         this.process = 0;
+        this.progressBar.setVisible(true);
     }
 
     public void addProcessBar(){
