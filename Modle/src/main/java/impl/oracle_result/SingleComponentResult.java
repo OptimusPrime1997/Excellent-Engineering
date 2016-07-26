@@ -9,10 +9,12 @@ public class SingleComponentResult implements Result{
     private ResultType resultType;
     private String componentType;
     private String expect;
+    private String message;
 
     public String toXML() {
         String XML = "<singleComponent>\n"
                    + "<index>" + index + "</index>\n"
+                   +"<message>"+message+"</message>\n"
                    + "<resultType>" + resultType.name() + "</resultType>\n"
                    + "<componentType>" + componentType + "</componentType>\n"
                    + "<expect>" + expect + "</expect>\n"
@@ -25,10 +27,11 @@ public class SingleComponentResult implements Result{
         return this.toXML();
     }
 
-    public SingleComponentResult(String index, ResultType resultType, String componentType, String expect) {
+    public SingleComponentResult(String index, ResultType resultType, String componentType, String expect,String message) {
         this.index = index;
         this.resultType = resultType;
         this.componentType = componentType;
         this.expect = expect;
+        this.message = message;
     }
 }

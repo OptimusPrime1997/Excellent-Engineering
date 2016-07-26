@@ -291,6 +291,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 
 		}
+		
 
 		alterBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
 		// System.out.println(bitmap.getWidth() + "");
@@ -709,40 +710,40 @@ public class MainActivity extends Activity implements OnTouchListener {
 	 * exit app confirm dialog
 	 */
 	protected void exitDialog() {
-//		AlertDialog.Builder builder = new Builder(MainActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-//		builder.setMessage("Exit now?");
-//		builder.setTitle("Promption");
-//		builder.setPositiveButton("Confirm", new OnClickListener() {
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				dialog.dismiss();
-//				MainActivity.this.finish();
-//			}
-//		});
-//		builder.setNegativeButton("Cancel", new OnClickListener() {
-//			@Override
-//			public void onClick(DialogInterface dialog, int which) {
-//				dialog.dismiss();
-//			}
-//		});
-//		builder.create().show();
-		CustomDialog.Builder builder = new CustomDialog.Builder(this);  
-		builder.setMessage("Exit now?");  
-		builder.setTitle("Prompt");  
-		builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {  
-		    public void onClick(DialogInterface dialog, int which) {  
-		        dialog.dismiss();  
-		        MainActivity.this.finish();
-		    }  
-		});  
-		  
-		builder.setNegativeButton("Cancel",  
-		        new android.content.DialogInterface.OnClickListener() {  
-		            public void onClick(DialogInterface dialog, int which) {  
-		                dialog.dismiss();  
-		            }  
-		        });  
+		AlertDialog.Builder builder = new Builder(MainActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		builder.setMessage("Exit now?");
+		builder.setTitle("Promption");
+		builder.setPositiveButton("Confirm", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				MainActivity.this.finish();
+			}
+		});
+		builder.setNegativeButton("Cancel", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
 		builder.create().show();
+//		CustomDialog.Builder builder = new CustomDialog.Builder(this);  
+//		builder.setMessage("Exit now?");  
+//		builder.setTitle("Prompt");  
+//		builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {  
+//		    public void onClick(DialogInterface dialog, int which) {  
+//		        dialog.dismiss();  
+//		        MainActivity.this.finish();
+//		    }  
+//		});  
+//		  
+//		builder.setNegativeButton("Cancel",  
+//		        new android.content.DialogInterface.OnClickListener() {  
+//		            public void onClick(DialogInterface dialog, int which) {  
+//		                dialog.dismiss();  
+//		            }  
+//		        });  
+//		builder.create().show();
 	}
 
 	/**
@@ -774,7 +775,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		 * handle target->save with fork tag
 		 */
 	protected void saveForkDialog() {
-		AlertDialog.Builder builder = new Builder(MainActivity.this);
+		AlertDialog.Builder builder = new Builder(MainActivity.this,AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 		builder.setMessage("This path savesed!");
 		builder.setTitle("Choose Dialog");
 		builder.setPositiveButton("Back to fork", new OnClickListener() {

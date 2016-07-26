@@ -56,6 +56,7 @@ public class ParseXML {
 				if (wn.startsWith(CLASS_PRE) && !wn.contains("Layout")) {
 					AndroidNode mid = new AndroidNode(id, tt, wn.substring(CLASS_PRE.length()), pn, bd, rd);
 					node_list.add(mid);
+					System.out.println(">>>>>>>>>>>"+node_list.size());
 				}
 			}
 
@@ -105,6 +106,7 @@ public class ParseXML {
 				wid_list.add(mid);
 			}
 		}
+		System.out.println("<<<<<<<"+wid_list.size());
 		print(wid_list);
 		return wid_list;
 	}

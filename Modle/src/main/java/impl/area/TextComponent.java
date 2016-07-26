@@ -6,8 +6,8 @@ package impl.area;
 public class TextComponent extends Component {
     private String input;
 
-    public TextComponent(String id, String type, String content) {
-        super(id, type);
+    public TextComponent(String id, String type, String message ,String content) {
+        super(id, type,message);
         this.input = content;
     }
 
