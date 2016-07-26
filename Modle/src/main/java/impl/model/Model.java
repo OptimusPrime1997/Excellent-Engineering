@@ -1,5 +1,6 @@
 package impl.model;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,10 @@ public class Model implements ModelService{
 
 	}
 	public Model(String savePath){
+		this.savePath = savePath;
+	}
+
+	public void setSavePath(String savePath){
 		this.savePath = savePath;
 	}
 
@@ -115,7 +120,8 @@ public class Model implements ModelService{
 			return;
 		}
 		System.out.println("Model has "+states.size() + " states");
-		this.strategy.writeXML(states,rootName,times,this.savePath + "/paths.xml");
+		System.out.println(this.savePath + File.separator + "paths.xml");
+		this.strategy.writeXML(states,rootName,times,this.savePath + File.separator + "paths.xml");
 	}
 
 	public void printModel() {
@@ -125,7 +131,7 @@ public class Model implements ModelService{
 		}
 		print += "</model>\n";
 		try{
-			FileWriter fileWriter=new FileWriter(this.savePath  + "/model.xml");
+			FileWriter fileWriter=new FileWriter(this.savePath  + File.separator +"model.xml");
 			fileWriter.write(print);
 			fileWriter.close();
 		}catch(Exception e){

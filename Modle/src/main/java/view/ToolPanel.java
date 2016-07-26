@@ -9,6 +9,7 @@ import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 /**
  * Created by Administrator on 2016/7/20.
@@ -31,14 +32,14 @@ public class ToolPanel extends JToolBar {
         jbtOpen.setBorderPainted(false);
         jbtPrint.setBorderPainted(false);
 
-        jbtNew.addMouseListener(new CreateProjectAdapter("./ONE_PIECE",jFrame));
+        jbtNew.addMouseListener(new CreateProjectAdapter("."+ File.separator+"ONE_PIECE",jFrame));
 
         jbtOpen.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 TreePath treePath = packetPanel.getSelectionPath();
-                consolePane.loadApp(packetPanel.getFilePath(treePath)+"/model.xml");
+                consolePane.loadApp(packetPanel.getFilePath(treePath)+File.separator+"model.xml");
             }
         });
         jbtPrint.addMouseListener(new MouseAdapter() {
@@ -46,7 +47,7 @@ public class ToolPanel extends JToolBar {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 TreePath treePath = packetPanel.getSelectionPath();
-                consolePane.runApp(packetPanel.getFilePath(treePath)+"/sketch");
+                consolePane.runApp(packetPanel.getFilePath(treePath)+File.separator+"sketch");
             }
         });
 

@@ -6,6 +6,7 @@ import view.tools.TabbedPanel;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -32,15 +33,14 @@ public class TextPanel extends JPanel {
             MyShowPane myShowPane = new MyShowPane(path,this);
             //myShowPane.setEditorKit(new JavaSyntaxKit());
             JScrollPane jScrollPane = new JScrollPane(myShowPane);
-            String name[] = path.split("/");
             for(int x = 0 ;  x < tb.getTabCount() ; x++){
-                if(tb.getTitleAt(x).equals(name[name.length - 1])){
+                if(tb.getTitleAt(x).equals(path)){
                     tb.setSelectedIndex(x);
                     return;
                 }
             }
 
-            tb.addTab(name[name.length - 1],jScrollPane);
+            tb.addTab(path,jScrollPane);
 
             tb.setTabComponentAt(tb.indexOfComponent(jScrollPane),new TabbedPanel(tb,path));
             tb.setSelectedIndex(tb.indexOfComponent(jScrollPane));

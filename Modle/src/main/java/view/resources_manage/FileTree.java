@@ -186,7 +186,7 @@ class FolderNode implements I_fileSystem {
     public FolderNode() {
         fsView = FileSystemView.getFileSystemView();
 
-        theFile = new File("./ONE_PIECE");
+        theFile = new File("."+File.separator+"ONE_PIECE");
         if(!theFile.exists()){
             theFile.mkdir();
             System.err.println("build the workspace");

@@ -70,7 +70,7 @@ public class ConsolePane extends JPanel {
 
     public void loadApp(String path){
         final File file = new File(path);
-        System.out.println(path);
+        System.out.println("load path :"+path);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -121,12 +121,13 @@ public class ConsolePane extends JPanel {
                 files[x] = f;
                 x++;
             }
+            //System.out.println(appFloderPath);
             ModelService modelService = modelCreateByPaths.getModel(PathStrategyEnum.ROOT_FRIST,files,appFloderPath);
             textField.setText("save the model");
             modelService.printModel();
             int num = Integer.parseInt(JOptionPane.showInputDialog(null,"please input the count of the paths you want to create"));
             textField.setText("building the path");
-            modelService.printXML(num);   //这里默认是20
+            modelService.printXML(num);
             textField.setText("build finish");
 
         }

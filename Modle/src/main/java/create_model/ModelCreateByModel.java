@@ -49,6 +49,8 @@ public class ModelCreateByModel {
         }
 
         Model model = new Model(states,rootName,id);
+        String path = file.getParentFile().getPath();
+        model.setSavePath(path);
         return model;
     }
 

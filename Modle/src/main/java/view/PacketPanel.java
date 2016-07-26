@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
 /**
  * Created by Administrator on 2016/7/20.
@@ -44,10 +45,11 @@ public class PacketPanel extends JPanel {
         tree.refreshTree();
     }
     public String getFilePath(TreePath path){
-        String filePath = "./";
+        String separator = File.separator;
+        String filePath = "." + separator;
         Object[] p =path.getPath();
         for(int x = 0 ; x < p.length - 1 ; x++){
-            filePath += p[x].toString() + '/';
+            filePath += p[x].toString() + separator;
         }
         filePath += p[p.length - 1].toString();
         return filePath;
@@ -108,7 +110,7 @@ public class PacketPanel extends JPanel {
                 menuItem.addMouseListener(new MouseAdapter(){
                     public void mouseReleased(MouseEvent e) {
                         String treePath = getFilePath(path);
-                        consolePane.loadApp(treePath + "/model.xml");
+                        consolePane.loadApp(treePath + File.separator+ "model.xml");
                     }
                 });
                 popMenu.add(menuLeafNode1);
@@ -151,8 +153,8 @@ public class PacketPanel extends JPanel {
         @Override
         public void mouseReleased(MouseEvent e) {
             String path = getFilePath(treePath);
-            System.out.println(path);
-            consolePane.runApp(path + "/sketch");
+            //System.out.println(path);
+            consolePane.runApp(path + File.separator +"sketch");
 
             tree.refreshTree();
         }
