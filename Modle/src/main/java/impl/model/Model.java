@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.sun.javafx.sg.prism.NGShape;
+//import com.sun.javafx.sg.prism.NGShape;
 import impl.oracle_result.Result;
 import impl.state.Oracle;
 import impl.state.State;
