@@ -8,18 +8,13 @@ import Explain.Action;
 import Node.ActionNode;
 
 public class TestAssist {
-	public String storePath = "./Script/";
-	// public String storePath =
-	// "/Users/sam/TestMake-Project/Test-Make/Script/";
-//	public String storePath = ".\\Script\\";
-//	public String storePath = "/Users/sam/TestMake-Project/Test-Make/Script/";
-	public String TestCaseClassName = "";
+	// public String storePath = "./Script/";
 
 	// num表示生成脚本的个数
 	int num = 3;
 	TestGenerator testGenerator = new TestGenerator();
 
-	int scriptNum = 0;
+	public int scriptNum = 0;
 
 	boolean is_drag;
 
@@ -28,7 +23,8 @@ public class TestAssist {
 	 * @param res
 	 *            TODO 遍历一条路径
 	 */
-	public void generator(ActionNode actionNode, String res, String fileName) {
+	public void generator(ActionNode actionNode, String res, String storePath,
+			String fileName) {
 
 		while (actionNode.getAction() != Action.ORACLE) {
 			if (actionNode.getAction() == Action.DRAG) {
@@ -51,7 +47,8 @@ public class TestAssist {
 								actionNode.getComponentid(), temp);
 						String ans = res
 								+ testGenerator.generatorTestCore(tempNode);
-						generator(actionNode.getNext(), ans, fileName);
+						generator(actionNode.getNext(), ans, storePath,
+								fileName);
 					}
 					is_drag = true;
 					break;
@@ -69,7 +66,12 @@ public class TestAssist {
 			res += testGenerator.testOracleSequence(actionNode);
 			res += "}\n";
 			scriptNum++;
-			StoreTestCase(res, fileName + scriptNum);
+			int addScriptNum = res
+					.indexOf(" extends ActivityInstrumentationTestCase2");
+			String res1 = res.substring(0, addScriptNum);
+			String res2 = res.substring(addScriptNum);
+			res = res1 + scriptNum + res2;
+			StoreTestCase(res, storePath + fileName + scriptNum);
 		}
 	}
 
@@ -78,17 +80,17 @@ public class TestAssist {
 	 *            TODO 存储文件
 	 */
 	public void StoreTestCase(String mid, String s) {
-		if (!storePath.equals("")) {
-			File fi = new File(storePath + TestCaseClassName + s + ".java");
+		if (!s.equals("")) {
+			File fi = new File(s + ".java");
 			if (!(fi.exists())) {
 				try {
-			        if (!fi.getParentFile().exists()) {  
-			            if (!fi.getParentFile().mkdirs()) {  
-			            }  
-			        }  
+					if (!fi.getParentFile().exists()) {
+						if (!fi.getParentFile().mkdirs()) {
+						}
+					}
 					fi.createNewFile();
 				} catch (IOException e) {
-					System.out.println(storePath + TestCaseClassName + s
+					System.out.println(s
 							+ ".java" + ": " + e.toString());
 					e.printStackTrace();
 				}

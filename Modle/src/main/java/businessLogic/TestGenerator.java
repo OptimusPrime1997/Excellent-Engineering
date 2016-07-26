@@ -15,10 +15,8 @@ public class TestGenerator {
 	public static String setupFunction = "public void setUp() throws Exception { \n solo = new Solo(getInstrumentation(), getActivity()); \n }\n\n";
 	public static String teardownFunction = "public void tearDown() throws Exception { \n solo.finishOpenedActivities(); \n }\n\n";
 
-	public String testApplicationName; // = "SimpleGUI"
-	public String testApplicationPackageName = "";
-	public String MainActivityName = "MainMenu";
-	public String TestCaseClassName = "ScriptTest";
+//	public String testApplicationName; // = "SimpleGUI"
+//	public String testApplicationPackageName = "";
 
 	//保存截图文件的路径
 	public String picName = "pic";
@@ -101,7 +99,7 @@ public class TestGenerator {
 	/**
 	 * @return TODO 生成导包等辅助语句
 	 */
-	public String generatorCompleteTest() {
+	public String generatorCompleteTest(String testApplicationPackageName,String TestCaseClassName,String MainActivityName) {
 		String ans = "";
 
 		if (!testApplicationPackageName.equals("")) {
@@ -110,6 +108,7 @@ public class TestGenerator {
 					+ MainActivityName + ";\n";
 		}
 		ans += "import com.robotium.solo.Solo;\n";
+		ans += "import " + testApplicationPackageName + "." + MainActivityName + ";\n";
 		ans += "import android.annotation.SuppressLint;\n";
 		ans += "import android.graphics.Bitmap;\n";
 		ans += "import android.graphics.BitmapFactory;\n";

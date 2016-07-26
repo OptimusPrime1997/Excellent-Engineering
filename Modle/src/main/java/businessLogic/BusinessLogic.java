@@ -1,5 +1,6 @@
 package businessLogic;
 
+import java.io.File;
 import java.util.List;
 
 import Explain.XmlAnalyse;
@@ -27,10 +28,10 @@ public class BusinessLogic {
 //			System.out.println(anActionNode.getPosition());
 			
 			
-			String result = new TestGenerator().generatorCompleteTest();
 			String Name = name+(i+"");
+			String result = new TestGenerator().generatorCompleteTest(PackageWay,Name,MainActivity);
 //			System.out.println(Name);
-			new TestAssist().generator(anActionNode, result,Name);
+			new TestAssist().generator(anActionNode, result,XmlWay+"Script"+File.separator,Name);
 			System.out.println("王栋去死吧");
 
 //			System.out.println("heheda");

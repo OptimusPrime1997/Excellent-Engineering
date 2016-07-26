@@ -22,9 +22,9 @@ public class TestScript {
 		a6.setNext(a7);
 		a7.setNext(a8);
 		
-		String result = new TestGenerator().generatorCompleteTest();
+		String result = new TestGenerator().generatorCompleteTest("net.fercanet.LNM","TestCaseClassName","MainMenu");
 //		new TestAssist().generator(a2, result,"");
-		new TestAssist().generator(a2, result, "fileName");
-		System.out.println("heheda");
+		new TestAssist().generator(a2, result, "./Script/","fileName");
+//		System.out.println("heheda");
 	}
 }
