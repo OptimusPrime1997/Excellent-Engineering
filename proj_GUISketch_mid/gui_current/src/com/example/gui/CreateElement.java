@@ -200,25 +200,24 @@ public class CreateElement {
 		PointF[] pointFs = new PointF[2];
 		pointFs[0] = pointF1;
 		pointFs[1] = pointF4;
+		System.out.println("============");
+		System.out.println(pointF1);
+		System.out.println(pointF4);
 		List<AndroidNode> nodes = parser.findWidgetByRect(pointFs);
 		
 		if (type.equals("single_component")) {
 			BuildDocument.addAttribute(element, "type", type);			
 			Element componentElement = BuildDocument.addElement(element, "singleComponent");
-//			if (nodes.isEmpty()==false&&nodes.get(nodes.size()-1)!=null) {
-//				Element indexElement = BuildDocument.addElement(componentElement, "index");
-//				BuildDocument.addText(indexElement, nodes.get(nodes.size()-1).text);
-//				Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
-//				BuildDocument.addText(resourceElement, nodes.get(nodes.size()-1).widget_name);			
-//			}
-			if (nodes.isEmpty()==false) {
+			if (nodes.isEmpty()==false&&nodes.get(nodes.size()-1)!=null) {
 				Element indexElement = BuildDocument.addElement(componentElement, "index");
-				BuildDocument.addText(indexElement, nodes.get(0).text);
+				BuildDocument.addText(indexElement, nodes.get(nodes.size()-1).text);
 				Element resourceElement = BuildDocument.addElement(componentElement, "resourceType");
-				BuildDocument.addText(resourceElement, nodes.get(0).widget_name);
+				BuildDocument.addText(resourceElement, nodes.get(nodes.size()-1).widget_name);	
 				Element resouceId = BuildDocument.addElement(componentElement, "message");
-				BuildDocument.addText(resouceId, nodes.get(0).getPrintString());
+				BuildDocument.addText(resouceId, nodes.get(nodes.size()-1).getPrintString());
 			}
+			System.out.println("wewerwwew"+nodes.size());
+			
 			Element expectElement = BuildDocument.addElement(componentElement, "expect");
 			BuildDocument.addAttribute(expectElement, "type", "text");
 			BuildDocument.addText(expectElement, text);
