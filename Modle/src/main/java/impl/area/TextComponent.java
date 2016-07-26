@@ -16,6 +16,7 @@ public class TextComponent extends Component {
                 "<index>" + id + "</index>\n"+
                 "<componentType>"+ type + "</componentType>\n" +
                 "<input>"+input+"</input>\n"+
+                "<message>"+message+"</message>\n"+
                 "</textComponent>\n";
 
         return XML;
@@ -26,6 +27,7 @@ public class TextComponent extends Component {
                 "<type>" + type + "</type>\n" +
                 "<id>"+id+"</id>\n" +
                 "<input>"+input+"</input>\n"+
+                "<message>"+message+"</message>\n"+
                 "</area>\n";
         return print;
     }
