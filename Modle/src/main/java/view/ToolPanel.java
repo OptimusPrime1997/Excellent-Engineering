@@ -87,6 +87,7 @@ public class ToolPanel extends JToolBar {
                     return;
                 }
                 consolePane.createScript(path);
+                packetPanel.refreshTree();
             }
         });
         this.add(jbtNew);

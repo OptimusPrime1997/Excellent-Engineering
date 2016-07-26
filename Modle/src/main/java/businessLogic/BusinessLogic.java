@@ -10,7 +10,7 @@ public class BusinessLogic {
 	public void GetAllAction(String PackageWay,String MainActivity,String XmlWay){
 		String name = "Test";
 		XmlAnalyse analyseAction = new XmlAnalyse();
-		List<ActionNode> actionList = analyseAction.GetAction(XmlWay+"path.xml");
+		List<ActionNode> actionList = analyseAction.GetAction(XmlWay+"paths.xml");
 		System.out.println("asasfa"+actionList.get(0).getAction());
 		for(int i=0;i<actionList.size();i++){
 			ActionNode anActionNode = actionList.get(i);

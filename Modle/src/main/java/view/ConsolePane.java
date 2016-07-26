@@ -1,5 +1,6 @@
 package view;
 
+import businessLogic.BusinessLogic;
 import create_model.ModelCreateByModel;
 import create_model.ModelCreateByPaths;
 import service.ModelService;
@@ -82,21 +83,14 @@ public class ConsolePane extends JPanel {
         thread.run();
     }
 
-    public void createScript(String path){
+    public void createScript(final String path){
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 String activity = JOptionPane.showInputDialog(null,"please input the main activity");
-                JFileChooser jdir = new JFileChooser();
-                jdir.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                //设置对话框标题
-                jdir.setDialogTitle("请选择路径");
-                if (JFileChooser.APPROVE_OPTION == jdir.showOpenDialog(null)) {//用户点击了确定
-                    String savePath = jdir.getSelectedFile().getAbsolutePath();//取得路径选择
-                    System.out.println(savePath);
-                }else{
-                    return;
-                }
+                String packetPath = JOptionPane.showInputDialog(null,"please input the packet name");
+                BusinessLogic businessLogic = new BusinessLogic();
+                businessLogic.GetAllAction(packetPath,activity,path);
 
             }
         });
