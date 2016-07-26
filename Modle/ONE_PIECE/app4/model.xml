@@ -11,6 +11,7 @@
 <type>EditText</type>
 <id></id>
 <input>ad</input>
+<message>node index="1";text="";resource-id="com.github.wdkapps.fillup:id/textVehicleName";class="EditText";package="com.github.wdkapps.fillup";bounds="[126,551][594,647]"</message>
 </area>
 <id>1</id>
 <delay>0</delay>

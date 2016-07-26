@@ -13,6 +13,7 @@
 <index></index>
 <componentType>EditText</componentType>
 <input>ad</input>
+<message>node index="1";text="";resource-id="com.github.wdkapps.fillup:id/textVehicleName";class="EditText";package="com.github.wdkapps.fillup";bounds="[126,551][594,647]"</message>
 </textComponent>
 </operation>
 <operation type = "Component" action = "CLICK" delayTime = "0">
