@@ -120,8 +120,8 @@ public class Model implements ModelService{
 			return;
 		}
 		System.out.println("Model has "+states.size() + " states");
-		System.out.println(this.savePath + File.separator + "paths.xml");
-		this.strategy.writeXML(states,rootName,times,this.savePath + File.separator + "paths.xml");
+		System.out.println(this.savePath +"paths.xml");
+		this.strategy.writeXML(states,rootName,times,this.savePath + "paths.xml");
 	}
 
 	public void printModel() {
@@ -131,7 +131,7 @@ public class Model implements ModelService{
 		}
 		print += "</model>\n";
 		try{
-			FileWriter fileWriter=new FileWriter(this.savePath  + File.separator +"model.xml");
+			FileWriter fileWriter=new FileWriter(this.savePath +"model.xml");
 			fileWriter.write(print);
 			fileWriter.close();
 		}catch(Exception e){
