@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+	<path>
+		<operation type="Component" action="CLICK" delayTime="0">
+			<Component>
+				<index>总计:28 新卡片:27 复习:1</index>
+				<componentType>TextView</componentType>
+				<message>node index="1";text="总计:28 新卡片:27
+					复习:1";resource-id="org.liberty.android.fantastischmemo:id/recent_item_info";class="TextView";package="org.liberty.android.fantastischmemo";bounds="[110,327][718,365]"
+				</message>
+			</Component>
+		</operation>
+		<operation type="Component" action="CLICK" delayTime="0">
+			<Component>
+				<index>?
+					显示答案
+				</index>
+				<componentType>TextView</componentType>
+				<message>node index="0";text="?
+					显示答案";resource-id="org.liberty.android.fantastischmemo:id/card_text_view";class="TextView";package="org.liberty.android.fantastischmemo";bounds="[0,854][720,989]"
+				</message>
+			</Component>
+		</operation>
+		<oracle type="SingleComponentResult">
+			<singleComponent>
+				<index>比较顺利
+					1.0 天
+				</index>
+				<message>node index="1";text="比较顺利
+					1.0
+					天";resource-id="org.liberty.android.fantastischmemo:id/grade_button_2";class="Button";package="org.liberty.android.fantastischmemo";bounds="[244,1165][476,1276]"
+				</message>
+				<resultType>TEXT</resultType>
+				<componentType>Button</componentType>
+				<expect>1.0</expect>
+			</singleComponent>
+		</oracle>
+	</path>
+</paths>

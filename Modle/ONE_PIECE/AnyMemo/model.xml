@@ -1,0 +1,55 @@
+<model>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/AnyMemo/2.png2</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/AnyMemo/3.png3</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/AnyMemo/2.png2</resource>
+<area  type = "Component">
+<type>TextView</type>
+<id>?
+显示答案</id>
+<message>node index="0";text="?
+显示答案";resource-id="org.liberty.android.fantastischmemo:id/card_text_view";class="TextView";package="org.liberty.android.fantastischmemo";bounds="[0,854][720,989]"</message></area>
+<id>1</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/AnyMemo/1.png0</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/AnyMemo/2.png2</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/AnyMemo/1.png0</resource>
+<area  type = "Component">
+<type>TextView</type>
+<id>总计:28 新卡片:27 复习:1</id>
+<message>node index="1";text="总计:28 新卡片:27 复习:1";resource-id="org.liberty.android.fantastischmemo:id/recent_item_info";class="TextView";package="org.liberty.android.fantastischmemo";bounds="[110,327][718,365]"</message></area>
+<id>0</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<oracle>
+<result>
+<singleComponent>
+<index>比较顺利
+1.0 天</index>
+<message>node index="1";text="比较顺利
+1.0 天";resource-id="org.liberty.android.fantastischmemo:id/grade_button_2";class="Button";package="org.liberty.android.fantastischmemo";bounds="[244,1165][476,1276]"</message>
+<resultType>TEXT</resultType>
+<componentType>Button</componentType>
+<expect>1.0</expect>
+</singleComponent>
+</result>
+<name>/mnt/sdcard/screenShotPicture/screen_data/AnyMemo/3.png3</name>
+<id>0</id>
+<edges>
+</edges>
+</oracle>
+</model>

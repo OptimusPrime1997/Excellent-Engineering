@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index></index>
+<componentType>ImageButton</componentType>
+<message>node index="2";text="";resource-id="com.github.wdkapps.fillup:id/buttonVehicleAdd";class="ImageButton";package="com.github.wdkapps.fillup";bounds="[548,255][656,355]"</message>
+</Component>
+</operation>
+<operation type = "TextComponent" action = "INPUT" delayTime = "0">
+<textComponent>
+<index></index>
+<componentType>EditText</componentType>
+<input>ad</input>
+</textComponent>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>OK</index>
+<componentType>Button</componentType>
+<message>node index="0";text="OK";resource-id="com.github.wdkapps.fillup:id/buttonOK";class="Button";package="com.github.wdkapps.fillup";bounds="[120,807][360,903]"</message>
+</Component>
+</operation>
+<oracle type = "SingleComponentResult">
+<singleComponent>
+<index>ad</index>
+<message>node index="0";text="ad";resource-id="android:id/text1";class="TextView";package="com.github.wdkapps.fillup";bounds="[85,180][553,224]"</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>ad</expect>
+</singleComponent>
+</oracle>
+</path> 
+</paths>

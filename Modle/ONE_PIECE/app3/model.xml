@@ -1,0 +1,262 @@
+<model>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>re</id>
+<message>null</message></area>
+<id>1</id>
+<delay>0</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>re</id>
+<message>null</message></area>
+<id>1</id>
+<delay>0</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
+<area type="MultiComponent">
+<area  type = "Component">
+<type>Button</type>
+<id>re</id>
+<message>null</message></area>
+<area  type = "Component">
+<type>Button</type>
+<id>si</id>
+<message>null</message></area>
+<area  type = "Component">
+<type>Button</type>
+<id>mi</id>
+<message>null</message></area>
+<area  type = "Component">
+<type>Button</type>
+<id>sol</id>
+<message>null</message></area>
+<area  type = "Component">
+<type>Button</type>
+<id>do</id>
+<message>null</message></area>
+<area  type = "Component">
+<type>Button</type>
+<id>fa</id>
+<message>null</message></area>
+<area  type = "Component">
+<type>Button</type>
+<id>la</id>
+<message>null</message></area>
+</area>
+<id>1</id>
+<delay>0</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>do</id>
+<message>null</message></area>
+<id>1</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>Training</id>
+<message>null</message></area>
+<id>0</id>
+<delay>0</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>Training</id>
+<message>null</message></area>
+<id>0</id>
+<delay>0</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png5</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>Training</id>
+<message>null</message></area>
+<id>0</id>
+<delay>0</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>Training</id>
+<message>null</message></area>
+<id>0</id>
+<delay>0</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png2</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/1.png0</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>Training</id>
+<message>null</message></area>
+<id>0</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>End Game</id>
+<message>null</message></area>
+<id>2</id>
+<delay>5</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>End Game</id>
+<message>null</message></area>
+<id>2</id>
+<delay>0</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>End Game</id>
+<message>null</message></area>
+<id>2</id>
+<delay>0</delay>
+</edge>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png3</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>End Game</id>
+<message>null</message></area>
+<id>2</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png5</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png6</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png5</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>fa</id>
+<message>null</message></area>
+<id>3</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png6</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png7</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/2.png6</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>End Game</id>
+<message>null</message></area>
+<id>4</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<oracle>
+<result>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+</result>
+<name>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png7</name>
+<id>0</id>
+<edges>
+</edges>
+</oracle>
+<oracle>
+<result>
+<and>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1</expect>
+</singleComponent>
+<singleComponent>
+<index>0 correct notes and 1 fails in 1:47 minutes!</index>
+<message>null</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>0</expect>
+</singleComponent>
+</and>
+</result>
+<name>/mnt/sdcard/screenShotPicture/screen_data/APPMusicNote/3.png4</name>
+<id>0</id>
+<edges>
+</edges>
+</oracle>
+</model>
