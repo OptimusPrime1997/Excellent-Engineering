@@ -1,8 +1,8 @@
-package org.jamienicol.episodes.test;
+package java.ww.test;
 
-import org.jamienicol.episodes.MainActivity;
+import java.ww.main;
 import com.robotium.solo.Solo;
-import org.jamienicol.episodes.MainActivity;
+import java.ww.main;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,13 +10,13 @@ import android.os.Environment;
 import java.io.*;
 import android.test.ActivityInstrumentationTestCase2;
 
-public class Test01 extends ActivityInstrumentationTestCase2<MainActivity>
+public class Test01 extends ActivityInstrumentationTestCase2<main>
 {
 private Solo solo;
 
 @SuppressLint("NewApi")
 public Test0(){
-super(MainActivity.class);
+super(main.class);
 }
 
 @Override

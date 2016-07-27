@@ -84,14 +84,15 @@ public class ConsolePane extends JPanel {
     }
 
     public void createScript(final String path){
+    	final ConsolePane consolePane =this;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 String activity = JOptionPane.showInputDialog(null,"please input the main activity");
                 String packetPath = JOptionPane.showInputDialog(null,"please input the packet name");
                 BusinessLogic businessLogic = new BusinessLogic();
+                businessLogic.setConsole(consolePane);
                 businessLogic.GetAllAction(packetPath,activity,path);
-
             }
         });
         thread.run();

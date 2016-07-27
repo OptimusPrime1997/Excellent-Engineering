@@ -15,9 +15,9 @@ public class BusinessLogic {
 		XmlAnalyse analyseAction = new XmlAnalyse();
 		List<ActionNode> actionList = analyseAction.GetAction(XmlWay+"paths.xml");
 		System.out.println("asasfa"+actionList.get(0).getAction());
-		ConsolePane anConsolePane = this.getConsole();
-		anConsolePane.resetProcessBar();
-		anConsolePane.setMax(actionList.size());
+//		ConsolePane anConsolePane = this.getConsole();
+		consolePane.resetProcessBar();
+		consolePane.setMax(actionList.size());
 		for(int i=0;i<actionList.size();i++){
 			ActionNode anActionNode = actionList.get(i);
 //			while(anActionNode.getNext()!=null){
@@ -38,7 +38,7 @@ public class BusinessLogic {
 //			System.out.println(Name);
 			new TestAssist().generator(anActionNode, result,XmlWay+"Script"+File.separator,Name);
 			System.out.println("王栋去死吧");
-			anConsolePane.addProcessBar();
+			consolePane.addProcessBar();
 //			System.out.println("heheda");
 		}
 		
@@ -50,9 +50,9 @@ public class BusinessLogic {
 		this.consolePane = consolePane;
 	}
 	
-	public ConsolePane getConsole(){
-		return this.consolePane;
-	}
+//	public ConsolePane getConsole(){
+//		return this.consolePane;
+//	}
 	
 	public static void main(String[] args) {
 		BusinessLogic businessLogic = new BusinessLogic();
