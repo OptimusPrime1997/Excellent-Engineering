@@ -24,8 +24,9 @@ public class EnterText {
 						String NowName = textList.item(j).getNodeName();
 //						System.out.println("当前结点为"+NowName);
 						if (NowName.equalsIgnoreCase("index")) {
-							ResolveMessage resolveMessage = new ResolveMessage();
-							ComName = resolveMessage.ResolveMsg(message, "index");
+//							message = textList.item(j).getTextContent();
+//							ResolveMessage resolveMessage = new ResolveMessage();
+//							ComName = resolveMessage.ResolveMsg(message, "index");
 //							ComName = textList.item(j).getTextContent();
 						}else if (NowName.equalsIgnoreCase("componentType")) {
 							type = textList.item(j).getTextContent();
@@ -33,6 +34,8 @@ public class EnterText {
 							EnterText = textList.item(j).getTextContent();
 						}else if (NowName.equalsIgnoreCase("message")) {
 							message = textList.item(j).getTextContent();
+							ResolveMessage resolveMessage = new ResolveMessage();
+							ComName = resolveMessage.ResolveMsg(message, "index");
 						}
 					}
 				}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index></index>
+<componentType>TextView</componentType>
+<message>node index="0";text="";resource-id="net.pejici.summation:id/action_add";class="TextView";package="net.pejici.summation";bounds="[608,50][720,146]"</message>
+</Component>
+</operation>
+<operation type = "TextComponent" action = "INPUT" delayTime = "0">
+<textComponent>
+<index>Label</index>
+<componentType>EditText</componentType>
+<input>test</input>
+<message>node index="0";text="Label";resource-id="net.pejici.summation:id/item_label_edit";class="EditText";package="net.pejici.summation";bounds="[32,178][688,257]"</message>
+</textComponent>
+</operation>
+<operation type = "TextComponent" action = "INPUT" delayTime = "0">
+<textComponent>
+<index>Value</index>
+<componentType>EditText</componentType>
+<input>6</input>
+<message>node index="1";text="Value";resource-id="net.pejici.summation:id/item_value_edit";class="EditText";package="net.pejici.summation";bounds="[32,257][688,336]"</message>
+</textComponent>
+</operation>
+<oracle type = "SingleComponentResult">
+<singleComponent>
+<index>9.99</index>
+<message>node index="1";text="9.99";resource-id="net.pejici.summation:id/summationListSum";class="TextView";package="net.pejici.summation";bounds="[612,1197][672,1246]"</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>9.99</expect>
+</singleComponent>
+</oracle>
+</path> 
+</paths>

@@ -1,0 +1,34 @@
+<model>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/eposodes/1.png0</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/eposodes/2.png2</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/eposodes/1.png0</resource>
+<area  type = "Component">
+<type>TextView</type>
+<id></id>
+<message>node index="0";text="";resource-id="org.jamienicol.episodes:id/menu_add_new_show";class="TextView";package="org.jamienicol.episodes";bounds="[528,58][624,154]"</message></area>
+<id>0</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<oracle>
+<result>
+<singleComponent>
+<index>Search for new show</index>
+<message>node index="0";text="Search for new show";resource-id="org.jamienicol.episodes:id/search_src_text";class="EditText";package="org.jamienicol.episodes";bounds="[128,70][672,142]"</message>
+<resultType>TEXT</resultType>
+<componentType>EditText</componentType>
+<expect>Search for</expect>
+</singleComponent>
+</result>
+<name>/mnt/sdcard/screenShotPicture/screen_data/eposodes/2.png2</name>
+<id>0</id>
+<edges>
+</edges>
+</oracle>
+</model>

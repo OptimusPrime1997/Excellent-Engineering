@@ -1,0 +1,91 @@
+<model>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png2</name>
+<id>0</id>
+<edges>
+<edge>
+<action>INPUT</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png3</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png2</resource>
+<area  type = "textComponent">
+<type>EditText</type>
+<id>Gallons</id>
+<input>1</input>
+<message>node index="1";text="Gallons";resource-id="com.evancharlton.mileage:id/volume";class="EditText";package="com.evancharlton.mileage";bounds="[360,235][720,331]"</message>
+</area>
+<id>1</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png0</name>
+<id>0</id>
+<edges>
+<edge>
+<action>INPUT</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png2</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png0</resource>
+<area  type = "textComponent">
+<type>EditText</type>
+<id>Price per Gallons</id>
+<input>1</input>
+<message>node index="0";text="Price per Gallons";resource-id="com.evancharlton.mileage:id/price";class="EditText";package="com.evancharlton.mileage";bounds="[0,235][360,331]"</message>
+</area>
+<id>0</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png3</name>
+<id>0</id>
+<edges>
+<edge>
+<action>INPUT</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png4</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png3</resource>
+<area  type = "textComponent">
+<type>EditText</type>
+<id>Odometer</id>
+<input>1</input>
+<message>node index="0";text="Odometer";resource-id="com.evancharlton.mileage:id/odometer";class="EditText";package="com.evancharlton.mileage";bounds="[0,331][360,427]"</message>
+</area>
+<id>2</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png4</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/mileage/2.png5</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png4</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>Save Fillup</id>
+<message>node index="1";text="Save Fillup";resource-id="com.evancharlton.mileage:id/save_btn";class="Button";package="com.evancharlton.mileage";bounds="[0,1184][720,1280]"</message></area>
+<id>3</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<oracle>
+<result>
+<singleComponent>
+<index>1.00</index>
+<message>node index="1";text="1.00";resource-id="com.evancharlton.mileage:id/price";class="TextView";package="com.evancharlton.mileage";bounds="[663,224][720,262]"</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1.00</expect>
+</singleComponent>
+</result>
+<name>/mnt/sdcard/screenShotPicture/screen_data/mileage/2.png5</name>
+<id>0</id>
+<edges>
+</edges>
+</oracle>
+</model>

@@ -1,0 +1,70 @@
+<model>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/fillUp/2.png2</name>
+<id>0</id>
+<edges>
+<edge>
+<action>INPUT</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/fillUp/2.png3</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/fillUp/2.png2</resource>
+<area  type = "textComponent">
+<type>EditText</type>
+<id></id>
+<input>ad</input>
+<message>node index="1";text="";resource-id="com.github.wdkapps.fillup:id/textVehicleName";class="EditText";package="com.github.wdkapps.fillup";bounds="[126,551][594,647]"</message>
+</area>
+<id>1</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/fillUp/1.png0</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/fillUp/2.png2</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/fillUp/1.png0</resource>
+<area  type = "Component">
+<type>ImageButton</type>
+<id></id>
+<message>node index="2";text="";resource-id="com.github.wdkapps.fillup:id/buttonVehicleAdd";class="ImageButton";package="com.github.wdkapps.fillup";bounds="[548,255][656,355]"</message></area>
+<id>0</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/fillUp/2.png3</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/fillUp/3.png4</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/fillUp/2.png3</resource>
+<area  type = "Component">
+<type>Button</type>
+<id>OK</id>
+<message>node index="0";text="OK";resource-id="com.github.wdkapps.fillup:id/buttonOK";class="Button";package="com.github.wdkapps.fillup";bounds="[120,807][360,903]"</message></area>
+<id>2</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<oracle>
+<result>
+<singleComponent>
+<index>ad</index>
+<message>node index="0";text="ad";resource-id="android:id/text1";class="TextView";package="com.github.wdkapps.fillup";bounds="[85,180][553,224]"</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>ad</expect>
+</singleComponent>
+</result>
+<name>/mnt/sdcard/screenShotPicture/screen_data/fillUp/3.png4</name>
+<id>0</id>
+<edges>
+</edges>
+</oracle>
+</model>

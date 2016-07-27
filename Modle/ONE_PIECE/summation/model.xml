@@ -1,0 +1,72 @@
+<model>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/summation/2.png2</name>
+<id>0</id>
+<edges>
+<edge>
+<action>INPUT</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/summation/2.png3</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/summation/2.png2</resource>
+<area  type = "textComponent">
+<type>EditText</type>
+<id>Label</id>
+<input>test</input>
+<message>node index="0";text="Label";resource-id="net.pejici.summation:id/item_label_edit";class="EditText";package="net.pejici.summation";bounds="[32,178][688,257]"</message>
+</area>
+<id>1</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/summation/1.png0</name>
+<id>0</id>
+<edges>
+<edge>
+<action>CLICK</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/summation/2.png2</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/summation/1.png0</resource>
+<area  type = "Component">
+<type>TextView</type>
+<id></id>
+<message>node index="0";text="";resource-id="net.pejici.summation:id/action_add";class="TextView";package="net.pejici.summation";bounds="[608,50][720,146]"</message></area>
+<id>0</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<state>
+<name>/mnt/sdcard/screenShotPicture/screen_data/summation/2.png3</name>
+<id>0</id>
+<edges>
+<edge>
+<action>INPUT</action>
+<destination>/mnt/sdcard/screenShotPicture/screen_data/summation/3.png4</destination>
+<resource>/mnt/sdcard/screenShotPicture/screen_data/summation/2.png3</resource>
+<area  type = "textComponent">
+<type>EditText</type>
+<id>Value</id>
+<input>6</input>
+<message>node index="1";text="Value";resource-id="net.pejici.summation:id/item_value_edit";class="EditText";package="net.pejici.summation";bounds="[32,257][688,336]"</message>
+</area>
+<id>2</id>
+<delay>0</delay>
+</edge>
+</edges>
+</state>
+<oracle>
+<result>
+<singleComponent>
+<index>9.99</index>
+<message>node index="1";text="9.99";resource-id="net.pejici.summation:id/summationListSum";class="TextView";package="net.pejici.summation";bounds="[612,1197][672,1246]"</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>9.99</expect>
+</singleComponent>
+</result>
+<name>/mnt/sdcard/screenShotPicture/screen_data/summation/3.png4</name>
+<id>0</id>
+<edges>
+</edges>
+</oracle>
+</model>

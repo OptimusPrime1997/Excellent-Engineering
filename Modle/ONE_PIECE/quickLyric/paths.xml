@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index></index>
+<componentType>TextView</componentType>
+<message>node index="0";text="";resource-id="com.geecko.QuickLyric:id/search_view";class="TextView";package="com.geecko.QuickLyric";bounds="[432,58][528,154]"</message>
+</Component>
+</operation>
+<oracle type = "SingleComponentResult">
+<singleComponent>
+<index>Search…</index>
+<message>node index="0";text="Search…";resource-id="com.geecko.QuickLyric:id/search_src_text";class="EditText";package="com.geecko.QuickLyric";bounds="[208,70][624,142]"</message>
+<resultType>TEXT</resultType>
+<componentType>EditText</componentType>
+<expect>Search</expect>
+</singleComponent>
+</oracle>
+</path> 
+</paths>

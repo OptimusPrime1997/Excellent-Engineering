@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<path>
+	<state typeCode="1">
+		<stateId>1</stateId>
+		<fileName>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png
+		</fileName>
+	</state>
+	<Operation id="0" delayTime="0" action="input" type="textComponent">
+		<index>Price per Gallons</index>
+		<resourceType>EditText</resourceType>
+		<message>node index="0";text="Price per
+			Gallons";resource-id="com.evancharlton.mileage:id/price";class="EditText";package="com.evancharlton.mileage";bounds="[0,235][360,331]"
+		</message>
+		<input>1</input>
+	</Operation>
+	<state typeCode="1">
+		<stateId>2</stateId>
+		<fileName>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png
+		</fileName>
+	</state>
+	<Operation id="1" delayTime="0" action="input" type="textComponent">
+		<index>Gallons</index>
+		<resourceType>EditText</resourceType>
+		<message>node
+			index="1";text="Gallons";resource-id="com.evancharlton.mileage:id/volume";class="EditText";package="com.evancharlton.mileage";bounds="[360,235][720,331]"
+		</message>
+		<input>1</input>
+	</Operation>
+	<state typeCode="1">
+		<stateId>3</stateId>
+		<fileName>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png
+		</fileName>
+	</state>
+	<Operation id="2" delayTime="0" action="input" type="textComponent">
+		<index>Odometer</index>
+		<resourceType>EditText</resourceType>
+		<message>node
+			index="0";text="Odometer";resource-id="com.evancharlton.mileage:id/odometer";class="EditText";package="com.evancharlton.mileage";bounds="[0,331][360,427]"
+		</message>
+		<input>1</input>
+	</Operation>
+	<state typeCode="1">
+		<stateId>4</stateId>
+		<fileName>/mnt/sdcard/screenShotPicture/screen_data/mileage/1.png
+		</fileName>
+	</state>
+	<Operation id="3" delayTime="0" action="click" type="component">
+		<index>Save Fillup</index>
+		<resourceType>Button</resourceType>
+		<message>node index="1";text="Save
+			Fillup";resource-id="com.evancharlton.mileage:id/save_btn";class="Button";package="com.evancharlton.mileage";bounds="[0,1184][720,1280]"
+		</message>
+	</Operation>
+	<state typeCode="2" type="single_component">
+		<stateId>5</stateId>
+		<fileName>/mnt/sdcard/screenShotPicture/screen_data/mileage/2.png
+		</fileName>
+		<singleComponent>
+			<index>1.00</index>
+			<resourceType>TextView</resourceType>
+			<message>node
+				index="1";text="1.00";resource-id="com.evancharlton.mileage:id/price";class="TextView";package="com.evancharlton.mileage";bounds="[663,224][720,262]"
+			</message>
+			<expect type="text">1.00</expect>
+		</singleComponent>
+	</state>
+</path>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+<path> 
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index></index>
+<componentType>TextView</componentType>
+<message>node index="0";text="";resource-id="org.jamienicol.episodes:id/menu_add_new_show";class="TextView";package="org.jamienicol.episodes";bounds="[528,58][624,154]"</message>
+</Component>
+</operation>
+<oracle type = "SingleComponentResult">
+<singleComponent>
+<index>Search for new show</index>
+<message>node index="0";text="Search for new show";resource-id="org.jamienicol.episodes:id/search_src_text";class="EditText";package="org.jamienicol.episodes";bounds="[128,70][672,142]"</message>
+<resultType>TEXT</resultType>
+<componentType>EditText</componentType>
+<expect>Search for</expect>
+</singleComponent>
+</oracle>
+</path> 
+</paths>

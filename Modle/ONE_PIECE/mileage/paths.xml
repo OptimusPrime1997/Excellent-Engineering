@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+<path> 
+<operation type = "TextComponent" action = "INPUT" delayTime = "0">
+<textComponent>
+<index>Price per Gallons</index>
+<componentType>EditText</componentType>
+<input>1</input>
+<message>node index="0";text="Price per Gallons";resource-id="com.evancharlton.mileage:id/price";class="EditText";package="com.evancharlton.mileage";bounds="[0,235][360,331]"</message>
+</textComponent>
+</operation>
+<operation type = "TextComponent" action = "INPUT" delayTime = "0">
+<textComponent>
+<index>Gallons</index>
+<componentType>EditText</componentType>
+<input>1</input>
+<message>node index="1";text="Gallons";resource-id="com.evancharlton.mileage:id/volume";class="EditText";package="com.evancharlton.mileage";bounds="[360,235][720,331]"</message>
+</textComponent>
+</operation>
+<operation type = "TextComponent" action = "INPUT" delayTime = "0">
+<textComponent>
+<index>Odometer</index>
+<componentType>EditText</componentType>
+<input>1</input>
+<message>node index="0";text="Odometer";resource-id="com.evancharlton.mileage:id/odometer";class="EditText";package="com.evancharlton.mileage";bounds="[0,331][360,427]"</message>
+</textComponent>
+</operation>
+<operation type = "Component" action = "CLICK" delayTime = "0">
+<Component>
+<index>Save Fillup</index>
+<componentType>Button</componentType>
+<message>node index="1";text="Save Fillup";resource-id="com.evancharlton.mileage:id/save_btn";class="Button";package="com.evancharlton.mileage";bounds="[0,1184][720,1280]"</message>
+</Component>
+</operation>
+<oracle type = "SingleComponentResult">
+<singleComponent>
+<index>1.00</index>
+<message>node index="1";text="1.00";resource-id="com.evancharlton.mileage:id/price";class="TextView";package="com.evancharlton.mileage";bounds="[663,224][720,262]"</message>
+<resultType>TEXT</resultType>
+<componentType>TextView</componentType>
+<expect>1.00</expect>
+</singleComponent>
+</oracle>
+</path> 
+</paths>

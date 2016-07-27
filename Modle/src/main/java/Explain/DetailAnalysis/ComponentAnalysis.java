@@ -15,6 +15,7 @@ public class ComponentAnalysis {
 		// operation.getChildNodes();
 		String type2 = null;
 		String Text = null;
+		String message = null;
 		for (int h = 0; h < childNodes.getLength(); h++) {
 			if (childNodes.item(h).getNodeType() == Node.ELEMENT_NODE) {
 				NodeList ComponentList = childNodes.item(h).getChildNodes();
@@ -26,10 +27,15 @@ public class ComponentAnalysis {
 						if (ComponentList.item(k).getNodeName().equalsIgnoreCase("componentType")) {
 							type2 = ComponentList.item(k).getTextContent();
 							// System.out.println(type2);
-						}
-						if (ComponentList.item(k).getNodeName().equalsIgnoreCase("index")) {
+						}else if (ComponentList.item(k).getNodeName().equalsIgnoreCase("index")) {
 							Text = ComponentList.item(k).getTextContent();
 							// System.out.println(Text);
+						}else if (ComponentList.item(k).getNodeName().equalsIgnoreCase("message")) {
+							message = ComponentList.item(k).getTextContent();
+							if (type2 .equalsIgnoreCase("ImageButton")) {
+								ResolveMessage resolveMessage = new ResolveMessage();
+								Text = resolveMessage.ResolveMsg(message, "index");
+							}
 						}
 					}
 				}
@@ -58,6 +64,7 @@ public class ComponentAnalysis {
 				for (int k = 0; k < MultiComponentList.getLength(); k++) {
 					String type2 = null;
 					String Text = null;
+					String message = null;
 					if (MultiComponentList.item(k).getNodeType() == Node.ELEMENT_NODE) {
 						// buttonNum++;
 						NodeList ComponentList = MultiComponentList.item(k).getChildNodes();
@@ -69,10 +76,15 @@ public class ComponentAnalysis {
 								if (ComponentList.item(m).getNodeName().equalsIgnoreCase("componentType")) {
 									type2 = ComponentList.item(m).getTextContent();
 									// System.out.println(type2);
-								}
-								if (ComponentList.item(m).getNodeName().equalsIgnoreCase("index")) {
+								}else if (ComponentList.item(m).getNodeName().equalsIgnoreCase("index")) {
 									Text = ComponentList.item(m).getTextContent();
 									// System.out.println(Text);
+								}else if (ComponentList.item(k).getNodeName().equalsIgnoreCase("message")) {
+									message = ComponentList.item(k).getTextContent();
+									if (type2 .equalsIgnoreCase("ImageButton")) {
+										ResolveMessage resolveMessage = new ResolveMessage();
+										Text = resolveMessage.ResolveMsg(message, "index");
+									}
 								}
 							}
 						}
