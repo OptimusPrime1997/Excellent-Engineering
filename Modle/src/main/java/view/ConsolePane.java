@@ -99,12 +99,19 @@ public class ConsolePane extends JPanel {
     }
     
     public void resetProcessBar(){
+    	this.progressBar.setForeground(Color.GREEN);
         this.progressBar.setValue(0);
         this.process = 0;
         this.max = 0;
         this.progressBar.setVisible(false);
     }
 
+    public void creatField(){
+    	this.progressBar.setValue(100);
+    	this.progressBar.setForeground(Color.red);
+    	this.textField.setText("task failed!");
+    }
+    
     public void setMax(int max){
         this.max = max;
         this.process = 0;

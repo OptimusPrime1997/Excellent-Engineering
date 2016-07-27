@@ -1,6 +1,7 @@
 package businessLogic;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import Explain.XmlAnalyse;
@@ -13,7 +14,13 @@ public class BusinessLogic {
 	public void GetAllAction(String PackageWay,String MainActivity,String XmlWay){
 		String name = "Test";
 		XmlAnalyse analyseAction = new XmlAnalyse();
-		List<ActionNode> actionList = analyseAction.GetAction(XmlWay+"paths.xml");
+		List<ActionNode> actionList = new ArrayList<>();
+		try {
+			actionList = analyseAction.GetAction(XmlWay+"paths.xml");
+		} catch (Exception e) {
+			// TODO: handle exception
+			consolePane.creatField();
+		}
 		System.out.println("asasfa"+actionList.get(0).getAction());
 //		ConsolePane anConsolePane = this.getConsole();
 		consolePane.resetProcessBar();

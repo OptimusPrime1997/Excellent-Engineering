@@ -24,7 +24,7 @@ import Explain.DetailAnalysis.Oracle;
 import Explain.DetailAnalysis.PointAnalysis;
 import Node.ActionNode;
 
-public class XmlAnalyse {
+public class XmlAnalyse{
 	/*
 	 * 操作列表
 	 */
@@ -36,7 +36,7 @@ public class XmlAnalyse {
 
 	private static boolean OpeFstAndOr = true;
 
-	public List<ActionNode> GetAction(String Xmlway) {
+	public List<ActionNode> GetAction(String Xmlway)throws Exception {
 		AllPath.clear();
 		// 创建一个documentBuildFactory的对象
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -141,12 +141,15 @@ public class XmlAnalyse {
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		}
 
 		return AllPath;
