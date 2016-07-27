@@ -5,14 +5,19 @@ import java.util.List;
 
 import Explain.XmlAnalyse;
 import Node.ActionNode;
+import view.ConsolePane;
 
 public class BusinessLogic {
+	private ConsolePane consolePane;
 	
 	public void GetAllAction(String PackageWay,String MainActivity,String XmlWay){
 		String name = "Test";
 		XmlAnalyse analyseAction = new XmlAnalyse();
 		List<ActionNode> actionList = analyseAction.GetAction(XmlWay+"paths.xml");
 		System.out.println("asasfa"+actionList.get(0).getAction());
+		ConsolePane anConsolePane = this.getConsole();
+		anConsolePane.resetProcessBar();
+		anConsolePane.setMax(actionList.size());
 		for(int i=0;i<actionList.size();i++){
 			ActionNode anActionNode = actionList.get(i);
 //			while(anActionNode.getNext()!=null){
@@ -33,12 +38,20 @@ public class BusinessLogic {
 //			System.out.println(Name);
 			new TestAssist().generator(anActionNode, result,XmlWay+"Script"+File.separator,Name);
 			System.out.println("王栋去死吧");
-
+			anConsolePane.addProcessBar();
 //			System.out.println("heheda");
 		}
 		
 		
 //		return analyseAction.GetAction();
+	}
+	
+	public void setConsole(ConsolePane consolePane){
+		this.consolePane = consolePane;
+	}
+	
+	public ConsolePane getConsole(){
+		return this.consolePane;
 	}
 	
 	public static void main(String[] args) {
