@@ -467,6 +467,19 @@ public class MainActivity extends Activity implements OnTouchListener {
 						String path = getDirName(getPath()) + "temp" + "/" + getImageName(getPath()) + ".arff";
 						double[] result;
 						result = gestureTrain.TrainResult(path);
+						System.out.println("=============");
+						System.out.println(result.length);
+						double resultNum = -1;
+						for (int i = 0; i < result.length; i++) {
+							System.out.println(result[i]);
+						}
+						for (int i = result.length-1; i >= 0 ; i--) {
+							if (result[i] != -1) {
+								resultNum = result[i];
+								break;
+							}
+						}
+						System.out.println(resultNum);
 						/*
 						 * isDrawed为true并且result等于-1时说明只绘制了区域，并没有单击双击拖动这三种操作
 						 */
@@ -479,8 +492,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 
 								// 如果是没有识别的动作坐标会设为0
 								if (operationPoint.get(i).x != 0 && operationPoint.get(i).y != 0) {
-									System.out.println("wwwwwww" + result[i]);
-									if (result[i] == 0) { // click
+									System.out.println("wwwwwww" + resultNum);
+									if (resultNum == 0) { // click
 										
 										if (isInputOperation) {
 											operation = "input;" + "\r\n" + format(operationPoint.get(i).x) + ","
@@ -513,7 +526,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 										}
 										onePictureOPerations.add(operation);
 
-									} else if (result[i] == 1) { // longclick
+									} else if (resultNum == 1) { // longclick
 										if (isInputOperation) {
 											operation = "input;" + "\r\n" + format(operationPoint.get(i).x) + ","
 													+ format(operationPoint.get(i).y) + "\r\n";
@@ -545,7 +558,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 											break;
 										}
 										onePictureOPerations.add(operation);
-									} else if (result[i] == 2) { // Drag
+									} else if (resultNum == 2) { // Drag
 
 										operation = "drag;" + "\r\n" + format(operationPoint.get(i).x) + ","
 												+ format(operationPoint.get(i).y) + "," + format(endPoint.get(i).x)
@@ -627,9 +640,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 				}
 
 			}
-			graphics = new ArrayList<PointF>();
+			//graphics = new ArrayList<PointF>();
 
-			lastIndex = graphics.size();
+			//lastIndex = graphics.size();
 			graphics.clear();
 			operationPoint.clear();
 			break;
@@ -996,6 +1009,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 			targetResult.clear();
 			combaOperation = null;
 			isDrawArea = false;
+			graphics.clear();
+			operationPoint.clear();
 			WriteXML.writeObject(currentDocument, currentWrittenFile.getPath());
 			System.out.println("--------+" + nodes.size());
 

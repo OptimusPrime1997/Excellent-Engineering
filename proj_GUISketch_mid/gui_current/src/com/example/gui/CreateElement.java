@@ -1,6 +1,10 @@
 package com.example.gui;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.dom4j.Element;
 
@@ -217,6 +221,9 @@ public class CreateElement {
 				BuildDocument.addText(resouceId, nodes.get(nodes.size()-1).getPrintString());
 			}
 			System.out.println("wewerwwew"+nodes.size());
+			for (int i = 0; i < nodes.size(); i++) {
+				System.out.println(nodes.get(i).getPrintString());
+			}
 			
 			Element expectElement = BuildDocument.addElement(componentElement, "expect");
 			BuildDocument.addAttribute(expectElement, "type", "text");

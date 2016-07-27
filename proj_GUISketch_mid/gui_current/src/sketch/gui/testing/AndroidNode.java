@@ -80,8 +80,8 @@ public class AndroidNode {
 	}
 
 	public String getPrintString() {
-		String str = "<node index=\"" + index + "\" text=\"" + text + "\" resource-id=\"" + resourceId + "\" class=\""
-				+ widget_name + "\" package=\"" + package_name + "\" bounds=\"" + bounds + "\" />";
+		String str = "node index=\"" + index + "\";text=\"" + text + "\";resource-id=\"" + resourceId + "\";class=\""
+				+ widget_name + "\";package=\"" + package_name + "\";bounds=\"" + bounds + "\"";
 		return str;
 	}
 

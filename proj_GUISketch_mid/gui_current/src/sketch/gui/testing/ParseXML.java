@@ -102,11 +102,18 @@ public class ParseXML {
 			y_cup = Math.max(mid.y1, rect[0].y);
 			y1_cup = Math.min(mid.y2, rect[1].y);
 			// 计算两者重合部分的面积，面积大于比例则算选中了控件
-			if ((calRectArea(x_cup, y_cup, x1_cup, y1_cup) / calRectArea(mid.x1, mid.y1, mid.x2, mid.y2)) >= ratio) {
+			if ((calRectArea(x_cup, y_cup, x1_cup, y1_cup) / calRectArea(mid.x1, mid.y1, mid.x2, mid.y2)) >= ratio
+					&&rect[1].x<mid.x1&&rect[0].x<mid.x2&&rect[0].y<mid.y2&&rect[1].y>mid.y1) {
 				wid_list.add(mid);
 			}
 		}
-		System.out.println("<<<<<<<"+wid_list.size());
+		//System.out.println("<<<<<<<"+wid_list.size());
+		if (wid_list.size()==0) {
+			double centerX = (rect[0].x+rect[1].x)/2;
+			double centerY = (rect[0].y+rect[1].y)/2;
+			AndroidNode temp = findWidgetByLocation(centerX, centerY);
+			wid_list.add(temp);
+		}
 		print(wid_list);
 		return wid_list;
 	}
